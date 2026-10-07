@@ -8,7 +8,7 @@ import type { LandingDimension } from '@orbit/directory/content';
 export const SITE = {
   name: 'Rivières & Canyons Gwada',
   utm_source: 'rivieres-canyons',
-  /** Icons: emoji is this site's choice (decision B2: the boilerplate default is SVG line icons). */
+  /** Icons: each site chooses `svg` (line icons) or `emoji` (decision B2). This site: emoji. */
   icon_style: 'emoji' as 'emoji' | 'svg',
 };
 

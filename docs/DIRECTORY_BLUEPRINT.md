@@ -21,7 +21,7 @@ The boilerplate is the four packages (`core`, `directory`, `places`) plus one ap
    - **Confidence levels:** label, note, and `hide`.
    - **Completeness:** key fields and threshold (default 0.6).
    - **Landing dimensions** and minimum (default 3): type, locality, zone, an activity, an audience.
-   - **Conversion:** UTM source name, icon style (`svg` or `emoji`), copy rules (e.g. where safety claims are allowed).
+   - **Conversion:** UTM source name, icon style (`svg` line icons or `emoji`: choose per site, no default), copy rules (e.g. where safety claims are allowed).
 2. **`src/content/schema.ts`:** narrows the package shapes with the site's vocabularies and facts. It is usually a copy of the reference app's file.
 3. **Theme:** tier-1 palette values, font files and families, radius values, breakpoint values. Semantic token names never change (§6.13 of `CLAUDE.md`).
 4. **Content:** a mapping from the design export (first time), then the Airtable adapter.

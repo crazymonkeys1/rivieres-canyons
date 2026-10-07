@@ -153,12 +153,12 @@ Layer (which projects a rule applies to):
 | `t-small` | `text-caption` |
 | `t-micro` | `text-label` |
 
-### 2026-10-07 · B2: SVG line icons by default, emoji as a site option
+### 2026-10-07 · B2: icon style chosen per site (SVG line icons or emoji)
 - **Layer:** Core
-- **Change:** The `Icon` atom renders SVG line icons by default. A site may choose emoji in its config (`SITE.icon_style`). Rivières & Canyons keeps emoji (the design is built on them). Emoji stay decorative (`aria-hidden`) and are always followed by text.
-- **Why:** SVG icons render the same on every device and match the type; emoji remain cheap for a first site.
+- **Change:** The `Icon` atom renders SVG line icons or emoji, set per site in `site.config.ts` (`SITE.icon_style`). No boilerplate default: each new site chooses at setup (Jordan, 2026-10-07). Rivières & Canyons keeps emoji (the design is built on them). Emoji stay decorative (`aria-hidden`) and are always followed by text.
+- **Why:** SVG icons render the same on every device and match the type; emoji are quicker and warmer. The right choice depends on the site's tone.
 - **How to apply elsewhere:** Set `icon_style` in `site.config.ts`. Icon keys in vocabularies stay the same in both modes.
-- **Status:** Rivières & Canyons ✅ (emoji) · Mangrove ⏳ · Template ⏳ (svg)
+- **Status:** Rivières & Canyons ✅ (emoji) · Mangrove ⏳ (to choose) · Template ✅ (choice at setup)
 
 ### 2026-10-07 · B3: small design gaps use the nearest existing item
 - **Layer:** Core
@@ -198,6 +198,13 @@ Layer (which projects a rule applies to):
 - **Change:** "En sécurité" / "en toute sécurité" may describe a guided outing or a guide (offers, guide bios, guided CTAs), never a place, an article, the listing or the disclaimer. `pnpm content:check` fails on them elsewhere. Supersedes the "pending" note in the Q1-A/Q3 entry and settles B10.
 - **Why:** Jordan, 2026-10-07: safety is what the guide brings, not a property of the place.
 - **Status:** Rivières & Canyons ✅ · Mangrove ⏳ · Template ⏳
+
+### 2026-10-07 · Open loops file
+- **Layer:** Core (way of working)
+- **Change:** `docs/OPEN_LOOPS.md` lists what is still to validate, get or do (blocking before launch / to validate / worth adding / closed). Read at session start, updated at session end. First entries: the 5 Parc national photos (kept, permission needed before launch), placeholders, draft signatures, policies to confirm.
+- **Why:** Jordan, 2026-10-07: one place to see the important open items, instead of scattered across reports.
+- **How to apply elsewhere:** Every site keeps its own `docs/OPEN_LOOPS.md`.
+- **Status:** Rivières & Canyons ✅ · Mangrove ⏳ · Template ✅
 
 ### 2026-10-07 · Phase 1: content schema, normalized fixtures, content report
 - **Layer:** Core (primitives: image with credit, placeholders, completeness) · Directory (operator, guide, offer, review, social post, article, block, declarative selection rules) · Places (place, location policy, access status, safety alert, minute ranges) · Site (vocabularies, mapping)
