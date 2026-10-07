@@ -92,7 +92,11 @@ export function listingFields(s: ListingSettings): Field[] {
     fLabelled('Bon à savoir', 'key_facts', {}, { group: 'Contenu' }),
     {
       ...fLink('Conseil — guide', 'tip.guide_id', n.guide, { single: true, group: 'Contenu' }),
-      set: (r, v) => setPath(r, 'tip.guide_id', (v as string[] | null)?.[0] ?? null),
+      set: (r, v) => {
+        const list = (v as string[] | null) ?? [];
+        if (list.length > 1) throw new Error(`« Conseil — guide » : un seul guide attendu, ${list.length} trouvés`);
+        setPath(r, 'tip.guide_id', list[0] ?? null);
+      },
     },
     {
       name: 'Conseil — texte', type: 'multilineText', group: 'Contenu', help: 'Le conseil du guide, à la première personne.',
@@ -204,7 +208,7 @@ export function guidesTable(n: TableNames): Table {
     about: 'Un guide : sa page, sa photo, son contact WhatsApp.',
     fields: [
       f('Prénom', 'singleLineText', 'first_name'), f('Clé', 'singleLineText', 'id', { edit: 'tech' }),
-      fLink(n.operator, 'operator_id', n.operator, { single: true, edit: 'orbit' }),
+      fLink(n.operator_one, 'operator_id', n.operator, { single: true, edit: 'orbit' }),
       f('Nom complet', 'singleLineText', 'full_name', { help: 'Obligatoire pour la mise en ligne (titre de la page guide).' }),
       f('Photo', 'singleLineText', 'photo', { help: 'Lien ou chemin du portrait.' }),
       f('Rôle', 'singleLineText', 'role'), f('Bio', 'multilineText', 'bio'),

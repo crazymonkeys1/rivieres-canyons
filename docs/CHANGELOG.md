@@ -38,6 +38,7 @@ Layer (which projects a rule applies to):
 ### 2026-10-07 · Airtable base built by a GitHub job
 - **Layer:** Core
 - **Change:** `pnpm airtable:build` creates a new base in a workspace through the Airtable API (tables, typed fields, options, links), writes the content, reads it back and compares, and records the field IDs (`airtable/map.json`) and a report (`airtable/BUILD_REPORT.md`). It refuses to create a second base once `map.json` exists. It runs from GitHub Actions (workflow "Airtable", started by hand), because GitHub can reach Airtable and keeps the token as a secret; the same workflow pulls the content later (`pull-content`). Tested against a simulated Airtable API.
+- **Fix (same day):** Airtable's API refuses the "one record only" option when creating a link field, so single links are created as normal links and the adapter enforces one record (clear error otherwise). New job `reset-and-refill-base` (`pnpm airtable:reset`, confirmation `RESET`): adds the fields a base lacks, empties its tables and writes the content again.
 - **Why:** replaces about 30 minutes of manual CSV import and type conversion; the cloud environment cannot reach api.airtable.com.
 - **How to apply elsewhere:** same workflow and command for every directory; only the token secret and the workspace ID change.
 - **Status:** Rivières & Canyons ⏳ (to run) · Mangrove ⏳ · Template ✅

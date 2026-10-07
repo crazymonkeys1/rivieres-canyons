@@ -97,7 +97,7 @@ Un guide : sa page, sa photo, son contact WhatsApp. Clients: edit their own rows
 |---|---|---|---|
 | Prénom | Single line text |  |  |
 | Clé | Single line text | Tech |  |
-| Opérateurs | Link to another record → **Opérateurs** (one record) | Orbit |  |
+| Opérateur | Link to another record → **Opérateurs** (one record) | Orbit |  |
 | Nom complet | Single line text |  | Obligatoire pour la mise en ligne (titre de la page guide). |
 | Photo | Single line text |  | Lien ou chemin du portrait. |
 | Rôle | Single line text |  |  |
@@ -353,7 +353,7 @@ Un texte du site (bouton, titre, bloc de page). Modifier « Texte » ou « Liste
 | Mis à jour le | Date (ISO or European) |  |  |
 
 ## 4. Link conversions (step 4), in this order
-- Guides · Opérateurs → Opérateurs
+- Guides · Opérateur → Opérateurs
 - Lieux · Type → Types
 - Lieux · Conseil — guide → Guides
 - Lieux · Critères → Critères

@@ -10,10 +10,16 @@ on:
         type: choice
         options:
           - build-new-base
+          - reset-and-refill-base
           - pull-content
         default: build-new-base
       workspace_id:
         description: "Workspace ID (starts with wsp…) or the link of the workspace page, only for build-new-base"
+        required: false
+        type: string
+
+      confirm:
+        description: "Type RESET to confirm reset-and-refill-base (deletes every row of the base, then writes the content again)"
         required: false
         type: string
 
@@ -44,6 +50,12 @@ jobs:
         env:
           AIRTABLE_WORKSPACE_ID: ${{ inputs.workspace_id }}
         run: pnpm --filter rivieres-canyons airtable:build
+
+      - name: Complete the base and write the content again
+        if: inputs.job == 'reset-and-refill-base'
+        env:
+          AIRTABLE_CONFIRM: ${{ inputs.confirm }}
+        run: pnpm --filter rivieres-canyons airtable:reset
 
       - name: Pull the content from Airtable and check it
         if: inputs.job == 'pull-content'

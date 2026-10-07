@@ -98,7 +98,11 @@ export function fLink(name: string, path: string, table: string, o: Opts & { sin
   return {
     name, type: 'multipleRecordLinks', link: table, ...o,
     get: (r) => { const v = getPath(r, path); return o.single ? (v ? [v] : []) : v ?? []; },
-    set: (r, v) => setPath(r, path, o.single ? ((v as string[] | null)?.[0] ?? null) : (v as string[] | null) ?? []),
+    set: (r, v) => {
+      const list = (v as string[] | null) ?? [];
+      if (o.single && list.length > 1) throw new Error(`« ${name} » : un seul lien attendu, ${list.length} trouvés (${list.join(', ')})`);
+      setPath(r, path, o.single ? list[0] ?? null : list);
+    },
   };
 }
 /** A list of short texts, one per line. */
@@ -335,7 +339,8 @@ function fieldDefinition(fd: Field, tableIds: Record<string, string>) {
     case 'checkbox': return { ...base, options: { icon: 'check', color: 'greenBright' } };
     case 'date': return { ...base, options: { dateFormat: { name: 'iso' } } };
     case 'singleSelect': case 'multipleSelects': return { ...base, options: { choices: fd.options!.map((o) => ({ name: o.label })) } };
-    case 'multipleRecordLinks': return { ...base, options: { linkedTableId: tableIds[fd.link!], ...(fd.single ? { prefersSingleRecordLink: true } : {}) } };
+    // The API refuses "prefersSingleRecordLink" on create: single links are enforced by the adapter (fLink, one record).
+    case 'multipleRecordLinks': return { ...base, options: { linkedTableId: tableIds[fd.link!] } };
     default: return base;
   }
 }
@@ -409,4 +414,37 @@ export async function pushRows(tables: Table[], map: BaseMap, rows: Record<strin
     for (const chunk of batches(updates)) await api(token, 'PATCH', `/${map.base_id}/${tm.id}`, { records: chunk });
   }
   return Object.fromEntries(Object.entries(recIds).map(([k, v]) => [k, v.length]));
+}
+
+/** Adds the spec's fields that the base lacks (creatable ones). Returns what was added and what failed. */
+export async function addMissingFields(tables: Table[], baseId: string, token: string) {
+  const meta = await api(token, 'GET', `/meta/bases/${baseId}/tables`) as { tables: { id: string; name: string; fields: { name: string }[] }[] };
+  const tableIds = Object.fromEntries(meta.tables.map((t) => [t.name, t.id]));
+  const added: string[] = [], problems: string[] = [];
+  for (const t of tables) {
+    const mt = meta.tables.find((x) => x.name === t.name);
+    if (!mt) { problems.push(`table manquante : ${t.name} (à créer à la main ou base à recréer)`); continue; }
+    for (const fd of t.fields.filter((x) => !manualHelper(x) && !mt.fields.some((f) => f.name === x.name))) {
+      try { await api(token, 'POST', `/meta/bases/${baseId}/tables/${mt.id}/fields`, fieldDefinition(fd, tableIds)); added.push(`${t.name} · ${fd.name}`); }
+      catch (e) { problems.push(`${t.name} · ${fd.name}: ${(e as Error).message}`); }
+    }
+  }
+  return { added, problems };
+}
+
+/** Deletes every record of the spec's tables (used only by the explicit "reset" job). */
+export async function clearTables(tables: Table[], map: BaseMap, token: string) {
+  let n = 0;
+  for (const t of tables) {
+    const tm = map.tables[t.name]; if (!tm) continue;
+    const ids: string[] = []; let offset: string | undefined;
+    do {
+      const j = await api(token, 'GET', `/${map.base_id}/${tm.id}?pageSize=100&fields%5B%5D=${encodeURIComponent(tm.fields[t.primary] ?? '')}${offset ? `&offset=${offset}` : ''}`);
+      ids.push(...j.records.map((r: any) => r.id)); offset = j.offset;
+    } while (offset);
+    for (let i = 0; i < ids.length; i += 10)
+      await api(token, 'DELETE', `/${map.base_id}/${tm.id}?${ids.slice(i, i + 10).map((x) => `records%5B%5D=${x}`).join('&')}`);
+    n += ids.length;
+  }
+  return n;
 }

@@ -11,7 +11,8 @@
     "airtable:link": "tsx scripts/airtable.ts link",
     "content:pull": "tsx scripts/airtable.ts pull",
     "airtable:build": "tsx scripts/airtable.ts build",
-    "content:verify": "tsx scripts/check-content.ts --source=Airtable"
+    "content:verify": "tsx scripts/check-content.ts --source=Airtable",
+    "airtable:reset": "tsx scripts/airtable.ts reset"
   },
   "dependencies": {
     "@orbit/core": "workspace:*",
