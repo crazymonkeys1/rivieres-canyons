@@ -1,0 +1,291 @@
+{
+  "base_id": "appQss9sjY59pUxtM",
+  "tables": {
+    "Types": {
+      "id": "tbl78toOssHElFybK",
+      "fields": {
+        "Type": "fldOiMsksR0ihVclS",
+        "Clé": "fldcajAoFP8qMZ1HW",
+        "Pluriel": "fldD9n8PvaxNR1QX2",
+        "Icône": "fld3doGMxHpTILcsi",
+        "Ordre": "fld0NsSm3WPnSgZML",
+        "Autres noms": "fldJjonjQYmyrTWV2",
+        "Introduction de la page": "fldiVCA6ikB6IsXng",
+        "Titre SEO": "fldQWv61fOmuCIZaG",
+        "Description SEO": "fldt1B3wxmSrKsZiz"
+      }
+    },
+    "Communes": {
+      "id": "tbl4xolFHLI6YG7HI",
+      "fields": {
+        "Nom": "fldtwcf0bbZmXhjVk",
+        "Clé": "fld9YkkvSq43D7NXB",
+        "Île": "fldYLekI8T7Qhcn6x",
+        "Introduction de la page": "fldP0ANNp7YvuD0x1",
+        "Titre SEO": "fld9fYrQDawGw3XVh",
+        "Description SEO": "fldgg1RUaxxhDtnFw"
+      }
+    },
+    "Critères": {
+      "id": "tblLxU5bU3ZOxFnof",
+      "fields": {
+        "Critère": "fldzzIyW8F4Y6DF8X",
+        "Clé": "fldo0G3Ea1nCVHcvR",
+        "S'applique à": "fldr4aicwrg17QZpL",
+        "Groupe": "fldoq7w8InPXrkzfu",
+        "Icône": "fldd9uUVVydWFzv4F",
+        "Ordre": "fldX6ssvtzYZabfub",
+        "Filtre": "fldUJ7NvdhX9B4wLL",
+        "Badge": "fldQbfqOJiAP6oUVw",
+        "Repère clé": "fldZ40nIAYiyvd5ZT",
+        "Page dédiée": "fldb1V3KVprXd4NZ7",
+        "Introduction de la page": "flde0bz0RetoXDuid",
+        "Titre SEO": "fldOtfMrMoICvA0aE",
+        "Description SEO": "fldYTDZQSCHHwKtPr"
+      }
+    },
+    "Opérateurs": {
+      "id": "tblJacsyZ6XRAMnTH",
+      "fields": {
+        "Nom": "fldR1oThjq4I82lEv",
+        "Clé": "fldjZ9LliA9jlaKjk",
+        "Couleur": "fldZPYu3xyfq0QMga",
+        "Logo (lien)": "fldAY1p0BqoOVcNKH",
+        "Site web": "fldi37349w7FkypY0",
+        "Page contact": "fldIc6GZA8TyfPQ0f",
+        "Lien de réservation": "fldFTAsoWsO9qMxx0",
+        "Note": "fldzZ5PQRF2YE6kSU",
+        "Nombre d'avis": "fldzbjkelsOurX7c3",
+        "Source de la note": "fld2rkRBPqmYiXzSe",
+        "Comptes": "fldCxBwEe27MU42em"
+      }
+    },
+    "Guides": {
+      "id": "tblIrUCIu86pFEm6e",
+      "fields": {
+        "Prénom": "fldkpAmugLjkjxXkn",
+        "Clé": "fldjelOTSyjdZph8R",
+        "Nom complet": "fldDDKxYWbMrtvuDs",
+        "Photo": "fldwAEkCkZ0rNPkM7",
+        "Rôle": "fldnfpryfKEoI7pmg",
+        "Bio": "fld9CYAVR9lnRf9VI",
+        "Repères": "fldqzUbEVnzMSqlyJ",
+        "WhatsApp": "fldaBVfmUgtJC4P3v",
+        "Compte Airtable": "fldKkJwuiXqy5iIzK"
+      }
+    },
+    "Lieux": {
+      "id": "tblscPUaKh3I1zuuL",
+      "fields": {
+        "Nom": "fld4R0XegPBjPUnM6",
+        "Slug": "fldv63wfpSAGBmOYx",
+        "Statut": "fld1paQehdlkNva4Q",
+        "Note de statut": "fldJiiJjHGxejhVq5",
+        "Résumé": "fldR3qvcusav0eZlI",
+        "Ce qui la rend unique": "fldyMQoU62gJhNYzJ",
+        "Phrase unique — statut": "fldz01wd9T8UL7JZq",
+        "Chapeau": "fldOvGy7Ya7LdzcU1",
+        "Introduction": "fldroWLA1Ns0mtieK",
+        "En savoir plus — titre": "fldfyWLTZY1PnY9SY",
+        "En savoir plus — texte": "fldyuopshwjgrul8f",
+        "Autres noms": "fldQpiEtEm4AVUR52",
+        "Bon à savoir": "fldtsRnG9dAVubhye",
+        "Conseil — texte": "fldcFX23z4qigPKvT",
+        "Critères": "fldvuarMpRdwfaYlo",
+        "Difficulté": "fldUnGnvf7tPxp6hC",
+        "Durée sur place — min (min)": "fldQNo1y6F0mTnxfa",
+        "Durée sur place — max (min)": "fldGBXcdnXxLGYOMr",
+        "Durée sur place — précision": "fldzh0s8caMSqP99T",
+        "Marche d'approche — min (min)": "fld9jPBVnEmMlmeZJ",
+        "Marche d'approche — max (min)": "fldoQ7lMvoDDF0cPy",
+        "Marche d'approche — précision": "flde8vYboiyQOlKWx",
+        "Âge conseillé (ans)": "fldW1iKTkQ3NIMvAw",
+        "Baignade": "fldbpUKngTAvnDAWB",
+        "Baignade — précision": "fldJ4JYhw42PW5SQX",
+        "Quand y aller": "fldRlFhuyyRo2Na3f",
+        "À confirmer": "fldaCo4RwAcU2TAti",
+        "Île": "fldbTjKsV8AO6chvW",
+        "Communes": "flduTV10nJFqOnvAr",
+        "Latitude": "fld5FT8flCHYyBSdP",
+        "Longitude": "fldYCGxHyTxDCcZTp",
+        "Niveau de vérification": "fldTNA6BnhKDZWpiC",
+        "Vérifié le": "fld2Y4XJikCZnfNX0",
+        "Titre H2 — aperçu": "fld3qjNlzZ1v91YGV",
+        "Titre H2 — accès": "fldT1GbN5x1mivY6w",
+        "Titre H2 — sortie": "fldcL5LUofMk0zxEx",
+        "Titre H2 — FAQ": "fldFu8LbuLsrmTz9H",
+        "Pourquoi avec un guide": "flduVe5NtFEc1ryak",
+        "Titre SEO": "fldCQaO5DUoTSAHID",
+        "Description SEO": "fldXwk1jNIimpzK1Q",
+        "Politique de localisation": "fld1RaOjpYXyi9jrd",
+        "Accès restreint": "fldC3S0MlOKgrxOpW",
+        "Statut d'accès": "fldkikXMgNt5SAzd7",
+        "Statut d'accès — note": "fldwLpDOzJNdOfGfk",
+        "Statut d'accès — source": "fldzx7KcbXEMLr9bw",
+        "Statut d'accès — lien": "fldurTfTl8MlbUSOt",
+        "Statut d'accès — vérifié le": "fld18YRs55qz5l1vI",
+        "Itinéraire": "fldidUG331cFw9bFM",
+        "Itinéraire — texte": "fldB4gVafJBA9zVOc",
+        "Repères d'accès": "fldlOQiHbDgBJlHdq",
+        "Parking": "fld5SOcObqX2EO3yq",
+        "Temps de route": "fld1tjSSOGjhmDC4l",
+        "Accès guidé — texte": "fldUIlBNL2R5EjFRL",
+        "Dangers": "fld9TC8mZjfeJwPyp",
+        "Alerte — titre": "fld2Om5mWDTXPAU5x",
+        "Alerte — libellé court": "fldtSKzwJH1uSr2qU",
+        "Alerte — texte": "fld5XHCRLaBzCYd6Z",
+        "Alerte — points": "fldnI2FtR6FJmgUMj",
+        "À apporter": "fldN8w915dEKfS6wy"
+      }
+    },
+    "Sorties": {
+      "id": "tbl5YcgxH965YTGTn",
+      "fields": {
+        "Nom": "fldAaQEQo8LdHoo8D",
+        "Slug": "fld04Z5g2fW7K350U",
+        "Statut": "fldoXM0x4QxT47pSo",
+        "Principale": "fldeN8e8rGuyyftbY",
+        "Sous-titre": "fldlPuxzygL6CcscZ",
+        "Durée (min)": "fldpPzLUXGGum9PIh",
+        "Prix adulte (€)": "fldfDU6lXfje5maab",
+        "Prix enfant (€)": "fldCr1S5vH16ePwIX",
+        "Tarif enfant jusqu'à (ans)": "fldG0sIyEvFkbKOAY",
+        "Prix vérifiés le": "fldxiyrqNEgENrL8D",
+        "Critères": "fldc8yDr00EfujSbt",
+        "Niveau": "fldEG7LJwKMxjRk3r",
+        "Esprit": "fldZr4ulUcZx8V4x4",
+        "Dès (ans)": "fldnthljQ3LCZL2wJ",
+        "Approche (min)": "fldKKsAVQAagy2A3k",
+        "Points forts": "fldWh0Rk1hBCQCkQR",
+        "Inclus": "fldR0pN7i7nCYoPdW",
+        "À apporter": "fld7Thbg9v2SMSJrk",
+        "Point de rendez-vous": "fldgtmbl0sJkbbMhI",
+        "Le mot du guide": "flddHtBQDsqBv1Bqm",
+        "Pourquoi je vous emmène ici": "fldkR4Ys6gxAO9Msu",
+        "Histoire — statut": "fldnuwQ8jQ1BgUlZE",
+        "Sur ce site depuis": "fldVfOqsDNC4IKdyY"
+      }
+    },
+    "Avis": {
+      "id": "tblQM7pU1c9xRVHJM",
+      "fields": {
+        "Réf": "fldObwXpWx4CFaZC8",
+        "Citation": "flde3rNP0aGPk2kVX",
+        "Auteur": "fldQjd67aQZCMEZzf",
+        "Note": "fldmqXBuDX2JBF4Jc",
+        "Date": "fldCO6R1XlgVD4NZS",
+        "Source": "fldrCbJUe7O4mOTHM",
+        "Statut": "fldhuBeQrm9CEcpPL"
+      }
+    },
+    "Articles": {
+      "id": "tblCy9KFJfDpqYdJ2",
+      "fields": {
+        "Libellé": "fldQ1Vos4UGYLX1El",
+        "Slug": "fldiW6oFt4CFcRkZT",
+        "Statut": "fldXkyJDf4mlFgVm6",
+        "Titre (H1)": "fldF4pys2X1QfbcBq",
+        "Surtitre": "fldHnb5fLszxNeKIv",
+        "Introduction": "fld5xOALWgyrqhJti",
+        "Réponse courte": "fldGQsIa4x5irxBze",
+        "Auteurs": "fld9zNw60QSDMk63V",
+        "Encadré — surtitre": "fld18rXPBYaJx3DKr",
+        "Encadré — titre (H2)": "fldgG1zNIf4EwGuFW",
+        "Angle — titre": "fldRHP1OJVsnW65pK",
+        "Pourquoi un guide — intro": "fld1W86MDVVPhspMH",
+        "Note de sécurité": "fldDZMJsisbbvqft5",
+        "Publié le": "fldWu113bHcMx5Ak2",
+        "Mis à jour le": "fldILxEVrkclXAkrJ",
+        "Lieux — types": "fldGbkj3ONjErhGf9",
+        "Lieux — communes": "fld4RPtW5u5Z1gFP7",
+        "Lieux — avec": "fldJZ5JGAajZh5xLI",
+        "Lieux — sans": "fldHILeVcJyTXiY2B",
+        "Lieux — règle": "fldeyJ7kDUELU91tr",
+        "Lieux — toujours inclure": "fldx5lRz2BKX1Gmi6",
+        "Lieux — exclure": "fldo4XgS0pY1TGBoB",
+        "Sorties — types": "fldPGs95TrYRgdH5b",
+        "Sorties — communes": "fldsKYYInggYfppL2",
+        "Sorties — avec": "fldP95FeF6xLaLc6M",
+        "Sorties — sans": "fldrFcu0VoWeD1jrs",
+        "Sorties — règle": "fldrRLyBPxQ135DMh",
+        "Sorties — toujours inclure": "flddpHhIi8bK6PzDI",
+        "Sorties — exclure": "fld17pO9J05G4BdJW",
+        "Titre SEO": "fldVJpx1rBl7rijVd",
+        "Description SEO": "fldS7fZpEiaPdGDP4"
+      }
+    },
+    "Sections d'article": {
+      "id": "tbl5UpNG69seqLkOp",
+      "fields": {
+        "Titre": "fld619d4S9VXeTwdv",
+        "Genre": "fldllA3JKBPmGXgE3",
+        "Ordre": "fld4nDvtmR3Kv4zOw",
+        "Texte": "fldIGRDTomnzwqvFw"
+      }
+    },
+    "FAQ": {
+      "id": "tblqQrdp0BLVwQv5L",
+      "fields": {
+        "Question": "fldVWJB28BDeLqVZA",
+        "Ordre": "flduNDG1SvCvQm4Ky",
+        "Réponse": "fldDJd4xV0sL3NCOH"
+      }
+    },
+    "Photos": {
+      "id": "tblhqLTew36Gxf7mg",
+      "fields": {
+        "Réf": "fldlUq8BLkexMjWfA",
+        "Rôle": "fldLFRjPpaGuBcEGY",
+        "Ordre": "fldPHhtjMqPLNKCQk",
+        "Lien de la photo": "fldAakWXu7CgyEdlJ",
+        "Fichier": "fldbaF2jOoEP3Nn45",
+        "Légende": "fldZjcBslkYMguIMO",
+        "Crédit": "fld3oW6PAWZjggXxB",
+        "Licence": "fldKhE4NUGLbmFsmk",
+        "Droits": "fldqMIFYA6gW6skvO",
+        "Source — nom": "fldNFjI9iC3M8QeBp",
+        "Source — page": "fldLOr4d0EBm29IzV"
+      }
+    },
+    "Sources": {
+      "id": "tblp8CtDdTy8TjW8S",
+      "fields": {
+        "Réf": "fldelurHFI8DCqKZd",
+        "Nom": "fldltNI6xh19rzp8i",
+        "Lien": "fldSPuzKkywkAvvpa",
+        "Type": "fldvQ0LqmoznNcKQW",
+        "Utilisée pour": "fldQwZaxjqEMoJXJQ",
+        "Presse": "fldtLLwUDdDwyazL0",
+        "Titre": "fldupNHbV75IhTBTZ",
+        "Éditeur": "fld2C4z3zmYDcNdNf",
+        "Note": "fldGBR8nVve1GkGvm"
+      }
+    },
+    "Publications": {
+      "id": "tbl8Ggz2FA7XDuPQc",
+      "fields": {
+        "Réf": "fldVo3FMjXFIWT2HO",
+        "Réseau": "fldEp7nBwBI8f8zfo",
+        "Lien": "fldIxgYfINgbpZOF3",
+        "ID YouTube": "fldaCjeJJ0sQOUbqb",
+        "Miniature": "fldl1ZlQyLMu8hMAg",
+        "Compte": "fldn1e40tZvFlTKBq",
+        "Titre": "fldjVI6W49yiUgA1Q",
+        "Durée (s)": "fldFlv8w66Fnpoq1B"
+      }
+    },
+    "Textes du site": {
+      "id": "tbl4aZMuns0Ovz6Qi",
+      "fields": {
+        "Clé": "flduH49s5Xmj68bzJ",
+        "Page": "fldfElIMnnuEW1gZa",
+        "Section": "fldx3rJs5YSIlS253",
+        "Format": "fldUjTrvPTHz1kCR3",
+        "Texte": "flddGw1uaK0x9EONo",
+        "Liste": "flds8nMYXzrNJMbis",
+        "Statut": "fld8oemHh1rHKFFHG",
+        "Mis à jour le": "fldpDTQpWv8Mi9GT9"
+      }
+    }
+  }
+}
