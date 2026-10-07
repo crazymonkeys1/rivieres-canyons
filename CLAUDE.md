@@ -119,7 +119,7 @@ To place something, ask: *"Would this still make sense if we listed cars?"* Yes 
 - Performance budget (mobile): LCP < 2.5 s, CLS < 0.1, JS < 50 KB on content pages. Accessibility: WCAG AA.
 
 ## 11. Copy rules
-Calm, factual, specific. **No absolute safety claims** (no "en toute sécurité", no "Y aller en sécurité": see decision J7; until answered, use "Y aller avec un guide" / "Voir la sortie"). Never copy sources verbatim. Always show photo credits and social account names. Every page keeps the safety disclaimer (`LegalNotice`).
+Calm, factual, specific. **Safety claims only where a guide is involved** (decision 2026-10-07): "en sécurité" / "en toute sécurité" may describe a guided outing or a guide (offers, guide bios, guided CTAs); never a place, an article, the listing or the disclaimer. `pnpm content:check` fails on them elsewhere. Never copy sources verbatim. Always show photo credits and social account names. Every page keeps the safety disclaimer (`LegalNotice`).
 
 ## 12. Changelog
 Log every reusable decision in `docs/CHANGELOG.md`: date, layer (Core / Directory / Places / Site), the change, why, how to apply elsewhere, and status per site (Rivières & Canyons / Mangrove / Template).

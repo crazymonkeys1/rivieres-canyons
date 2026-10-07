@@ -26,6 +26,13 @@ const dropped: string[] = []; // data removed by a rule
 const errors: string[] = [];
 
 // ---------- helpers ----------
+/** Every string in a value, with its path. */
+function findText(value: unknown, path = ''): { path: string; text: string }[] {
+  if (typeof value === 'string') return [{ path, text: value }];
+  if (Array.isArray(value)) return value.flatMap((v, i) => findText(v, `${path}[${i}]`));
+  if (value && typeof value === 'object') return Object.entries(value).flatMap(([k, v]) => findText(v, path ? `${path}.${k}` : k));
+  return [];
+}
 const kebab = (id: string) => id.replace(/_/g, '-');
 const slugOf = (id: string) => (id === 'saut_d_acomat_site' ? 'saut-d-acomat' : kebab(id));
 const blank = (v: unknown) => (v === undefined || v === '' ? null : (v as any));
@@ -169,7 +176,6 @@ let destinations: Destination[] = D.destinations.map(mapDestination);
     "**Acomat split.** `saut-d-acomat` (closed waterfall site) keeps the site facts: description, history, height, pool, closure, season, risks, site photos and 6 FAQ answers about the site. Its hero photo is now the first site photo; the old hero showed a guided outing.",
     "`canyon-d-acomat` (new, `guide_only`) receives the guided experience: the guided text as summary, difficulty, duration, approach, minimum age, Pascal's tip, \"why with a guide\", the 8 guided-outing photos, and 6 FAQ answers about canyoning, price, children and gear. Both Acomat outings (`acomat`, `wc-acomat`) now link to it. Its season and risks are copied from the saut (same river). Everything else on this place is empty, to fill in Airtable.",
     "The draft signature of `saut-d-acomat` ends with \"que l'on découvre de l'intérieur avec un guide\": no longer true for the closed site. Rewrite it when validating.",
-    "Yalodé's outing is named \"Saut d'Acomat\", but it now sits on the Canyon d'Acomat page. Rename it in Airtable if Yalodé agrees.",
   );
 }
 
@@ -303,6 +309,10 @@ for (const pg of B.SEO_PAGES) {
   }
 }
 
+// Decision 2026-10-07 (Jordan): Yalodé's outing now sits on the canyon page, so it takes the canyon's name.
+offers.find((o) => o.id === 'acomat')!.name = "Canyon d'Acomat";
+notes.push('Yalodé\'s outing `acomat` is renamed "Canyon d\'Acomat" (decision 2026-10-07; confirm with Yalodé).');
+
 // ---------- blocks and shared media ----------
 const blocks = [
   { key: 'privacy_policy', status: 'placeholder' as const, body: '[PRIVACY_POLICY_TEXT]', updated_on: null },
@@ -348,6 +358,13 @@ for (const p of social_posts) if (!p.account) prodIssues.push(`social post \`${p
 for (const g of guides) if (!g.full_name) prodIssues.push(`guide \`${g.id}\` has no full name (H1 and Person JSON-LD)`);
 for (const o of operators) if (o.rating !== null && !o.rating_source) prodIssues.push(`operator \`${o.id}\` shows a rating (${o.rating}) without a source`);
 
+// Safety claims ("en sécurité", "en toute sécurité") are allowed only where a guide is involved (decision 2026-10-07).
+const SAFETY_CLAIM = /en (toute )?sécurité/i;
+const safetyOutsideGuided = findText({ destinations, articles, blocks, social_posts })
+  .filter(({ text }) => SAFETY_CLAIM.test(text))
+  .map(({ path, text }) => `\`${path}\`: "${text.length > 140 ? text.slice(0, 137) + '…' : text}"`);
+for (const s of safetyOutsideGuided) errors.push(`safety claim outside guided-outing content: ${s}`);
+
 // ---------- completeness ----------
 const KEY_FIELDS = ['summary', 'intro', 'signature', 'difficulty', 'duration', 'approach', 'min_age', 'season',
   'hero_image', 'location_policy', 'communes', 'faq', 'risks', 'verification'] as const;
@@ -356,11 +373,13 @@ const scores = destinations.map((d) => {
   return { d, ...c, indexable: c.score >= CONTENT_CONFIG.indexThreshold };
 });
 
+// Sentences reviewed and kept by Jordan (2026-10-07).
+const KEPT_BY_DECISION = ["Le rendez-vous se fait au parking du Saut d'Acomat."];
 // Text in guide_only / closed places that still mentions a meeting place or parking (for human review).
 const textLeaks = destinations
   .filter((d) => d.location_policy === 'guide_only' || d.location_policy === 'closed')
   .flatMap((d) => [...d.faq.map((f) => f.answer), d.summary, d.intro, d.more_text]
-    .filter((t): t is string => !!t && /rendez-vous|parking|se garer|on se gare/i.test(t))
+    .filter((t): t is string => !!t && /rendez-vous|parking|se garer|on se gare/i.test(t) && !KEPT_BY_DECISION.some((k) => t.includes(k)))
     .map((t) => `\`${d.id}\`: "${t.length > 160 ? t.slice(0, 157) + '…' : t}"`));
 
 // ---------- write ----------
@@ -411,7 +430,8 @@ ${notes.map((n) => `- ${n}`).join('\n')}
 - Field names are snake_case English; vocabularies are enums (\`src/content/vocabularies.ts\`). Colours that lived in the data (access, verification, levels) were dropped: they belong to the tokens.
 - The design's JavaScript selection rules for articles are now declarative rules (field, operator, value); the check confirms each selects exactly the same outings and places as before.
 - Insider tips point to a guide (\`pascal\`, \`quentin\`) or to nobody (team tip).
-- "En sécurité" wording is kept verbatim (decision Q3, 2026-10-07).
+- Safety claims ("en sécurité", "en toute sécurité") are allowed only in guided-outing content (outings, guides); the check fails anywhere else (decision 2026-10-07). Template copy (\`data/ui-copy.json\`: listing hero subtitle, disclaimer) is checked when it is placed in phase 4.
+- Canyon doré keeps its FAQ sentence about the meeting place (decision 2026-10-07).
 `;
 writeFileSync(resolve(root, 'docs/CONTENT_REPORT.md'), report);
 

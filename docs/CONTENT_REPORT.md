@@ -80,17 +80,18 @@ Directions are never published for `guide_only` and `closed` places (decision Q2
 - social posts of `canyon-ferry`: 3 mock entries ("@exemple_compte")
 
 ## Text to review (guide-only or closed places that still mention a meeting place or parking)
-- `canyon-dore`: "Sur les pentes des Mamelles, au-dessus de Pointe-Noire, en Côte-sous-le-Vent (Basse-Terre). Le rendez-vous se fait au parking du Saut d'Acomat."
+- none
 
 ## Mapping decisions
 - **Acomat split.** `saut-d-acomat` (closed waterfall site) keeps the site facts: description, history, height, pool, closure, season, risks, site photos and 6 FAQ answers about the site. Its hero photo is now the first site photo; the old hero showed a guided outing.
 - `canyon-d-acomat` (new, `guide_only`) receives the guided experience: the guided text as summary, difficulty, duration, approach, minimum age, Pascal's tip, "why with a guide", the 8 guided-outing photos, and 6 FAQ answers about canyoning, price, children and gear. Both Acomat outings (`acomat`, `wc-acomat`) now link to it. Its season and risks are copied from the saut (same river). Everything else on this place is empty, to fill in Airtable.
 - The draft signature of `saut-d-acomat` ends with "que l'on découvre de l'intérieur avec un guide": no longer true for the closed site. Rewrite it when validating.
-- Yalodé's outing is named "Saut d'Acomat", but it now sits on the Canyon d'Acomat page. Rename it in Airtable if Yalodé agrees.
 - Offer durations come from the design's `hours` (3.5 h → 210 min). The child price rule "-12 ans" from the template is stored as `child_price_under_age: 12`.
+- Yalodé's outing `acomat` is renamed "Canyon d'Acomat" (decision 2026-10-07; confirm with Yalodé).
 - Static template copy (`data/ui-copy.json`, ~150 strings) is not mapped yet: it is page wording, placed in templates in phase 4. The photos used for places without their own photo ("Photo d'illustration") are kept as `illustration_images` with their credits.
 - Durations and approaches are stored as minute ranges (`{min, max, note}`): "2 à 3 h" → 120–180, "20 à 25 min aller (descente raide)" → 20–25 + note.
 - Field names are snake_case English; vocabularies are enums (`src/content/vocabularies.ts`). Colours that lived in the data (access, verification, levels) were dropped: they belong to the tokens.
 - The design's JavaScript selection rules for articles are now declarative rules (field, operator, value); the check confirms each selects exactly the same outings and places as before.
 - Insider tips point to a guide (`pascal`, `quentin`) or to nobody (team tip).
-- "En sécurité" wording is kept verbatim (decision Q3, 2026-10-07).
+- Safety claims ("en sécurité", "en toute sécurité") are allowed only in guided-outing content (outings, guides); the check fails anywhere else (decision 2026-10-07). Template copy (`data/ui-copy.json`: listing hero subtitle, disclaimer) is checked when it is placed in phase 4.
+- Canyon doré keeps its FAQ sentence about the meeting place (decision 2026-10-07).
