@@ -65,6 +65,7 @@
       "fields": {
         "Prénom": "fldkpAmugLjkjxXkn",
         "Clé": "fldjelOTSyjdZph8R",
+        "Opérateur": "fld1pcJAUi3XyLp3m",
         "Nom complet": "fldDDKxYWbMrtvuDs",
         "Photo": "fldwAEkCkZ0rNPkM7",
         "Rôle": "fldnfpryfKEoI7pmg",
@@ -79,6 +80,7 @@
       "fields": {
         "Nom": "fld4R0XegPBjPUnM6",
         "Slug": "fldv63wfpSAGBmOYx",
+        "Type": "fldzqlkxrCF1lW8U3",
         "Statut": "fld1paQehdlkNva4Q",
         "Note de statut": "fldJiiJjHGxejhVq5",
         "Résumé": "fldR3qvcusav0eZlI",
@@ -90,6 +92,7 @@
         "En savoir plus — texte": "fldyuopshwjgrul8f",
         "Autres noms": "fldQpiEtEm4AVUR52",
         "Bon à savoir": "fldtsRnG9dAVubhye",
+        "Conseil — guide": "fldd5uTko58n8uu7m",
         "Conseil — texte": "fldcFX23z4qigPKvT",
         "Critères": "fldvuarMpRdwfaYlo",
         "Difficulté": "fldUnGnvf7tPxp6hC",
@@ -135,7 +138,9 @@
         "Alerte — libellé court": "fldtSKzwJH1uSr2qU",
         "Alerte — texte": "fld5XHCRLaBzCYd6Z",
         "Alerte — points": "fldnI2FtR6FJmgUMj",
-        "À apporter": "fldN8w915dEKfS6wy"
+        "À apporter": "fldN8w915dEKfS6wy",
+        "Photos": "fldvOR9XjP9xxfzdg",
+        "FAQ": "fldOcJHdJa31FPGEy"
       }
     },
     "Sorties": {
@@ -144,6 +149,8 @@
         "Nom": "fldAaQEQo8LdHoo8D",
         "Slug": "fld04Z5g2fW7K350U",
         "Statut": "fldoXM0x4QxT47pSo",
+        "Lieu": "fld948DRXFlPBGFa3",
+        "Opérateur": "fldoZ8r6c06VAbr2u",
         "Principale": "fldeN8e8rGuyyftbY",
         "Sous-titre": "fldlPuxzygL6CcscZ",
         "Durée (min)": "fldpPzLUXGGum9PIh",
@@ -170,6 +177,9 @@
       "id": "tblQM7pU1c9xRVHJM",
       "fields": {
         "Réf": "fldObwXpWx4CFaZC8",
+        "Opérateur": "fldwOiHFfY2p37H8z",
+        "Sortie": "fldIOp3n7MGfq5wER",
+        "Guide": "fldAkdtXnWVyT2hjl",
         "Citation": "flde3rNP0aGPk2kVX",
         "Auteur": "fldQjd67aQZCMEZzf",
         "Note": "fldmqXBuDX2JBF4Jc",
@@ -189,6 +199,7 @@
         "Introduction": "fld5xOALWgyrqhJti",
         "Réponse courte": "fldGQsIa4x5irxBze",
         "Auteurs": "fld9zNw60QSDMk63V",
+        "Sortie mise en avant": "fldgvY6kkd1fGfcxi",
         "Encadré — surtitre": "fld18rXPBYaJx3DKr",
         "Encadré — titre (H2)": "fldgG1zNIf4EwGuFW",
         "Angle — titre": "fldRHP1OJVsnW65pK",
@@ -218,15 +229,20 @@
       "id": "tbl5UpNG69seqLkOp",
       "fields": {
         "Titre": "fld619d4S9VXeTwdv",
+        "Article": "fldOuUp9QItR5yYGs",
         "Genre": "fldllA3JKBPmGXgE3",
         "Ordre": "fld4nDvtmR3Kv4zOw",
-        "Texte": "fldIGRDTomnzwqvFw"
+        "Texte": "fldIGRDTomnzwqvFw",
+        "Lieu": "fldE2mW9RY8KvhO86",
+        "Sortie": "fldwFkdVlssTYlgXZ"
       }
     },
     "FAQ": {
       "id": "tblqQrdp0BLVwQv5L",
       "fields": {
         "Question": "fldVWJB28BDeLqVZA",
+        "Lieu": "fld5CSJ97ueZOxSXA",
+        "Article": "fldHD2MwQbvli9ZZK",
         "Ordre": "flduNDG1SvCvQm4Ky",
         "Réponse": "fldDJd4xV0sL3NCOH"
       }
@@ -235,6 +251,9 @@
       "id": "tblhqLTew36Gxf7mg",
       "fields": {
         "Réf": "fldlUq8BLkexMjWfA",
+        "Lieu": "fldeVrYZuR6RjQ4s5",
+        "Sortie": "fldVs8jwDojxWgCN5",
+        "Article": "fldToUmMex0dKI3dY",
         "Rôle": "fldLFRjPpaGuBcEGY",
         "Ordre": "fldPHhtjMqPLNKCQk",
         "Lien de la photo": "fldAakWXu7CgyEdlJ",
@@ -251,6 +270,8 @@
       "id": "tblp8CtDdTy8TjW8S",
       "fields": {
         "Réf": "fldelurHFI8DCqKZd",
+        "Lieu": "fldnWVjURvRJV8jfa",
+        "Article": "fldvvg2tw8nSRKw0e",
         "Nom": "fldltNI6xh19rzp8i",
         "Lien": "fldSPuzKkywkAvvpa",
         "Type": "fldvQ0LqmoznNcKQW",
@@ -265,6 +286,7 @@
       "id": "tbl8Ggz2FA7XDuPQc",
       "fields": {
         "Réf": "fldVo3FMjXFIWT2HO",
+        "Lieu": "fldJ3yveso8hQMAik",
         "Réseau": "fldEp7nBwBI8f8zfo",
         "Lien": "fldIxgYfINgbpZOF3",
         "ID YouTube": "fldaCjeJJ0sQOUbqb",
