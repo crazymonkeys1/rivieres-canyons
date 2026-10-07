@@ -2,7 +2,7 @@
 
 Source of truth: `design/Guadeloupe v12 Details.dc.html` (v12 only). Tokens: `tokens/tokens.css`.
 Documents (read in this order): `ARCHITECTURE.md` (hierarchy, naming, placement) → `tokens/tokens.css` + `TYPOGRAPHY.md` + `tokens/text-styles.css` → `COMPONENTS.md` (registry) → this file (foundations, behaviour, page templates, SEO) → `CONTENT_MODEL.md` + `data/*.json` → `CHANGELOG.md` (history) → `AUDIT_2026-10-06.md`, `REVIEW_2026-10-06.md` (rationale and open decisions).
-Precedence: see `CLAUDE_CODE_CONTEXT.md`. The HTML prototype is a visual and behavioural reference only; where it disagrees with the documents above on type scale, weights, spacing or names, the documents win.
+Precedence: see `CLAUDE.md` §3. The HTML prototype is a visual and behavioural reference only; where it disagrees with the documents above on type scale, weights, spacing or names, the documents win.
 
 ## 1. Foundations
 
@@ -124,7 +124,7 @@ SiteHeader, then Hero (H1 `h1`), then Filters, then grid/list toggle, then the D
    - a photo,
    - a breadcrumb and back link aligned with the title,
    - a type pill with a "!" DangerBadge (tooltip, links to `#alerte-site`),
-   - H1 display-l,
+   - H1 (`t-h1`),
    - the commune line (`body`, on-dark-2). No subtitle: guide voice appears in the Callout and the tour-card quote only.
 2. HeroFacts.
 4. `#apercu`: Aperçu (intro in the read style, Callout when real, "Bon à savoir" as KeyFacts incl. "Aussi appelé").
@@ -170,7 +170,7 @@ No live or safety-critical status is ever shown (no "praticable aujourd'hui", no
    - a photo with a dark gradient,
    - the breadcrumb "Accueil › Le blog › {thème}",
    - a glass pill eyebrow,
-   - H1 display-xl,
+   - H1 (`t-h1`),
    - a byline (stacked avatars, "Par Pascal & Quentin · Mis à jour le … · N min de lecture").
    - No CTA.
 2. Article column (`--w-article` 728px, text 680px):
@@ -193,7 +193,7 @@ No live or safety-critical status is ever shown (no "praticable aujourd'hui", no
 
 ### D. Filter landing page (`view: 'filter'`, e.g. `/cascades`, `/communes/petit-bourg`)
 Only for types and communes with 3+ destinations (computed: Rivières 13, Cascades 4, Canyons 3, Petit-Bourg 6, Vieux-Habitants 3). Reuses blog hero, AnswerSummary, DestinationCard, FaqList and RelatedCard.
-1. Hero: breadcrumb "Accueil › Par type|Par commune › {H1}", glass pill, H1 display-xl ("Cascades de Guadeloupe", "Rivières et cascades à Petit-Bourg"), photo credit.
+1. Hero: breadcrumb "Accueil › Par type|Par commune › {H1}", glass pill, H1 `t-h1` ("Cascades de Guadeloupe", "Rivières et cascades à Petit-Bourg"), photo credit.
 2. Column 720: intro (lead), AnswerSummary "En bref". Intro and answer are computed from data (counts, guided places, public access, closures); never hand-written facts.
 3. `#lieux`: overline "Les lieux", H2 "{n} {type} {où}", DestinationCard grid.
 4. `#faq-filtre`: FaqList (computed questions) + FAQPage JSON-LD.
@@ -201,10 +201,10 @@ Only for types and communes with 3+ destinations (computed: Rivières 13, Cascad
 6. SiteFooter. SiteFooter "Par type" and "Par commune" link only to existing filter pages; "Par île" lists only islands that have places (Basse-Terre).
 
 ### E. Guide page (`view: 'guide'`, `/guides/pascal`, `/guides/quentin`)
-Back button, then a header: 72px portrait, overline "Guide · {company}" in the operator colour, H1 display-l (full name), "{diploma} · {rating} ★", Button primary "Réserver sur {company} →" (BookingLink) + Button secondary "Écrire à {guide} sur WhatsApp" (GuideContactLink). Sections (destination section style): `#a-propos` (bio + 2-column fact grid: diplomas, experience), `#sorties` (nearby-card list of the guide's tours), `#lieux` (places), `#avis` (real reviews only, hidden when none). JSON-LD: Person (name, jobTitle, image, worksFor) + BreadcrumbList.
+Back button, then a header: 72px portrait, overline "Guide · {company}" in the operator colour, H1 `t-h1` (full name), "{diploma} · {rating} ★", Button primary "Réserver sur {company} →" (BookingLink) + Button secondary "Écrire à {guide} sur WhatsApp" (GuideContactLink). Sections (destination section style): `#a-propos` (bio + 2-column fact grid: diplomas, experience), `#sorties` (nearby-card list of the guide's tours), `#lieux` (places), `#avis` (real reviews only, hidden when none). JSON-LD: Person (name, jobTitle, image, worksFor) + BreadcrumbList.
 
 ### F. Blog index (`view: 'blog'`, `/blog`)
-Blog hero (breadcrumb "Accueil › Le blog", pill, H1 "Idées de sorties en Guadeloupe", byline with the article count), then a RelatedCard grid of all intent articles with their intro (15/1.5 `--text-body`). JSON-LD: Blog + ItemList + BreadcrumbList. The blog breadcrumb "Le blog" links here.
+Blog hero (breadcrumb "Accueil › Le blog", pill, H1 "Idées de sorties en Guadeloupe", byline with the article count), then a RelatedCard grid of all intent articles with their intro (`t-body`, `--text-body`). JSON-LD: Blog + ItemList + BreadcrumbList. The blog breadcrumb "Le blog" links here.
 
 ### G. Privacy page (`view: 'privacy'`, `/confidentialite`)
 DocumentTemplate. Linked from the lead-capture consent and the footer. **The text is not written yet and will be generated later.** Build the page with a placeholder block (`[PRIVACY_POLICY_TEXT]`, `noindex` while present, production build fails on it) and follow `PRIVACY_CONTEXT.md`.

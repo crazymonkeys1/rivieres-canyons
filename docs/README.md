@@ -30,7 +30,7 @@ Preview props (Tweaks panel): `startView` (open any template), `previewSite`, `a
 **Superseded:** everything in `../_archive/` (v2–v11, `design_handoff_directory_v10/`, the Orbit Directory Playbook, old specs and CSVs).
 
 ## Fidelity and precedence
-The HTML prototype is the **reference for structure, content, behaviour and colour roles**. It predates the type system and the naming review: its pixel sizes, weights, line heights, spacing and component names are **not** the standard. Where it disagrees with `tokens/*.css` or `docs/*.md`, the documents win. Precedence list: `../CLAUDE_CODE_CONTEXT.md` §3 (repo root file; `CLAUDE.md` once imported). Migration map from prototype values to tokens: `docs/TYPOGRAPHY.md` §6.
+The HTML prototype is the **reference for structure, content, behaviour and colour roles**. It predates the type system and the naming review: its pixel sizes, weights, line heights, spacing and component names are **not** the standard. Where it disagrees with `tokens/*.css` or `docs/*.md`, the documents win. Precedence list: `CLAUDE.md` §3 (repo root). Migration map from prototype values to tokens: `docs/TYPOGRAPHY.md` §6.
 
 ## Contents
 | Path | What |
@@ -68,7 +68,7 @@ The HTML prototype is the **reference for structure, content, behaviour and colo
 - **Motion:** `riseIn`, `sheetUp`, `fadeIn` and `--dur-*` tokens; `prefers-reduced-motion` respected.
 
 ## Placeholders to replace before launch
-`[WHATSAPP_PASCAL]`, `[WHATSAPP_QUENTIN]`, `[BOOKING_URL_YALODE]`, `[BOOKING_URL_WILDCANYON]`, Yalodé logo, `[PRIVACY_POLICY_TEXT]` (text to be generated later, see `docs/PRIVACY_CONTEXT.md`), `signature` per destination (10 drafts written on 2026-10-06 in the design, to validate with the guides; 12 still empty).
+`[WHATSAPP_PASCAL]`, `[WHATSAPP_QUENTIN]`, `[BOOKING_URL_YALODE]`, `[BOOKING_URL_WILDCANYON]`, Yalodé logo, `[PRIVACY_POLICY_TEXT]` (text to be generated later, see `docs/PRIVACY_CONTEXT.md`), `signature` per destination (10 drafts written on 2026-10-06 in the design, to validate with the guides; 11 still empty).
 
 ## Assets
 - `design/assets/pascal-head.png`, `design/assets/quentin-head.png` (guide portraits).

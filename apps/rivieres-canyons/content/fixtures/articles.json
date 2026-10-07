@@ -1,0 +1,762 @@
+[
+  {
+    "id": "canyoning-enfants",
+    "label": "Canyoning avec enfants",
+    "h1": "Canyoning avec des enfants en Guadeloupe",
+    "eyebrow": "En famille",
+    "intro": "Des sorties qui acceptent les enfants dès 8 ans, sans rappel obligatoire pour la plupart. Pour une balade sans guide, la Cascade aux Écrevisses reste le site le plus simple d'accès.",
+    "answer": "Oui, on peut faire du canyoning avec des enfants en Guadeloupe dès 8 ans, avec un guide diplômé. Les sorties familiales se font sans rappel, en randonnée aquatique : on marche, on nage et on glisse sur des toboggans naturels. Comptez environ 3 h et 50 € par personne, équipement fourni.",
+    "hero_image": {
+      "src": "https://www.kayak-guadeloupe.fr/images/canyoning-famille-01.jpg",
+      "credit": "Photo : Yalodé",
+      "source_url": "https://www.kayak-guadeloupe.fr/",
+      "source_name": "kayak-guadeloupe.fr"
+    },
+    "featured_offer_id": "acomat",
+    "takeaways": [
+      {
+        "title": "Dès 8 ans",
+        "text": "Acomat avec Yalodé ou Wild Canyon, sans rappel."
+      },
+      {
+        "title": "Tout se contourne",
+        "text": "Toboggans et sauts sont facultatifs : personne ne reste au bord."
+      },
+      {
+        "title": "Équipement fourni",
+        "text": "Casque et néoprène prêtés par le guide, gilet chez Yalodé."
+      }
+    ],
+    "editorial": {
+      "eyebrow": "Le guide",
+      "h2": "Faire du canyoning en famille en Guadeloupe",
+      "sections": [
+        {
+          "title": "À partir de quel âge ?",
+          "text": "La plupart des sorties familiales acceptent les enfants dès 8 ans. À cet âge, il faut savoir nager quelques mètres et être à l'aise dans l'eau fraîche. Les parcours techniques avec rappels hauts restent réservés aux plus de 14 ou 16 ans."
+        },
+        {
+          "title": "Quel parcours choisir ?",
+          "text": "Pour une première fois, privilégiez une randonnée aquatique sans rappel, où toboggans et sauts se contournent. Acomat, à Pointe-Noire, est le parcours le plus proposé aux familles. Pour une simple balade avec de jeunes enfants, la Cascade aux Écrevisses se rejoint en dix minutes par un sentier aménagé."
+        },
+        {
+          "title": "Comment se passe la sortie ?",
+          "text": "Le guide fournit casque, combinaison et gilet, puis explique chaque passage. Le groupe avance au rythme du plus jeune, avec des pauses régulières. Comptez une demi-journée, marche d'approche comprise."
+        }
+      ],
+      "tips": [
+        {
+          "label": "Âge minimum",
+          "value": "Dès 8 ans pour les sorties sans rappel"
+        },
+        {
+          "label": "Savoir nager",
+          "value": "Oui, quelques mètres"
+        },
+        {
+          "label": "Durée",
+          "value": "3 h à 3 h 30 en moyenne"
+        },
+        {
+          "label": "Équipement",
+          "value": "Fourni par le guide"
+        },
+        {
+          "label": "À prévoir",
+          "value": "Chaussures fermées, maillot, vêtement chaud pour après"
+        }
+      ]
+    },
+    "offer_rule": {
+      "match": "all",
+      "conditions": [
+        {
+          "field": "min_age",
+          "op": "lte",
+          "value": 10
+        }
+      ]
+    },
+    "listing_ids": [
+      "cascade-aux-ecrevisses"
+    ],
+    "listing_rule": null,
+    "angle_label": "Avec des enfants",
+    "angle_notes": [
+      {
+        "kind": "offer",
+        "id": "acomat",
+        "text": "Le parcours le plus doux de la sélection. Toboggans et sauts se contournent, et le guide cale le rythme sur le plus jeune."
+      },
+      {
+        "kind": "offer",
+        "id": "wc-acomat",
+        "text": "Une formule pensée pour les familles, sans rappel, avec une courte marche d'approche."
+      },
+      {
+        "kind": "offer",
+        "id": "wc-bourceau-family",
+        "text": "Une journée complète pour des enfants déjà à l'aise dans l'eau, avec un premier rappel encadré."
+      },
+      {
+        "kind": "listing",
+        "id": "cascade-aux-ecrevisses",
+        "text": "Sans guide, c'est la sortie la plus simple : dix minutes de sentier aménagé. Gardez les enfants hors de l'eau si elle se trouble."
+      }
+    ],
+    "why_intro": "Avec des enfants, le guide fait plus que montrer le chemin : il choisit le parcours selon l'âge, adapte chaque passage et surveille le groupe en permanence. Les parents profitent de la sortie au lieu de la gérer.",
+    "safety_note": "Même sur un parcours facile, un enfant se fatigue et se refroidit vite dans l'eau. Les sites sans guide ne sont pas surveillés.",
+    "published_on": "2026-10-02",
+    "updated_on": "2026-10-02"
+  },
+  {
+    "id": "cascades-faciles-acces",
+    "label": "Cascades faciles d'accès",
+    "h1": "Cascades faciles d'accès en Guadeloupe",
+    "eyebrow": "Accès facile",
+    "intro": "Des cascades à moins de 30 minutes de marche d'un parking, en accès libre ou avec un guide.",
+    "answer": "Les cascades les plus faciles d'accès en Guadeloupe sont la Cascade aux Écrevisses, à 10 minutes de marche sur un sentier aménagé, et la 2e chute du Carbet, à 20 à 25 minutes. Toutes deux se trouvent en Basse-Terre, dans le Parc national.",
+    "hero_image": {
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Cascade%20aux%20%C3%A9crevisses%20(Guadeloupe).jpg",
+      "credit": "Photo : Wikimedia Commons, CC BY-SA 4.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Cascade%20aux%20%C3%A9crevisses%20(Guadeloupe).jpg",
+      "source_name": "commons.wikimedia.org"
+    },
+    "featured_offer_id": "acomat",
+    "takeaways": [
+      {
+        "title": "10 min de marche",
+        "text": "La Cascade aux Écrevisses se rejoint par un sentier aménagé depuis le parking."
+      },
+      {
+        "title": "110 m de chute",
+        "text": "La 2e chute du Carbet, la seule ouverte des trois, par un sentier aménagé."
+      },
+      {
+        "title": "Ou avec un guide",
+        "text": "Acomat en sortie guidée, 20 à 25 min d'approche."
+      }
+    ],
+    "editorial": {
+      "eyebrow": "Le guide",
+      "h2": "Les cascades faciles d'accès en Guadeloupe",
+      "sections": [
+        {
+          "title": "Où les trouver ?",
+          "text": "Les cascades les plus simples se concentrent en Basse-Terre, dans le Parc national. La Cascade aux Écrevisses, sur la Route de la Traversée, et la 2e chute du Carbet, à Capesterre-Belle-Eau, se rejoignent par des sentiers aménagés."
+        },
+        {
+          "title": "Ce qui change d’un site à l’autre",
+          "text": "Certaines cascades sont gratuites et en bord de route, d'autres demandent un droit d'entrée ou une marche de 20 à 30 minutes. La baignade est possible à certains endroits et interdite à d'autres, comme au pied de la chute du Carbet."
+        },
+        {
+          "title": "Le bon moment",
+          "text": "Venez tôt le matin, en semaine si possible : les sites les plus connus sont très fréquentés à partir de 10 h et le week-end."
+        }
+      ],
+      "tips": [
+        {
+          "label": "Marche",
+          "value": "5 à 30 min depuis le parking"
+        },
+        {
+          "label": "Coût",
+          "value": "Gratuit ou petit droit d’entrée"
+        },
+        {
+          "label": "Avec enfants",
+          "value": "Oui, sur les sentiers aménagés"
+        },
+        {
+          "label": "À éviter",
+          "value": "Après de fortes pluies"
+        }
+      ]
+    },
+    "offer_rule": {
+      "match": "all",
+      "conditions": [
+        {
+          "field": "level",
+          "op": "eq",
+          "value": "facile"
+        },
+        {
+          "field": "approach_min",
+          "op": "lte",
+          "value": 25
+        }
+      ]
+    },
+    "listing_ids": [
+      "cascade-aux-ecrevisses",
+      "chutes-du-carbet"
+    ],
+    "listing_rule": null,
+    "angle_label": "Accès",
+    "angle_notes": [
+      {
+        "kind": "offer",
+        "id": "acomat",
+        "text": "Le site est proche de la route, mais la descente de la rivière se fait avec un guide qui connaît les passages."
+      },
+      {
+        "kind": "offer",
+        "id": "wc-acomat",
+        "text": "Courte marche, puis progression dans l'eau au rythme du groupe."
+      },
+      {
+        "kind": "listing",
+        "id": "cascade-aux-ecrevisses",
+        "text": "La plus facile de l'île : dix minutes depuis le parking, sur la Route de la Traversée."
+      },
+      {
+        "kind": "listing",
+        "id": "chutes-du-carbet",
+        "text": "La 2e chute se rejoint en 20 à 25 minutes par un sentier aménagé. Droit d'entrée sur place."
+      }
+    ],
+    "why_intro": "Les cascades faciles se visitent seul. Avec un guide, on découvre les vasques et les passages en amont que l'on ne trouve pas depuis le sentier.",
+    "safety_note": "Un accès facile ne veut pas dire sans risque : les rochers sont glissants et l'eau peut monter après une pluie en amont. Aux Chutes du Carbet, seule la 2e chute est ouverte.",
+    "published_on": "2026-10-02",
+    "updated_on": "2026-10-02"
+  },
+  {
+    "id": "baignade-riviere",
+    "label": "Baignade en rivière",
+    "h1": "Se baigner en rivière en Guadeloupe",
+    "eyebrow": "Baignade",
+    "intro": "Bassins et rivières où l'on peut se baigner, avec ou sans guide. La baignade en rivière n'est jamais surveillée.",
+    "answer": "On peut se baigner dans plusieurs rivières de Basse-Terre, comme à la Cascade aux Écrevisses ou à Bras-David. La baignade n'est jamais surveillée, certains sites sont interdits par arrêté, et il faut sortir de l'eau dès qu'elle se trouble ou que le débit monte.",
+    "hero_image": {
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Guadeloupe%20-%20bassin%20paradise%20pr%C3%A8s%20des%20chutes%20du%20Carbet.jpg",
+      "credit": "Photo : Wikimedia Commons, CC BY-SA 4.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Guadeloupe%20-%20bassin%20paradise%20pr%C3%A8s%20des%20chutes%20du%20Carbet.jpg",
+      "source_name": "commons.wikimedia.org"
+    },
+    "featured_offer_id": "acomat",
+    "takeaways": [
+      {
+        "title": "Non surveillée",
+        "text": "La baignade en rivière n'est pas surveillée : on reste en groupe."
+      },
+      {
+        "title": "La pluie en amont",
+        "text": "Une pluie en amont suffit à faire monter la rivière, même par ciel clair."
+      },
+      {
+        "title": "Le guide choisit",
+        "text": "Avec un guide, on nage là où il connaît le fond et le courant."
+      }
+    ],
+    "editorial": {
+      "eyebrow": "Le guide",
+      "h2": "Se baigner en rivière en Guadeloupe",
+      "sections": [
+        {
+          "title": "Où se baigner ?",
+          "text": "Les bassins naturels de Basse-Terre offrent une eau claire et fraîche, entre 22 et 25 °C. Les plus accessibles se trouvent le long de la Route de la Traversée et sur la Côte-sous-le-Vent."
+        },
+        {
+          "title": "Les règles à connaître",
+          "text": "La baignade en rivière n'est jamais surveillée. Certains sites sont interdits par arrêté municipal, d'autres font l'objet d'un affichage de l'ARS sur la qualité de l'eau. Vérifiez toujours avant d'entrer dans l'eau."
+        },
+        {
+          "title": "Quand sortir de l’eau ?",
+          "text": "Dès que l'eau se trouble, que le débit augmente ou qu'il pleut en amont. Une crue peut arriver en quelques minutes, même sous un ciel dégagé."
+        }
+      ],
+      "tips": [
+        {
+          "label": "Température",
+          "value": "22 à 25 °C"
+        },
+        {
+          "label": "Surveillance",
+          "value": "Aucune"
+        },
+        {
+          "label": "Plongeon",
+          "value": "Déconseillé : fonds rocheux"
+        },
+        {
+          "label": "Saison",
+          "value": "Décembre à mai, débit plus stable"
+        }
+      ]
+    },
+    "offer_rule": {
+      "match": "all",
+      "conditions": [
+        {
+          "field": "level",
+          "op": "eq",
+          "value": "facile"
+        }
+      ]
+    },
+    "listing_ids": [],
+    "listing_rule": {
+      "match": "all",
+      "conditions": [
+        {
+          "field": "swimming",
+          "op": "filled"
+        }
+      ]
+    },
+    "angle_label": "Baignade",
+    "angle_notes": [
+      {
+        "kind": "offer",
+        "id": "acomat",
+        "text": "Vasques profondes et eau claire, à faire avec un guide qui connaît les sauts sûrs."
+      },
+      {
+        "kind": "offer",
+        "id": "wc-acomat",
+        "text": "On nage tout au long du parcours, gilet fourni."
+      },
+      {
+        "kind": "listing",
+        "id": "riviere-bras-david",
+        "text": "Bassins peu profonds et eau fraîche, appréciés des familles."
+      },
+      {
+        "kind": "listing",
+        "id": "cascade-aux-ecrevisses",
+        "text": "Possible sous conditions, selon l'affichage sur place et le niveau de l'eau."
+      },
+      {
+        "kind": "listing",
+        "id": "chutes-du-carbet",
+        "text": "Interdite au pied de la 2e chute."
+      },
+      {
+        "kind": "listing",
+        "id": "riviere-bourceau",
+        "text": "Vasques dans le lit de la rivière, à éviter après la pluie."
+      },
+      {
+        "kind": "offer",
+        "id": "dore",
+        "text": "Vasques au cœur du canyon, accessibles après une longue montée."
+      },
+      {
+        "kind": "listing",
+        "id": "canyon-ferry",
+        "text": "Canyon engagé : on ne s'y baigne pas sans encadrement."
+      },
+      {
+        "kind": "listing",
+        "id": "canyon-bois-malaise",
+        "text": "Réservée aux sorties encadrées : le canyon enchaîne rappels et sauts."
+      }
+    ],
+    "why_intro": "Une rivière change vite. Le guide lit le débit, connaît les fonds et sait quand sortir de l'eau : vous vous baignez dans les meilleurs coins, sans prendre de risque.",
+    "safety_note": "Plusieurs sites connus sont interdits d'accès par arrêté : vérifiez la réglementation avant de partir. Sortez de l'eau dès qu'elle se trouble ou monte.",
+    "published_on": "2026-10-02",
+    "updated_on": "2026-10-02"
+  },
+  {
+    "id": "canyoning-debutant",
+    "label": "Canyoning débutant",
+    "h1": "Canyoning pour débutants en Guadeloupe",
+    "eyebrow": "Première fois",
+    "intro": "Des parcours pensés pour une première fois : sauts contournables, rappel encadré en option, avec des guides diplômés d'État.",
+    "answer": "Pour débuter le canyoning en Guadeloupe, choisissez une sortie encadrée par un guide diplômé d'État. La randonnée aquatique d'Acomat se fait sans corde dès 8 ans ; la rivière Bourceau permet un premier rappel encadré dès 10 ans. Aucune expérience n'est demandée.",
+    "hero_image": {
+      "src": "https://www.kayak-guadeloupe.fr/images/canyoning-famille-01.jpg",
+      "credit": "Photo : Yalodé",
+      "source_url": "https://www.kayak-guadeloupe.fr/",
+      "source_name": "kayak-guadeloupe.fr"
+    },
+    "featured_offer_id": "acomat",
+    "takeaways": [
+      {
+        "title": "Rien d’obligatoire",
+        "text": "Sur Acomat, toboggans et sauts se contournent."
+      },
+      {
+        "title": "Premier rappel",
+        "text": "À Bourceau, un rappel encadré par un cordiste professionnel."
+      },
+      {
+        "title": "Diplômés d’État",
+        "text": "Brevet d'État (Pascal) et DE JEPS Canyoning (Quentin)."
+      }
+    ],
+    "editorial": {
+      "eyebrow": "Le guide",
+      "h2": "Débuter le canyoning en Guadeloupe",
+      "sections": [
+        {
+          "title": "Randonnée aquatique ou canyoning ?",
+          "text": "La randonnée aquatique se pratique sans corde : on marche, on nage et on glisse dans la rivière. Le canyoning ajoute des descentes en rappel. Pour une première fois, les deux formules sont possibles avec un guide."
+        },
+        {
+          "title": "Le premier rappel",
+          "text": "Sur les parcours d'initiation comme Bourceau, le guide installe la corde, explique la technique au sol puis vous assure pendant la descente. Aucune expérience n'est demandée."
+        },
+        {
+          "title": "Choisir son guide",
+          "text": "Vérifiez le diplôme : brevet d'État ou DE JEPS canyoning. C'est la garantie d'un encadrement formé à la sécurité en eaux vives."
+        }
+      ],
+      "tips": [
+        {
+          "label": "Expérience",
+          "value": "Aucune"
+        },
+        {
+          "label": "Condition physique",
+          "value": "Bonne santé, à l’aise dans l’eau"
+        },
+        {
+          "label": "Diplôme du guide",
+          "value": "Brevet d'État ou DE JEPS canyoning"
+        },
+        {
+          "label": "Matériel",
+          "value": "Fourni"
+        }
+      ]
+    },
+    "offer_rule": {
+      "match": "any",
+      "conditions": [
+        {
+          "field": "level",
+          "op": "eq",
+          "value": "facile"
+        },
+        {
+          "field": "tags",
+          "op": "includes",
+          "value": "Initiation technique"
+        }
+      ]
+    },
+    "listing_ids": [],
+    "listing_rule": null,
+    "angle_label": "Pour débuter",
+    "angle_notes": [
+      {
+        "kind": "offer",
+        "id": "acomat",
+        "text": "Idéal pour découvrir sans corde, en apprenant à lire la rivière."
+      },
+      {
+        "kind": "offer",
+        "id": "wc-acomat",
+        "text": "La formule la plus accessible : il suffit de savoir nager."
+      },
+      {
+        "kind": "offer",
+        "id": "wc-bourceau-decouverte",
+        "text": "Le premier rappel, expliqué au sol puis assuré par le guide."
+      }
+    ],
+    "why_intro": "Pour une première fois, le guide est indispensable : il fournit le matériel, enseigne les gestes et vous assure à chaque rappel.",
+    "safety_note": "Un parcours débutant reste une activité en milieu naturel : le guide peut annuler si la météo l'impose.",
+    "published_on": "2026-10-02",
+    "updated_on": "2026-10-02"
+  },
+  {
+    "id": "randonnee-aquatique",
+    "label": "Randonnée aquatique",
+    "h1": "Randonnée aquatique en Guadeloupe (sans rappel)",
+    "eyebrow": "Sans corde",
+    "intro": "Marche, nage, glissades et petits sauts dans le lit de la rivière, sans descente sur corde.",
+    "answer": "La randonnée aquatique consiste à descendre une rivière à pied et à la nage, sans rappel. En Guadeloupe, Acomat convient dès 8 ans (3 h 30), et le Canyon doré, plus sportif, demande 1 h 30 de montée et 700 m de dénivelé (5 h 30).",
+    "hero_image": {
+      "src": "https://www.kayak-guadeloupe.fr/images/yalode-sport-1.jpg",
+      "credit": "Photo : Yalodé",
+      "source_url": "https://www.kayak-guadeloupe.fr/",
+      "source_name": "kayak-guadeloupe.fr"
+    },
+    "featured_offer_id": "dore",
+    "takeaways": [
+      {
+        "title": "Sans rappel",
+        "text": "Marche, nage, sauts et floating, sans descente sur corde."
+      },
+      {
+        "title": "Du facile au sportif",
+        "text": "Acomat pour débuter, Canyon doré pour les marcheurs (+700 m de dénivelé)."
+      },
+      {
+        "title": "Dès 8 ans",
+        "text": "Sur Acomat, avec Yalodé ou Wild Canyon."
+      }
+    ],
+    "editorial": {
+      "eyebrow": "Le guide",
+      "h2": "La randonnée aquatique en Guadeloupe",
+      "sections": [
+        {
+          "title": "Le principe",
+          "text": "On descend le lit d'une rivière en marchant, en nageant et en se laissant porter par le courant. Il n'y a pas de rappel, mais il faut être à l'aise dans l'eau et sur les rochers."
+        },
+        {
+          "title": "Du facile au sportif",
+          "text": "Acomat convient dès 8 ans avec une courte marche. Le Canyon doré demande 1 h 30 de montée et 700 m de dénivelé, pour des marcheurs réguliers."
+        },
+        {
+          "title": "Ce qu’il faut prévoir",
+          "text": "Des chaussures fermées qui tiennent bien au pied, un maillot et de quoi se changer. Le guide fournit le gilet, la combinaison et le casque."
+        }
+      ],
+      "tips": [
+        {
+          "label": "Rappel",
+          "value": "Aucun"
+        },
+        {
+          "label": "Âge",
+          "value": "Dès 8 ans selon le parcours"
+        },
+        {
+          "label": "Durée",
+          "value": "3 h 30 à 5 h 30"
+        },
+        {
+          "label": "Équipement",
+          "value": "Fourni"
+        }
+      ]
+    },
+    "offer_rule": {
+      "match": "all",
+      "conditions": [
+        {
+          "field": "has_rappel",
+          "op": "eq",
+          "value": false
+        }
+      ]
+    },
+    "listing_ids": [],
+    "listing_rule": null,
+    "angle_label": "Le parcours",
+    "angle_notes": [
+      {
+        "kind": "offer",
+        "id": "dore",
+        "text": "1 h 30 de montée et 700 m de dénivelé, puis la descente dans l'eau. Pour marcheurs réguliers."
+      },
+      {
+        "kind": "offer",
+        "id": "acomat",
+        "text": "Marche courte, nage et glissades dans les vasques."
+      },
+      {
+        "kind": "offer",
+        "id": "wc-acomat",
+        "text": "Version raccourcie, au rythme des enfants."
+      }
+    ],
+    "why_intro": "Le guide connaît l'itinéraire, les sauts sûrs et les sorties de secours. Vous profitez de la rivière sans chercher votre chemin.",
+    "safety_note": "Sans rappel ne veut pas dire sans effort : la marche d'approche peut être longue (1 h 30 pour le Canyon doré).",
+    "published_on": "2026-10-02",
+    "updated_on": "2026-10-02"
+  },
+  {
+    "id": "canyoning-sensations",
+    "label": "Sensations fortes",
+    "h1": "Canyoning sensations fortes en Guadeloupe",
+    "eyebrow": "Sensations fortes",
+    "intro": "Rappels enchaînés, sauts engagés et journées entières dans les gorges de la Côte-sous-le-Vent, pour les pratiquants en forme.",
+    "answer": "Les canyons les plus engagés de Guadeloupe sont Ferry, à Bouillante, et Bois Malaisé, à Vieux-Habitants. Ce sont des journées de 6 h avec rappels enchaînés et sauts, accessibles dès 14 ou 16 ans, toujours avec un guide.",
+    "hero_image": {
+      "src": "https://www.kayak-guadeloupe.fr/images/yalode-sport-1.jpg",
+      "credit": "Photo : Yalodé",
+      "source_url": "https://www.kayak-guadeloupe.fr/",
+      "source_name": "kayak-guadeloupe.fr"
+    },
+    "featured_offer_id": "wc-ferry",
+    "takeaways": [
+      {
+        "title": "Rappels enchaînés",
+        "text": "Ferry et Bois Malaisé, dans des gorges resserrées."
+      },
+      {
+        "title": "Journée entière",
+        "text": "6 h à 6 h 30 sur le terrain, repas à prévoir."
+      },
+      {
+        "title": "Dès 14 ans",
+        "text": "Bonne condition physique requise, 16 ans pour Bois Malaisé."
+      }
+    ],
+    "editorial": {
+      "eyebrow": "Le guide",
+      "h2": "Canyoning sensations fortes en Guadeloupe",
+      "sections": [
+        {
+          "title": "Les parcours engagés",
+          "text": "Ferry, à Bouillante, et Bois Malaisé, à Vieux-Habitants, enchaînent rappels et sauts dans des gorges étroites. Ce sont des journées entières dans l'eau."
+        },
+        {
+          "title": "Pour qui ?",
+          "text": "Pour des personnes en bonne condition physique, sans vertige et à l'aise dans l'eau. Une première expérience en canyoning est conseillée pour Bois Malaisé."
+        },
+        {
+          "title": "La météo décide",
+          "text": "Ces canyons sont sensibles aux crues. Le guide confirme la sortie la veille et peut l'annuler si le débit est trop fort."
+        }
+      ],
+      "tips": [
+        {
+          "label": "Âge",
+          "value": "Dès 14 ou 16 ans"
+        },
+        {
+          "label": "Durée",
+          "value": "6 h à 6 h 30"
+        },
+        {
+          "label": "Repas",
+          "value": "À prévoir"
+        },
+        {
+          "label": "Sans guide",
+          "value": "Jamais"
+        }
+      ]
+    },
+    "offer_rule": {
+      "match": "any",
+      "conditions": [
+        {
+          "field": "spirit",
+          "op": "eq",
+          "value": "sensations"
+        },
+        {
+          "field": "level",
+          "op": "eq",
+          "value": "engage"
+        }
+      ]
+    },
+    "listing_ids": [],
+    "listing_rule": null,
+    "angle_label": "Sensations",
+    "angle_notes": [
+      {
+        "kind": "offer",
+        "id": "wc-ferry",
+        "text": "Rappels et sauts enchaînés dans des gorges étroites, sur une journée."
+      },
+      {
+        "kind": "offer",
+        "id": "wc-boismalaise",
+        "text": "Le plus sportif de la sélection. Une première expérience est conseillée."
+      }
+    ],
+    "why_intro": "Sur les canyons engagés, l'encadrement n'est pas une option : cordes, rappels et sauts se font avec un professionnel qui connaît chaque obstacle.",
+    "safety_note": "Ces parcours demandent une bonne condition physique. Ne les tentez jamais sans guide.",
+    "published_on": "2026-10-02",
+    "updated_on": "2026-10-02"
+  },
+  {
+    "id": "canyoning-demi-journee",
+    "label": "Canyoning à la demi-journée",
+    "h1": "Canyoning à la demi-journée en Guadeloupe",
+    "eyebrow": "Demi-journée",
+    "intro": "Des sorties de 3 h à 4 h 30, pour garder le reste de la journée libre.",
+    "answer": "Plusieurs sorties canyoning en Guadeloupe durent une demi-journée, de 3 h à 4 h 30, avec un départ le matin. Acomat avec Yalodé (dès 50 €) et la formule découverte de Bourceau avec Wild Canyon laissent l'après-midi libre.",
+    "hero_image": {
+      "src": "https://www.kayak-guadeloupe.fr/images/canyoning-famille-01.jpg",
+      "credit": "Photo : Yalodé",
+      "source_url": "https://www.kayak-guadeloupe.fr/",
+      "source_name": "kayak-guadeloupe.fr"
+    },
+    "featured_offer_id": "wc-bourceau-decouverte",
+    "takeaways": [
+      {
+        "title": "3 h à 4 h 30",
+        "text": "Le reste de la journée reste libre."
+      },
+      {
+        "title": "Départ le matin",
+        "text": "9 h à Acomat avec Yalodé, départ matinal avec Wild Canyon."
+      },
+      {
+        "title": "Dès 50 €",
+        "text": "Par personne, équipement compris."
+      }
+    ],
+    "editorial": {
+      "eyebrow": "Le guide",
+      "h2": "Le canyoning à la demi-journée",
+      "sections": [
+        {
+          "title": "Pourquoi une demi-journée ?",
+          "text": "Une sortie de 3 h à 4 h 30 laisse l'après-midi libre pour la plage ou une autre visite. Les départs se font le matin, quand les conditions sont les plus stables."
+        },
+        {
+          "title": "Quels parcours ?",
+          "text": "Acomat avec Yalodé, départ à 9 h, et la formule découverte de Bourceau avec Wild Canyon sont les deux options les plus courtes."
+        },
+        {
+          "title": "À combiner avec",
+          "text": "Sur la Côte-sous-le-Vent, la plage de Malendure ou la Maison du Cacao, à Pointe-Noire, sont à quelques minutes des points de rendez-vous."
+        }
+      ],
+      "tips": [
+        {
+          "label": "Durée",
+          "value": "3 h à 4 h 30"
+        },
+        {
+          "label": "Départ",
+          "value": "Le matin"
+        },
+        {
+          "label": "Prix",
+          "value": "Dès 50 € par personne"
+        },
+        {
+          "label": "Après-midi",
+          "value": "Libre"
+        }
+      ]
+    },
+    "offer_rule": {
+      "match": "all",
+      "conditions": [
+        {
+          "field": "duration_min",
+          "op": "lte",
+          "value": 270
+        }
+      ]
+    },
+    "listing_ids": [],
+    "listing_rule": null,
+    "angle_label": "Le timing",
+    "angle_notes": [
+      {
+        "kind": "offer",
+        "id": "wc-bourceau-decouverte",
+        "text": "Départ le matin, retour pour le déjeuner."
+      },
+      {
+        "kind": "offer",
+        "id": "acomat",
+        "text": "Rendez-vous à 9 h, fini en début d'après-midi."
+      },
+      {
+        "kind": "offer",
+        "id": "wc-acomat",
+        "text": "Environ 3 h : l'après-midi reste libre."
+      }
+    ],
+    "why_intro": "En demi-journée, chaque minute compte. Le guide vous mène directement aux plus beaux passages, avec le matériel prêt au départ.",
+    "safety_note": "Le guide confirme la sortie la veille selon la météo.",
+    "published_on": "2026-10-02",
+    "updated_on": "2026-10-02"
+  }
+]

@@ -33,6 +33,32 @@ Layer (which projects a rule applies to):
 
 ## Changes
 
+### 2026-10-07 · Phase 1: content schema, normalized fixtures, content report
+- **Layer:** Core (primitives: image with credit, placeholders, completeness) · Directory (operator, guide, offer, review, social post, article, block, declarative selection rules) · Places (place, location policy, access status, safety alert, minute ranges) · Site (vocabularies, mapping)
+- **Change:** Zod schemas in `packages/*/src/content/` and `apps/rivieres-canyons/src/content/`. `pnpm content:check` maps the design export (`data/*.json`) to snake_case fixtures in `apps/rivieres-canyons/content/fixtures/`, checks schema and references, and writes `docs/CONTENT_REPORT.md`. `pnpm content:check:prod` also fails on placeholders, draft signatures, guides without a full name, ratings without a source and social posts without an account. Article selection rules are declarative (`{match, conditions[{field, op, value}]}`) and verified against the design's JavaScript rules. Durations and approaches are minute ranges `{min, max, note}`. WhatsApp moves from the operator to the guide.
+- **Why:** One data shape for the fixtures adapter now and the Airtable adapter later; invalid content fails the build with a clear message.
+- **How to apply elsewhere:** Reuse the package schemas; a new site only writes its vocabularies, its `.extend()` and its mapping.
+- **Status:** Rivières & Canyons ✅ · Mangrove ⏳ · Template ⏳
+
+### 2026-10-07 · Directions never stored for guide-only and closed places (decision Q2-A)
+- **Layer:** Places
+- **Change:** The mapping drops itinerary, itinerary text, access tiles, parking, drive time, access H2 and guided access text from `guide_only` and `closed` places, plus the outings' meeting notes on those places. The place schema fails if any of these fields is filled.
+- **Why:** Data that is never meant to be shown should not exist in the content store (no leak through feeds, JSON-LD, Markdown twins or a future template).
+- **How to apply elsewhere:** Same rule for every place directory.
+- **Status:** Rivières & Canyons ✅ · Mangrove ⏳ · Template ⏳
+
+### 2026-10-07 · Acomat split into Saut d'Acomat and Canyon d'Acomat
+- **Layer:** Site
+- **Change:** `saut-d-acomat` (closed waterfall site) keeps the site facts. New place `canyon-d-acomat` (`guide_only`) holds the guided experience; the Yalodé and Wild Canyon Acomat outings link to it.
+- **Why:** Jordan, 2026-10-07: the trips run in the canyon, not at the closed saut.
+- **How to apply elsewhere:** When a closed site and a guided route share a name, model them as two places.
+- **Status:** Rivières & Canyons ✅ · Mangrove — · Template —
+
+### 2026-10-07 · Phase order and safety wording (decisions Q1-A, Q3)
+- **Layer:** Site
+- **Change:** Phases follow `CLAUDE.md` §13 (content, Airtable, then scaffold). "En sécurité" / "en toute sécurité" wording is kept as written, pending confirmation against `CLAUDE.md` §11 and B10.
+- **Status:** Rivières & Canyons ✅ · Mangrove — · Template —
+
 ### 2026-10-06 · v12: variable rename, single changelog, fonts, images, privacy context
 - **Layer:** Core
 - **Change:** Variable renames (J-N2, option B): `--w-regular/--w-semibold` → `--fw-*`, `--t-h1…--t-micro` → `--fs-*`; `--w-*` now means width only. The root `Directory Design Changelog.md` is deleted; `docs/CHANGELOG.md` is the only changelog. Fonts documented as Google Fonts (OFL), self-hosted. Image licences are documented in the data files (credit, url); phase 1 only reports gaps. New `docs/PRIVACY_CONTEXT.md`: processing facts, open items and build rules for the privacy page, whose text will be generated later (`[PRIVACY_POLICY_TEXT]` placeholder, noindex, production build fails on it). Signature drafts synced into `data/destinations.json` with `signature_status: draft`.

@@ -1,0 +1,9 @@
+{
+  "name": "orbit-directories",
+  "private": true,
+  "packageManager": "pnpm@10.28.0",
+  "scripts": {
+    "content:check": "pnpm --filter rivieres-canyons content:check",
+    "content:check:prod": "pnpm --filter rivieres-canyons content:check:prod"
+  }
+}

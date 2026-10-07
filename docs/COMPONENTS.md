@@ -2,7 +2,7 @@
 
 One row per component. **Name** is canonical (role-based, see `ARCHITECTURE.md` §3). **Legacy** is the name used in docs and changelog before 2026-10-06 (kept so old entries can be looked up; do not use it in code). Rename decision J-N1 is in `REVIEW_2026-10-06.md` §4 (applied, reversible: swap the two columns).
 
-How to read: **Composed of** lists lower-level pieces. **Variants** are props (never separate components). **Text** lists text styles from `TYPOGRAPHY.md`. **Mobile** is the base layout (≈360px); **≥480** and **≥1024** list only what changes. "Reference" is the section of `Guadeloupe v12 Details.dc.html` that shows it (the prototype is a visual reference only; where it disagrees with this file, this file wins, see `CLAUDE_CODE_CONTEXT.md` precedence).
+How to read: **Composed of** lists lower-level pieces. **Variants** are props (never separate components). **Text** lists text styles from `TYPOGRAPHY.md`. **Mobile** is the base layout (≈360px); **≥480** and **≥1024** list only what changes. "Reference" is the section of `Guadeloupe v12 Details.dc.html` that shows it (the prototype is a visual reference only; where it disagrees with this file, this file wins, see `CLAUDE.md` §3 precedence).
 
 Status: ✅ in the reference · 🆕 needed by the system but only implied in the reference (build it from this spec).
 

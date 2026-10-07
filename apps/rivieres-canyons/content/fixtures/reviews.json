@@ -1,0 +1,29 @@
+[
+  {
+    "id": "wildcanyon-1",
+    "operator_id": "wildcanyon",
+    "offer_id": null,
+    "quote": "Super moniteur, super site et superbe vue tout au long de la journée, avec de bonnes sensations.",
+    "author": "Andy S.",
+    "source": "avis Google",
+    "status": "published"
+  },
+  {
+    "id": "wildcanyon-2",
+    "operator_id": "wildcanyon",
+    "offer_id": null,
+    "quote": "J'ai passé un très bon moment, l'activité était super, beaucoup de sensations.",
+    "author": "Catherine A.",
+    "source": "avis Google",
+    "status": "published"
+  },
+  {
+    "id": "wildcanyon-3",
+    "operator_id": "wildcanyon",
+    "offer_id": null,
+    "quote": "Quant au cadre… rien à dire, c’est magnifique !",
+    "author": "Benjamin L.",
+    "source": "avis Google",
+    "status": "published"
+  }
+]

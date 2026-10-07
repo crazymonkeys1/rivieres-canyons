@@ -1,5 +1,10 @@
 # Content model (v12)
 
+> **Since phase 1 (2026-10-07)** the schema lives in code and wins over this file:
+> `packages/core|directory|places/src/content/` (generic entities) and `apps/rivieres-canyons/src/content/schema.ts` + `vocabularies.ts` (site enums).
+> `pnpm content:check` maps `data/*.json` (the design export, kept as the raw source) to `apps/rivieres-canyons/content/fixtures/*.json`
+> (snake_case, numbers as numbers, enums) and writes `docs/CONTENT_REPORT.md`. The tables below describe the design export.
+
 ## Data files
 | File | Contents |
 |---|---|

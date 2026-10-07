@@ -1,0 +1,2380 @@
+[
+  {
+    "id": "grande-riviere-a-goyaves",
+    "name": "Grande Rivière à Goyaves",
+    "type": "riviere",
+    "island": "Basse-Terre",
+    "communes": [
+      "Petit-Bourg",
+      "Lamentin",
+      "Sainte-Rose"
+    ],
+    "signature": null,
+    "signature_status": null,
+    "has_waterfall": null,
+    "location_policy": "commune_only",
+    "alt_names": [],
+    "access_status": null,
+    "summary": "La principale rivière de Guadeloupe selon le Parc national, avec un bassin versant important.",
+    "overview_h2": null,
+    "lead": null,
+    "intro": null,
+    "more_title": null,
+    "more_text": null,
+    "season": null,
+    "difficulty": null,
+    "duration": null,
+    "approach": null,
+    "min_age": null,
+    "swimming": null,
+    "swimming_note": null,
+    "access_h2": null,
+    "itinerary": null,
+    "itinerary_text": null,
+    "access_tiles": [],
+    "parking": null,
+    "drive": null,
+    "latitude": null,
+    "longitude": null,
+    "guided_access_text": null,
+    "risks": [
+      "crues_soudaines",
+      "courant_variable"
+    ],
+    "safety_alert": null,
+    "to_bring": [],
+    "key_facts": [],
+    "insider_tip": null,
+    "offer_h2": null,
+    "offer_why": null,
+    "faq_h2": null,
+    "faq": [],
+    "press": [],
+    "hero_image": null,
+    "gallery": [],
+    "site_photos": [],
+    "guided_photos": [],
+    "photo_caption_site": null,
+    "photo_caption_guided": null,
+    "verification": "eleve",
+    "source_publisher": "Parc national de la Guadeloupe",
+    "source_url": "https://guadeloupe-parcnational.fr/fr/des-connaissances/patrimoines-naturels/les-milieux/milieux-humides/eau-douce-cascades-et-rivieres",
+    "estimated_fields": []
+  },
+  {
+    "id": "riviere-lezarde",
+    "name": "Rivière Lézarde",
+    "type": "riviere",
+    "island": "Basse-Terre",
+    "communes": [
+      "Petit-Bourg"
+    ],
+    "signature": null,
+    "signature_status": null,
+    "has_waterfall": null,
+    "location_policy": "commune_only",
+    "alt_names": [],
+    "access_status": null,
+    "summary": "Rivière associée au site du Saut de la Lézarde.",
+    "overview_h2": null,
+    "lead": null,
+    "intro": null,
+    "more_title": null,
+    "more_text": null,
+    "season": null,
+    "difficulty": null,
+    "duration": null,
+    "approach": null,
+    "min_age": null,
+    "swimming": null,
+    "swimming_note": null,
+    "access_h2": null,
+    "itinerary": null,
+    "itinerary_text": null,
+    "access_tiles": [],
+    "parking": null,
+    "drive": null,
+    "latitude": null,
+    "longitude": null,
+    "guided_access_text": null,
+    "risks": [
+      "crues_soudaines",
+      "roches_glissantes"
+    ],
+    "safety_alert": null,
+    "to_bring": [],
+    "key_facts": [],
+    "insider_tip": null,
+    "offer_h2": null,
+    "offer_why": null,
+    "faq_h2": null,
+    "faq": [],
+    "press": [],
+    "hero_image": null,
+    "gallery": [],
+    "site_photos": [],
+    "guided_photos": [],
+    "photo_caption_site": null,
+    "photo_caption_guided": null,
+    "verification": "moyen",
+    "source_publisher": "Parc national de la Guadeloupe",
+    "source_url": "https://guadeloupe-parcnational.fr/fr/des-connaissances/patrimoines-naturels/les-milieux/milieux-humides/eau-douce-cascades-et-rivieres",
+    "estimated_fields": []
+  },
+  {
+    "id": "saut-de-la-lezarde",
+    "name": "Saut de la Lézarde",
+    "type": "cascade",
+    "island": "Basse-Terre",
+    "communes": [
+      "Petit-Bourg"
+    ],
+    "signature": "Une chute d'une dizaine de mètres et un bassin profond, au bout d'un sentier de forêt.",
+    "signature_status": "draft",
+    "has_waterfall": true,
+    "location_policy": "commune_only",
+    "alt_names": [
+      "Cascade de la Lézarde",
+      "Lézarde Falls"
+    ],
+    "access_status": null,
+    "summary": "Cascade d'une dizaine de mètres sur la rivière Lézarde, dans les hauteurs de Petit-Bourg, avec un bassin profond. On y descend par un sentier en forêt, boueux et raide par endroits.",
+    "overview_h2": "Saut de la Lézarde, la cascade de Petit-Bourg",
+    "lead": "Une cascade d'une dizaine de mètres qui tombe dans un bassin profond, au bout d'une descente en forêt.",
+    "intro": "Le Saut de la Lézarde se trouve sur la rivière Lézarde, dans les hauteurs de Petit-Bourg, vers Vernou. On y accède par un sentier en forêt de 20 à 30 minutes, boueux et raide par endroits, qui descend jusqu'à une cascade d'une dizaine de mètres et un bassin profond entouré de roches.",
+    "more_title": null,
+    "more_text": "Un sentier glissant qui descend en forêt, quelques passages sur racines, puis une cascade qui tombe dans un bassin profond entouré de roches.",
+    "season": "De décembre à mai, par temps sec. Le sentier devient très glissant après la pluie.",
+    "difficulty": "moyen",
+    "duration": {
+      "min": 90,
+      "max": 120,
+      "note": null
+    },
+    "approach": {
+      "min": 20,
+      "max": 30,
+      "note": "aller (descente raide)"
+    },
+    "min_age": 8,
+    "swimming": "conditional",
+    "swimming_note": "possible sous conditions",
+    "access_h2": "Comment aller au Saut de la Lézarde",
+    "itinerary": "Depuis Petit-Bourg, monter vers Vernou ; le départ du sentier se trouve en bord de route, près d'un parking privé.",
+    "itinerary_text": "Depuis Petit-Bourg, montez vers Vernou. Le départ du sentier se trouve en bord de route, près d'un parking privé.",
+    "access_tiles": [
+      {
+        "icon": "🚗",
+        "label": "Pointe-à-Pitre",
+        "value": "25 min de route",
+        "tip": "Par Petit-Bourg, puis la route de Vernou."
+      },
+      {
+        "icon": "🅿️",
+        "label": "Parking",
+        "value": "Privé, payant",
+        "tip": "Une participation est demandée par le propriétaire."
+      },
+      {
+        "icon": "🥾",
+        "label": "Sentier",
+        "value": "20 à 30 min",
+        "tip": "Descente raide et boueuse par endroits, racines glissantes."
+      }
+    ],
+    "parking": "Parking privé à proximité (participation demandée)",
+    "drive": "25 min depuis Pointe-à-Pitre",
+    "latitude": null,
+    "longitude": null,
+    "guided_access_text": null,
+    "risks": [
+      "crues_soudaines",
+      "roches_glissantes",
+      "profondeur_variable"
+    ],
+    "safety_alert": {
+      "short_label": "Accès à vérifier",
+      "title": "Vérifiez l'accès avant de partir",
+      "text": "L'accès au site peut être restreint. Renseignez-vous auprès de la mairie de Petit-Bourg avant de vous y rendre.",
+      "items": [
+        "Le sentier devient très glissant après la pluie.",
+        "Le bassin est profond : la baignade n'est pas surveillée."
+      ]
+    },
+    "to_bring": [
+      "Chaussures de randonnée",
+      "Maillot de bain",
+      "Serviette",
+      "Bouteille d'eau",
+      "Anti-moustique"
+    ],
+    "key_facts": [
+      {
+        "label": "Hauteur",
+        "value": "Une dizaine de mètres"
+      },
+      {
+        "label": "Sentier",
+        "value": "20 à 30 min, raide"
+      },
+      {
+        "label": "Parking",
+        "value": "Privé, participation demandée"
+      }
+    ],
+    "insider_tip": null,
+    "offer_h2": null,
+    "offer_why": null,
+    "faq_h2": "Saut de la Lézarde : questions fréquentes",
+    "faq": [
+      {
+        "question": "Où se trouve le Saut de la Lézarde ?",
+        "answer": "Dans les hauteurs de Petit-Bourg, vers Vernou, en Basse-Terre, à environ 25 min de Pointe-à-Pitre."
+      },
+      {
+        "question": "Le Saut de la Lézarde est-il accessible ?",
+        "answer": "L'accès peut être restreint : renseignez-vous auprès de la mairie de Petit-Bourg avant de partir."
+      },
+      {
+        "question": "Combien de temps de marche ?",
+        "answer": "20 à 30 minutes de descente sur un sentier raide et boueux par endroits."
+      },
+      {
+        "question": "Peut-on se baigner ?",
+        "answer": "Le bassin est profond et la baignade n'est pas surveillée. Ne vous baignez pas si l'eau est trouble ou après la pluie."
+      },
+      {
+        "question": "Le parking est-il payant ?",
+        "answer": "Oui, le parking est privé et une participation est demandée."
+      },
+      {
+        "question": "Quand y aller ?",
+        "answer": "De décembre à mai, par temps sec : le sentier devient très glissant après la pluie."
+      }
+    ],
+    "press": [],
+    "hero_image": {
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Saut%20de%20la%20L%C3%A9zarde.JPG",
+      "credit": "Photo : LPLT, Wikimedia Commons, CC BY-SA 3.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Saut%20de%20la%20L%C3%A9zarde.JPG",
+      "source_name": "commons.wikimedia.org"
+    },
+    "gallery": [],
+    "site_photos": [],
+    "guided_photos": [],
+    "photo_caption_site": null,
+    "photo_caption_guided": null,
+    "verification": "moyen",
+    "source_publisher": "Parc national de la Guadeloupe",
+    "source_url": "https://guadeloupe-parcnational.fr/fr/des-connaissances/patrimoines-naturels/les-milieux/milieux-humides/eau-douce-cascades-et-rivieres",
+    "estimated_fields": [
+      "difficulty",
+      "duration",
+      "approach",
+      "min_age",
+      "itinerary",
+      "drive",
+      "parking",
+      "season"
+    ]
+  },
+  {
+    "id": "riviere-moustique",
+    "name": "Rivière Moustique",
+    "type": "riviere",
+    "island": "Basse-Terre",
+    "communes": [
+      "Sainte-Rose"
+    ],
+    "signature": null,
+    "signature_status": null,
+    "has_waterfall": null,
+    "location_policy": "commune_only",
+    "alt_names": [],
+    "access_status": null,
+    "summary": "Citée dans le classement réglementaire des cours d'eau de Guadeloupe et dans les offres de canyoning.",
+    "overview_h2": null,
+    "lead": null,
+    "intro": null,
+    "more_title": null,
+    "more_text": null,
+    "season": null,
+    "difficulty": null,
+    "duration": null,
+    "approach": null,
+    "min_age": null,
+    "swimming": null,
+    "swimming_note": null,
+    "access_h2": null,
+    "itinerary": null,
+    "itinerary_text": null,
+    "access_tiles": [],
+    "parking": null,
+    "drive": null,
+    "latitude": null,
+    "longitude": null,
+    "guided_access_text": null,
+    "risks": [
+      "crues_soudaines",
+      "courant",
+      "roches_glissantes"
+    ],
+    "safety_alert": null,
+    "to_bring": [],
+    "key_facts": [],
+    "insider_tip": null,
+    "offer_h2": null,
+    "offer_why": null,
+    "faq_h2": null,
+    "faq": [],
+    "press": [],
+    "hero_image": null,
+    "gallery": [],
+    "site_photos": [],
+    "guided_photos": [],
+    "photo_caption_site": null,
+    "photo_caption_guided": null,
+    "verification": "moyen",
+    "source_publisher": "Préfecture de Guadeloupe (DEAL)",
+    "source_url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000031496919",
+    "estimated_fields": []
+  },
+  {
+    "id": "riviere-bras-david",
+    "name": "Rivière Bras-David",
+    "type": "riviere",
+    "island": "Basse-Terre",
+    "communes": [
+      "Petit-Bourg"
+    ],
+    "signature": "Une rivière de forêt tropicale au bord de la Route de la Traversée, avec son aire de pique-nique.",
+    "signature_status": "draft",
+    "has_waterfall": null,
+    "location_policy": "public",
+    "alt_names": [
+      "Bras David",
+      "Rivière Bras David"
+    ],
+    "access_status": {
+      "status": "open",
+      "note": "Accès libre et gratuit.",
+      "source_name": null,
+      "source_url": null,
+      "checked_on": null
+    },
+    "summary": "Rivière de forêt tropicale au cœur du Parc national, le long de la Route de la Traversée. Elle est connue pour l'aire de pique-nique de Bras-David et les sentiers courts qui partent de la Maison de la Forêt.",
+    "overview_h2": "Rivière Bras-David, pique-nique et forêt au cœur du Parc national",
+    "lead": "Une rivière de forêt tropicale, des tables au bord de l'eau et des sentiers courts pour toute la famille.",
+    "intro": "La rivière Bras-David coule au cœur du Parc national de la Guadeloupe, le long de la Route de la Traversée, sur la commune de Petit-Bourg. Elle est connue pour son aire de pique-nique et les sentiers courts qui partent de la Maison de la Forêt, à travers une forêt humide ombragée ponctuée de petits bassins.",
+    "more_title": null,
+    "more_text": "Des sentiers ombragés en forêt humide, des tables de pique-nique au bord de la rivière et quelques bassins peu profonds.",
+    "season": "Toute l'année ; la forêt reste humide même en saison sèche. Évitez la rivière après de fortes pluies.",
+    "difficulty": "facile",
+    "duration": {
+      "min": 60,
+      "max": 120,
+      "note": null
+    },
+    "approach": {
+      "min": 5,
+      "max": 20,
+      "note": "selon le sentier"
+    },
+    "min_age": 4,
+    "swimming": "conditional",
+    "swimming_note": "possible sous conditions, dans les petits bassins",
+    "access_h2": "Comment aller à la rivière Bras-David",
+    "itinerary": "Route de la Traversée (D23), secteur de la Maison de la Forêt, commune de Petit-Bourg.",
+    "itinerary_text": "Prenez la Route de la Traversée (D23) depuis Petit-Bourg jusqu'au secteur de la Maison de la Forêt. Les parkings de l'aire de Bras-David sont en bord de route.",
+    "access_tiles": [
+      {
+        "icon": "🚗",
+        "label": "Pointe-à-Pitre",
+        "value": "35 min de route",
+        "tip": "Par la Route de la Traversée (D23), côté Petit-Bourg."
+      },
+      {
+        "icon": "🅿️",
+        "label": "Parking",
+        "value": "Gratuit",
+        "tip": "Parkings de l'aire de Bras-David et de la Maison de la Forêt."
+      },
+      {
+        "icon": "🥾",
+        "label": "Sentiers",
+        "value": "5 à 20 min",
+        "tip": "Courts et ombragés, accessibles en famille."
+      }
+    ],
+    "parking": "Parkings de l'aire de Bras-David et de la Maison de la Forêt, gratuits",
+    "drive": "35 min depuis Pointe-à-Pitre",
+    "latitude": null,
+    "longitude": null,
+    "guided_access_text": null,
+    "risks": [
+      "crues_soudaines",
+      "terrain_glissant"
+    ],
+    "safety_alert": null,
+    "to_bring": [
+      "Chaussures de marche",
+      "Anti-moustique",
+      "K-way",
+      "Pique-nique"
+    ],
+    "key_facts": [
+      {
+        "label": "Sentiers",
+        "value": "5 à 20 min"
+      },
+      {
+        "label": "Équipements",
+        "value": "Tables de pique-nique"
+      },
+      {
+        "label": "À proximité",
+        "value": "Maison de la Forêt"
+      }
+    ],
+    "insider_tip": null,
+    "offer_h2": null,
+    "offer_why": null,
+    "faq_h2": "Rivière Bras-David : questions fréquentes",
+    "faq": [
+      {
+        "question": "Où se trouve la rivière Bras-David ?",
+        "answer": "Sur la Route de la Traversée (D23), secteur de la Maison de la Forêt, à Petit-Bourg, à environ 35 min de Pointe-à-Pitre."
+      },
+      {
+        "question": "Peut-on pique-niquer à Bras-David ?",
+        "answer": "Oui, une aire de pique-nique avec tables se trouve au bord de la rivière."
+      },
+      {
+        "question": "Peut-on se baigner ?",
+        "answer": "Dans les petits bassins, sous conditions et sous votre responsabilité. Évitez la rivière après de fortes pluies."
+      },
+      {
+        "question": "C'est adapté aux enfants ?",
+        "answer": "Oui, les sentiers sont courts (5 à 20 min) et ombragés."
+      },
+      {
+        "question": "Le parking est-il gratuit ?",
+        "answer": "Oui, les parkings de l'aire de Bras-David et de la Maison de la Forêt sont gratuits."
+      },
+      {
+        "question": "Quand y aller ?",
+        "answer": "Toute l'année ; la forêt reste humide même en saison sèche, prévoyez un K-way."
+      }
+    ],
+    "press": [],
+    "hero_image": null,
+    "gallery": [],
+    "site_photos": [],
+    "guided_photos": [],
+    "photo_caption_site": null,
+    "photo_caption_guided": null,
+    "verification": "moyen",
+    "source_publisher": "Parc national de la Guadeloupe",
+    "source_url": "https://guadeloupe-parcnational.fr/fr/raa/2022",
+    "estimated_fields": [
+      "summary",
+      "difficulty",
+      "duration",
+      "approach",
+      "min_age",
+      "itinerary",
+      "drive",
+      "parking",
+      "season",
+      "swimming"
+    ]
+  },
+  {
+    "id": "riviere-corossol",
+    "name": "Rivière Corossol",
+    "type": "riviere",
+    "island": "Basse-Terre",
+    "communes": [
+      "Petit-Bourg"
+    ],
+    "signature": null,
+    "signature_status": null,
+    "has_waterfall": null,
+    "location_policy": "commune_only",
+    "alt_names": [],
+    "access_status": null,
+    "summary": "Identifiée dans les documents du Parc national, notamment dans le secteur de la Cascade aux Écrevisses.",
+    "overview_h2": null,
+    "lead": null,
+    "intro": null,
+    "more_title": null,
+    "more_text": null,
+    "season": null,
+    "difficulty": null,
+    "duration": null,
+    "approach": null,
+    "min_age": null,
+    "swimming": null,
+    "swimming_note": null,
+    "access_h2": null,
+    "itinerary": null,
+    "itinerary_text": null,
+    "access_tiles": [],
+    "parking": null,
+    "drive": null,
+    "latitude": null,
+    "longitude": null,
+    "guided_access_text": null,
+    "risks": [
+      "crues_soudaines",
+      "roches_glissantes"
+    ],
+    "safety_alert": null,
+    "to_bring": [],
+    "key_facts": [],
+    "insider_tip": null,
+    "offer_h2": null,
+    "offer_why": null,
+    "faq_h2": null,
+    "faq": [],
+    "press": [],
+    "hero_image": null,
+    "gallery": [],
+    "site_photos": [],
+    "guided_photos": [],
+    "photo_caption_site": null,
+    "photo_caption_guided": null,
+    "verification": "moyen",
+    "source_publisher": "Parc national de la Guadeloupe",
+    "source_url": "https://www.guadeloupe-parcnational.fr/fr/raa/2021",
+    "estimated_fields": []
+  },
+  {
+    "id": "cascade-aux-ecrevisses",
+    "name": "Cascade aux Écrevisses",
+    "type": "cascade",
+    "island": "Basse-Terre",
+    "communes": [
+      "Petit-Bourg"
+    ],
+    "signature": "La cascade la plus simple d'accès de Basse-Terre : dix minutes de sentier depuis la Route de la Traversée.",
+    "signature_status": "draft",
+    "has_waterfall": true,
+    "location_policy": "public",
+    "alt_names": [
+      "Cascade des Écrevisses",
+      "Crayfish Falls",
+      "Crayfish Waterfall"
+    ],
+    "access_status": {
+      "status": "open",
+      "note": "Accès libre et gratuit. Le Parc national mène des travaux sur le sentier : une fermeture temporaire est possible.",
+      "source_name": null,
+      "source_url": null,
+      "checked_on": null
+    },
+    "summary": "Petite cascade et bassin sur la rivière Corossol, en bord de Route de la Traversée, dans le Parc national. C'est la cascade la plus simple d'accès de Basse-Terre : une dizaine de minutes de sentier aménagé depuis le parking.",
+    "overview_h2": "Cascade aux Écrevisses, la cascade la plus facile de Basse-Terre",
+    "lead": "Une petite cascade et un bassin en pleine forêt, à dix minutes de marche de la route.",
+    "intro": "La Cascade aux Écrevisses se trouve sur la rivière Corossol, en bord de Route de la Traversée, dans le cœur du Parc national de la Guadeloupe, côté Petit-Bourg. C'est le site naturel le plus visité de l'île, avec près de 200 000 visiteurs par an. Un sentier pavé et plat d'environ 200 m longe la rivière jusqu'à une plateforme face à une chute de 8 à 10 m, qui tombe dans un bassin clair où l'on peut se baigner.",
+    "more_title": "Pourquoi ce nom",
+    "more_text": "Le nom vient des ouassous, les écrevisses d'eau douce qui peuplaient autrefois le bassin et se font rares aujourd'hui. En chemin, des panneaux, dont une fresque en braille, présentent la faune du site : moqueur-trembleur, pic de la Guadeloupe, ouassous et crabes de rivière. Un second bassin, plus calme, se trouve en amont.",
+    "season": "Toute l'année ; tôt le matin en semaine pour éviter la foule. Ne pas se baigner après de fortes pluies.",
+    "difficulty": "tres_facile",
+    "duration": {
+      "min": 45,
+      "max": 60,
+      "note": null
+    },
+    "approach": {
+      "min": 10,
+      "max": 10,
+      "note": "aller"
+    },
+    "min_age": 2,
+    "swimming": "conditional",
+    "swimming_note": "possible sous conditions",
+    "access_h2": "Comment aller à la Cascade aux Écrevisses",
+    "itinerary": "Route de la Traversée (D23), entre Versailles et la Maison de la Forêt, côté Petit-Bourg ; le parking est signalé en bord de route.",
+    "itinerary_text": "Prenez la Route de la Traversée (RD23) depuis Petit-Bourg ou Bouillante et garez-vous au parking de la Cascade aux Écrevisses, près du pont sur la rivière Corossol. Le sentier balisé en jaune part du parking. Soyez prudent en traversant la RD23, la circulation y est dense.",
+    "access_tiles": [
+      {
+        "icon": "🚗",
+        "label": "Pointe-à-Pitre",
+        "value": "30 min de route",
+        "tip": "Par la Route de la Traversée (D23), côté Petit-Bourg ou Bouillante."
+      },
+      {
+        "icon": "🅿️",
+        "label": "Parking",
+        "value": "Gratuit, près du pont",
+        "tip": "Non surveillé : ne laissez rien de visible. Plein vers 11 h et le week-end."
+      },
+      {
+        "icon": "🚌",
+        "label": "En bus",
+        "value": "Arrêt « Corossol »",
+        "tip": "Ligne 115 depuis Pointe-à-Pitre, arrêt sur le parking principal."
+      }
+    ],
+    "parking": "Parking aménagé en bord de route, gratuit, non surveillé",
+    "drive": "30 min depuis Pointe-à-Pitre",
+    "latitude": null,
+    "longitude": null,
+    "guided_access_text": null,
+    "risks": [
+      "crues_soudaines",
+      "parking_non_surveille",
+      "baignade_non_surveillee",
+      "travaux_eventuels"
+    ],
+    "safety_alert": {
+      "short_label": "Baignade non surveillée",
+      "title": "Baignade non surveillée",
+      "text": "Respectez l'affichage de l'ARS sur la qualité de l'eau. Si la rivière monte, ne traversez pas et attendez la décrue.",
+      "items": []
+    },
+    "to_bring": [
+      "Chaussures qui accrochent sur roche mouillée",
+      "Maillot de bain",
+      "Serviette",
+      "Anti-moustique"
+    ],
+    "key_facts": [
+      {
+        "label": "Hauteur",
+        "value": "8 à 10 m"
+      },
+      {
+        "label": "Sentier",
+        "value": "Pavé, 415 m aller-retour, 30 min"
+      },
+      {
+        "label": "Accessibilité",
+        "value": "Sentier adapté PMR et malvoyants (label Tourisme & Handicap)"
+      },
+      {
+        "label": "Sur place",
+        "value": "Aire de pique-nique de l'autre côté de la RD23, pas de poubelles"
+      },
+      {
+        "label": "Se renseigner",
+        "value": "Maison de la Forêt, à 2 km sur la RD23"
+      }
+    ],
+    "insider_tip": {
+      "guide_id": null,
+      "text": "Venez avant 9 h en semaine : vous aurez le bassin pour vous. Remontez quelques mètres à gauche de la chute pour une vue moins fréquentée."
+    },
+    "offer_h2": null,
+    "offer_why": null,
+    "faq_h2": "Cascade aux Écrevisses : questions fréquentes",
+    "faq": [
+      {
+        "question": "Où se trouve la Cascade aux Écrevisses ?",
+        "answer": "Sur la Route de la Traversée (RD23), à Petit-Bourg, dans le cœur du Parc national de la Guadeloupe. Comptez 30 min de route depuis Pointe-à-Pitre."
+      },
+      {
+        "question": "Combien de temps de marche pour la cascade ?",
+        "answer": "5 à 10 minutes par un sentier pavé et plat. L'aller-retour fait environ 415 m, comptez 30 min avec la pause."
+      },
+      {
+        "question": "Peut-on se baigner à la Cascade aux Écrevisses ?",
+        "answer": "Oui, la baignade est autorisée mais pas surveillée. Suivez l'affichage de l'ARS sur la qualité de l'eau et sortez dès que l'eau se trouble."
+      },
+      {
+        "question": "Le site est-il accessible en fauteuil roulant ?",
+        "answer": "Oui. Le parking et le sentier sont adaptés aux personnes à mobilité réduite et malvoyantes, avec le label Tourisme & Handicap."
+      },
+      {
+        "question": "Le parking est-il gratuit ?",
+        "answer": "Oui, il est gratuit mais non surveillé. Il se remplit vite en fin de matinée et le week-end."
+      },
+      {
+        "question": "Peut-on y aller en bus ?",
+        "answer": "Oui, la ligne 115 depuis Pointe-à-Pitre dessert l'arrêt « Corossol », sur le parking principal."
+      },
+      {
+        "question": "Pourquoi s'appelle-t-elle Cascade aux Écrevisses ?",
+        "answer": "Pour les ouassous, des écrevisses d'eau douce autrefois nombreuses dans le bassin. Elles sont devenues rares avec la fréquentation."
+      },
+      {
+        "question": "Quelle est la hauteur de la cascade ?",
+        "answer": "Entre 8 et 10 m. Elle se jette dans la rivière Corossol."
+      },
+      {
+        "question": "Peut-on pique-niquer sur place ?",
+        "answer": "Oui, une aire de pique-nique avec carbets se trouve de l'autre côté de la RD23. Il n'y a pas de poubelles : remportez vos déchets."
+      },
+      {
+        "question": "C'est adapté aux enfants ?",
+        "answer": "Oui, c'est l'une des sorties nature les plus faciles de Guadeloupe, même avec de jeunes enfants."
+      },
+      {
+        "question": "Quand y aller ?",
+        "answer": "Toute l'année. Venez tôt le matin en semaine pour éviter la foule, et évitez la baignade après de fortes pluies."
+      },
+      {
+        "question": "Que voir à proximité ?",
+        "answer": "La Maison de la Forêt et ses sentiers, l'aire de Bras-David, et plus loin la Route de la Traversée jusqu'à la Côte-sous-le-Vent."
+      }
+    ],
+    "press": [
+      {
+        "site": "Rando Guadeloupe",
+        "by": "Parc national de la Guadeloupe",
+        "title": "Fiche randonnée : Cascade aux Écrevisses",
+        "note": "Tracé GPX, profil, accessibilité et accès en bus.",
+        "url": "https://www.randoguadeloupe.gp/fr/trek/2752-Cascade-aux-Ecrevisses"
+      },
+      {
+        "site": "Les îles de Guadeloupe",
+        "by": "Comité du tourisme",
+        "title": "La Cascade aux Écrevisses",
+        "note": "Présentation officielle du site et conseils de visite.",
+        "url": "https://www.lesilesdeguadeloupe.com/decouvrir/espaces-naturels/les-cascades/la-cascade-aux-ecrevisses/"
+      },
+      {
+        "site": "Wikipédia",
+        "by": "Encyclopédie",
+        "title": "Cascade aux écrevisses",
+        "note": "Localisation, hauteur et fréquentation.",
+        "url": "https://fr.wikipedia.org/wiki/Cascade_aux_%C3%A9crevisses"
+      },
+      {
+        "site": "Guadeloupe Tourisme",
+        "by": "Guide en ligne",
+        "title": "Cascade aux écrevisses, Petit-Bourg",
+        "note": "Le second bassin en amont et les carbets de pique-nique.",
+        "url": "https://fr.guadeloupe-tourisme.com/366/cascade-aux-ecrevisses-petitbourg/"
+      }
+    ],
+    "hero_image": {
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Cascade%20aux%20%C3%A9crevisses%20(Guadeloupe).jpg",
+      "credit": "Photo : Wikimedia Commons, CC BY-SA 4.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Cascade%20aux%20%C3%A9crevisses%20(Guadeloupe).jpg",
+      "source_name": "commons.wikimedia.org"
+    },
+    "gallery": [
+      {
+        "src": "https://geotrek.guadeloupe-parcnational.fr/media/paperclip/trekking_poi/2763/la-cascade-aux-ecrevisses_4.JPG",
+        "credit": "Photo : Parc national de la Guadeloupe · Rando Guadeloupe",
+        "source_url": "https://www.randoguadeloupe.gp/fr/trek/2752-Cascade-aux-Ecrevisses",
+        "source_name": "randoguadeloupe.gp"
+      },
+      {
+        "src": "https://geotrek.guadeloupe-parcnational.fr/media/paperclip/trekking_trek/2752/img_20260825_135450-zv0zs1t4y3q6-dkuvth1eqv2w.jpg",
+        "credit": "Photo : Parc national de la Guadeloupe · Rando Guadeloupe",
+        "source_url": "https://www.randoguadeloupe.gp/fr/trek/2752-Cascade-aux-Ecrevisses",
+        "source_name": "randoguadeloupe.gp"
+      },
+      {
+        "src": "https://geotrek.guadeloupe-parcnational.fr/media/paperclip/trekking_poi/2761/img_20260626_072700-1hjtgbocgf5b.jpg",
+        "credit": "Photo : Parc national de la Guadeloupe · Rando Guadeloupe",
+        "source_url": "https://www.randoguadeloupe.gp/fr/trek/2752-Cascade-aux-Ecrevisses",
+        "source_name": "randoguadeloupe.gp"
+      },
+      {
+        "src": "https://geotrek.guadeloupe-parcnational.fr/media/paperclip/trekking_poi/2756/le-long-de-la-riviere_3.JPG",
+        "credit": "Photo : Parc national de la Guadeloupe · Rando Guadeloupe",
+        "source_url": "https://www.randoguadeloupe.gp/fr/trek/2752-Cascade-aux-Ecrevisses",
+        "source_name": "randoguadeloupe.gp"
+      },
+      {
+        "src": "https://geotrek.guadeloupe-parcnational.fr/media/paperclip/trekking_poi/2754/panneaux-de-presentation-du-parc-national.JPG",
+        "credit": "Photo : Parc national de la Guadeloupe · Rando Guadeloupe",
+        "source_url": "https://www.randoguadeloupe.gp/fr/trek/2752-Cascade-aux-Ecrevisses",
+        "source_name": "randoguadeloupe.gp"
+      }
+    ],
+    "site_photos": [],
+    "guided_photos": [],
+    "photo_caption_site": null,
+    "photo_caption_guided": null,
+    "verification": "eleve",
+    "source_publisher": "Parc national de la Guadeloupe",
+    "source_url": "https://guadeloupe-parcnational.fr/fr/actualites/cascade-aux-ecrevisses-une-nouvelle-phase-de-travaux-pour-un-sentier-plus-sur-et",
+    "estimated_fields": [
+      "duration",
+      "min_age",
+      "drive",
+      "parking",
+      "season"
+    ]
+  },
+  {
+    "id": "chutes-du-carbet",
+    "name": "Chutes du Carbet",
+    "type": "cascade",
+    "island": "Basse-Terre",
+    "communes": [
+      "Capesterre-Belle-Eau"
+    ],
+    "signature": "Trois chutes sur les flancs de la Soufrière, dont la 2e (110 m) se rejoint par un sentier aménagé.",
+    "signature_status": "draft",
+    "has_waterfall": true,
+    "location_policy": "public",
+    "alt_names": [
+      "Carbet Falls",
+      "Chutes du Grand Carbet"
+    ],
+    "access_status": {
+      "status": "partial",
+      "note": "Seule la 2e chute (110 m) est ouverte en accès normal : 45 min aller-retour depuis l'aire d'accueil, entrée payante. 1re chute fermée après un éboulement, 3e interdite depuis 2008.",
+      "source_name": "Sailoe (2026)",
+      "source_url": "https://www.sailoe.com/en/carbet-falls-guadeloupe/",
+      "checked_on": "2026-09-30"
+    },
+    "summary": "Les trois chutes de la rivière du Grand Carbet, sur les flancs de la Soufrière, comptent parmi les sites les plus visités de Guadeloupe. Seule la 2e chute (110 m) est accessible en visite normale, par un sentier aménagé depuis l'aire d'accueil.",
+    "overview_h2": "Chutes du Carbet, les cascades géantes de la Soufrière",
+    "lead": "Une chute de 110 m qui jaillit de la forêt tropicale, au bout d'un sentier aménagé sur les flancs de la Soufrière.",
+    "intro": "Les Chutes du Carbet sont trois cascades de la rivière du Grand Carbet, sur la commune de Capesterre-Belle-Eau, dans le Parc national de la Guadeloupe. Ce sont parmi les sites les plus visités de l'île. Aujourd'hui, seule la 2e chute (110 m) est accessible en visite normale : un sentier aménagé de 20 à 25 minutes mène de l'aire d'accueil à un belvédère face à la cascade.",
+    "more_title": null,
+    "more_text": "Un sentier dallé et des passerelles en forêt tropicale jusqu'à un belvédère face à la 2e chute. En chemin, le Grand Étang et le bassin Paradise valent un détour.",
+    "season": "Toute l'année ; le matin pour éviter les groupes et les nuages qui couvrent souvent la chute l'après-midi. Le site ferme en cas d'alerte météo.",
+    "difficulty": "facile",
+    "duration": {
+      "min": 90,
+      "max": 90,
+      "note": "sur place"
+    },
+    "approach": {
+      "min": 20,
+      "max": 25,
+      "note": "aller jusqu'à la 2e chute"
+    },
+    "min_age": 4,
+    "swimming": "no",
+    "swimming_note": "non, baignade interdite au pied de la chute",
+    "access_h2": "Comment aller aux Chutes du Carbet",
+    "itinerary": "Depuis Capesterre-Belle-Eau, suivre la route des Chutes du Carbet (D3) par Saint-Sauveur jusqu'au bout, environ 10 km de montée.",
+    "itinerary_text": "Depuis Capesterre-Belle-Eau, prenez la route des Chutes du Carbet (D3) par Saint-Sauveur et montez jusqu'au bout, environ 10 km. Le parking de l'aire d'accueil marque le départ du sentier aménagé vers la 2e chute.",
+    "access_tiles": [
+      {
+        "icon": "🚗",
+        "label": "Pointe-à-Pitre",
+        "value": "1 h de route",
+        "tip": "30 min depuis Basse-Terre, par Capesterre-Belle-Eau et Saint-Sauveur."
+      },
+      {
+        "icon": "🅿️",
+        "label": "Parking",
+        "value": "Aire d'accueil, en fin de route",
+        "tip": "Entrée du site payante. Arrivez tôt pour éviter les groupes."
+      },
+      {
+        "icon": "🥾",
+        "label": "Sentier",
+        "value": "20 à 25 min",
+        "tip": "Sentier dallé et passerelles jusqu'au belvédère de la 2e chute."
+      }
+    ],
+    "parking": "Parking de l'aire d'accueil, en fin de route (entrée du site payante)",
+    "drive": "1 h depuis Pointe-à-Pitre, 30 min depuis Basse-Terre",
+    "latitude": null,
+    "longitude": null,
+    "guided_access_text": null,
+    "risks": [
+      "terrain_montagneux",
+      "roches_glissantes",
+      "conditions_meteo"
+    ],
+    "safety_alert": {
+      "short_label": "Accès partiel",
+      "title": "Seule la 2e chute est ouverte",
+      "text": "La 1re chute est fermée après un éboulement. La baignade est interdite au pied de la 2e chute. Le site ferme en cas d'alerte météo.",
+      "items": []
+    },
+    "to_bring": [
+      "Chaussures de marche",
+      "K-way",
+      "Anti-moustique",
+      "Bouteille d'eau",
+      "Monnaie pour le droit d’entrée"
+    ],
+    "key_facts": [
+      {
+        "label": "Hauteur",
+        "value": "110 m pour la 2e chute"
+      },
+      {
+        "label": "Accès",
+        "value": "Payant, aire d'accueil en fin de route"
+      },
+      {
+        "label": "À proximité",
+        "value": "Grand Étang, bassin Paradise"
+      }
+    ],
+    "insider_tip": {
+      "guide_id": null,
+      "text": "Arrivez à l'ouverture : avant 9 h, la 2e chute est souvent dégagée et le sentier presque vide. Au retour, arrêtez-vous au Grand Étang."
+    },
+    "offer_h2": null,
+    "offer_why": null,
+    "faq_h2": "Chutes du Carbet : questions fréquentes",
+    "faq": [
+      {
+        "question": "Où se trouvent les Chutes du Carbet ?",
+        "answer": "À Capesterre-Belle-Eau, sur les flancs de la Soufrière, dans le Parc national de la Guadeloupe. Comptez 1 h de route depuis Pointe-à-Pitre."
+      },
+      {
+        "question": "Les Chutes du Carbet sont-elles ouvertes ?",
+        "answer": "En partie. Seule la 2e chute (110 m) est accessible en visite normale ; la 1re est fermée après un éboulement."
+      },
+      {
+        "question": "L'entrée est-elle payante ?",
+        "answer": "Oui, un droit d'entrée est demandé à l'aire d'accueil."
+      },
+      {
+        "question": "Combien de temps faut-il pour voir la 2e chute ?",
+        "answer": "20 à 25 minutes de marche aller par un sentier aménagé. Prévoyez environ 1 h 30 sur place."
+      },
+      {
+        "question": "Peut-on se baigner aux Chutes du Carbet ?",
+        "answer": "Non, la baignade est interdite au pied de la chute."
+      },
+      {
+        "question": "C'est adapté aux enfants ?",
+        "answer": "Oui, le sentier vers la 2e chute est aménagé et accessible dès 4 ans environ."
+      },
+      {
+        "question": "Quand y aller ?",
+        "answer": "Toute l'année, de préférence le matin : moins de monde, et la chute est souvent couverte de nuages l'après-midi."
+      },
+      {
+        "question": "Que voir à proximité ?",
+        "answer": "Le Grand Étang et le bassin Paradise, sur la même route."
+      }
+    ],
+    "press": [],
+    "hero_image": {
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Guadeloupe%20-%20bassin%20paradise%20pr%C3%A8s%20des%20chutes%20du%20Carbet.jpg",
+      "credit": "Photo : Wikimedia Commons, CC BY-SA 4.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Guadeloupe%20-%20bassin%20paradise%20pr%C3%A8s%20des%20chutes%20du%20Carbet.jpg",
+      "source_name": "commons.wikimedia.org"
+    },
+    "gallery": [],
+    "site_photos": [],
+    "guided_photos": [],
+    "photo_caption_site": null,
+    "photo_caption_guided": null,
+    "verification": "eleve",
+    "source_publisher": "Parc national de la Guadeloupe",
+    "source_url": "https://www.guadeloupe-parcnational.fr/sites/guadeloupe-parcnational.fr/files/atoms/files/depliant_chutes_carbet.pdf",
+    "estimated_fields": [
+      "duration",
+      "approach",
+      "min_age",
+      "drive",
+      "parking",
+      "season",
+      "swimming"
+    ]
+  },
+  {
+    "id": "chutes-moreau",
+    "name": "Chutes Moreau",
+    "type": "cascade",
+    "island": "Basse-Terre",
+    "communes": [
+      "Goyave"
+    ],
+    "signature": "Une des randonnées les plus sauvages de Basse-Terre, avec plusieurs traversées de rivière.",
+    "signature_status": "draft",
+    "has_waterfall": true,
+    "location_policy": "public",
+    "alt_names": [
+      "Cascades Moreau",
+      "Moreau Falls"
+    ],
+    "access_status": null,
+    "summary": "Une des randonnées les plus sauvages de Basse-Terre : un long sentier du Parc national depuis le parking Moreau à Goyave, avec plusieurs traversées de rivière et des passages raides équipés de cordes avant d'atteindre les chutes.",
+    "overview_h2": "Chutes Moreau, la randonnée sauvage de Goyave",
+    "lead": "Une longue marche dans la forêt du Parc national, des gués à traverser et des chutes au bout de l'effort.",
+    "intro": "Les Chutes Moreau se trouvent sur la commune de Goyave, dans le Parc national de la Guadeloupe. C'est l'une des randonnées les plus sauvages de Basse-Terre : 2 h 30 à 3 h de marche aller depuis le parking Moreau, en forêt dense, avec plusieurs traversées de rivière et une fin de parcours raide équipée de cordes fixes.",
+    "more_title": null,
+    "more_text": "Une marche longue en forêt dense, de la boue, des racines et plusieurs gués à traverser. La fin du parcours est raide et glissante, aidée de cordes fixes.",
+    "season": "Uniquement par temps sec, de préférence de février à avril. Ne pas partir si de la pluie est annoncée : les gués deviennent infranchissables.",
+    "difficulty": "difficile",
+    "duration": {
+      "min": 300,
+      "max": 360,
+      "note": "aller-retour"
+    },
+    "approach": {
+      "min": 150,
+      "max": 180,
+      "note": "aller"
+    },
+    "min_age": 12,
+    "swimming": null,
+    "swimming_note": null,
+    "access_h2": "Comment aller aux Chutes Moreau",
+    "itinerary": "Depuis Goyave, suivre la route de Moreau vers l'intérieur des terres jusqu'au parking en fin de route.",
+    "itinerary_text": "Depuis Goyave, suivez la route de Moreau vers l'intérieur des terres jusqu'au parking en fin de route. Le sentier du Parc national part de là.",
+    "access_tiles": [
+      {
+        "icon": "🚗",
+        "label": "Pointe-à-Pitre",
+        "value": "45 min de route",
+        "tip": "Par Goyave, puis la route de Moreau jusqu'au bout."
+      },
+      {
+        "icon": "🅿️",
+        "label": "Parking",
+        "value": "Moreau, fin de route",
+        "tip": "Non surveillé : ne laissez rien de visible."
+      },
+      {
+        "icon": "🥾",
+        "label": "Sentier",
+        "value": "2 h 30 à 3 h aller",
+        "tip": "Forêt dense, boue, racines et plusieurs gués."
+      }
+    ],
+    "parking": "Parking Moreau, en fin de route, non surveillé",
+    "drive": "45 min depuis Pointe-à-Pitre",
+    "latitude": null,
+    "longitude": null,
+    "guided_access_text": null,
+    "risks": [
+      "traversees_riviere",
+      "boue",
+      "racines",
+      "parois_raides",
+      "cordages"
+    ],
+    "safety_alert": {
+      "short_label": "Randonnée difficile",
+      "title": "Randonnée longue et difficile",
+      "text": "L'accès au site peut être restreint : vérifiez auprès du Parc national avant de partir. Ne partez jamais si de la pluie est annoncée.",
+      "items": [
+        "Les gués peuvent devenir infranchissables en quelques minutes.",
+        "Fin de parcours raide et glissante, aidée de cordes.",
+        "Partez tôt : prévoyez une lampe frontale."
+      ]
+    },
+    "to_bring": [
+      "Chaussures de randonnée montantes",
+      "Eau (2 L minimum)",
+      "Repas",
+      "Vêtements de rechange",
+      "Lampe frontale"
+    ],
+    "key_facts": [
+      {
+        "label": "Distance",
+        "value": "5 à 6 h aller-retour"
+      },
+      {
+        "label": "Gués",
+        "value": "Plusieurs traversées de rivière"
+      },
+      {
+        "label": "Pour qui",
+        "value": "Randonneurs expérimentés, dès 12 ans"
+      }
+    ],
+    "insider_tip": null,
+    "offer_h2": null,
+    "offer_why": null,
+    "faq_h2": "Chutes Moreau : questions fréquentes",
+    "faq": [
+      {
+        "question": "Où se trouvent les Chutes Moreau ?",
+        "answer": "À Goyave, dans le Parc national de la Guadeloupe, à environ 45 min de Pointe-à-Pitre."
+      },
+      {
+        "question": "Combien de temps faut-il ?",
+        "answer": "De 5 à 6 heures aller-retour, dont 2 h 30 à 3 h de marche aller."
+      },
+      {
+        "question": "La randonnée est-elle difficile ?",
+        "answer": "Oui : longue, boueuse, avec plusieurs traversées de rivière et une fin raide aidée de cordes fixes."
+      },
+      {
+        "question": "À partir de quel âge ?",
+        "answer": "Dès 12 ans environ, pour des marcheurs habitués."
+      },
+      {
+        "question": "Le site est-il accessible ?",
+        "answer": "L'accès peut être restreint : vérifiez auprès du Parc national avant de partir."
+      },
+      {
+        "question": "Quand y aller ?",
+        "answer": "Uniquement par temps sec, de préférence de février à avril. Ne partez pas si de la pluie est annoncée."
+      },
+      {
+        "question": "Que prévoir ?",
+        "answer": "Des chaussures de randonnée montantes, au moins 2 L d'eau, un repas, des vêtements de rechange et une lampe frontale."
+      }
+    ],
+    "press": [],
+    "hero_image": null,
+    "gallery": [],
+    "site_photos": [],
+    "guided_photos": [],
+    "photo_caption_site": null,
+    "photo_caption_guided": null,
+    "verification": "eleve",
+    "source_publisher": "Parc national de la Guadeloupe",
+    "source_url": "https://geotrek.guadeloupe-parcnational.fr/api/fr/treks/1576/chutes-moreau.pdf",
+    "estimated_fields": [
+      "duration",
+      "approach",
+      "min_age",
+      "itinerary",
+      "drive",
+      "season"
+    ]
+  },
+  {
+    "id": "riviere-moreau",
+    "name": "Rivière Moreau",
+    "type": "riviere",
+    "island": "Basse-Terre",
+    "communes": [
+      "Goyave"
+    ],
+    "signature": null,
+    "signature_status": null,
+    "has_waterfall": null,
+    "location_policy": "commune_only",
+    "alt_names": [],
+    "access_status": null,
+    "summary": "Cours d'eau associé aux Chutes Moreau, également listé parmi les cours d'eau classés.",
+    "overview_h2": null,
+    "lead": null,
+    "intro": null,
+    "more_title": null,
+    "more_text": null,
+    "season": null,
+    "difficulty": null,
+    "duration": null,
+    "approach": null,
+    "min_age": null,
+    "swimming": null,
+    "swimming_note": null,
+    "access_h2": null,
+    "itinerary": null,
+    "itinerary_text": null,
+    "access_tiles": [],
+    "parking": null,
+    "drive": null,
+    "latitude": null,
+    "longitude": null,
+    "guided_access_text": null,
+    "risks": [
+      "traversees_riviere",
+      "crues_soudaines",
+      "terrain_glissant"
+    ],
+    "safety_alert": null,
+    "to_bring": [],
+    "key_facts": [],
+    "insider_tip": null,
+    "offer_h2": null,
+    "offer_why": null,
+    "faq_h2": null,
+    "faq": [],
+    "press": [],
+    "hero_image": null,
+    "gallery": [],
+    "site_photos": [],
+    "guided_photos": [],
+    "photo_caption_site": null,
+    "photo_caption_guided": null,
+    "verification": "eleve",
+    "source_publisher": "Parc national de la Guadeloupe",
+    "source_url": "https://geotrek.guadeloupe-parcnational.fr/api/fr/treks/1576/chutes-moreau.pdf",
+    "estimated_fields": []
+  },
+  {
+    "id": "saut-d-acomat",
+    "name": "Saut d'Acomat",
+    "type": "bassin_naturel",
+    "island": "Basse-Terre",
+    "communes": [
+      "Pointe-Noire"
+    ],
+    "signature": "Un bassin vert émeraude au pied d'une chute de 9 à 12 m, que l'on découvre de l'intérieur avec un guide.",
+    "signature_status": "draft",
+    "has_waterfall": true,
+    "location_policy": "closed",
+    "alt_names": [
+      "Saut de l'Acomat",
+      "Cascade Acomat",
+      "Acomat waterfall"
+    ],
+    "access_status": {
+      "status": "closed",
+      "note": "Accès interdit par arrêté municipal (risques d'éboulement et de crue), selon Wikipédia et Les Îles de Guadeloupe. Statut des sorties encadrées à confirmer.",
+      "source_name": "Wikipédia",
+      "source_url": "https://fr.wikipedia.org/wiki/Saut_de_l%27Acomat",
+      "checked_on": "2026-09-30"
+    },
+    "summary": "Bassin naturel au pied d'une cascade d'une dizaine de mètres, sur la rivière Grande Plaine, dans les hauteurs de Pointe-Noire. Le site est connu pour ses toboggans naturels et ses sauts, mais l'accès libre est interdit par arrêté municipal.",
+    "overview_h2": "Saut d'Acomat, la cascade émeraude de Pointe-Noire",
+    "lead": "Une chute d'une dizaine de mètres qui plonge dans un bassin vert émeraude, entre roches et forêt tropicale.",
+    "intro": "Le Saut d'Acomat est l'une des cascades les plus connues de Guadeloupe. Il se trouve sur la rivière Grande Plaine, au lieu-dit Les Plaines, à environ 2 km de la nationale 2 entre Mahaut et Pointe-Noire. La chute, haute de 9 à 12 m selon les sources, se jette dans un grand bassin naturel où les familles de la Côte-sous-le-Vent venaient se rafraîchir le dimanche. Le sentier, court mais raide et glissant, rejoint la rivière en 15 minutes environ.",
+    "more_title": null,
+    "more_text": null,
+    "season": "De décembre à mai (carême), quand le débit est stable. À éviter pendant et après de fortes pluies.",
+    "difficulty": null,
+    "duration": null,
+    "approach": null,
+    "min_age": null,
+    "swimming": "conditional",
+    "swimming_note": "possible sous conditions",
+    "access_h2": null,
+    "itinerary": null,
+    "itinerary_text": null,
+    "access_tiles": [],
+    "parking": null,
+    "drive": null,
+    "latitude": null,
+    "longitude": null,
+    "guided_access_text": null,
+    "risks": [
+      "roches_glissantes",
+      "profondeur_variable",
+      "crues_soudaines"
+    ],
+    "safety_alert": {
+      "short_label": "Accès libre interdit",
+      "title": "Accès libre interdit par arrêté municipal",
+      "text": "La commune de Pointe-Noire interdit l'accès au site en raison des risques d'éboulement, de coulées de boue et de crues soudaines.",
+      "items": [
+        "Plongeon interdit : des blocs rocheux tapissent le fond du bassin.",
+        "Tourbillons au pied de la chute, avec effet d’aspiration.",
+        "La rivière peut monter en quelques minutes après une pluie en amont."
+      ]
+    },
+    "to_bring": [
+      "Chaussures fermées qui tiennent au pied",
+      "Maillot de bain",
+      "Serviette",
+      "Bouteille d'eau",
+      "Anti-moustique"
+    ],
+    "key_facts": [
+      {
+        "label": "Hauteur de chute",
+        "value": "9 à 12 m selon les sources"
+      },
+      {
+        "label": "Bassin",
+        "value": "Environ 2,5 m de profondeur, blocs rocheux au fond"
+      },
+      {
+        "label": "À proximité",
+        "value": "Maison du Cacao, plage de Caraïbe"
+      }
+    ],
+    "insider_tip": null,
+    "offer_h2": null,
+    "offer_why": null,
+    "faq_h2": "Saut d'Acomat : questions fréquentes",
+    "faq": [
+      {
+        "question": "Où se trouve le Saut d'Acomat ?",
+        "answer": "Sur la rivière Grande Plaine, à Pointe-Noire (Basse-Terre), au lieu-dit Les Plaines, à environ 2 km de la nationale 2 entre Mahaut et Pointe-Noire. Comptez 1 h 15 de route depuis Pointe-à-Pitre et 20 min depuis Deshaies."
+      },
+      {
+        "question": "Le Saut d'Acomat est-il ouvert au public ?",
+        "answer": "Non. L'accès libre au site est interdit par arrêté municipal, en raison des risques d'éboulement, de coulées de boue et de crues soudaines. Renseignez-vous auprès de la mairie de Pointe-Noire avant de vous y rendre."
+      },
+      {
+        "question": "Peut-on se baigner au Saut d'Acomat ?",
+        "answer": "Pas en accès libre tant que l'arrêté est en vigueur. Le plongeon y est interdit : le fond du bassin est tapissé de blocs rocheux et la chute crée des tourbillons."
+      },
+      {
+        "question": "Quelle est la hauteur de la cascade d'Acomat ?",
+        "answer": "Entre 9 et 12 m selon les sources. Elle se jette dans un bassin vert émeraude d'environ 2,5 m de profondeur."
+      },
+      {
+        "question": "Quand aller au Saut d'Acomat ?",
+        "answer": "De décembre à mai (carême), quand le débit est stable. Évitez les jours de pluie et les lendemains de fortes averses : la rivière peut monter en quelques minutes."
+      },
+      {
+        "question": "Que voir près du Saut d'Acomat ?",
+        "answer": "La Maison du Cacao, à une centaine de mètres de l'entrée du site, et la plage de Caraïbe à Pointe-Noire. Deshaies et son jardin botanique sont à 20 minutes."
+      }
+    ],
+    "press": [],
+    "hero_image": {
+      "src": "https://www.kayak-guadeloupe.fr/images/bassin-guadeloupe.jpg",
+      "credit": "Photo : Yalodé",
+      "source_url": "https://www.kayak-guadeloupe.fr/",
+      "source_name": "kayak-guadeloupe.fr"
+    },
+    "gallery": [],
+    "site_photos": [
+      {
+        "src": "https://www.kayak-guadeloupe.fr/images/bassin-guadeloupe.jpg",
+        "credit": "Photo : Yalodé",
+        "source_url": "https://www.kayak-guadeloupe.fr/",
+        "source_name": "kayak-guadeloupe.fr"
+      },
+      {
+        "src": "https://www.kayak-guadeloupe.fr/images/cascade-toboggan.jpg",
+        "credit": "Photo : Yalodé",
+        "source_url": "https://www.kayak-guadeloupe.fr/",
+        "source_name": "kayak-guadeloupe.fr"
+      },
+      {
+        "src": "https://www.kayak-guadeloupe.fr/images/riviere-guadeloupe.jpg",
+        "credit": "Photo : Yalodé",
+        "source_url": "https://www.kayak-guadeloupe.fr/",
+        "source_name": "kayak-guadeloupe.fr"
+      }
+    ],
+    "guided_photos": [],
+    "photo_caption_site": "La cascade et le bassin, tels qu'on les voit depuis la rive.",
+    "photo_caption_guided": null,
+    "verification": "faible",
+    "source_publisher": "Visite Guadeloupe",
+    "source_url": "https://visiteguadeloupe.com/en/most-beautiful-waterfalls-guadeloupe-swimming-hikes/",
+    "estimated_fields": [
+      "season"
+    ]
+  },
+  {
+    "id": "canyon-d-acomat",
+    "name": "Canyon d'Acomat",
+    "type": "canyon",
+    "island": "Basse-Terre",
+    "communes": [
+      "Pointe-Noire"
+    ],
+    "signature": null,
+    "signature_status": null,
+    "has_waterfall": null,
+    "location_policy": "guide_only",
+    "alt_names": [],
+    "access_status": null,
+    "summary": "Avec un guide, on découvre la rivière Grande Plaine dans son lit : marche, nage dans les vasques et toboggans de roche polis par l'eau. Chaque saut peut être contourné, ce qui rend la sortie accessible dès 8 ans.",
+    "overview_h2": null,
+    "lead": null,
+    "intro": null,
+    "more_title": null,
+    "more_text": null,
+    "season": "De décembre à mai (carême), quand le débit est stable. À éviter pendant et après de fortes pluies.",
+    "difficulty": "facile",
+    "duration": {
+      "min": 120,
+      "max": 180,
+      "note": null
+    },
+    "approach": {
+      "min": 20,
+      "max": 25,
+      "note": null
+    },
+    "min_age": 8,
+    "swimming": null,
+    "swimming_note": null,
+    "access_h2": null,
+    "itinerary": null,
+    "itinerary_text": null,
+    "access_tiles": [],
+    "parking": null,
+    "drive": null,
+    "latitude": null,
+    "longitude": null,
+    "guided_access_text": null,
+    "risks": [
+      "roches_glissantes",
+      "profondeur_variable",
+      "crues_soudaines"
+    ],
+    "safety_alert": null,
+    "to_bring": [],
+    "key_facts": [],
+    "insider_tip": {
+      "guide_id": "pascal",
+      "text": "Levez les yeux en remontant la rivière : les fougères arborescentes et les balisiers sont plus beaux que la cascade elle-même. Et goûtez l'eau du verre de l'amitié, elle vient de la source."
+    },
+    "offer_h2": null,
+    "offer_why": "Seul, on s'arrête au bord du sentier : l'accès libre au saut est interdit. Avec Pascal, on découvre la rivière Grande Plaine de l'intérieur, avec ses vasques cachées, ses toboggans de roche et ses petits sauts invisibles depuis la rive. Il connaît chaque passage et adapte la sortie au débit du jour ; vous, vous profitez.",
+    "faq_h2": null,
+    "faq": [
+      {
+        "question": "Peut-on faire du canyoning à Acomat ?",
+        "answer": "Oui, avec un guide. Yalodé propose une randonnée aquatique sans rappel sur la rivière Grande Plaine : marche, nage, toboggans naturels et sauts, tous contournables. Comptez 3 h 30 d'activité, dès 8 ans."
+      },
+      {
+        "question": "Pourquoi faire Acomat avec un guide ?",
+        "answer": "Le guide vous emmène dans des parties de la rivière qu'on ne trouve pas seul, choisit les passages sûrs et adapte la sortie au débit du jour. Le matériel est fourni et le groupe reste petit."
+      },
+      {
+        "question": "Qui guide la sortie à Acomat ?",
+        "answer": "Pascal Proust, fondateur de Yalodé en 2012, titulaire du brevet d'État canyoning aquarando, avec plus de 15 ans d'expérience. Yalodé est noté 4,9 sur plus de 1 880 avis."
+      },
+      {
+        "question": "Combien coûte le canyoning à Acomat ?",
+        "answer": "50 € par personne avec Yalodé, équipement compris (gilet, shorty, casque, culotte de glisse). Annulation gratuite jusqu'à 48 h avant l'activité."
+      },
+      {
+        "question": "Le canyoning à Acomat est-il adapté aux enfants ?",
+        "answer": "Oui, dès 8 ans. Aucune difficulté n'est obligatoire : toboggans et sauts peuvent être contournés. Il faut être en bonne santé, avec un bon équilibre : la marche comporte environ 100 m de dénivelé, glissant par endroits."
+      },
+      {
+        "question": "Que prévoir pour le canyoning à Acomat ?",
+        "answer": "Des chaussures de sport fermées, un maillot de bain et un cordon à lunettes si besoin. Le reste du matériel est fourni par le guide."
+      }
+    ],
+    "press": [],
+    "hero_image": {
+      "src": "https://www.kayak-guadeloupe.fr/images/canyoning-famille-01.jpg",
+      "credit": "Photo : Yalodé (kayak-guadeloupe.fr)",
+      "source_url": "https://www.kayak-guadeloupe.fr/",
+      "source_name": "kayak-guadeloupe.fr"
+    },
+    "gallery": [],
+    "site_photos": [],
+    "guided_photos": [
+      {
+        "src": "https://www.kayak-guadeloupe.fr/images/canyoning-famille-02.jpg",
+        "credit": "Photo : Yalodé",
+        "source_url": "https://www.kayak-guadeloupe.fr/",
+        "source_name": "kayak-guadeloupe.fr"
+      },
+      {
+        "src": "https://www.kayak-guadeloupe.fr/images/canyoning-famille-03.jpg",
+        "credit": "Photo : Yalodé",
+        "source_url": "https://www.kayak-guadeloupe.fr/",
+        "source_name": "kayak-guadeloupe.fr"
+      },
+      {
+        "src": "https://www.kayak-guadeloupe.fr/images/canyoning-famille-04.jpg",
+        "credit": "Photo : Yalodé",
+        "source_url": "https://www.kayak-guadeloupe.fr/",
+        "source_name": "kayak-guadeloupe.fr"
+      },
+      {
+        "src": "https://www.kayak-guadeloupe.fr/images/canyoning-famille-05.jpg",
+        "credit": "Photo : Yalodé",
+        "source_url": "https://www.kayak-guadeloupe.fr/",
+        "source_name": "kayak-guadeloupe.fr"
+      },
+      {
+        "src": "https://www.kayak-guadeloupe.fr/images/canyoning-famille-06.jpg",
+        "credit": "Photo : Yalodé",
+        "source_url": "https://www.kayak-guadeloupe.fr/",
+        "source_name": "kayak-guadeloupe.fr"
+      },
+      {
+        "src": "https://www.kayak-guadeloupe.fr/images/canyoning-famille-07.jpg",
+        "credit": "Photo : Yalodé",
+        "source_url": "https://www.kayak-guadeloupe.fr/",
+        "source_name": "kayak-guadeloupe.fr"
+      },
+      {
+        "src": "https://www.kayak-guadeloupe.fr/images/canyoning-famille-08.jpg",
+        "credit": "Photo : Yalodé",
+        "source_url": "https://www.kayak-guadeloupe.fr/",
+        "source_name": "kayak-guadeloupe.fr"
+      },
+      {
+        "src": "https://www.kayak-guadeloupe.fr/images/canyoning-famille-10.jpg",
+        "credit": "Photo : Yalodé",
+        "source_url": "https://www.kayak-guadeloupe.fr/",
+        "source_name": "kayak-guadeloupe.fr"
+      }
+    ],
+    "photo_caption_site": null,
+    "photo_caption_guided": "Toboggans, vasques et sauts, accessibles seulement avec un guide.",
+    "verification": null,
+    "source_publisher": "Yalodé (kayak-guadeloupe.fr)",
+    "source_url": "https://www.kayak-guadeloupe.fr/",
+    "estimated_fields": [
+      "difficulty",
+      "duration"
+    ]
+  },
+  {
+    "id": "riviere-bourceau",
+    "name": "Rivière Bourceau",
+    "type": "riviere",
+    "island": "Basse-Terre",
+    "communes": [
+      "Bouillante"
+    ],
+    "signature": "Une gorge encaissée où l'on apprend vite : quelques sauts et un premier rappel.",
+    "signature_status": "draft",
+    "has_waterfall": null,
+    "location_policy": "guide_only",
+    "alt_names": [
+      "Canyon Bourceau",
+      "Canyon de Bourceau"
+    ],
+    "access_status": {
+      "status": "open",
+      "note": "Accessible en sortie guidée. À confirmer auprès de l'opérateur.",
+      "source_name": null,
+      "source_url": null,
+      "checked_on": null
+    },
+    "summary": "Rivière encaissée de la commune de Bouillante, sur la Côte-sous-le-Vent, descendue en canyoning avec quelques sauts et un premier rappel. C'est l'un des parcours d'initiation au canyoning technique les plus proposés de Basse-Terre.",
+    "overview_h2": "Rivière Bourceau, le canyoning d'initiation à Bouillante",
+    "lead": "Une gorge ombragée de la Côte-sous-le-Vent, des vasques fraîches et un premier rappel encadré.",
+    "intro": "La rivière Bourceau coule dans les hauteurs de Bouillante, sur la Côte-sous-le-Vent. C'est l'un des parcours les plus proposés pour découvrir le canyoning technique en Guadeloupe : on y progresse dans une gorge étroite et ombragée, entre vasques, sauts contournables et un rappel sur corde encadré par le guide.",
+    "more_title": "En sortie guidée",
+    "more_text": "Une gorge étroite et ombragée, des vasques d'eau fraîche, des sauts contournables et un rappel encadré. La journée complète ajoute une pause pique-nique au bord de l'eau.",
+    "season": "Praticable toute l'année avec un guide ; le carême (décembre à mai) offre les conditions les plus régulières.",
+    "difficulty": "sportif",
+    "duration": {
+      "min": 270,
+      "max": 390,
+      "note": null
+    },
+    "approach": {
+      "min": 30,
+      "max": 30,
+      "note": null
+    },
+    "min_age": 10,
+    "swimming": "yes",
+    "swimming_note": "en vasques, pendant la descente",
+    "access_h2": null,
+    "itinerary": null,
+    "itinerary_text": null,
+    "access_tiles": [],
+    "parking": null,
+    "drive": null,
+    "latitude": null,
+    "longitude": null,
+    "guided_access_text": null,
+    "risks": [
+      "crues_soudaines"
+    ],
+    "safety_alert": null,
+    "to_bring": [
+      "Chaussures de sport fermées",
+      "Maillot de bain",
+      "En-cas",
+      "Vêtements de rechange"
+    ],
+    "key_facts": [
+      {
+        "label": "Rappel",
+        "value": "Oui, encadré par le guide"
+      },
+      {
+        "label": "Pour qui",
+        "value": "Débutants en forme, dès 10 ans"
+      },
+      {
+        "label": "Formules",
+        "value": "Demi-journée ou journée"
+      }
+    ],
+    "insider_tip": {
+      "guide_id": "quentin",
+      "text": "Gardez de l'énergie pour la dernière vasque : c'est la plus belle du parcours, et on y fait une vraie pause."
+    },
+    "offer_h2": "Faire la rivière Bourceau avec un guide",
+    "offer_why": null,
+    "faq_h2": "Rivière Bourceau : questions fréquentes",
+    "faq": [
+      {
+        "question": "Où se trouve la rivière Bourceau ?",
+        "answer": "Dans les hauteurs de Bouillante, sur la Côte-sous-le-Vent (Basse-Terre), à environ 1 h 15 de Pointe-à-Pitre."
+      },
+      {
+        "question": "Faut-il savoir faire du rappel ?",
+        "answer": "Non. Le rappel est encadré et expliqué par le guide, ce qui fait de Bourceau un bon parcours pour une première fois."
+      },
+      {
+        "question": "À partir de quel âge ?",
+        "answer": "Dès 10 ans, avec une bonne condition physique."
+      },
+      {
+        "question": "Combien de temps dure la sortie ?",
+        "answer": "De 4 h 30 à 6 h 30, selon la formule choisie."
+      },
+      {
+        "question": "Peut-on y aller sans guide ?",
+        "answer": "Ce n'est pas recommandé : le parcours comporte un rappel et demande du matériel et une connaissance de la rivière."
+      },
+      {
+        "question": "Que prévoir ?",
+        "answer": "Des chaussures de sport fermées, un maillot de bain, un en-cas et des vêtements de rechange. Le matériel technique est fourni."
+      },
+      {
+        "question": "Quelle est la meilleure période ?",
+        "answer": "Praticable toute l'année avec un guide ; le carême (décembre à mai) offre les conditions les plus régulières."
+      }
+    ],
+    "press": [],
+    "hero_image": null,
+    "gallery": [],
+    "site_photos": [],
+    "guided_photos": [],
+    "photo_caption_site": null,
+    "photo_caption_guided": null,
+    "verification": "eleve_nom",
+    "source_publisher": "Préfecture de Guadeloupe (DEAL)",
+    "source_url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000031496919",
+    "estimated_fields": [
+      "summary",
+      "difficulty",
+      "season",
+      "swimming"
+    ]
+  },
+  {
+    "id": "riviere-beaugendre",
+    "name": "Rivière Beaugendre",
+    "type": "riviere",
+    "island": "Basse-Terre",
+    "communes": [
+      "Vieux-Habitants"
+    ],
+    "signature": null,
+    "signature_status": null,
+    "has_waterfall": null,
+    "location_policy": "commune_only",
+    "alt_names": [],
+    "access_status": null,
+    "summary": "Cours d'eau officiellement listé ; informations sur la baignade, les cascades ou le canyoning restent à rechercher.",
+    "overview_h2": null,
+    "lead": null,
+    "intro": null,
+    "more_title": null,
+    "more_text": null,
+    "season": null,
+    "difficulty": null,
+    "duration": null,
+    "approach": null,
+    "min_age": null,
+    "swimming": null,
+    "swimming_note": null,
+    "access_h2": null,
+    "itinerary": null,
+    "itinerary_text": null,
+    "access_tiles": [],
+    "parking": null,
+    "drive": null,
+    "latitude": null,
+    "longitude": null,
+    "guided_access_text": null,
+    "risks": [
+      "crues_soudaines"
+    ],
+    "safety_alert": null,
+    "to_bring": [],
+    "key_facts": [],
+    "insider_tip": null,
+    "offer_h2": null,
+    "offer_why": null,
+    "faq_h2": null,
+    "faq": [],
+    "press": [],
+    "hero_image": null,
+    "gallery": [],
+    "site_photos": [],
+    "guided_photos": [],
+    "photo_caption_site": null,
+    "photo_caption_guided": null,
+    "verification": "eleve_nom",
+    "source_publisher": "Préfecture de Guadeloupe (DEAL)",
+    "source_url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000031496919",
+    "estimated_fields": []
+  },
+  {
+    "id": "riviere-grande-anse",
+    "name": "Rivière Grande-Anse",
+    "type": "riviere",
+    "island": "Basse-Terre",
+    "communes": [],
+    "signature": null,
+    "signature_status": null,
+    "has_waterfall": null,
+    "location_policy": null,
+    "alt_names": [],
+    "access_status": null,
+    "summary": "Cours d'eau présent dans la liste réglementaire des cours d'eau classés.",
+    "overview_h2": null,
+    "lead": null,
+    "intro": null,
+    "more_title": null,
+    "more_text": null,
+    "season": null,
+    "difficulty": null,
+    "duration": null,
+    "approach": null,
+    "min_age": null,
+    "swimming": null,
+    "swimming_note": null,
+    "access_h2": null,
+    "itinerary": null,
+    "itinerary_text": null,
+    "access_tiles": [],
+    "parking": null,
+    "drive": null,
+    "latitude": null,
+    "longitude": null,
+    "guided_access_text": null,
+    "risks": [
+      "crues_soudaines"
+    ],
+    "safety_alert": null,
+    "to_bring": [],
+    "key_facts": [],
+    "insider_tip": null,
+    "offer_h2": null,
+    "offer_why": null,
+    "faq_h2": null,
+    "faq": [],
+    "press": [],
+    "hero_image": null,
+    "gallery": [],
+    "site_photos": [],
+    "guided_photos": [],
+    "photo_caption_site": null,
+    "photo_caption_guided": null,
+    "verification": "eleve_nom",
+    "source_publisher": "Préfecture de Guadeloupe (DEAL)",
+    "source_url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000031496919",
+    "estimated_fields": []
+  },
+  {
+    "id": "riviere-du-perou",
+    "name": "Rivière du Pérou",
+    "type": "riviere",
+    "island": "Basse-Terre",
+    "communes": [],
+    "signature": null,
+    "signature_status": null,
+    "has_waterfall": null,
+    "location_policy": null,
+    "alt_names": [],
+    "access_status": null,
+    "summary": "Cours d'eau officiellement listé ; caractéristiques récréatives et accès non confirmés.",
+    "overview_h2": null,
+    "lead": null,
+    "intro": null,
+    "more_title": null,
+    "more_text": null,
+    "season": null,
+    "difficulty": null,
+    "duration": null,
+    "approach": null,
+    "min_age": null,
+    "swimming": null,
+    "swimming_note": null,
+    "access_h2": null,
+    "itinerary": null,
+    "itinerary_text": null,
+    "access_tiles": [],
+    "parking": null,
+    "drive": null,
+    "latitude": null,
+    "longitude": null,
+    "guided_access_text": null,
+    "risks": [
+      "crues_soudaines"
+    ],
+    "safety_alert": null,
+    "to_bring": [],
+    "key_facts": [],
+    "insider_tip": null,
+    "offer_h2": null,
+    "offer_why": null,
+    "faq_h2": null,
+    "faq": [],
+    "press": [],
+    "hero_image": null,
+    "gallery": [],
+    "site_photos": [],
+    "guided_photos": [],
+    "photo_caption_site": null,
+    "photo_caption_guided": null,
+    "verification": "eleve_nom",
+    "source_publisher": "Préfecture de Guadeloupe (DEAL)",
+    "source_url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000031496919",
+    "estimated_fields": []
+  },
+  {
+    "id": "riviere-lostau",
+    "name": "Rivière Lostau",
+    "type": "riviere",
+    "island": "Basse-Terre",
+    "communes": [],
+    "signature": null,
+    "signature_status": null,
+    "has_waterfall": null,
+    "location_policy": null,
+    "alt_names": [],
+    "access_status": null,
+    "summary": "Cours d'eau officiellement listé ; aucune information récréative suffisamment vérifiée n'a été ajoutée.",
+    "overview_h2": null,
+    "lead": null,
+    "intro": null,
+    "more_title": null,
+    "more_text": null,
+    "season": null,
+    "difficulty": null,
+    "duration": null,
+    "approach": null,
+    "min_age": null,
+    "swimming": null,
+    "swimming_note": null,
+    "access_h2": null,
+    "itinerary": null,
+    "itinerary_text": null,
+    "access_tiles": [],
+    "parking": null,
+    "drive": null,
+    "latitude": null,
+    "longitude": null,
+    "guided_access_text": null,
+    "risks": [
+      "crues_soudaines"
+    ],
+    "safety_alert": null,
+    "to_bring": [],
+    "key_facts": [],
+    "insider_tip": null,
+    "offer_h2": null,
+    "offer_why": null,
+    "faq_h2": null,
+    "faq": [],
+    "press": [],
+    "hero_image": null,
+    "gallery": [],
+    "site_photos": [],
+    "guided_photos": [],
+    "photo_caption_site": null,
+    "photo_caption_guided": null,
+    "verification": "eleve_nom",
+    "source_publisher": "Préfecture de Guadeloupe (DEAL)",
+    "source_url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000031496919",
+    "estimated_fields": []
+  },
+  {
+    "id": "grande-riviere-de-vieux-habitants",
+    "name": "Grande Rivière de Vieux-Habitants",
+    "type": "riviere",
+    "island": "Basse-Terre",
+    "communes": [
+      "Vieux-Habitants"
+    ],
+    "signature": null,
+    "signature_status": null,
+    "has_waterfall": null,
+    "location_policy": "commune_only",
+    "alt_names": [],
+    "access_status": null,
+    "summary": "Grande rivière de la Côte-sous-le-Vent, officiellement listée parmi les cours d'eau classés.",
+    "overview_h2": null,
+    "lead": null,
+    "intro": null,
+    "more_title": null,
+    "more_text": null,
+    "season": null,
+    "difficulty": null,
+    "duration": null,
+    "approach": null,
+    "min_age": null,
+    "swimming": null,
+    "swimming_note": null,
+    "access_h2": null,
+    "itinerary": null,
+    "itinerary_text": null,
+    "access_tiles": [],
+    "parking": null,
+    "drive": null,
+    "latitude": null,
+    "longitude": null,
+    "guided_access_text": null,
+    "risks": [
+      "crues_soudaines"
+    ],
+    "safety_alert": null,
+    "to_bring": [],
+    "key_facts": [],
+    "insider_tip": null,
+    "offer_h2": null,
+    "offer_why": null,
+    "faq_h2": null,
+    "faq": [],
+    "press": [],
+    "hero_image": null,
+    "gallery": [],
+    "site_photos": [],
+    "guided_photos": [],
+    "photo_caption_site": null,
+    "photo_caption_guided": null,
+    "verification": "eleve_nom",
+    "source_publisher": "Parc national de la Guadeloupe",
+    "source_url": "https://www.guadeloupe-parcnational.fr/fr/node/2307",
+    "estimated_fields": []
+  },
+  {
+    "id": "riviere-ziotte",
+    "name": "Rivière Ziotte",
+    "type": "riviere",
+    "island": "Basse-Terre",
+    "communes": [],
+    "signature": null,
+    "signature_status": null,
+    "has_waterfall": null,
+    "location_policy": null,
+    "alt_names": [],
+    "access_status": null,
+    "summary": "Cours d'eau officiellement listé ; données touristiques et géographiques détaillées restant à compléter.",
+    "overview_h2": null,
+    "lead": null,
+    "intro": null,
+    "more_title": null,
+    "more_text": null,
+    "season": null,
+    "difficulty": null,
+    "duration": null,
+    "approach": null,
+    "min_age": null,
+    "swimming": null,
+    "swimming_note": null,
+    "access_h2": null,
+    "itinerary": null,
+    "itinerary_text": null,
+    "access_tiles": [],
+    "parking": null,
+    "drive": null,
+    "latitude": null,
+    "longitude": null,
+    "guided_access_text": null,
+    "risks": [
+      "crues_soudaines"
+    ],
+    "safety_alert": null,
+    "to_bring": [],
+    "key_facts": [],
+    "insider_tip": null,
+    "offer_h2": null,
+    "offer_why": null,
+    "faq_h2": null,
+    "faq": [],
+    "press": [],
+    "hero_image": null,
+    "gallery": [],
+    "site_photos": [],
+    "guided_photos": [],
+    "photo_caption_site": null,
+    "photo_caption_guided": null,
+    "verification": "eleve_nom",
+    "source_publisher": "Préfecture de Guadeloupe (DEAL)",
+    "source_url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000031496919",
+    "estimated_fields": []
+  },
+  {
+    "id": "canyon-dore",
+    "name": "Canyon doré",
+    "type": "canyon",
+    "island": "Basse-Terre",
+    "communes": [
+      "Pointe-Noire"
+    ],
+    "signature": "Une longue montée en forêt primaire, puis un canyon que l'on descend presque seul.",
+    "signature_status": "draft",
+    "has_waterfall": null,
+    "location_policy": "guide_only",
+    "alt_names": [
+      "Canyon Doré",
+      "Canyon des Mamelles"
+    ],
+    "access_status": {
+      "status": "open",
+      "note": "Accessible en sortie guidée. À confirmer auprès de l'opérateur.",
+      "source_name": null,
+      "source_url": null,
+      "checked_on": null
+    },
+    "summary": "Canyon sauvage en forêt primaire, sur les pentes des Mamelles au-dessus de Pointe-Noire. On y accède par une longue marche hors sentier (+700 m de dénivelé), puis on descend le lit de la rivière entre marche, nage, sauts et floating, sans rappel.",
+    "overview_h2": "Canyon doré, la randonnée aquatique sauvage des Mamelles",
+    "lead": "Une longue montée en forêt primaire, puis un canyon émeraude que l'on descend en nageant, en sautant et en se laissant porter.",
+    "intro": "Le Canyon doré se trouve sur les pentes des Mamelles, au-dessus de Pointe-Noire, en Côte-sous-le-Vent. On y accède par une marche d'approche hors sentier d'environ 1 h 30 et 700 m de dénivelé. La descente se fait ensuite dans le lit de la rivière, sans rappel : vasques profondes, petits sauts, passages à la nage et une gorge spectaculaire en fin de parcours.",
+    "more_title": "En sortie guidée",
+    "more_text": "Une montée soutenue en forêt humide, puis une descente dans un canyon peu fréquenté : vasques profondes, petits sauts et passages à la nage. Pas de corde, mais une vraie journée d'effort.",
+    "season": "De décembre à mai de préférence. La sortie peut être annulée la veille si de la pluie est annoncée sur les hauteurs.",
+    "difficulty": "sportif",
+    "duration": {
+      "min": 330,
+      "max": 330,
+      "note": "marche comprise"
+    },
+    "approach": {
+      "min": 90,
+      "max": 90,
+      "note": "+700 m de dénivelé"
+    },
+    "min_age": 13,
+    "swimming": "yes",
+    "swimming_note": "en vasques, pendant la descente",
+    "access_h2": null,
+    "itinerary": null,
+    "itinerary_text": null,
+    "access_tiles": [],
+    "parking": null,
+    "drive": null,
+    "latitude": null,
+    "longitude": null,
+    "guided_access_text": null,
+    "risks": [
+      "crues_soudaines"
+    ],
+    "safety_alert": {
+      "short_label": "Engagé physiquement",
+      "title": "Réservé aux personnes en bonne condition physique",
+      "text": "La marche d'approche est longue et raide, hors sentier. Le canyon n'est pas balisé et se pratique uniquement avec un guide.",
+      "items": [
+        "Ne partez pas seul : l'itinéraire n'est pas balisé.",
+        "La rivière peut monter vite après une pluie sur les hauteurs.",
+        "Prévoyez de l'eau et un repas : la sortie dure 5 h 30."
+      ]
+    },
+    "to_bring": [
+      "Chaussures de sport à semelle crantée",
+      "Maillot de bain",
+      "Eau (1,5 L minimum)",
+      "Repas tiré du sac",
+      "Vêtements de rechange"
+    ],
+    "key_facts": [
+      {
+        "label": "Dénivelé",
+        "value": "+700 m à la montée"
+      },
+      {
+        "label": "Rappel",
+        "value": "Aucun, randonnée aquatique"
+      },
+      {
+        "label": "Pour qui",
+        "value": "Sportifs réguliers, dès 13 ans"
+      }
+    ],
+    "insider_tip": {
+      "guide_id": "pascal",
+      "text": "La lumière entre dans la gorge vers 11 h : c'est là que le canyon devient vraiment doré. On s'arrange pour y être à ce moment-là."
+    },
+    "offer_h2": "Faire le Canyon doré avec un guide",
+    "offer_why": "Sans guide, le Canyon doré reste introuvable : pas de sentier, pas de balisage. Avec Pascal, vous montez par le bon versant, vous savez où sauter et où nager, et vous profitez d'un canyon où l'on croise rarement quelqu'un.",
+    "faq_h2": "Canyon doré : questions fréquentes",
+    "faq": [
+      {
+        "question": "Où se trouve le Canyon doré ?",
+        "answer": "Sur les pentes des Mamelles, au-dessus de Pointe-Noire, en Côte-sous-le-Vent (Basse-Terre). Le rendez-vous se fait au parking du Saut d'Acomat."
+      },
+      {
+        "question": "Peut-on faire le Canyon doré sans guide ?",
+        "answer": "Non. L'accès se fait hors sentier, sans balisage, et la descente demande de connaître la rivière. Le parcours se fait uniquement en sortie guidée."
+      },
+      {
+        "question": "Le Canyon doré est-il difficile ?",
+        "answer": "Oui, physiquement. La marche d'approche dure environ 1 h 30 avec 700 m de dénivelé. Il n'y a pas de rappel, mais il faut être sportif régulier, avec un bon cardio et de bonnes articulations."
+      },
+      {
+        "question": "À partir de quel âge ?",
+        "answer": "Dès 13 ans, avec une bonne condition physique."
+      },
+      {
+        "question": "Combien de temps dure la sortie ?",
+        "answer": "Environ 5 h 30, marche d'approche et retour compris."
+      },
+      {
+        "question": "Combien coûte le Canyon doré ?",
+        "answer": "70 € par personne avec Yalodé, équipement fourni (gilet, shorty, casque, sac étanche)."
+      },
+      {
+        "question": "Que prévoir ?",
+        "answer": "Des chaussures de sport à semelle crantée, un maillot de bain, au moins 1,5 L d'eau et un repas tiré du sac."
+      },
+      {
+        "question": "Quelle est la meilleure période ?",
+        "answer": "De décembre à mai. La sortie peut être annulée la veille si de la pluie est annoncée sur les hauteurs."
+      }
+    ],
+    "press": [],
+    "hero_image": null,
+    "gallery": [],
+    "site_photos": [],
+    "guided_photos": [],
+    "photo_caption_site": null,
+    "photo_caption_guided": null,
+    "verification": null,
+    "source_publisher": "Yalodé (kayak-guadeloupe.fr)",
+    "source_url": "https://www.kayak-guadeloupe.fr/",
+    "estimated_fields": [
+      "difficulty",
+      "season",
+      "swimming"
+    ]
+  },
+  {
+    "id": "canyon-ferry",
+    "name": "Canyon Ferry",
+    "type": "canyon",
+    "island": "Basse-Terre",
+    "communes": [
+      "Bouillante"
+    ],
+    "signature": "Une gorge resserrée où les rappels s'enchaînent, pour ceux qui ont déjà goûté au canyoning.",
+    "signature_status": "draft",
+    "has_waterfall": null,
+    "location_policy": "guide_only",
+    "alt_names": [
+      "Ravine Ferry",
+      "Ferry canyon"
+    ],
+    "access_status": {
+      "status": "open",
+      "note": "Accessible en sortie guidée. À confirmer auprès de l'opérateur.",
+      "source_name": null,
+      "source_url": null,
+      "checked_on": null
+    },
+    "summary": "Gorge resserrée du secteur de Bouillante, sur la Côte-sous-le-Vent. Le canyon enchaîne rappels et sauts plus engagés : c'est une journée pour ceux qui ont déjà fait du canyoning.",
+    "overview_h2": "Canyon Ferry, rappels et sauts dans les gorges de Bouillante",
+    "lead": "Une gorge resserrée où les rappels s'enchaînent, pour ceux qui ont déjà goûté au canyoning.",
+    "intro": "Le Canyon Ferry se trouve dans le secteur de Bouillante, sur la Côte-sous-le-Vent. Après 25 minutes de descente à pied, la journée se passe dans une gorge étroite : rappels successifs, sauts sécurisés et progression continue dans l'eau. Une bonne condition physique est nécessaire, notamment pour la remontée finale.",
+    "more_title": "En sortie guidée",
+    "more_text": "Des rappels qui s'enchaînent dans une gorge étroite, des sauts sécurisés et une progression continue dans l'eau. Prévoir une bonne condition physique pour la remontée finale.",
+    "season": "De décembre à mai de préférence. Sortie confirmée la veille selon la météo.",
+    "difficulty": "sportif",
+    "duration": {
+      "min": 360,
+      "max": 360,
+      "note": "journée"
+    },
+    "approach": {
+      "min": 25,
+      "max": 25,
+      "note": "aller, 25 min retour"
+    },
+    "min_age": 14,
+    "swimming": "yes",
+    "swimming_note": "en vasques, pendant la descente",
+    "access_h2": null,
+    "itinerary": null,
+    "itinerary_text": null,
+    "access_tiles": [],
+    "parking": null,
+    "drive": null,
+    "latitude": null,
+    "longitude": null,
+    "guided_access_text": null,
+    "risks": [
+      "crues_soudaines"
+    ],
+    "safety_alert": {
+      "short_label": "Parcours technique",
+      "title": "Canyon technique, uniquement avec un guide",
+      "text": "Le parcours enchaîne rappels et sauts dans une gorge étroite. Il demande du matériel, de l'expérience et une bonne condition physique.",
+      "items": [
+        "Ne descendez jamais ce canyon sans guide ni matériel.",
+        "La sortie est confirmée la veille selon la météo."
+      ]
+    },
+    "to_bring": [
+      "Chaussures de sport fermées",
+      "Repas complet",
+      "Bouteille d'eau",
+      "Vêtements de rechange"
+    ],
+    "key_facts": [
+      {
+        "label": "Rappels",
+        "value": "Plusieurs, enchaînés"
+      },
+      {
+        "label": "Pour qui",
+        "value": "Déjà initiés, dès 14 ans"
+      },
+      {
+        "label": "Durée",
+        "value": "Journée, repas à prévoir"
+      }
+    ],
+    "insider_tip": null,
+    "offer_h2": "Faire le Canyon Ferry avec un guide",
+    "offer_why": null,
+    "faq_h2": "Canyon Ferry : questions fréquentes",
+    "faq": [
+      {
+        "question": "Où se trouve le Canyon Ferry ?",
+        "answer": "Dans le secteur de Bouillante, sur la Côte-sous-le-Vent (Basse-Terre), à environ 1 h 15 de Pointe-à-Pitre."
+      },
+      {
+        "question": "Le Canyon Ferry est-il adapté aux débutants ?",
+        "answer": "Il vaut mieux avoir déjà fait du canyoning : les rappels s'enchaînent et la journée est longue."
+      },
+      {
+        "question": "À partir de quel âge ?",
+        "answer": "Dès 14 ans, avec une bonne condition physique."
+      },
+      {
+        "question": "Combien de temps dure la sortie ?",
+        "answer": "Environ 6 heures, dont 25 minutes d'approche et 25 minutes de retour à pied."
+      },
+      {
+        "question": "Peut-on y aller sans guide ?",
+        "answer": "Non : c'est un canyon technique qui demande du matériel de corde et une connaissance du parcours."
+      },
+      {
+        "question": "Que prévoir ?",
+        "answer": "Des chaussures de sport fermées, un repas complet, de l'eau et des vêtements de rechange."
+      }
+    ],
+    "press": [],
+    "hero_image": null,
+    "gallery": [],
+    "site_photos": [],
+    "guided_photos": [],
+    "photo_caption_site": null,
+    "photo_caption_guided": null,
+    "verification": null,
+    "source_publisher": "Wild Canyon (wild-canyon.fr)",
+    "source_url": "https://wild-canyon.fr/",
+    "estimated_fields": [
+      "difficulty",
+      "season",
+      "swimming"
+    ]
+  },
+  {
+    "id": "canyon-bois-malaise",
+    "name": "Canyon Bois Malaisé",
+    "type": "canyon",
+    "island": "Basse-Terre",
+    "communes": [
+      "Vieux-Habitants"
+    ],
+    "signature": "La journée la plus exigeante de la sélection : rappels hauts et progression technique.",
+    "signature_status": "draft",
+    "has_waterfall": null,
+    "location_policy": "guide_only",
+    "alt_names": [
+      "Canyon de Bois Malaisé",
+      "Bois Malaisé"
+    ],
+    "access_status": {
+      "status": "open",
+      "note": "Accessible en sortie guidée. À confirmer auprès de l'opérateur.",
+      "source_name": null,
+      "source_url": null,
+      "checked_on": null
+    },
+    "summary": "Canyon technique de Vieux-Habitants, sur la Côte-sous-le-Vent, avec des rappels hauts et une progression exigeante. C'est le parcours le plus engagé proposé en sortie guidée dans l'annuaire.",
+    "overview_h2": "Canyon Bois Malaisé, le canyon engagé de Vieux-Habitants",
+    "lead": "Des rappels hauts dans une gorge profonde : le parcours le plus engagé de l'annuaire.",
+    "intro": "Le Canyon Bois Malaisé se trouve dans les hauteurs de Vieux-Habitants, sur la Côte-sous-le-Vent. C'est un canyon technique : rappels hauts, gorge profonde et une journée entière dans l'eau. Il s'adresse aux personnes en très bonne forme, à l'aise dans l'eau et sans vertige.",
+    "more_title": "En sortie guidée",
+    "more_text": "Une gorge profonde, des rappels hauts sur corde et une journée entière dans le canyon. Réservé aux personnes en bonne forme, à l'aise dans l'eau et sans vertige.",
+    "season": "De décembre à mai de préférence. Le guide peut annuler si le débit est trop fort.",
+    "difficulty": "engage",
+    "duration": {
+      "min": 390,
+      "max": 390,
+      "note": "journée"
+    },
+    "approach": {
+      "min": 45,
+      "max": 45,
+      "note": null
+    },
+    "min_age": 16,
+    "swimming": "yes",
+    "swimming_note": "en vasques, pendant la descente",
+    "access_h2": null,
+    "itinerary": null,
+    "itinerary_text": null,
+    "access_tiles": [],
+    "parking": null,
+    "drive": null,
+    "latitude": null,
+    "longitude": null,
+    "guided_access_text": null,
+    "risks": [
+      "crues_soudaines"
+    ],
+    "safety_alert": {
+      "short_label": "Parcours engagé",
+      "title": "Canyon engagé, uniquement avec un guide",
+      "text": "Rappels hauts, gorge profonde et longue journée dans l'eau. Ce parcours demande de l'expérience, du matériel et une très bonne condition physique.",
+      "items": [
+        "Ne descendez jamais ce canyon sans guide ni matériel.",
+        "Le guide peut annuler si le débit est trop fort."
+      ]
+    },
+    "to_bring": [
+      "Chaussures de canyon ou de randonnée à semelle crantée",
+      "Repas complet",
+      "Eau (1,5 L minimum)",
+      "Vêtements de rechange"
+    ],
+    "key_facts": [
+      {
+        "label": "Rappels",
+        "value": "Hauts, sur corde"
+      },
+      {
+        "label": "Pour qui",
+        "value": "Expérimentés, dès 16 ans"
+      },
+      {
+        "label": "Durée",
+        "value": "Journée complète"
+      }
+    ],
+    "insider_tip": null,
+    "offer_h2": "Faire le Canyon Bois Malaisé avec un guide",
+    "offer_why": null,
+    "faq_h2": "Canyon Bois Malaisé : questions fréquentes",
+    "faq": [
+      {
+        "question": "Où se trouve le Canyon Bois Malaisé ?",
+        "answer": "Dans les hauteurs de Vieux-Habitants, sur la Côte-sous-le-Vent (Basse-Terre), à environ 1 h 30 de Pointe-à-Pitre."
+      },
+      {
+        "question": "Le Canyon Bois Malaisé est-il difficile ?",
+        "answer": "Oui. C'est le parcours le plus engagé de l'annuaire : rappels hauts, gorge profonde et journée complète."
+      },
+      {
+        "question": "À partir de quel âge ?",
+        "answer": "Dès 16 ans, pour des personnes en très bonne forme, à l'aise dans l'eau et sans vertige."
+      },
+      {
+        "question": "Peut-on y aller sans guide ?",
+        "answer": "Non : le canyon demande du matériel de corde et une parfaite connaissance du parcours."
+      },
+      {
+        "question": "Que prévoir ?",
+        "answer": "Des chaussures à semelle crantée, un repas complet, au moins 1,5 L d'eau et des vêtements de rechange."
+      },
+      {
+        "question": "Quelle est la meilleure période ?",
+        "answer": "De décembre à mai. Le guide peut annuler si le débit de la rivière est trop fort."
+      }
+    ],
+    "press": [],
+    "hero_image": null,
+    "gallery": [],
+    "site_photos": [],
+    "guided_photos": [],
+    "photo_caption_site": null,
+    "photo_caption_guided": null,
+    "verification": null,
+    "source_publisher": "Wild Canyon (wild-canyon.fr)",
+    "source_url": "https://wild-canyon.fr/",
+    "estimated_fields": [
+      "difficulty",
+      "season",
+      "swimming"
+    ]
+  }
+]

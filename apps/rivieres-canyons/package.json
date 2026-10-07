@@ -1,0 +1,17 @@
+{
+  "name": "rivieres-canyons",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "content:check": "tsx scripts/map-fixtures.ts",
+    "content:check:prod": "tsx scripts/map-fixtures.ts --production"
+  },
+  "dependencies": {
+    "@orbit/core": "workspace:*",
+    "@orbit/directory": "workspace:*",
+    "@orbit/places": "workspace:*",
+    "zod": "^3.25.0"
+  },
+  "devDependencies": { "tsx": "^4.20.0", "typescript": "^5.9.0", "@types/node": "^22.0.0" }
+}
