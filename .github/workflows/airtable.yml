@@ -9,10 +9,11 @@ on:
         description: "What to do"
         type: choice
         options:
+          - verify-base
           - build-new-base
           - reset-and-refill-base
           - pull-content
-        default: build-new-base
+        default: verify-base
       workspace_id:
         description: "Workspace ID (starts with wsp…) or the link of the workspace page, only for build-new-base"
         required: false
@@ -56,6 +57,10 @@ jobs:
         env:
           AIRTABLE_CONFIRM: ${{ inputs.confirm }}
         run: pnpm --filter rivieres-canyons airtable:reset
+
+      - name: Check the base against the repository (read-only)
+        if: inputs.job == 'verify-base'
+        run: pnpm --filter rivieres-canyons exec tsx scripts/airtable.ts verify
 
       - name: Pull the content from Airtable and check it
         if: inputs.job == 'pull-content'

@@ -43,6 +43,9 @@ function build(logical: Record<string, Row[]>, errors: string[]): Content | null
 /** Order-insensitive JSON, to compare two contents. */
 const canon = (v: unknown): unknown => Array.isArray(v) ? v.map(canon)
   : v && typeof v === 'object' ? Object.fromEntries(Object.keys(v).sort().map((k) => [k, canon((v as any)[k])])) : v;
+/** Airtable does not keep row order: compare each collection sorted by its key (order inside a record is kept). */
+const byIdentity = (c: Content) => Object.fromEntries(Object.entries(c).map(([k, list]) => [k,
+  [...(list as any[])].sort((x, y) => String(x.id ?? x.key).localeCompare(String(y.id ?? y.key)))]));
 function firstDiff(a: unknown, b: unknown, path = ''): string | null {
   if (JSON.stringify(canon(a)) === JSON.stringify(canon(b))) return null;
   if (a && b && typeof a === 'object' && typeof b === 'object') {
@@ -145,7 +148,7 @@ async function main() {
     // Round trip: CSV → content must equal the content we started from.
     const back = build(toLogical(shaped, errors), errors);
     if (back) {
-      const diff = firstDiff(content, back);
+      const diff = firstDiff(byIdentity(content), byIdentity(back));
       if (diff) errors.push(`round trip differs at ${diff}`);
     }
     writeFileSync(resolve(outDir, 'SPEC.md'), spec(Object.fromEntries(TABLES.map((t) => [t.id, logical[t.id].length]))));
@@ -201,7 +204,7 @@ ${errors.length ? `\n## Problems\n${errors.map((e) => `- ${e}`).join('\n')}\n` :
       log.push(`Rows written: ${TABLES.map((t) => `${t.name} ${counts[t.id]}`).join(' · ')}.`);
       // Read everything back through the API and compare with the content we sent.
       const back = build(toLogical(await fetchBase(TABLES, linked.map, token!), errors), errors);
-      const diff = back && firstDiff(content, back);
+      const diff = back && firstDiff(byIdentity(content), byIdentity(back));
       if (diff) errors.push(`read-back differs at ${diff}`);
       else if (back) log.push('Read back through the API: identical to the content sent.');
       const byHand = TABLES.flatMap((t) => t.fields.filter((fd) => fd.helper && ['formula', 'count', 'multipleLookupValues'].includes(fd.type)).map((field) => ({ table: t.name, field })));
@@ -221,6 +224,18 @@ ${errors.length ? `\n## Problems\n${errors.map((e) => `- ${e}`).join('\n')}\n` :
     }
   }
   if (!token) throw new Error('AIRTABLE_TOKEN is missing');
+  if (cmd === 'verify') {
+    // Read-only: is the base identical to the content in the repository?
+    const map = JSON.parse(readFileSync(mapFile, 'utf8')) as BaseMap;
+    const errors: string[] = [];
+    const back = build(toLogical(await fetchBase(TABLES, map, token), errors), errors);
+    const diff = back && firstDiff(byIdentity(readFixtures()), byIdentity(back));
+    if (diff) errors.push(`the base differs from the repository at ${diff}`);
+    const text = `# Airtable check\n\nBase \`${map.base_id}\`, read on ${new Date().toISOString().slice(0, 16).replace('T', ' ')} UTC: **${errors.length ? 'differences found' : 'identical to the repository'}**.\n${errors.map((e) => `\n- ${e}`).join('')}\n`;
+    console.log(text);
+    if (process.env.GITHUB_STEP_SUMMARY) appendFileSync(process.env.GITHUB_STEP_SUMMARY, text);
+    process.exit(errors.length ? 1 : 0);
+  }
   if (cmd === 'link') {
     if (!baseId) throw new Error('AIRTABLE_BASE_ID is missing');
     const { map, problems } = await linkBase(TABLES, baseId, token);
