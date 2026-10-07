@@ -1,0 +1,242 @@
+/* ==========================================================================
+   Orbit Directory — design tokens
+   Source: Guadeloupe v12 · system pass of 2026-10-06 (see docs/AUDIT_2026-10-06.md)
+
+   HOW TO USE THIS FILE
+   - Every value in the UI comes from a variable below. No raw hex, px size, shadow or duration in components.
+   - Mobile-first: all values are the MOBILE value. Larger screens are reached with fluid clamp() values or,
+     where a layout really changes, a single `@media (min-width: 1024px)` (see "Breakpoints").
+   - Need a value that is not here? Add it here and log it in docs/CHANGELOG.md first.
+   - Names: --{category}-{role}[-{variant}]. Roles describe use ("body", "muted"), never appearance ("grey-2"). Full convention: docs/ARCHITECTURE.md §3.
+   - Layers: 0 primitives (--c-*) → 1 semantic tokens (everything else) → components. Components only read layer 1.
+   - Text styles built from these tokens are in text-styles.css. Rules for emphasis: docs/DESIGN_SYSTEM.md §1.
+   ========================================================================== */
+
+:root {
+
+  /* ======================================================================
+     0. PRIMITIVE PALETTE (layer 0). Raw colour values, named by hue and step.
+        RULE: components never use --c-* directly. They use the semantic tokens in §2, which point here.
+        A visual redesign changes the values below and/or re-points semantic tokens; no component changes.
+        Only add a primitive when a semantic token needs a colour that is not here.
+     ====================================================================== */
+  --c-white: #FFFFFF;
+  --c-sand-25: #FAF8F3;  --c-sand-50: #F7F3EC;  --c-sand-100: #EFEBE2;  --c-sand-150: #EFE6D4;  --c-sand-200: #E9E3D8;  --c-sand-300: #DCD6CA;
+  --c-stone-400: #B4AC9C;
+  --c-ink-500: #616D66;  --c-ink-800: #26332D;
+  --c-green-950: #0F2A22;  --c-green-900: #14342A;  --c-green-700: #2C784C;  --c-green-600: #3E6B58;
+  --c-green-300: #9FD3C4;  --c-green-200: #A8E0CE;  --c-green-100: #E4F2E9;  --c-green-50: #EFF4F0;
+  --c-coral-500: #E2603C;  --c-coral-600: #C24E2B;  --c-coral-700: #A8401F;
+  --c-red-900: #4A1C0E;  --c-red-600: #B8321E;  --c-red-200: #E7B4A0;  --c-red-50: #FCEBE4;
+  --c-amber-800: #8A5A00;  --c-amber-500: #D39B1F;  --c-amber-50: #FBF0DE;
+  --c-teal-600: #0A8577;  --c-indigo-600: #3D4AA0;  --c-peach-200: #F2C7B4;
+
+  /* ======================================================================
+     1. FONTS AND WEIGHTS  (3 families, 6 font files; justification in docs/TYPOGRAPHY.md §1)
+     ====================================================================== */
+  --font-display: 'Instrument Serif', Georgia, serif;
+    /* BRAND VOICE. Headings (H1, H2), names (cards, tours), prices, quotes. 400 + 400 italic only. Never bold. Never for body text. */
+  --font-read: 'Source Serif 4', Georgia, serif;
+    /* READING. Long prose where people read sentences: intros, access text, FAQ answers, bios, article body. 400 + 600 (lead-ins). */
+  --font-ui: 'Archivo', system-ui, sans-serif;
+    /* SCANNING AND ACTION. Facts, meta, labels, chips, buttons, links, h3, form text. 400 + 600. */
+
+  --fw-regular: 400;   /* all text by default */
+  --fw-semibold: 600;  /* emphasis in UI and prose: h3, values, buttons, links, selected state, lead-ins. The ONLY emphasis weight. */
+  /* No 500, no 700: if something needs more than 400 it gets 600; if it needs less it stays 400 and uses --text-muted. */
+
+  /* ======================================================================
+     2. COLOUR
+     ====================================================================== */
+
+  /* 2.1 Text on light surfaces — three reading tiers plus one decorative tier */
+  --text-strong: var(--c-green-900);   /* headings (serif and sans), fact values, names, button-like text. Deep green-black: the brand's ink. */
+  --text-body:   var(--c-ink-800);   /* ALL content text: prose, card subtitles, tile text. Content is never muted. */
+  --text-muted:  var(--c-ink-500);   /* META ONLY: dates, units, credits, fact labels, captions. ≥4.5:1 on every light surface. */
+  --text-faint:  var(--c-stone-400);   /* decoration only (separators, chevrons). 2.2:1, so never for words. */
+
+  /* 2.2 Text on dark or photo — three steps, no other opacities */
+  --text-on-dark:   var(--c-white);                  /* titles, primary text */
+  --text-on-dark-2: rgba(255,255,255,0.85);   /* secondary text (meta, bylines) */
+  --text-on-dark-3: rgba(255,255,255,0.7);    /* credits and captions on photos; 12px minimum */
+  --text-on-dark-accent: var(--c-green-300);             /* overlines and highlights on dark bands (8.1:1 on --surface-dark-2) */
+
+  /* 2.3 Surfaces */
+  --surface-page:   var(--c-sand-50);  /* page background */
+  --surface-card:   var(--c-white);  /* cards, inputs, popovers, fact cells */
+  --surface-subtle: var(--c-sand-25);  /* tiles inside a white card, KeyValueTiles */
+  --surface-sunken: var(--c-sand-100);  /* segmented controls, tag chips, placeholders */
+  --surface-info:   var(--c-green-50);  /* AnswerBox, AccessNotice, "Fourni par le guide" (green tint) */
+  --surface-footer: var(--c-sand-150);  /* footer band */
+  --surface-dark:   var(--c-green-950);  /* hero base, image fallback */
+  --surface-dark-2: var(--c-green-900);  /* lead-magnet band, dark buttons, active filter */
+  --surface-glass:  rgba(255,255,255,0.16);   /* pill on photo (with --border-on-dark) */
+  --surface-chip-on-photo: rgba(255,255,255,0.94);  /* badges and back button on photo (dark text) */
+  --surface-scrim:  rgba(8,14,11,0.94);       /* lightbox / video overlay */
+  --scrim-hero: linear-gradient(180deg, rgba(10,28,22,0.5) 0%, rgba(10,28,22,0.7) 55%, rgba(10,28,22,0.92) 100%);
+    /* text-legibility gradient on every hero photo */
+
+  /* 2.4 Borders */
+  --border:        var(--c-sand-200);  /* default hairline: cards, dividers, fact grids */
+  --border-strong: var(--c-sand-300);  /* inputs, pills, sticky bar edge */
+  --border-on-dark: rgba(255,255,255,0.3);
+
+  /* 2.5 Brand and action */
+  --brand:        var(--c-green-600);   /* overlines, text links, active filter border, entry numbers (6.1:1 on white) */
+  --brand-hover:  var(--c-green-900);   /* hover colour for text links (= --text-strong) */
+  --accent:       var(--c-coral-500);   /* DECORATION of action: link underline, bullets, quote rule. Never text, never a fill behind text (3.5:1). */
+  --accent-strong:       var(--c-coral-600);  /* filled CTA buttons and count badges. White label 4.75:1. */
+  --accent-strong-hover: var(--c-coral-700);  /* hover / pressed state of --accent-strong (6.1:1 with white) */
+
+  /* 2.6 Focus (see §10) */
+  --focus-ring:      var(--c-green-600);  /* outline on light surfaces */
+  --focus-halo:      var(--c-white);  /* inner ring that keeps the outline visible on dark and photo */
+  --focus-ring-dark: var(--c-green-200);  /* ring on inputs inside the dark lead-magnet band */
+
+  /* 2.7 Status */
+  --danger:         var(--c-red-600);  /* "!" badge fill. Safety only. At most one danger surface per viewport. */
+  --danger-surface: var(--c-red-50);
+  --danger-border:  var(--c-red-200);
+  --danger-text:    var(--c-red-900);  /* ALL text inside danger surfaces (title in 600, body in 400) */
+  --success-surface: var(--c-green-100); /* access tile "ok" */
+  --success-ink:     var(--c-green-700); /* 4.7:1 on --success-surface */
+  --warning-surface: var(--c-amber-50); /* access tile "partial" */
+  --warning-ink:     var(--c-amber-800); /* 5.3:1 on --warning-surface */
+  --star: var(--c-amber-500);            /* rating stars. Decorative only (2.3:1): always pair with the number as text. */
+
+  /* 2.8 Operators (one colour per guide company) */
+  --op-yalode:     var(--c-teal-600);   /* 4.53:1 on white: only for text ≥14px/600 or as a fill with white text */
+  --op-wildcanyon: var(--c-indigo-600);
+  --avatar-pascal:  var(--c-green-300);  /* placeholder behind the portrait */
+  --avatar-quentin: var(--c-peach-200);
+
+  /* ======================================================================
+     3. TYPE SCALE — 10 sizes in total. Mobile-first: fluid clamp() runs from ≈360px to ≈1024px.
+        Display serif: h1, h2, title, quote, pull. Reading serif: read. UI sans: h3, body, small, micro.
+        Changing a size = changing ONE line here. Alternatives for the UI scale: docs/TYPOGRAPHY.md §7 (J-T2).
+     ====================================================================== */
+  /* Display serif (Instrument Serif 400) */
+  --fs-h1:   clamp(34px, 6vw, 48px);   /* the one H1 style: every page */
+  --fs-h2:   clamp(26px, 4vw, 32px);   /* every section heading */
+  --fs-title: 22px;                    /* names: cards, tour, sheet; prices; closing the gap between H2 and body */
+  --fs-quote: 20px;                    /* italic: quotes inside cards (reviews, insider tip, in-body quote) */
+  --fs-pull:  clamp(24px, 1.5vw + 18px, 30px);  /* italic: ONE pull quote per tour card (the guide's voice) */
+  /* Reading serif (Source Serif 4) */
+  --fs-read:  clamp(18px, 1vw + 14px, 20px);    /* all prose; 680px max line */
+  /* UI sans (Archivo): even 2px steps, 12 is the floor, 16 = input size */
+  --fs-h3:    18px;   /* sub-headings, FAQ questions, tile and card sub-titles (600) */
+  --fs-body:  16px;   /* UI text, card text, buttons, links, inputs (400, or 600 for emphasis) */
+  --fs-small: 14px;   /* meta, captions, fact values, chips, filter controls, tooltips (400 or 600) */
+  --fs-micro: 12px;   /* fact labels, badges, photo credits, overline (the floor) */
+
+  /* Line heights: 4 values */
+  --lh-display: 1.1;   /* h1, h2, title: short, large, serif */
+  --lh-tight: 1.3;     /* quote, pull, h3, one-line UI (labels, chips, values) */
+  --lh-ui: 1.5;        /* multi-line UI text (body, small paragraphs) */
+  --lh-read: 1.6;      /* prose */
+
+  /* Letter-spacing: 3 values */
+  --ls-read: -0.003em;     /* prose only (optical tightening of Source Serif 4) */
+  --ls-overline: 0.08em;   /* uppercase micro only */
+  --ls-wordmark: 0.06em;   /* the logo wordmark only */
+
+  /* Effects */
+  --text-shadow-photo: 0 1px 12px rgba(0,0,0,0.35);  /* the only text-shadow: white text directly on a photo (H1, quote). Never on cards. */
+
+  /* ======================================================================
+     4. SPACING  (4px base; half-steps for tight UI). Use these for padding, margin and gap.
+        Off-scale values (5, 7, 9, 11, 13, 14, 15, 18, 22px) are not allowed: snap to the nearest token.
+     ====================================================================== */
+  --space-0h: 2px;   /* hairline gaps (dt/dd, icon + text) */
+  --space-1: 4px;    /* chip internal, tight stacks */
+  --space-1h: 6px;   /* gap between chips, small stacks */
+  --space-2: 8px;    /* default small gap, tile grids */
+  --space-2h: 10px;  /* gap in rows of controls */
+  --space-3: 12px;   /* tile padding, field gap */
+  --space-4: 16px;   /* default card padding, paragraph gap */
+  --space-5: 20px;   /* page gutter, large card padding */
+  --space-6: 24px;   /* article gutter, block gap */
+  --space-7: 28px;   /* avoid; use 24 or 32 */
+  --space-8: 32px;
+  --space-9: 40px;
+  --space-10: 48px;
+  --space-11: 64px;
+
+  /* Rhythm (responsive) */
+  --section-y:   clamp(32px, 6vw, 48px);   /* padding-block of destination / guide sections */
+  --article-gap: clamp(48px, 8vw, 64px);   /* between blog article parts */
+  --entry-gap:   clamp(56px, 10vw, 80px);  /* between blog selection entries */
+
+  /* ======================================================================
+     5. LAYOUT
+     ====================================================================== */
+  --gutter: 20px;          /* page side padding on mobile */
+  --gutter-read: 24px;     /* side padding inside long-form articles (a bit more air for reading) */
+  --w-layout: 1120px;      /* page container */
+  --w-article: 728px;      /* article / hero text column = --w-read + 2 × --gutter-read */
+  --w-read: 680px;         /* line length of prose (~70 characters at 20px) */
+  --w-text: 640px;         /* destination text blocks; also max for stat grids */
+  --w-narrow: 480px;       /* forms, hero subtitle */
+  --w-side: 340px;         /* GuideOfferCard column (≥1024px only) */
+  --target: 44px;          /* minimum touch target (height and width). Visual size may be smaller if the hit area is padded to this. */
+
+  /* ======================================================================
+     6. BREAKPOINTS  (custom properties cannot be used inside @media: copy the number)
+        Mobile-first: write the base CSS for ≈360px, then add up with min-width.
+        Prefer intrinsic layouts (auto-fit grids, flex-wrap, clamp). Add a media query only when the layout truly changes.
+     ====================================================================== */
+  --bp-sm: 480px;   /* @media (min-width: 480px)  — fact strips go from 2 to 3–4 columns */
+  --bp-lg: 1024px;  /* @media (min-width: 1024px) — detail page two-column + sticky side card, hero fact bar floats over photo, filters inline */
+  /* No max-width queries. No JavaScript breakpoint: layout must not depend on JS (static build, CLS). */
+
+  /* ======================================================================
+     7. RADIUS
+     ====================================================================== */
+  --r-s: 8px;        /* icon tiles, small chips, tag chips */
+  --r-m: 12px;       /* inputs, tiles, buttons, tooltips */
+  --r-l: 16px;       /* cards, alerts, images, fact strips */
+  --r-sheet: 22px;   /* top corners of the bottom sheet */
+  --r-pill: 999px;   /* pills, filters, avatars' containers */
+  /* Circles: border-radius: 50% (avatars, dots, DangerBadge) */
+
+  /* ======================================================================
+     8. SHADOW  (only on floating layers; flat cards use a border)
+     ====================================================================== */
+  --sh-card-hover:    0 6px 20px rgba(10,20,16,0.08);   /* list-view card hover */
+  --sh-float:         0 10px 28px rgba(10,20,16,0.18);  /* hero fact bar, floating CTA, badge */
+  --sh-tooltip:       0 10px 24px rgba(10,20,16,0.2);   /* tooltips, popovers */
+  --sh-sheet:         0 12px 32px rgba(10,20,16,0.26);  /* bottom sheet, lightbox controls */
+  --sh-sticky-bottom: 0 -6px 20px rgba(10,20,16,0.08);  /* mobile sticky CTA */
+  --sh-input:         0 1px 2px rgba(0,0,0,0.12);       /* inputs on dark band */
+  --sh-knob:          0 1px 3px rgba(0,0,0,0.22);       /* toggle knob */
+  --sh-avatar-ring:   0 0 0 2px var(--surface-page);    /* avatar separation ring (use --surface-dark on dark) */
+
+  /* ======================================================================
+     9. LAYERS (z-index)
+     ====================================================================== */
+  --z-raised: 1;     /* badges over photos */
+  --z-float: 2;      /* hero fact bar over the photo edge */
+  --z-tooltip: 5;
+  --z-sticky: 40;    /* sticky filter header */
+  --z-cta: 50;       /* mobile sticky CTA */
+  --z-sheet: 90;     /* filters bottom sheet */
+  --z-lightbox: 95;  /* gallery / video overlay (always on top) */
+
+  /* ======================================================================
+     10. MOTION AND STATES
+     ====================================================================== */
+  --dur-fast: 150ms;    /* hover colour / border */
+  --dur-base: 200ms;    /* toggles, fades */
+  --dur-slow: 300ms;    /* sheets, sticky CTA slide */
+  --dur-enter: 400ms;   /* card entrance (riseIn) */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);  /* sheets */
+  --ease: ease;                                  /* everything else */
+  /* prefers-reduced-motion: reduce → all durations become ~0 and entrance animations are skipped (global rule in text-styles.css). */
+
+  /* State rules (apply to every interactive element)
+     hover   : text link → --brand-hover · filled CTA → --accent-strong-hover · card → border --border-strong (+ --sh-card-hover in list view)
+     focus   : :focus-visible → outline 3px --focus-ring, offset 2px, plus 2px --focus-halo box-shadow. Never remove without replacement.
+     active  : darken fill one step or --surface-subtle on tiles; no scale animations
+     disabled: opacity 0.5, cursor not-allowed, aria-disabled; label stays readable
+     Hover is never the only way to reach information: every tooltip also opens on tap and focus. */
+}

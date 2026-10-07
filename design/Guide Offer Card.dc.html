@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<aside style="display: flex; flex-direction: column; background: #FFF; border: 1px solid #E9E3D8; border-radius: 16px; box-shadow: 0 10px 28px rgba(10,20,16,0.08); overflow: hidden; font-family: inherit;">
+  <div style="display: flex; align-items: center; gap: 12px; padding: 16px 18px 14px;">
+    <span style="{{ tour.avatarMd }}"></span>
+    <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px;">
+      <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: {{ tour.opColor }};">Sortie guidée · {{ tour.opName }}</span>
+      <span style="font-family: 'Instrument Serif', serif; font-size: 20px; line-height: 1.1; color: #14342A;">Avec {{ tour.guideFirstName }}</span>
+      <span style="font-size: 12px; color: #616D66;">{{ tour.guideRole }} · {{ tour.rating }} ★</span>
+    </div>
+  </div>
+  <div style="padding: 12px 18px; border-top: 1px solid #EFEBE2;">
+    <span style="display: block; font-size: 15px; font-weight: 600; color: #14342A; text-wrap: pretty;">{{ tour.name }}</span>
+    <span style="display: block; margin-top: 2px; font-size: 14px; line-height: 1.4; color: #616D66; text-wrap: pretty;">{{ tour.subtitle }}</span>
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; margin-top: 12px;">
+      <sc-for list="{{ facts }}" as="f" hint-placeholder-count="3">
+        <div style="background: #FAF8F3; border-radius: 12px; padding: 8px 10px; display: flex; flex-direction: column; gap: 2px; min-width: 0;">
+          <span style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #616D66; white-space: nowrap;">{{ f.k }}</span>
+          <span style="font-size: 14px; font-weight: 600; color: #14342A; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ f.v }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+  <div style="padding: 14px 18px 16px; border-top: 1px solid #EFEBE2; background: #FAF8F3; display: flex; flex-direction: column; gap: 8px;">
+    <div style="display: flex; align-items: baseline; gap: 6px; margin-bottom: 4px;">
+      <span style="font-family: 'Instrument Serif', serif; font-size: 26px; line-height: 1.1; color: #14342A;">{{ tour.priceLabel }}</span>
+      <span style="font-size: 12px; color: #616D66;">{{ tour.priceUnit }}</span>
+    </div>
+    <a href="{{ tour.bookUrl }}" target="_blank" rel="noopener" style="display: block; text-align: center; padding: 12px 16px; border-radius: 12px; background: #C24E2B; color: #FFF; font-size: 14px; font-weight: 700; text-decoration: none;">Réserver sur {{ tour.opName }} →</a>
+    <sc-if value="{{ hasWa }}" hint-placeholder-val="{{ true }}"><a href="{{ tour.waUrl }}" target="_blank" rel="noopener" style="align-self: center; min-height: 44px; display: inline-flex; align-items: center; padding: 0 8px; color: #14342A; font-size: 14px; font-weight: 600; text-decoration: underline; text-underline-offset: 3px;" style-hover="color: #3E6B58;">Écrire à {{ tour.guideFirstName }}</a></sc-if>
+    <sc-if value="{{ noWa }}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{ onWrite }}" style="align-self: center; min-height: 44px; padding: 0 8px; border: none; background: none; color: #14342A; font-size: 14px; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; cursor: pointer;" style-hover="color: #3E6B58;">Écrire à {{ tour.guideFirstName }}</button></sc-if>
+  </div>
+</aside>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:360,&quot;height&quot;:520},&quot;tour&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;object&quot;},&quot;altTour&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;object&quot;},&quot;hasAlt&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;onWrite&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;() =&gt; void&quot;},&quot;onAlt&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;() =&gt; void&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const t = this.props.tour || {};
+    const keep = ['Durée', 'Dès', 'Niveau'];
+    const facts = (t.facts || []).filter((f) => keep.includes(f.k));
+    const alt = this.props.altTour || {};
+    return {
+      tour: t, facts, hasWa: !!t.waUrl, noWa: !t.waUrl,
+      hasAlt: !!this.props.hasAlt, altTour: alt, onAlt: this.props.onAlt, onWrite: this.props.onWrite,
+      altAvatar: (alt.avatarSm || 'display: none;').replace(/34px/g, '20px')
+    };
+  }
+}
+</script>
+</body>
+</html>

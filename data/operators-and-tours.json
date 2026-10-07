@@ -1,0 +1,452 @@
+{
+  "_meta": {
+    "note": "v12. bookUrl and whatsapp hold placeholders until the operators confirm them. TEST_ARR keeps only real reviews with a source (drafts removed). Live weather status removed from tours.",
+    "tour_filter_communes": [
+      "Pointe-Noire",
+      "Bouillante",
+      "Vieux-Habitants"
+    ]
+  },
+  "OPERATORS": {
+    "yalode": {
+      "name": "Yalodé",
+      "color": "#0A8577",
+      "guideFirstName": "Pascal",
+      "guideInitial": "P",
+      "guidePhoto": "assets/pascal-head.png",
+      "logoUrl": null,
+      "rating": "4,9",
+      "guideRole": "brevet d'État canyoning aquarando",
+      "bookUrl": "[BOOKING_URL_YALODE]",
+      "contactUrl": "https://www.kayak-guadeloupe.fr/contact.html",
+      "website": "https://www.kayak-guadeloupe.fr/",
+      "whatsapp": "[WHATSAPP_PASCAL]",
+      "slug": "pascal",
+      "guideFullName": "Pascal Proust",
+      "about": {
+        "bio": "Pascal Proust a fondé Yalodé en 2012. Guide nature, il fait découvrir en petits groupes les rivières des Mamelles et la mangrove du Grand Cul-de-Sac Marin, avec une approche qui mêle aventure, botanique et contemplation.",
+        "facts": [
+          [
+            "🎓",
+            "Diplôme",
+            "Brevet d'État canyoning aquarando"
+          ],
+          [
+            "🧭",
+            "Expérience",
+            "Plus de 15 ans de guidage"
+          ],
+          [
+            "🌿",
+            "Certification",
+            "INFOM, bain de forêt"
+          ],
+          [
+            "🏡",
+            "Yalodé",
+            "Depuis 2012"
+          ]
+        ]
+      },
+      "espritDefault": "decouverte"
+    },
+    "wildcanyon": {
+      "name": "Wild Canyon",
+      "color": "#3D4AA0",
+      "guideFirstName": "Quentin",
+      "guideInitial": "Q",
+      "guidePhoto": "assets/quentin-head.png",
+      "rating": "5",
+      "logoUrl": "https://wild-canyon.fr/wp-content/uploads/2024/04/wildCanyonLogo.webp",
+      "guideRole": "DE JEPS Canyoning, cordiste",
+      "bookUrl": "[BOOKING_URL_WILDCANYON]",
+      "contactUrl": "https://wild-canyon.fr/#contact",
+      "website": "https://wild-canyon.fr/",
+      "whatsapp": "[WHATSAPP_QUENTIN]",
+      "slug": "quentin",
+      "profile": {
+        "bio": "Les sensations fortes en sécurité : sauts, rappels, toboggans. Plus de 200 canyons explorés dans le monde.",
+        "facts": [
+          [
+            "🎓",
+            "Diplôme",
+            "DE JEPS Canyoning, cordiste"
+          ],
+          [
+            "🧭",
+            "Expérience",
+            "8 ans d'expérience"
+          ]
+        ]
+      },
+      "espritDefault": "sensations"
+    }
+  },
+  "DATA": [
+    {
+      "id": "acomat",
+      "op": "yalode",
+      "name": "Saut d'Acomat",
+      "commune": "Pointe-Noire",
+      "subtitle": "Randonnée aquatique sans rappel, fun et relaxante. Toboggans et sauts contournables, aucune difficulté obligatoire.",
+      "level": "Facile",
+      "esprit": "decouverte",
+      "minAge": 8,
+      "duration": "3 h 30",
+      "hours": 3.5,
+      "approach": "25 min",
+      "approachMin": 25,
+      "price": 50,
+      "priceChild": null,
+      "pets": false,
+      "rappel": false,
+      "img": "https://www.kayak-guadeloupe.fr/images/canyoning-famille-01.jpg",
+      "tags": [
+        "Famille",
+        "Toboggans naturels",
+        "Bain de forêt",
+        "Petit groupe"
+      ],
+      "sameSpot": "wc-acomat",
+      "imagine": [
+        "Explorer les parties les plus inaccessibles des canyons des Mamelles : marche, nage, saut, floating.",
+        "Glisser sur les toboggans naturels creusés dans la roche.",
+        "Vous imprégner de l'atmosphère de la forêt avec tous vos sens (initiation au bain Shinrin Yoku).",
+        "Partager des moments extras avec vos proches, loin des foules."
+      ],
+      "included": [
+        "Gilet de sauvetage",
+        "Shorty néoprène",
+        "Casque",
+        "Culotte de glisse",
+        "Verre de l'amitié"
+      ],
+      "bring": [
+        "Chaussures de sport",
+        "Maillot de bain",
+        "Cordon à lunettes"
+      ],
+      "meeting": "Départ 9 h 00 — parking du saut d'Acomat, 97116 Pointe-Noire.",
+      "tip": "C'est le canyon que je fais découvrir depuis 2012 : tout est contournable, donc personne ne reste au bord."
+    },
+    {
+      "id": "dore",
+      "op": "yalode",
+      "name": "Canyon doré",
+      "commune": "Pointe-Noire",
+      "subtitle": "Un parcours mythique et très sauvage en forêt primaire. Sans rappel, mais marche d'approche difficile de +700 m de dénivelé.",
+      "level": "Sportif",
+      "esprit": "decouverte",
+      "minAge": 13,
+      "duration": "5 h 30",
+      "hours": 5.5,
+      "approach": "1 h 30",
+      "approachMin": 90,
+      "price": 70,
+      "priceChild": null,
+      "pets": false,
+      "rappel": false,
+      "img": "https://www.kayak-guadeloupe.fr/images/yalode-sport-1.jpg",
+      "tags": [
+        "Forêt primaire",
+        "Hors sentiers",
+        "Journée",
+        "Petit groupe"
+      ],
+      "imagine": [
+        "Crapahuter hors des sentiers battus dans un des plus beaux endroits de Guadeloupe.",
+        "Découvrir la faune et la flore avec un guide qui connaît parfaitement les lieux.",
+        "Enchaîner marche, nage, sauts et floating au cœur du canyon."
+      ],
+      "included": [
+        "Gilet de sauvetage",
+        "Shorty néoprène",
+        "Casque",
+        "Sac et bidon XL",
+        "Verre de l'amitié"
+      ],
+      "bring": [
+        "Chaussures de sport",
+        "Maillot de bain",
+        "Eau",
+        "Repas tiré du sac"
+      ],
+      "meeting": "Départ 9 h 30 — parking du saut d'Acomat, 97116 Pointe-Noire. Bonne condition physique requise.",
+      "tip": "Les 700 m de dénivelé filtrent tout : venez si vous marchez déjà régulièrement, vous aurez le canyon pour vous."
+    },
+    {
+      "id": "wc-acomat",
+      "op": "wildcanyon",
+      "name": "Randonnée aquatique Acomat – Family",
+      "commune": "Pointe-Noire",
+      "subtitle": "La même rivière qu'Acomat, en formule Wild Canyon : rythme familial, pas de rappel, encadrement sportif.",
+      "level": "Facile",
+      "esprit": "decouverte",
+      "minAge": 8,
+      "duration": "3 h",
+      "hours": 3,
+      "approach": "20 min",
+      "approachMin": 20,
+      "price": 50,
+      "priceChild": 40,
+      "pets": false,
+      "rappel": false,
+      "img": null,
+      "tags": [
+        "Famille",
+        "Toboggans naturels",
+        "Formule Family"
+      ],
+      "sameSpot": "acomat",
+      "imagine": [
+        "Randonner dans le lit de la rivière entre nage, marche et petits sauts.",
+        "Glisser sur des toboggans naturels en toute sécurité.",
+        "Profiter d'un cadre tropical accessible dès 8 ans."
+      ],
+      "included": [
+        "Combinaison néoprène",
+        "Casque",
+        "Baudrier"
+      ],
+      "bring": [
+        "Chaussures de sport fermées",
+        "Maillot de bain",
+        "Serviette",
+        "Bouteille d'eau"
+      ],
+      "meeting": "Départ matinal — lieu de rendez-vous communiqué à la réservation, secteur Pointe-Noire.",
+      "tip": "C'est le canyon idéal pour une première sortie en famille : personne n'est mis en difficulté."
+    },
+    {
+      "id": "wc-bourceau-decouverte",
+      "op": "wildcanyon",
+      "name": "Canyon Bourceau – Demi-journée découverte",
+      "commune": "Bouillante",
+      "subtitle": "Une demi-journée pour découvrir le canyoning technique : quelques sauts et un rappel encadré, sans excès.",
+      "level": "Sportif",
+      "esprit": "decouverte",
+      "minAge": 12,
+      "duration": "4 h 30",
+      "hours": 4.5,
+      "approach": "30 min",
+      "approachMin": 30,
+      "price": 60,
+      "priceChild": 50,
+      "pets": false,
+      "rappel": true,
+      "img": null,
+      "tags": [
+        "Initiation technique",
+        "Demi-journée",
+        "Rappel encadré"
+      ],
+      "imagine": [
+        "Descendre votre premier rappel encadré par un cordiste professionnel.",
+        "Enchaîner quelques sauts contournables dans une gorge encaissée.",
+        "Découvrir les techniques de progression du canyoning sportif."
+      ],
+      "included": [
+        "Baudrier et corde",
+        "Casque",
+        "Combinaison néoprène"
+      ],
+      "bring": [
+        "Chaussures de sport fermées",
+        "Maillot de bain",
+        "En-cas"
+      ],
+      "meeting": "Départ matinal — lieu de rendez-vous communiqué à la réservation, secteur Bouillante.",
+      "tip": "Le bon format pour tester le rappel sans s'engager sur une journée entière."
+    },
+    {
+      "id": "wc-bourceau-family",
+      "op": "wildcanyon",
+      "name": "Canyon Bourceau – Journée family",
+      "commune": "Bouillante",
+      "subtitle": "Une journée complète sur le même canyon, avec pause pique-nique et davantage de temps pour profiter des vasques.",
+      "level": "Sportif",
+      "esprit": "decouverte",
+      "minAge": 10,
+      "duration": "6 h 30",
+      "hours": 6.5,
+      "approach": "30 min",
+      "approachMin": 30,
+      "price": 75,
+      "priceChild": 68,
+      "pets": false,
+      "rappel": true,
+      "img": null,
+      "tags": [
+        "Journée complète",
+        "Pique-nique",
+        "Rappel encadré"
+      ],
+      "imagine": [
+        "Prendre le temps d'explorer chaque vasque et chaque toboggan du canyon.",
+        "Pique-niquer au bord de l'eau entre deux portions du parcours.",
+        "Descendre un rappel encadré, à votre rythme."
+      ],
+      "included": [
+        "Baudrier et corde",
+        "Casque",
+        "Combinaison néoprène",
+        "Pique-nique"
+      ],
+      "bring": [
+        "Chaussures de sport fermées",
+        "Maillot de bain",
+        "Vêtements de rechange"
+      ],
+      "meeting": "Départ matinal — lieu de rendez-vous communiqué à la réservation, secteur Bouillante.",
+      "tip": "La version longue de Bourceau : parfaite si vous voulez que la journée entière soit consacrée au canyon."
+    },
+    {
+      "id": "wc-ferry",
+      "op": "wildcanyon",
+      "name": "Canyon Ferry – Journée sensation",
+      "commune": "Bouillante",
+      "subtitle": "Une journée orientée sensations : sauts plus engagés, rappels enchaînés et progression continue dans la gorge.",
+      "level": "Sportif",
+      "esprit": "sensations",
+      "minAge": 14,
+      "duration": "6 h",
+      "hours": 6,
+      "approach": "25 min",
+      "approachMin": 25,
+      "price": 70,
+      "priceChild": null,
+      "pets": false,
+      "rappel": true,
+      "img": null,
+      "tags": [
+        "Sauts engagés",
+        "Rappels enchaînés",
+        "Journée entière"
+      ],
+      "imagine": [
+        "Enchaîner plusieurs rappels dans une gorge resserrée.",
+        "Sauter depuis des hauteurs plus engagées, toujours sécurisées.",
+        "Ressentir l'adrénaline dans un décor spectaculaire."
+      ],
+      "included": [
+        "Baudrier et cordes",
+        "Casque",
+        "Combinaison néoprène",
+        "Sac de canyon"
+      ],
+      "bring": [
+        "Chaussures de sport fermées",
+        "Repas complet",
+        "Vêtements de rechange"
+      ],
+      "meeting": "Départ matinal — lieu de rendez-vous communiqué à la réservation, secteur Bouillante. Bonne condition physique requise.",
+      "tip": "Ferry, c'est pour ceux qui ont déjà goûté au canyoning et qui veulent plus de sensations."
+    },
+    {
+      "id": "wc-boismalaise",
+      "op": "wildcanyon",
+      "name": "Canyon Bois Malaisé – Journée sportif",
+      "commune": "Vieux-Habitants",
+      "subtitle": "Le parcours le plus engagé de Wild Canyon : rappels hauts, progression technique, réservé aux pratiquants en forme.",
+      "level": "Engagé",
+      "esprit": "sensations",
+      "minAge": 16,
+      "duration": "6 h 30",
+      "hours": 6.5,
+      "approach": "45 min",
+      "approachMin": 45,
+      "price": 85,
+      "priceChild": null,
+      "pets": false,
+      "rappel": true,
+      "img": null,
+      "tags": [
+        "Rappels hauts",
+        "Expérience requise",
+        "Journée entière"
+      ],
+      "imagine": [
+        "Descendre les rappels les plus hauts du parcours Wild Canyon.",
+        "Progresser en autonomie encadrée dans une gorge exigeante.",
+        "Terminer la journée avec le sentiment d'avoir vécu une vraie aventure sportive."
+      ],
+      "included": [
+        "Baudrier et cordes",
+        "Casque",
+        "Combinaison néoprène 5 mm",
+        "Sac de canyon"
+      ],
+      "bring": [
+        "Chaussures de canyon",
+        "Repas complet",
+        "Vêtements de rechange"
+      ],
+      "meeting": "Départ matinal — lieu de rendez-vous communiqué à la réservation, secteur Vieux-Habitants. Réservé aux bonnes conditions physiques.",
+      "tip": "Bois Malaisé, c'est notre journée la plus exigeante : venez si vous pratiquez déjà un sport d'endurance."
+    }
+  ],
+  "TOUR_META": {
+    "acomat": {
+      "siteId": "saut_d_acomat_site",
+      "main": true,
+      "yearsHere": "depuis 2012",
+      "story": "Acomat, c'est la rivière où tout le monde trouve sa place : les toboggans et les sauts se contournent, l'eau est claire et la forêt vient jusqu'au bord. Je l'ai choisie pour les familles parce qu'on peut vraiment en profiter sans se mettre en difficulté."
+    },
+    "wc-acomat": {
+      "siteId": "saut_d_acomat_site",
+      "main": false,
+      "yearsHere": null,
+      "story": "Pour une première sortie en famille, Acomat est idéal : on nage, on glisse, on saute un peu, et personne n'est mis en difficulté."
+    },
+    "dore": {
+      "siteId": "canyon_dore",
+      "main": true,
+      "yearsHere": null,
+      "story": "Le Canyon doré se mérite, mais c'est l'un des endroits les plus sauvages que je connaisse en Guadeloupe. On marche hors des sentiers, et une fois dans le canyon, on l'a pour nous."
+    },
+    "wc-bourceau-decouverte": {
+      "siteId": "riviere_bourceau",
+      "main": true,
+      "yearsHere": null,
+      "story": "Bourceau est la bonne porte d'entrée vers le canyoning technique : quelques sauts, un premier rappel, dans une gorge encaissée où l'on apprend vite."
+    },
+    "wc-bourceau-family": {
+      "siteId": "riviere_bourceau",
+      "main": false,
+      "yearsHere": null,
+      "story": "La journée complète à Bourceau laisse le temps de profiter de chaque vasque, avec une pause pique-nique au bord de l'eau."
+    },
+    "wc-ferry": {
+      "siteId": "canyon_ferry",
+      "main": true,
+      "yearsHere": null,
+      "story": "Ferry, c'est pour ceux qui ont déjà goûté au canyoning et qui en veulent plus : des rappels qui s'enchaînent et des sauts plus engagés dans une gorge resserrée."
+    },
+    "wc-boismalaise": {
+      "siteId": "canyon_bois_malaise",
+      "main": true,
+      "yearsHere": null,
+      "story": "Bois Malaisé est notre journée la plus exigeante : des rappels hauts et une progression technique. On y va quand on a déjà le goût de l'effort."
+    }
+  },
+  "TEST_ARR": {
+    "yalode": [],
+    "wildcanyon": [
+      {
+        "quote": "Super moniteur, super site et superbe vue tout au long de la journée, avec de bonnes sensations.",
+        "author": "Andy S.",
+        "source": "avis Google"
+      },
+      {
+        "quote": "J'ai passé un très bon moment, l'activité était super, beaucoup de sensations.",
+        "author": "Catherine A.",
+        "source": "avis Google"
+      },
+      {
+        "quote": "Quant au cadre… rien à dire, c’est magnifique !",
+        "author": "Benjamin L.",
+        "source": "avis Google"
+      }
+    ]
+  }
+}

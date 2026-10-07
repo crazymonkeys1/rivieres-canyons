@@ -1,0 +1,323 @@
+{
+  "ESPRIT": {
+    "decouverte": "🌿 Détente & découverte",
+    "sensations": "⚡ Sensations fortes"
+  },
+  "SITE_TYPE_META": {
+    "canyon": {
+      "icon": "⛰️",
+      "label": "Canyon",
+      "plural": "Canyons"
+    },
+    "rivière": {
+      "icon": "🌊",
+      "label": "Rivière",
+      "plural": "Rivières"
+    },
+    "cascade": {
+      "icon": "💦",
+      "label": "Cascade",
+      "plural": "Cascades",
+      "aliases": [
+        "Chutes d'eau"
+      ]
+    },
+    "bassin_naturel": {
+      "icon": "🛁",
+      "label": "Bassin naturel",
+      "plural": "Bassins naturels"
+    }
+  },
+  "ACCESS_META": {
+    "ouvert": {
+      "label": "Accès ouvert",
+      "pill": "● Ouvert",
+      "color": "#2E7D4F"
+    },
+    "partiel": {
+      "label": "Accès partiel",
+      "pill": "● Accès partiel",
+      "color": "#8A5A00"
+    },
+    "ferme": {
+      "label": "Accès interdit",
+      "pill": "● Accès interdit",
+      "color": "#B23A1C"
+    },
+    "inconnu": {
+      "label": "Accès non vérifié",
+      "pill": "● Accès non vérifié",
+      "color": "#626E67"
+    }
+  },
+  "VERIF_NOTE": {
+    "élevé": "Informations recoupées avec une source publique.",
+    "élevé_pour_le_nom": "Le nom du site est confirmé ; l'accès et les conditions restent à vérifier.",
+    "moyen": "Une partie des informations est recoupée ; vérifiez avant de partir.",
+    "faible": "Peu de sources disponibles ; vérifiez avant de partir."
+  },
+  "VERIF_META": {
+    "élevé": {
+      "label": "Vérifié",
+      "color": "#3FA86A",
+      "badge": "✅ Vérifié"
+    },
+    "élevé_pour_le_nom": {
+      "label": "Nom confirmé, détails à vérifier",
+      "color": "#E0A32C",
+      "badge": "🏷️ Nom confirmé"
+    },
+    "moyen": {
+      "label": "Partiellement vérifié",
+      "color": "#E0A32C",
+      "badge": "🟡 Partiel"
+    },
+    "faible": {
+      "label": "Peu vérifié",
+      "color": "#D2513A",
+      "badge": "🔺 Peu vérifié"
+    }
+  },
+  "RISK_ICON": {
+    "roches_glissantes": "🪨",
+    "terrain_glissant": "🥾",
+    "profondeur_variable": "📏",
+    "crues_soudaines": "🌧️",
+    "courant": "💨",
+    "courant_variable": "💨",
+    "traversées de rivière": "🚶",
+    "baignade non surveillée": "🏊",
+    "parking non surveillé": "🅿️",
+    "travaux éventuels": "🚧"
+  },
+  "GEAR_EMOJI": [
+    [
+      "Gilet",
+      "🦺"
+    ],
+    [
+      "Shorty",
+      "🤿"
+    ],
+    [
+      "Combinaison",
+      "🤿"
+    ],
+    [
+      "Casque",
+      "⛑️"
+    ],
+    [
+      "Culotte de glisse",
+      "🩳"
+    ],
+    [
+      "Verre de l'amitié",
+      "🥂"
+    ],
+    [
+      "bidon",
+      "🎒"
+    ],
+    [
+      "Sac de canyon",
+      "🎒"
+    ],
+    [
+      "Baudrier",
+      "🧗"
+    ],
+    [
+      "corde",
+      "🪢"
+    ],
+    [
+      "Pique-nique",
+      "🧺"
+    ],
+    [
+      "Chaussures",
+      "👟"
+    ],
+    [
+      "Maillot de bain",
+      "🩱"
+    ],
+    [
+      "lunettes",
+      "🕶️"
+    ],
+    [
+      "Bouteille d'eau",
+      "💧"
+    ],
+    [
+      "Eau",
+      "💧"
+    ],
+    [
+      "Repas",
+      "🍱"
+    ],
+    [
+      "Serviette",
+      "🏖️"
+    ],
+    [
+      "En-cas",
+      "🍫"
+    ],
+    [
+      "Vêtements de rechange",
+      "👕"
+    ]
+  ],
+  "TAG_EMOJI": {
+    "Famille": "👨‍👩‍👧",
+    "Formule Family": "👨‍👩‍👧",
+    "Toboggans naturels": "🎢",
+    "Bain de forêt": "🌳",
+    "Petit groupe": "👥",
+    "Forêt primaire": "🌲",
+    "Hors sentiers": "🥾",
+    "Journée": "☀️",
+    "Journée complète": "☀️",
+    "Journée entière": "☀️",
+    "Demi-journée": "🕐",
+    "Initiation technique": "🎓",
+    "Rappel encadré": "🪢",
+    "Rappels enchaînés": "🪢",
+    "Rappels hauts": "🪢",
+    "Pique-nique": "🧺",
+    "Sauts engagés": "💦",
+    "Expérience requise": "⚠️"
+  },
+  "LEVEL_COLOR": {
+    "Facile": "#3FA86A",
+    "Sportif": "#E0A32C",
+    "Engagé": "#D2513A"
+  },
+  "IMG_Y": "https://www.kayak-guadeloupe.fr/images/",
+  "PLACEHOLDER": {
+    "decouverte": "#3E6B58",
+    "sensations": "#264A38"
+  },
+  "LOCATION_POLICY": {
+    "public": {
+      "label": "Accès public",
+      "shows": [
+        "access tiles (drive, parking, approach)",
+        "itinerary text",
+        "map link"
+      ]
+    },
+    "commune_only": {
+      "label": "Commune seulement",
+      "shows": [
+        "commune",
+        "'renseignez-vous avant de partir' notice"
+      ],
+      "hides": [
+        "itinerary",
+        "tiles",
+        "map"
+      ]
+    },
+    "guide_only": {
+      "label": "Avec un guide uniquement",
+      "shows": [
+        "'point de rendez-vous donné par le guide' notice",
+        "guide link"
+      ],
+      "hides": [
+        "coordinates",
+        "itinerary",
+        "tiles",
+        "map",
+        "tour meeting point"
+      ]
+    },
+    "closed": {
+      "label": "Site fermé",
+      "shows": [
+        "closure alert",
+        "'pas d'itinéraire publié' notice"
+      ],
+      "hides": [
+        "all directions"
+      ]
+    }
+  },
+  "FILTER_PAGE_RULE": "One landing page per type and per commune that has 3 or more destinations.",
+  "FILTER_PAGES": [
+    {
+      "id": "type-canyon",
+      "kind": "type",
+      "key": "canyon",
+      "count": 3,
+      "ids": [
+        "canyon_dore",
+        "canyon_ferry",
+        "canyon_bois_malaise"
+      ]
+    },
+    {
+      "id": "type-riviere",
+      "kind": "type",
+      "key": "rivière",
+      "count": 13,
+      "ids": [
+        "grande_riviere_a_goyaves",
+        "riviere_lezarde",
+        "riviere_moustique",
+        "riviere_bras_david",
+        "riviere_corossol",
+        "riviere_moreau",
+        "riviere_bourceau",
+        "riviere_beaugendre",
+        "riviere_grande_anse",
+        "riviere_du_perou",
+        "riviere_lostau",
+        "grande_riviere_de_vieux_habitants",
+        "riviere_ziotte"
+      ]
+    },
+    {
+      "id": "type-cascade",
+      "kind": "type",
+      "key": "cascade",
+      "count": 4,
+      "ids": [
+        "saut_de_la_lezarde",
+        "cascade_aux_ecrevisses",
+        "chutes_du_carbet",
+        "chutes_moreau"
+      ]
+    },
+    {
+      "id": "commune-petit-bourg",
+      "kind": "commune",
+      "key": "Petit-Bourg",
+      "count": 6,
+      "ids": [
+        "grande_riviere_a_goyaves",
+        "riviere_lezarde",
+        "saut_de_la_lezarde",
+        "riviere_bras_david",
+        "riviere_corossol",
+        "cascade_aux_ecrevisses"
+      ]
+    },
+    {
+      "id": "commune-vieux-habitants",
+      "kind": "commune",
+      "key": "Vieux-Habitants",
+      "count": 3,
+      "ids": [
+        "riviere_beaugendre",
+        "grande_riviere_de_vieux_habitants",
+        "canyon_bois_malaise"
+      ]
+    }
+  ]
+}
