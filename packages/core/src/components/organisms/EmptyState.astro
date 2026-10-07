@@ -1,0 +1,18 @@
+---
+// L5 EmptyState: what to do when nothing matches: a title, a line, and actions (slot).
+interface Props { title: string; text: string; hidden?: boolean }
+const { title, text, hidden } = Astro.props;
+---
+<div class="empty-state" hidden={hidden} data-empty-state role="status">
+  <p class="text-title empty-state__title">{title}</p>
+  <p class="text-body empty-state__text">{text}</p>
+  <div class="empty-state__actions"><slot /></div>
+</div>
+<style>
+  .empty-state { display: grid; gap: var(--space-2); justify-items: start; padding: var(--space-6) var(--space-5); background: var(--color-surface-card); border: 1px solid var(--color-border-default); border-radius: var(--radius-container); }
+  .empty-state[hidden] { display: none; }
+  .empty-state p { margin: 0; }
+  .empty-state__title { color: var(--color-text-strong); }
+  .empty-state__text { color: var(--color-text-body); }
+  .empty-state__actions { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-block-start: var(--space-2); }
+</style>

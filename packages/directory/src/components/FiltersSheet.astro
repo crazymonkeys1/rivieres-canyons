@@ -1,0 +1,32 @@
+---
+// L5 FiltersSheet: every filter, in a bottom sheet (native <dialog>). Groups of FilterOptions and Toggles come in the
+// slot; the footer clears or shows the results ("Voir N résultats").
+interface Props { id: string; title: string; clearLabel: string; showLabel: string; closeLabel: string }
+const { id, title, clearLabel, showLabel, closeLabel } = Astro.props;
+---
+<dialog class="filters-sheet" id={id} aria-labelledby={`${id}-title`}>
+  <div class="filters-sheet__panel">
+    <div class="filters-sheet__head">
+      <h2 class="text-title filters-sheet__title" id={`${id}-title`}>{title}</h2>
+      <button type="button" class="filters-sheet__close text-title" aria-label={closeLabel} data-filters-close>×</button>
+    </div>
+    <div class="filters-sheet__groups"><slot /></div>
+    <div class="filters-sheet__footer">
+      <button type="button" class="filters-sheet__button filters-sheet__button--clear text-body is-strong" data-filters-clear>{clearLabel}</button>
+      <button type="button" class="filters-sheet__button filters-sheet__button--show text-body is-strong" data-filters-close data-filters-show-label={showLabel}>{showLabel}</button>
+    </div>
+  </div>
+</dialog>
+<style>
+  .filters-sheet { inset-block: auto 0; inline-size: 100%; max-inline-size: var(--container-article); max-block-size: 88dvh; margin: auto auto 0; padding: 0; border: 0; border-start-start-radius: var(--radius-sheet); border-start-end-radius: var(--radius-sheet); background: var(--color-surface-page); box-shadow: var(--elevation-sheet); }
+  .filters-sheet::backdrop { background: var(--color-overlay-lightbox); }
+  .filters-sheet[open] { animation: sheetUp var(--duration-slow) var(--easing-sheet); }
+  .filters-sheet__panel { display: grid; grid-template-rows: auto 1fr auto; max-block-size: 88dvh; }
+  .filters-sheet__head { display: flex; justify-content: space-between; align-items: center; padding: var(--space-3) var(--page-gutter); border-block-end: 1px solid var(--color-border-default); }
+  .filters-sheet__title { margin: 0; color: var(--color-text-strong); }
+  .filters-sheet__close { inline-size: var(--tap-size-min); block-size: var(--tap-size-min); border: 0; border-radius: 50%; background: none; color: var(--color-text-strong); cursor: pointer; }
+  .filters-sheet__groups { display: grid; gap: var(--space-5); min-block-size: 0; padding: var(--space-4) var(--page-gutter); overflow-y: auto; }
+  .filters-sheet__footer { display: flex; gap: var(--space-2); padding: var(--space-3) var(--page-gutter); border-block-start: 1px solid var(--color-border-default); }
+  .filters-sheet__button { --sheet-button: 52px; flex: 1; min-block-size: var(--sheet-button); border: 1px solid var(--color-border-strong); border-radius: var(--radius-control); background: var(--color-surface-card); color: var(--color-text-strong); cursor: pointer; }
+  .filters-sheet__button--show { border-color: var(--color-action-primary); background: var(--color-action-primary); color: var(--color-text-inverse); }
+</style>

@@ -1,0 +1,97 @@
+---
+// L5 FilterToolbar: one line at every width: search + "Filtres" (opens the FiltersSheet, shows the active count).
+// From 1024px, quick filters (slot "inline") also sit in the line. Sticky at the top of the listing.
+import SearchField from '@orbit/core/components/molecules/SearchField.astro';
+import Icon from '@orbit/core/components/atoms/Icon.astro';
+interface Props { searchLabel: string; searchPlaceholder: string; filtersLabel: string; sheetId: string }
+const { searchLabel, searchPlaceholder, filtersLabel, sheetId } = Astro.props;
+---
+<div class="filter-toolbar" data-filter-toolbar>
+  <div class="filter-toolbar__line">
+    <SearchField id="listing-search" name="q" label={searchLabel} placeholder={searchPlaceholder} />
+    <div class="filter-toolbar__inline"><slot name="inline" /></div>
+    <button type="button" class="filter-toolbar__button text-body is-strong" aria-haspopup="dialog" aria-controls={sheetId} data-filters-open={sheetId}>
+      <Icon name="filters" size={17} />{filtersLabel}<span class="filter-toolbar__count text-label is-strong" data-filters-count hidden></span>
+    </button>
+  </div>
+</div>
+<script>
+  // Filtering engine (any directory). Cards: <li data-item data-search="…" data-f-{key}="token token">.
+  // Choices: FilterOptionGroups (data-filter-group, single or multi), switches named "f-{key}" (match token "yes"),
+  // a sort <select name="sort"> (orders by data-sort-{value}). Empty choice = no filter on that key.
+  // A non-card row with data-feed-slot="N" (e.g. the lead capture) stays after the Nth card.
+  const items = [...document.querySelectorAll<HTMLElement>('[data-item]')];
+  const list = items[0]?.parentElement;
+  const search = document.querySelector<HTMLInputElement>('#listing-search');
+  const groups = [...document.querySelectorAll<HTMLElement>('[data-filter-group]')];
+  const toggles = [...document.querySelectorAll<HTMLInputElement>('input[role=switch][name^="f-"]')];
+  const sort = document.querySelector<HTMLSelectElement>('select[name="sort"]');
+  const counts = document.querySelectorAll<HTMLElement>('[data-results-count]');
+  const badge = document.querySelector<HTMLElement>('[data-filters-count]');
+  const empty = document.querySelector<HTMLElement>('[data-empty-state]');
+  const showButtons = document.querySelectorAll<HTMLElement>('[data-filters-show-label]');
+  const norm = (s: string) => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  const ds = (prefix: string, k: string) => `${prefix}-${k}`.replace(/-([a-z0-9])/g, (_, c) => c.toUpperCase());   // data-f-c-x → fCX
+  const selected = (g: HTMLElement) => [...g.querySelectorAll<HTMLElement>('[aria-pressed=true]')].map((b) => b.dataset.value!).filter(Boolean);
+  function apply() {
+    const q = norm(search?.value.trim() ?? '');
+    const active = groups.map((g) => ({ key: g.dataset.filterGroup!, values: selected(g) })).filter((f) => f.values.length);
+    const on = toggles.filter((t) => t.checked).map((t) => t.name.slice(2));
+    let n = 0;
+    for (const it of items) {
+      const tokens = (k: string) => (it.dataset[ds('f', k)] ?? '').split(' ');
+      const ok = (!q || norm(it.dataset.search ?? '').includes(q))
+        && active.every((f) => f.values.some((v) => tokens(f.key).includes(v)))
+        && on.every((k) => tokens(k).includes('yes'));
+      it.hidden = !ok; if (ok) n++;
+    }
+    for (const c of counts) c.textContent = (n === 1 ? c.dataset.one : c.dataset.many)!.replace('{n}', String(n));
+    for (const b of showButtons) b.textContent = b.dataset.filtersShowLabel!.replace('{n}', String(n));
+    const k = active.length + on.length;
+    if (badge) { badge.hidden = !k; badge.textContent = String(k); }
+    if (empty) empty.hidden = n > 0;
+  }
+  function order() {
+    if (!list || !sort) return;
+    const key = sort.value;
+    const value = (it: HTMLElement) => it.dataset[ds('sort', key)] ?? '';
+    const sorted = [...items].sort((a, b) => { const x = value(a), y = value(b); return x === y ? 0 : !isNaN(+x) && !isNaN(+y) ? +x - +y : x.localeCompare(y, 'fr'); });
+    for (const it of sorted) list.insertBefore(it, list.querySelector('[data-results-end]'));
+    for (const slot of list.querySelectorAll<HTMLElement>('[data-feed-slot]')) {
+      const after = sorted[Number(slot.dataset.feedSlot) - 1];
+      if (after) after.after(slot);
+    }
+  }
+  for (const g of groups) g.addEventListener('click', (e) => {
+    const b = (e.target as Element).closest<HTMLElement>('[aria-pressed]'); if (!b) return;
+    const was = b.getAttribute('aria-pressed') === 'true';
+    if (g.dataset.multi !== 'true') for (const o of g.querySelectorAll('[aria-pressed]')) o.setAttribute('aria-pressed', 'false');
+    b.setAttribute('aria-pressed', String(!was || (g.dataset.multi !== 'true' && !b.dataset.value)));
+    apply();
+  });
+  for (const t of toggles) t.addEventListener('change', () => {
+    for (const twin of toggles) if (twin !== t && twin.name === t.name) twin.checked = t.checked;   // inline and sheet switches stay in sync
+    apply();
+  });
+  search?.addEventListener('input', apply);
+  sort?.addEventListener('change', () => { order(); apply(); });
+  for (const b of document.querySelectorAll<HTMLElement>('[data-filters-clear]')) b.addEventListener('click', () => {
+    for (const g of groups) for (const o of g.querySelectorAll<HTMLElement>('[aria-pressed]')) o.setAttribute('aria-pressed', String(g.dataset.multi !== 'true' && !o.dataset.value));
+    for (const t of toggles) t.checked = false; if (search) search.value = ''; apply();
+  });
+  for (const open of document.querySelectorAll<HTMLElement>('[data-filters-open]')) {
+    const dialog = document.getElementById(open.dataset.filtersOpen!) as HTMLDialogElement | null;
+    open.addEventListener('click', () => dialog?.showModal());
+    dialog?.addEventListener('click', (e) => { if (e.target === dialog || (e.target as Element).closest('[data-filters-close]')) dialog.close(); });
+  }
+  apply();
+</script>
+<style>
+  .filter-toolbar { position: sticky; inset-block-start: 0; z-index: var(--z-sticky); padding: var(--space-2h) var(--page-gutter); background: var(--color-surface-page); border-block-end: 1px solid var(--color-border-default); }
+  .filter-toolbar__line { display: flex; gap: var(--space-2); align-items: center; max-inline-size: var(--container-page); margin-inline: auto; }
+  .filter-toolbar__inline { display: none; }
+  .filter-toolbar__button { display: inline-flex; flex: none; align-items: center; gap: var(--space-1h); min-block-size: var(--tap-size-min); padding-inline: var(--space-4); border: 0; border-radius: var(--radius-full); background: var(--color-surface-inverse-strong); color: var(--color-text-inverse); cursor: pointer; }
+  .filter-toolbar__count { display: inline-grid; place-items: center; min-inline-size: var(--space-6); block-size: var(--space-6); padding-inline: var(--space-1); border-radius: var(--radius-full); background: var(--color-action-primary); color: var(--color-text-inverse); }
+  .filter-toolbar__count[hidden] { display: none; }
+  @media (min-width: 1024px) { .filter-toolbar__inline { display: flex; gap: var(--space-2); align-items: center; } }
+</style>

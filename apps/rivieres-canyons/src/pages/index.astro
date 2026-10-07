@@ -1,7 +1,85 @@
 ---
-// Placeholder until the listing page is built (phase 4).
-import Document from '../components/styleguide/Document.astro';
+// L7 Home: the listing of guided outings and places, with filters. No styling here.
+import SiteLayout from '../layouts/SiteLayout.astro';
+import ListingTemplate from '@orbit/directory/templates/ListingTemplate.astro';
+import Hero from '@orbit/core/components/organisms/Hero.astro';
+import FilterToolbar from '@orbit/directory/components/FilterToolbar.astro';
+import FiltersSheet from '@orbit/directory/components/FiltersSheet.astro';
+import DestinationCard from '@orbit/directory/components/DestinationCard.astro';
+import SafetyAlert from '@orbit/places/components/SafetyAlert.astro';
+import LeadCapture from '@orbit/core/components/organisms/LeadCapture.astro';
+import EmptyState from '@orbit/core/components/organisms/EmptyState.astro';
+import Photo from '@orbit/core/components/atoms/Photo.astro';
+import Badge from '@orbit/core/components/atoms/Badge.astro';
+import Avatar from '@orbit/core/components/atoms/Avatar.astro';
+import Button from '@orbit/core/components/atoms/Button.astro';
+import Toggle from '@orbit/core/components/atoms/Toggle.astro';
+import Select from '@orbit/core/components/atoms/Select.astro';
+import FilterOptionGroup from '@orbit/core/components/molecules/FilterOptionGroup.astro';
+import { content, t, url, imagesOf, photoFile, portraitOf, guideOf } from '../content/site';
+import { listingItems, filterGroups, filterToggles } from '../content/listing';
+
+const heroImage = imagesOf('site', 'site', 'illustration')[0] ?? null;
+const LEAD_AFTER = 3;
+const attrs = (i: (typeof listingItems)[number]) => ({
+  'data-item': '', 'data-search': i.search,
+  ...Object.fromEntries(Object.entries(i.tokens).map(([k, v]) => [`data-f-${k}`, v.join(' ')])),
+  ...Object.fromEntries(Object.entries(i.sort).map(([k, v]) => [`data-sort-${k}`, v])),
+});
+const sortOptions = [{ value: 'default', label: t('listing.sort_default'), selected: true }, { value: 'name', label: t('listing.sort_name') }, { value: 'price', label: t('listing.sort_price') }];
 ---
-<Document title="Rivières & Canyons · en construction">
-  <main class="text-body"><h1 class="text-display">Rivières &amp; Canyons</h1><p><a class="link" href="/style-guide/">Style guide</a></p></main>
-</Document>
+<SiteLayout title={`${t('site.name')} · ${t('site.tagline')}`} description={t('listing.description')} path={url.home()}>
+  <ListingTemplate>
+    <Hero slot="hero" variant="listing" title={t('listing.title')} credit={heroImage?.credit}>
+      <Photo slot="media" image={heroImage ? photoFile(heroImage.id) : null} alt="" ratio="16:9" eager widths={[640, 1024, 1600]} sizes="100vw" />
+      <Badge slot="badges" onPhoto>{t('site.tagline')}</Badge>
+      <Fragment slot="meta">
+        <span>{t('listing.subtitle')}</span>
+        <span class="visually-hidden">{t('listing.operators')}</span>
+        {content.operators.map((o) => { const g = guideOf(o.id); return <Badge onPhoto><Avatar src={g ? portraitOf(g.photo)?.src : undefined} alt="" size={18} />{o.name}</Badge>; })}
+      </Fragment>
+    </Hero>
+
+    <Fragment slot="filters">
+      <FilterToolbar searchLabel={t('listing.search_label')} searchPlaceholder={t('listing.search_placeholder')} filtersLabel={t('listing.filters')} sheetId="filters">
+        <Fragment slot="inline">
+          <Toggle id="inline-guided" name="f-guided" label={t('listing.f_show_guided')} />
+          <Toggle id="inline-kids" name="f-kids" label={t('listing.f_kids')} />
+        </Fragment>
+      </FilterToolbar>
+      <FiltersSheet id="filters" title={t('listing.filters_title')} clearLabel={t('listing.filters_clear')} showLabel={t('listing.filters_show')} closeLabel={t('listing.filters_close')}>
+        {filterGroups.map((g) => <FilterOptionGroup title={g.title} name={g.name} multi={g.multi} options={g.options} />)}
+        {filterToggles.map((tg) => <Toggle id={`sheet-${tg.name}`} name={tg.name} label={tg.label} hint={tg.hint} />)}
+        <Select id="sort" name="sort" label={t('listing.sort')} options={sortOptions} />
+      </FiltersSheet>
+    </Fragment>
+
+    <SafetyAlert slot="notice" variant="compact" title={t('listing.alert_title')} text={t('listing.alert_text')} badgeLabel={t('listing.alert_badge')} />
+    <h2 slot="header" class="visually-hidden" id="resultats">{t('listing.results_title')}</h2>
+    <p slot="header" class="text-caption" data-results-count data-one={t('listing.results_one')} data-many={t('listing.results_many')}>{t('listing.results_many', { n: listingItems.length })}</p>
+
+    {listingItems.map((item, index) => (
+      <>
+        <li {...attrs(item)}>
+          <DestinationCard href={item.href} name={item.name} image={item.image} imageAlt="" placeholderLabel={t('place.photo_missing')}
+            typeLabel={item.typeLabel} typeEmoji={item.typeEmoji} meta={item.meta} subtitle={item.subtitle} alert={item.alert}
+            tags={item.tags} facts={item.facts} guided={item.guided} cta={item.cta} factsLabel={t('place.facts_label')} />
+        </li>
+        {index === LEAD_AFTER - 1 && (
+          <li class="is-full" data-feed-slot={LEAD_AFTER}>
+            <LeadCapture id="top5" eyebrow={t('lead.eyebrow')} title={t('lead.title')} text={t('lead.text')} action="/api/lead"
+              emailLabel={t('lead.email')} emailPlaceholder={t('lead.email_placeholder')} submitLabel={t('lead.submit')}
+              consentText={t('lead.consent')} privacy={{ label: t('lead.privacy'), href: url.privacy() }}
+              hidden={{ site: 'rivieres-canyons', source: 'listing', magnet: 'top5', page: url.home() }} />
+          </li>
+        )}
+      </>
+    ))}
+    <li hidden data-results-end></li>
+
+    <EmptyState slot="empty" title={t('listing.empty_title')} text={t('listing.empty_text')} hidden>
+      <Button variant="secondary" data-filters-clear>{t('listing.empty_reset')}</Button>
+      {content.guides.map((g) => <Button variant="quiet" href={url.whatsapp(g.id, url.home())} external>{t('listing.empty_ask', { guide: g.first_name })}</Button>)}
+    </EmptyState>
+  </ListingTemplate>
+</SiteLayout>

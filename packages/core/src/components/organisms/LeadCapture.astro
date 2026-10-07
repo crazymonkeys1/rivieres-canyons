@@ -1,0 +1,51 @@
+---
+// L5 LeadCapture: the lead magnet form on a dark panel. E-mail first; explicit consent, never pre-checked, with a link to
+// the privacy page; the button stays disabled until the e-mail is valid and consent is given.
+// Posts to the lead endpoint in the fixed lead format (the endpoint and the later steps come in phase 6).
+import Checkbox from '../atoms/Checkbox.astro';
+interface Props {
+  id: string; eyebrow: string; title: string; text: string; action: string;
+  emailLabel: string; emailPlaceholder: string; submitLabel: string;
+  consentText: string; privacy: { label: string; href: string };
+  hidden: { site: string; source: string; magnet: string; page: string };
+}
+const { id, eyebrow, title, text, action, emailLabel, emailPlaceholder, submitLabel, consentText, privacy, hidden } = Astro.props;
+---
+<section class="lead-capture" aria-labelledby={`${id}-title`}>
+  <p class="text-label is-upper lead-capture__eyebrow">{eyebrow}</p>
+  <h2 class="text-title lead-capture__title" id={`${id}-title`}>{title}</h2>
+  <p class="text-body lead-capture__text">{text}</p>
+  <form class="lead-capture__form" method="post" action={action} data-lead-form novalidate>
+    {Object.entries(hidden).map(([k, v]) => <input type="hidden" name={k} value={v} />)}
+    <input type="hidden" name="consent_text" value={consentText} />
+    <div class="lead-capture__row">
+      <label for={`${id}-email`} class="visually-hidden">{emailLabel}</label>
+      <input class="lead-capture__email text-body" id={`${id}-email`} name="email" type="email" inputmode="email" autocomplete="email" enterkeyhint="send" placeholder={emailPlaceholder} required />
+      <button class="lead-capture__submit text-body is-strong" type="submit" disabled aria-disabled="true" data-lead-submit>{submitLabel}</button>
+    </div>
+    <Checkbox id={`${id}-consent`} name="consent" required onDark>{consentText} <a href={privacy.href} class="lead-capture__privacy">{privacy.label}</a></Checkbox>
+  </form>
+</section>
+<script>
+  for (const form of document.querySelectorAll<HTMLFormElement>('[data-lead-form]')) {
+    const email = form.querySelector<HTMLInputElement>('input[type=email]')!, consent = form.querySelector<HTMLInputElement>('input[name=consent]')!;
+    const submit = form.querySelector<HTMLButtonElement>('[data-lead-submit]')!;
+    const update = () => { const ok = email.validity.valid && email.value.trim() !== '' && consent.checked; submit.disabled = !ok; submit.setAttribute('aria-disabled', String(!ok)); };
+    form.addEventListener('input', update); form.addEventListener('change', update); update();
+  }
+</script>
+<style>
+  .lead-capture { display: grid; gap: var(--space-2); padding: var(--space-6) var(--space-5); background: var(--color-surface-inverse-strong); border-radius: var(--radius-container); color: var(--color-text-inverse); }
+  .lead-capture p, .lead-capture h2 { margin: 0; }
+  .lead-capture__eyebrow { color: var(--color-text-inverse-accent); }
+  .lead-capture__title { color: var(--color-text-inverse); }
+  .lead-capture__text { max-inline-size: var(--container-narrow); color: var(--color-text-inverse-secondary); }
+  .lead-capture__form { display: grid; gap: var(--space-2); margin-block-start: var(--space-2); }
+  .lead-capture__row { --lead-field: 52px; --lead-email-basis: 240px; --lead-button-basis: 160px; display: flex; flex-wrap: wrap; gap: var(--space-2); }
+  .lead-capture__email { flex: 1 1 var(--lead-email-basis); min-block-size: var(--lead-field); padding-inline: var(--space-4); border: 0; border-radius: var(--radius-control); background: var(--color-surface-card); color: var(--color-text-strong); box-shadow: var(--elevation-input); }
+  .lead-capture__email:focus-visible { outline-color: var(--color-focus-ring-inverse); }
+  .lead-capture__submit { flex: 1 1 var(--lead-button-basis); min-block-size: var(--lead-field); border: 0; border-radius: var(--radius-control); background: var(--color-action-primary); color: var(--color-text-inverse); cursor: pointer; }
+  .lead-capture__submit:hover:not(:disabled) { background: var(--color-action-primary-hover); }
+  .lead-capture__submit:disabled { opacity: 0.5; cursor: not-allowed; }
+  .lead-capture__privacy { color: var(--color-text-inverse); text-decoration: underline; }
+</style>

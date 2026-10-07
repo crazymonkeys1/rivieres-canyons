@@ -108,7 +108,7 @@ export const SAFETY_CLAIMS = {
   pattern: /en (toute )?sécurité/i,
   allowed_in: ['offers', 'guides'] as const,
   /** Site texts that describe a guided outing or an operator (copy keys starting with these). */
-  allowed_copy_keys: ['team.operator.'] as const,
+  allowed_copy_keys: ['team.operator.', 'listing.cta_guided'] as const,
 };
 
 /** Sentences on guide-only or closed places that mention a meeting place, reviewed and kept by Jordan (2026-10-07). */
