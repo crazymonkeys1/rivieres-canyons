@@ -10,7 +10,7 @@ import type { Content } from '../src/content/schema';
 const here = dirname(fileURLToPath(import.meta.url));
 const dir = resolve(here, '../content/fixtures');
 const production = process.argv.includes('--production');
-const source = process.argv.find((a) => a.startsWith('--source='))?.slice(9) ?? '`data/*.json` (design migration)';
+const source = process.argv.find((a) => a.startsWith('--source='))?.slice(9) ?? '`content/fixtures/` (written by `content:pull` from Airtable; first filled by the design migration)';
 
 const content = Object.fromEntries(readdirSync(dir).filter((f) => f.endsWith('.json'))
   .map((f) => [f.replace(/\.json$/, ''), JSON.parse(readFileSync(resolve(dir, f), 'utf8'))])) as Content;

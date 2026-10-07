@@ -2,6 +2,8 @@
 // writes normalized fixtures to content/fixtures/ and docs/DESIGN_MIGRATION.md.
 // One-off migration from the prototype: once Airtable is the source (phase 2), the Airtable adapter
 // produces the same fixtures and this script is retired.
+// RETIRED as a source since 2026-10-07: Airtable is the source (content:pull). Running it again (pnpm content:migrate)
+// overwrites content/fixtures/ with the design export; only do that on purpose.
 // The content checks and docs/CONTENT_REPORT.md come from scripts/check-content.ts, which runs right after.
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';

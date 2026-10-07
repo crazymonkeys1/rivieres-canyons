@@ -4,9 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "content:migrate": "tsx scripts/map-fixtures.ts",
-    "content:check": "tsx scripts/map-fixtures.ts && tsx scripts/check-content.ts",
-    "content:check:prod": "tsx scripts/map-fixtures.ts && tsx scripts/check-content.ts --production",
+    "content:migrate": "tsx scripts/map-fixtures.ts && tsx scripts/check-content.ts",
+    "content:check": "tsx scripts/check-content.ts",
+    "content:check:prod": "tsx scripts/check-content.ts --production",
     "airtable:export": "tsx scripts/airtable.ts export",
     "airtable:link": "tsx scripts/airtable.ts link",
     "content:pull": "tsx scripts/airtable.ts pull",
