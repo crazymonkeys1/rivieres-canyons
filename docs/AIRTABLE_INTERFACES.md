@@ -1,5 +1,7 @@
 # Airtable interfaces: step by step
 
+> **Deferred (Jordan, 2026-10-07):** only Orbit edits for now, directly in the base. Build "Mon espace" when the guides start editing.
+
 The two editing screens on top of the base (decisions D1–D6, `docs/AIRTABLE_BASE_DESIGN.md` §4). Airtable's API cannot create interfaces, so they are built by hand, once per site. Same steps for every directory: only the table names change.
 
 - **Orbit · Contenu**: for the Orbit team. Everything, organised by job.
