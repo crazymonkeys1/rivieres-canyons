@@ -1,0 +1,61 @@
+# Airtable jobs, started by hand from the GitHub "Actions" tab (Run workflow).
+# GitHub's servers can reach api.airtable.com; the token stays in the repository's secrets (AIRTABLE_TOKEN).
+name: Airtable
+
+on:
+  workflow_dispatch:
+    inputs:
+      job:
+        description: "What to do"
+        type: choice
+        options:
+          - build-new-base
+          - pull-content
+        default: build-new-base
+      workspace_id:
+        description: "Workspace ID (starts with wsp…), only for build-new-base"
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: airtable
+  cancel-in-progress: false
+
+jobs:
+  airtable:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      AIRTABLE_TOKEN: ${{ secrets.AIRTABLE_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+
+      - name: Build a new base and fill it
+        if: inputs.job == 'build-new-base'
+        env:
+          AIRTABLE_WORKSPACE_ID: ${{ inputs.workspace_id }}
+        run: pnpm --filter rivieres-canyons airtable:build
+
+      - name: Pull the content from Airtable and check it
+        if: inputs.job == 'pull-content'
+        run: |
+          pnpm --filter rivieres-canyons content:pull
+          pnpm --filter rivieres-canyons content:verify
+
+      - name: Save the results to the repository
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add apps/rivieres-canyons/airtable apps/rivieres-canyons/content/fixtures docs/CONTENT_REPORT.md
+          git diff --cached --quiet || git commit -m "Airtable: ${{ inputs.job }} (run ${{ github.run_number }})"
+          git push

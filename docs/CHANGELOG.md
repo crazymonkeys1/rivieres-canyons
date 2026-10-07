@@ -35,6 +35,13 @@ Layer (which projects a rule applies to):
 
 ## Changes
 
+### 2026-10-07 · Airtable base built by a GitHub job
+- **Layer:** Core
+- **Change:** `pnpm airtable:build` creates a new base in a workspace through the Airtable API (tables, typed fields, options, links), writes the content, reads it back and compares, and records the field IDs (`airtable/map.json`) and a report (`airtable/BUILD_REPORT.md`). It refuses to create a second base once `map.json` exists. It runs from GitHub Actions (workflow "Airtable", started by hand), because GitHub can reach Airtable and keeps the token as a secret; the same workflow pulls the content later (`pull-content`). Tested against a simulated Airtable API.
+- **Why:** replaces about 30 minutes of manual CSV import and type conversion; the cloud environment cannot reach api.airtable.com.
+- **How to apply elsewhere:** same workflow and command for every directory; only the token secret and the workspace ID change.
+- **Status:** Rivières & Canyons ⏳ (to run) · Mangrove ⏳ · Template ✅
+
 ### 2026-10-07 · Airtable base: generated from code, criteria as rows, French columns read by ID (decisions D1–D6)
 - **Layer:** Core (Airtable engine: field spec, CSV, round trip, API by field ID; site texts merged with page blocks) · Directory (types, localities and criteria entities; article selections; generic tables) · Places (places table, "Ce qui manque" formula) · Site (table names, `ARTICLE_RULES`, social posts table)
 - **Change:**

@@ -35,9 +35,9 @@ The detailed, always-current list of data gaps is generated in `docs/CONTENT_REP
 
 | # | Action | Who | Opened | Status |
 |---|---|---|---|---|
-| N1 | Create the Airtable base from `apps/rivieres-canyons/airtable/csv/` following `airtable/SPEC.md` §1 | Jordan | 2026-10-07 | open |
-| N2 | Give Claude a personal access token (read records + read schema, this base only) and the base ID | Jordan | 2026-10-07 | open |
-| N3 | Allow `api.airtable.com` in this cloud environment's network settings (Edit environment → Network access → Allowed domains), or run the pull in the Cloudflare build (phase 7) | Jordan | 2026-10-07 | open |
+| N1 | Run the GitHub job "Airtable" → `build-new-base` with the workspace ID (decision 2026-10-07: new base, the old base `appiXWOUutTEdu4PK` stays as an archive) | Jordan | 2026-10-07 | open |
+| N2 | Save a personal access token as the GitHub secret `AIRTABLE_TOKEN` (scopes: records read/write, schema read/write; access: the workspace) | Jordan | 2026-10-07 | open |
+| N3 | ~~Allow `api.airtable.com` in the cloud environment~~: the settings screen fails ("Couldn't update environment"); replaced by the GitHub job, which reaches Airtable | — | 2026-10-07 | replaced |
 | N4 | Build the two interfaces ("Orbit · Contenu", "Mon espace") and invite the guides as interface-only collaborators (SPEC §2, §5) | Jordan + Claude | 2026-10-07 | open |
 
 ## Worth adding (improves SEO, not blocking)

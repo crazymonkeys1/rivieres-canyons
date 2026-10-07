@@ -9,7 +9,9 @@
     "content:check:prod": "tsx scripts/map-fixtures.ts && tsx scripts/check-content.ts --production",
     "airtable:export": "tsx scripts/airtable.ts export",
     "airtable:link": "tsx scripts/airtable.ts link",
-    "content:pull": "tsx scripts/airtable.ts pull"
+    "content:pull": "tsx scripts/airtable.ts pull",
+    "airtable:build": "tsx scripts/airtable.ts build",
+    "content:verify": "tsx scripts/check-content.ts --source=Airtable"
   },
   "dependencies": {
     "@orbit/core": "workspace:*",

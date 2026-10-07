@@ -266,12 +266,8 @@ export async function fetchBase(tables: Table[], map: BaseMap, token: string): P
     const tm = map.tables[t.name]; if (!tm) throw new Error(`table « ${t.name} » absente de airtable.map.json (lancez airtable:link)`);
     const recs: any[] = []; let offset: string | undefined;
     do {
-      const u = new URL(`https://api.airtable.com/v0/${map.base_id}/${tm.id}`);
-      u.searchParams.set('returnFieldsByFieldId', 'true'); u.searchParams.set('pageSize', '100');
-      if (offset) u.searchParams.set('offset', offset);
-      const res = await fetch(u, { headers: { Authorization: `Bearer ${token}` } });
-      if (!res.ok) throw new Error(`Airtable ${t.name} : ${res.status} ${await res.text()}`);
-      const j = await res.json() as any; recs.push(...j.records); offset = j.offset;
+      const j = await api(token, 'GET', `/${map.base_id}/${tm.id}?returnFieldsByFieldId=true&pageSize=100${offset ? `&offset=${offset}` : ''}`);
+      recs.push(...j.records); offset = j.offset;
     } while (offset);
     raw[t.name] = recs;
   }
@@ -297,9 +293,7 @@ export async function fetchBase(tables: Table[], map: BaseMap, token: string): P
 
 /** Matches the base's tables and fields to the spec by name, once. Returns the map and what is missing or extra. */
 export async function linkBase(tables: Table[], baseId: string, token: string) {
-  const res = await fetch(`https://api.airtable.com/v0/meta/bases/${baseId}/tables`, { headers: { Authorization: `Bearer ${token}` } });
-  if (!res.ok) throw new Error(`Airtable meta : ${res.status} ${await res.text()}`);
-  const meta = await res.json() as { tables: { id: string; name: string; fields: { id: string; name: string; type: string }[] }[] };
+  const meta = await api(token, 'GET', `/meta/bases/${baseId}/tables`) as { tables: { id: string; name: string; fields: { id: string; name: string; type: string }[] }[] };
   const map: BaseMap = { base_id: baseId, tables: {} }; const problems: string[] = [];
   for (const t of tables) {
     const mt = meta.tables.find((x) => x.name === t.name);
@@ -313,4 +307,106 @@ export async function linkBase(tables: Table[], baseId: string, token: string) {
     }
   }
   return { map, problems };
+}
+
+// ---------- Building a base through the API (schema + records) ----------
+const API = 'https://api.airtable.com/v0';
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+/** One API call, paced under Airtable's 5 requests/second and retried on 429 / 5xx. */
+export async function api(token: string, method: string, path: string, body?: unknown): Promise<any> {
+  for (let attempt = 0; ; attempt++) {
+    await sleep(250);
+    const res = await fetch(`${API}${path}`, {
+      method, headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+      body: body === undefined ? undefined : JSON.stringify(body),
+    });
+    if (res.ok) return res.json();
+    const text = await res.text();
+    if ((res.status === 429 || res.status >= 500) && attempt < 5) { await sleep(2000 * 2 ** attempt); continue; }
+    throw new Error(`Airtable ${method} ${path}: ${res.status} ${text}`);
+  }
+}
+
+/** Airtable field definition for the create-base / create-field endpoints (links are added afterwards). */
+function fieldDefinition(fd: Field, tableIds: Record<string, string>) {
+  const base = { name: fd.name, type: fd.type, ...(fd.help ? { description: fd.help.slice(0, 20000) } : {}) };
+  switch (fd.type) {
+    case 'number': return { ...base, options: { precision: fd.decimals ?? 0 } };
+    case 'checkbox': return { ...base, options: { icon: 'check', color: 'greenBright' } };
+    case 'date': return { ...base, options: { dateFormat: { name: 'iso' } } };
+    case 'singleSelect': case 'multipleSelects': return { ...base, options: { choices: fd.options!.map((o) => ({ name: o.label })) } };
+    case 'multipleRecordLinks': return { ...base, options: { linkedTableId: tableIds[fd.link!], ...(fd.single ? { prefersSingleRecordLink: true } : {}) } };
+    default: return base;
+  }
+}
+/** Added one by one after the tables exist, so one refused field cannot block the whole base. */
+const later = (fd: Field) => ['multipleRecordLinks', 'singleCollaborator', 'multipleCollaborators', 'multipleAttachments'].includes(fd.type);
+/** Helpers the API cannot create (computed fields, reverse links): left for a person, listed in the report. */
+const manualHelper = (fd: Field) => fd.helper && ['formula', 'count', 'multipleLookupValues', 'multipleRecordLinks'].includes(fd.type);
+
+/**
+ * Creates a new base in a workspace with every table and field of the spec.
+ * Tables are created with their plain fields, then links are added (Airtable creates the reverse link itself).
+ */
+export async function createBase(tables: Table[], workspaceId: string, name: string, token: string) {
+  const problems: string[] = [];
+  const plain = (t: Table) => {
+    const fields = t.fields.filter((fd) => !later(fd) && !manualHelper(fd));
+    const primary = fields.find((fd) => fd.name === t.primary)!;
+    return [primary, ...fields.filter((fd) => fd !== primary)];
+  };
+  const created = await api(token, 'POST', '/meta/bases', {
+    name, workspaceId,
+    tables: tables.map((t) => ({ name: t.name, description: t.about.slice(0, 20000), fields: plain(t).map((fd) => fieldDefinition(fd, {})) })),
+  });
+  const baseId: string = created.id;
+  const tableIds: Record<string, string> = Object.fromEntries(created.tables.map((t: any) => [t.name, t.id]));
+  for (const t of tables)
+    for (const fd of t.fields.filter((x) => later(x) && !manualHelper(x))) {
+      try { await api(token, 'POST', `/meta/bases/${baseId}/tables/${tableIds[t.name]}/fields`, fieldDefinition(fd, tableIds)); }
+      catch (e) { problems.push(`${t.name} · ${fd.name}: ${(e as Error).message}`); }
+    }
+  const manual = tables.flatMap((t) => t.fields.filter((fd) => manualHelper(fd)).map((fd) => ({ table: t.name, field: fd })));
+  return { baseId, tableIds, problems, manual };
+}
+
+/**
+ * Writes logical rows into an empty base: records first (without links), then the links, by record ID.
+ * Values are sent as Airtable shows them (option labels); keys of linked records become record IDs.
+ */
+export async function pushRows(tables: Table[], map: BaseMap, rows: Record<string, Row[]>, codec: Codec, token: string) {
+  const recIds: Record<string, string[]> = {};
+  const byKey: Record<string, Map<string, string>> = {};
+  const value = (fd: Field, v: Cell) => {
+    const out = codec.out(fd, v);
+    if (out === null || out === '' || (Array.isArray(out) && !out.length)) return undefined;
+    return fd.type === 'checkbox' ? (out ? true : undefined) : out;
+  };
+  const batches = <T,>(a: T[]) => Array.from({ length: Math.ceil(a.length / 10) }, (_, i) => a.slice(i * 10, i * 10 + 10));
+  for (const t of tables) {
+    const tm = map.tables[t.name]; const list = rows[t.id] ?? [];
+    const plain = t.fields.filter((fd) => fd.get && fd.type !== 'multipleRecordLinks' && tm.fields[fd.name]);
+    recIds[t.id] = [];
+    for (const chunk of batches(list)) {
+      const res = await api(token, 'POST', `/${map.base_id}/${tm.id}`, {
+        typecast: false,
+        records: chunk.map((row) => ({ fields: Object.fromEntries(plain.map((fd) => [tm.fields[fd.name], value(fd, row[fd.name] ?? null)]).filter(([, v]) => v !== undefined)) })),
+      });
+      recIds[t.id].push(...res.records.map((r: any) => r.id));
+    }
+    if (t.key) byKey[t.name] = new Map(list.map((row, i) => [String(row[t.key!]), recIds[t.id][i]]));
+  }
+  for (const t of tables) {
+    const tm = map.tables[t.name]; const list = rows[t.id] ?? [];
+    const links = t.fields.filter((fd) => fd.get && fd.type === 'multipleRecordLinks' && !fd.helper && tm.fields[fd.name]);
+    if (!links.length) continue;
+    const updates = list.map((row, i) => ({
+      id: recIds[t.id][i],
+      fields: Object.fromEntries(links.map((fd) => [tm.fields[fd.name], ((row[fd.name] as string[] | null) ?? []).map((k) => {
+        const id = byKey[fd.link!]?.get(k); if (!id) throw new Error(`${t.name} · ${fd.name}: « ${k} » not found in ${fd.link}`); return id;
+      })]).filter(([, v]) => (v as string[]).length)),
+    })).filter((u) => Object.keys(u.fields).length);
+    for (const chunk of batches(updates)) await api(token, 'PATCH', `/${map.base_id}/${tm.id}`, { records: chunk });
+  }
+  return Object.fromEntries(Object.entries(recIds).map(([k, v]) => [k, v.length]));
 }
