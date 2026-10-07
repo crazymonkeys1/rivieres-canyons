@@ -1,20 +1,7 @@
 [
   {
-    "key": "canyon",
-    "label": "Canyon",
-    "plural": "Canyons",
-    "icon": "⛰️",
-    "order": 1,
-    "aliases": [],
-    "intro": null,
-    "seo": {
-      "title": null,
-      "description": null
-    }
-  },
-  {
-    "key": "riviere",
     "label": "Rivière",
+    "key": "riviere",
     "plural": "Rivières",
     "icon": "🌊",
     "order": 2,
@@ -26,8 +13,8 @@
     }
   },
   {
-    "key": "cascade",
     "label": "Cascade",
+    "key": "cascade",
     "plural": "Cascades",
     "icon": "💦",
     "order": 3,
@@ -41,8 +28,21 @@
     }
   },
   {
-    "key": "bassin-naturel",
+    "label": "Canyon",
+    "key": "canyon",
+    "plural": "Canyons",
+    "icon": "⛰️",
+    "order": 1,
+    "aliases": [],
+    "intro": null,
+    "seo": {
+      "title": null,
+      "description": null
+    }
+  },
+  {
     "label": "Bassin naturel",
+    "key": "bassin-naturel",
     "plural": "Bassins naturels",
     "icon": "🛁",
     "order": 4,

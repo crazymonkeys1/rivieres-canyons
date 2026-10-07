@@ -1,8 +1,8 @@
 [
   {
+    "first_name": "Pascal",
     "id": "pascal",
     "operator_id": "yalode",
-    "first_name": "Pascal",
     "full_name": "Pascal Proust",
     "photo": "assets/pascal-head.png",
     "role": "brevet d'État canyoning aquarando",
@@ -32,9 +32,9 @@
     "whatsapp": "[WHATSAPP_PASCAL]"
   },
   {
+    "first_name": "Quentin",
     "id": "quentin",
     "operator_id": "wildcanyon",
-    "first_name": "Quentin",
     "full_name": null,
     "photo": "assets/quentin-head.png",
     "role": "DE JEPS Canyoning, cordiste",

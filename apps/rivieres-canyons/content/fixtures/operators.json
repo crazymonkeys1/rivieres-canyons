@@ -1,7 +1,7 @@
 [
   {
-    "id": "yalode",
     "name": "Yalodé",
+    "id": "yalode",
     "brand_color": "#0A8577",
     "logo_url": null,
     "website_url": "https://www.kayak-guadeloupe.fr/",
@@ -12,8 +12,8 @@
     "rating_source": null
   },
   {
-    "id": "wildcanyon",
     "name": "Wild Canyon",
+    "id": "wildcanyon",
     "brand_color": "#3D4AA0",
     "logo_url": "https://wild-canyon.fr/wp-content/uploads/2024/04/wildCanyonLogo.webp",
     "website_url": "https://wild-canyon.fr/",

@@ -1,60 +1,104 @@
 [
   {
-    "id": "acomat",
+    "name": "Randonnée aquatique Acomat – Family",
+    "id": "wc-acomat",
     "status": "published",
-    "operator_id": "yalode",
     "listing_id": "canyon-d-acomat",
-    "is_main": true,
-    "name": "Canyon d'Acomat",
-    "subtitle": "Randonnée aquatique sans rappel, fun et relaxante. Toboggans et sauts contournables, aucune difficulté obligatoire.",
-    "duration_min": 210,
+    "operator_id": "wildcanyon",
+    "is_main": false,
+    "subtitle": "La même rivière qu'Acomat, en formule Wild Canyon : rythme familial, pas de rappel, encadrement sportif.",
+    "duration_min": 180,
     "price_eur": 50,
-    "price_child_eur": null,
-    "child_price_under_age": null,
+    "price_child_eur": 40,
+    "child_price_under_age": 12,
     "price_checked_on": null,
     "criteria": [
       "famille",
       "toboggans-naturels",
-      "bain-de-foret",
-      "petit-groupe"
+      "formule-family"
     ],
     "facts": {
       "level": "facile",
       "spirit": "decouverte",
       "min_age": 8,
+      "approach_min": 20
+    },
+    "highlights": [
+      "Randonner dans le lit de la rivière entre nage, marche et petits sauts.",
+      "Glisser sur des toboggans naturels en toute sécurité.",
+      "Profiter d'un cadre tropical accessible dès 8 ans."
+    ],
+    "included": [
+      "Combinaison néoprène",
+      "Casque",
+      "Baudrier"
+    ],
+    "to_bring": [
+      "Chaussures de sport fermées",
+      "Maillot de bain",
+      "Serviette",
+      "Bouteille d'eau"
+    ],
+    "meeting_note": null,
+    "guide_tip": "C'est le canyon idéal pour une première sortie en famille : personne n'est mis en difficulté.",
+    "guide_story": "Pour une première sortie en famille, Acomat est idéal : on nage, on glisse, on saute un peu, et personne n'est mis en difficulté.",
+    "guide_story_status": "draft",
+    "on_site_since": null
+  },
+  {
+    "name": "Canyon Ferry – Journée sensation",
+    "id": "wc-ferry",
+    "status": "published",
+    "listing_id": "canyon-ferry",
+    "operator_id": "wildcanyon",
+    "is_main": true,
+    "subtitle": "Une journée orientée sensations : sauts plus engagés, rappels enchaînés et progression continue dans la gorge.",
+    "duration_min": 360,
+    "price_eur": 70,
+    "price_child_eur": null,
+    "child_price_under_age": null,
+    "price_checked_on": null,
+    "criteria": [
+      "rappel",
+      "sauts-engages",
+      "rappels-enchaines",
+      "journee-entiere"
+    ],
+    "facts": {
+      "level": "sportif",
+      "spirit": "sensations",
+      "min_age": 14,
       "approach_min": 25
     },
     "highlights": [
-      "Explorer les parties les plus inaccessibles des canyons des Mamelles : marche, nage, saut, floating.",
-      "Glisser sur les toboggans naturels creusés dans la roche.",
-      "Vous imprégner de l'atmosphère de la forêt avec tous vos sens (initiation au bain Shinrin Yoku).",
-      "Partager des moments extras avec vos proches, loin des foules."
+      "Enchaîner plusieurs rappels dans une gorge resserrée.",
+      "Sauter depuis des hauteurs plus engagées, toujours sécurisées.",
+      "Ressentir l'adrénaline dans un décor spectaculaire."
     ],
     "included": [
-      "Gilet de sauvetage",
-      "Shorty néoprène",
+      "Baudrier et cordes",
       "Casque",
-      "Culotte de glisse",
-      "Verre de l'amitié"
+      "Combinaison néoprène",
+      "Sac de canyon"
     ],
     "to_bring": [
-      "Chaussures de sport",
-      "Maillot de bain",
-      "Cordon à lunettes"
+      "Chaussures de sport fermées",
+      "Repas complet",
+      "Vêtements de rechange"
     ],
     "meeting_note": null,
-    "guide_tip": "C'est le canyon que je fais découvrir depuis 2012 : tout est contournable, donc personne ne reste au bord.",
-    "guide_story": "Acomat, c'est la rivière où tout le monde trouve sa place : les toboggans et les sauts se contournent, l'eau est claire et la forêt vient jusqu'au bord. Je l'ai choisie pour les familles parce qu'on peut vraiment en profiter sans se mettre en difficulté.",
+    "guide_tip": "Ferry, c'est pour ceux qui ont déjà goûté au canyoning et qui veulent plus de sensations.",
+    "guide_story": "Ferry, c'est pour ceux qui ont déjà goûté au canyoning et qui en veulent plus : des rappels qui s'enchaînent et des sauts plus engagés dans une gorge resserrée.",
     "guide_story_status": "draft",
-    "on_site_since": 2012
+    "on_site_since": null
   },
   {
+    "name": "Canyon doré",
     "id": "dore",
     "status": "published",
-    "operator_id": "yalode",
     "listing_id": "canyon-dore",
+    "operator_id": "yalode",
     "is_main": true,
-    "name": "Canyon doré",
     "subtitle": "Un parcours mythique et très sauvage en forêt primaire. Sans rappel, mais marche d'approche difficile de +700 m de dénivelé.",
     "duration_min": 330,
     "price_eur": 70,
@@ -98,104 +142,108 @@
     "on_site_since": null
   },
   {
-    "id": "wc-acomat",
+    "name": "Canyon d'Acomat",
+    "id": "acomat",
     "status": "published",
-    "operator_id": "wildcanyon",
     "listing_id": "canyon-d-acomat",
-    "is_main": false,
-    "name": "Randonnée aquatique Acomat – Family",
-    "subtitle": "La même rivière qu'Acomat, en formule Wild Canyon : rythme familial, pas de rappel, encadrement sportif.",
-    "duration_min": 180,
+    "operator_id": "yalode",
+    "is_main": true,
+    "subtitle": "Randonnée aquatique sans rappel, fun et relaxante. Toboggans et sauts contournables, aucune difficulté obligatoire.",
+    "duration_min": 210,
     "price_eur": 50,
-    "price_child_eur": 40,
-    "child_price_under_age": 12,
+    "price_child_eur": null,
+    "child_price_under_age": null,
     "price_checked_on": null,
     "criteria": [
       "famille",
       "toboggans-naturels",
-      "formule-family"
+      "bain-de-foret",
+      "petit-groupe"
     ],
     "facts": {
       "level": "facile",
       "spirit": "decouverte",
       "min_age": 8,
-      "approach_min": 20
+      "approach_min": 25
     },
     "highlights": [
-      "Randonner dans le lit de la rivière entre nage, marche et petits sauts.",
-      "Glisser sur des toboggans naturels en toute sécurité.",
-      "Profiter d'un cadre tropical accessible dès 8 ans."
+      "Explorer les parties les plus inaccessibles des canyons des Mamelles : marche, nage, saut, floating.",
+      "Glisser sur les toboggans naturels creusés dans la roche.",
+      "Vous imprégner de l'atmosphère de la forêt avec tous vos sens (initiation au bain Shinrin Yoku).",
+      "Partager des moments extras avec vos proches, loin des foules."
     ],
     "included": [
-      "Combinaison néoprène",
+      "Gilet de sauvetage",
+      "Shorty néoprène",
       "Casque",
-      "Baudrier"
+      "Culotte de glisse",
+      "Verre de l'amitié"
     ],
     "to_bring": [
-      "Chaussures de sport fermées",
+      "Chaussures de sport",
       "Maillot de bain",
-      "Serviette",
-      "Bouteille d'eau"
+      "Cordon à lunettes"
     ],
     "meeting_note": null,
-    "guide_tip": "C'est le canyon idéal pour une première sortie en famille : personne n'est mis en difficulté.",
-    "guide_story": "Pour une première sortie en famille, Acomat est idéal : on nage, on glisse, on saute un peu, et personne n'est mis en difficulté.",
+    "guide_tip": "C'est le canyon que je fais découvrir depuis 2012 : tout est contournable, donc personne ne reste au bord.",
+    "guide_story": "Acomat, c'est la rivière où tout le monde trouve sa place : les toboggans et les sauts se contournent, l'eau est claire et la forêt vient jusqu'au bord. Je l'ai choisie pour les familles parce qu'on peut vraiment en profiter sans se mettre en difficulté.",
     "guide_story_status": "draft",
-    "on_site_since": null
+    "on_site_since": 2012
   },
   {
-    "id": "wc-bourceau-decouverte",
+    "name": "Canyon Bois Malaisé – Journée sportif",
+    "id": "wc-boismalaise",
     "status": "published",
+    "listing_id": "canyon-bois-malaise",
     "operator_id": "wildcanyon",
-    "listing_id": "riviere-bourceau",
     "is_main": true,
-    "name": "Canyon Bourceau – Demi-journée découverte",
-    "subtitle": "Une demi-journée pour découvrir le canyoning technique : quelques sauts et un rappel encadré, sans excès.",
-    "duration_min": 270,
-    "price_eur": 60,
-    "price_child_eur": 50,
-    "child_price_under_age": 12,
+    "subtitle": "Le parcours le plus engagé de Wild Canyon : rappels hauts, progression technique, réservé aux pratiquants en forme.",
+    "duration_min": 390,
+    "price_eur": 85,
+    "price_child_eur": null,
+    "child_price_under_age": null,
     "price_checked_on": null,
     "criteria": [
       "rappel",
-      "initiation-technique",
-      "demi-journee",
-      "rappel-encadre"
+      "rappels-hauts",
+      "experience-requise",
+      "journee-entiere"
     ],
     "facts": {
-      "level": "sportif",
-      "spirit": "decouverte",
-      "min_age": 12,
-      "approach_min": 30
+      "level": "engage",
+      "spirit": "sensations",
+      "min_age": 16,
+      "approach_min": 45
     },
     "highlights": [
-      "Descendre votre premier rappel encadré par un cordiste professionnel.",
-      "Enchaîner quelques sauts contournables dans une gorge encaissée.",
-      "Découvrir les techniques de progression du canyoning sportif."
+      "Descendre les rappels les plus hauts du parcours Wild Canyon.",
+      "Progresser en autonomie encadrée dans une gorge exigeante.",
+      "Terminer la journée avec le sentiment d'avoir vécu une vraie aventure sportive."
     ],
     "included": [
-      "Baudrier et corde",
+      "Baudrier et cordes",
       "Casque",
-      "Combinaison néoprène"
+      "Combinaison néoprène 5 mm",
+      "Sac de canyon"
     ],
     "to_bring": [
-      "Chaussures de sport fermées",
-      "Maillot de bain",
-      "En-cas"
+      "Chaussures de canyon",
+      "Repas complet",
+      "Vêtements de rechange"
     ],
     "meeting_note": null,
-    "guide_tip": "Le bon format pour tester le rappel sans s'engager sur une journée entière.",
-    "guide_story": "Bourceau est la bonne porte d'entrée vers le canyoning technique : quelques sauts, un premier rappel, dans une gorge encaissée où l'on apprend vite.",
+    "guide_tip": "Bois Malaisé, c'est notre journée la plus exigeante : venez si vous pratiquez déjà un sport d'endurance.",
+    "guide_story": "Bois Malaisé est notre journée la plus exigeante : des rappels hauts et une progression technique. On y va quand on a déjà le goût de l'effort.",
     "guide_story_status": "draft",
     "on_site_since": null
   },
   {
+    "name": "Canyon Bourceau – Journée family",
     "id": "wc-bourceau-family",
     "status": "published",
-    "operator_id": "wildcanyon",
     "listing_id": "riviere-bourceau",
+    "operator_id": "wildcanyon",
     "is_main": false,
-    "name": "Canyon Bourceau – Journée family",
     "subtitle": "Une journée complète sur le même canyon, avec pause pique-nique et davantage de temps pour profiter des vasques.",
     "duration_min": 390,
     "price_eur": 75,
@@ -237,96 +285,48 @@
     "on_site_since": null
   },
   {
-    "id": "wc-ferry",
+    "name": "Canyon Bourceau – Demi-journée découverte",
+    "id": "wc-bourceau-decouverte",
     "status": "published",
+    "listing_id": "riviere-bourceau",
     "operator_id": "wildcanyon",
-    "listing_id": "canyon-ferry",
     "is_main": true,
-    "name": "Canyon Ferry – Journée sensation",
-    "subtitle": "Une journée orientée sensations : sauts plus engagés, rappels enchaînés et progression continue dans la gorge.",
-    "duration_min": 360,
-    "price_eur": 70,
-    "price_child_eur": null,
-    "child_price_under_age": null,
+    "subtitle": "Une demi-journée pour découvrir le canyoning technique : quelques sauts et un rappel encadré, sans excès.",
+    "duration_min": 270,
+    "price_eur": 60,
+    "price_child_eur": 50,
+    "child_price_under_age": 12,
     "price_checked_on": null,
     "criteria": [
       "rappel",
-      "sauts-engages",
-      "rappels-enchaines",
-      "journee-entiere"
+      "initiation-technique",
+      "demi-journee",
+      "rappel-encadre"
     ],
     "facts": {
       "level": "sportif",
-      "spirit": "sensations",
-      "min_age": 14,
-      "approach_min": 25
+      "spirit": "decouverte",
+      "min_age": 12,
+      "approach_min": 30
     },
     "highlights": [
-      "Enchaîner plusieurs rappels dans une gorge resserrée.",
-      "Sauter depuis des hauteurs plus engagées, toujours sécurisées.",
-      "Ressentir l'adrénaline dans un décor spectaculaire."
+      "Descendre votre premier rappel encadré par un cordiste professionnel.",
+      "Enchaîner quelques sauts contournables dans une gorge encaissée.",
+      "Découvrir les techniques de progression du canyoning sportif."
     ],
     "included": [
-      "Baudrier et cordes",
+      "Baudrier et corde",
       "Casque",
-      "Combinaison néoprène",
-      "Sac de canyon"
+      "Combinaison néoprène"
     ],
     "to_bring": [
       "Chaussures de sport fermées",
-      "Repas complet",
-      "Vêtements de rechange"
+      "Maillot de bain",
+      "En-cas"
     ],
     "meeting_note": null,
-    "guide_tip": "Ferry, c'est pour ceux qui ont déjà goûté au canyoning et qui veulent plus de sensations.",
-    "guide_story": "Ferry, c'est pour ceux qui ont déjà goûté au canyoning et qui en veulent plus : des rappels qui s'enchaînent et des sauts plus engagés dans une gorge resserrée.",
-    "guide_story_status": "draft",
-    "on_site_since": null
-  },
-  {
-    "id": "wc-boismalaise",
-    "status": "published",
-    "operator_id": "wildcanyon",
-    "listing_id": "canyon-bois-malaise",
-    "is_main": true,
-    "name": "Canyon Bois Malaisé – Journée sportif",
-    "subtitle": "Le parcours le plus engagé de Wild Canyon : rappels hauts, progression technique, réservé aux pratiquants en forme.",
-    "duration_min": 390,
-    "price_eur": 85,
-    "price_child_eur": null,
-    "child_price_under_age": null,
-    "price_checked_on": null,
-    "criteria": [
-      "rappel",
-      "rappels-hauts",
-      "experience-requise",
-      "journee-entiere"
-    ],
-    "facts": {
-      "level": "engage",
-      "spirit": "sensations",
-      "min_age": 16,
-      "approach_min": 45
-    },
-    "highlights": [
-      "Descendre les rappels les plus hauts du parcours Wild Canyon.",
-      "Progresser en autonomie encadrée dans une gorge exigeante.",
-      "Terminer la journée avec le sentiment d'avoir vécu une vraie aventure sportive."
-    ],
-    "included": [
-      "Baudrier et cordes",
-      "Casque",
-      "Combinaison néoprène 5 mm",
-      "Sac de canyon"
-    ],
-    "to_bring": [
-      "Chaussures de canyon",
-      "Repas complet",
-      "Vêtements de rechange"
-    ],
-    "meeting_note": null,
-    "guide_tip": "Bois Malaisé, c'est notre journée la plus exigeante : venez si vous pratiquez déjà un sport d'endurance.",
-    "guide_story": "Bois Malaisé est notre journée la plus exigeante : des rappels hauts et une progression technique. On y va quand on a déjà le goût de l'effort.",
+    "guide_tip": "Le bon format pour tester le rappel sans s'engager sur une journée entière.",
+    "guide_story": "Bourceau est la bonne porte d'entrée vers le canyoning technique : quelques sauts, un premier rappel, dans une gorge encaissée où l'on apprend vite.",
     "guide_story_status": "draft",
     "on_site_since": null
   }

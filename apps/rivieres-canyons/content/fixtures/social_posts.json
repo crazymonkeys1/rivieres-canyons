@@ -1,16 +1,5 @@
 [
   {
-    "id": "cascade-aux-ecrevisses-1",
-    "listing_id": "cascade-aux-ecrevisses",
-    "platform": "Facebook",
-    "url": "https://www.facebook.com/AIRVACANCESOFFICIEL/videos/-cascade-aux-%C3%A9crevisses-lun-des-tr%C3%A9sors-les-plus-accessibles-de-guadeloupela-cas/2517102392093608/",
-    "youtube_id": null,
-    "thumbnail_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Cascade%20aux%20%C3%A9crevisses%20(Guadeloupe).jpg",
-    "account": "Air Vacances",
-    "title": "L'un des trésors les plus accessibles de Guadeloupe",
-    "duration_sec": 26
-  },
-  {
     "id": "cascade-aux-ecrevisses-2",
     "listing_id": "cascade-aux-ecrevisses",
     "platform": "Instagram",
@@ -20,6 +9,17 @@
     "account": null,
     "title": "Baignade au pied de la cascade",
     "duration_sec": null
+  },
+  {
+    "id": "cascade-aux-ecrevisses-1",
+    "listing_id": "cascade-aux-ecrevisses",
+    "platform": "Facebook",
+    "url": "https://www.facebook.com/AIRVACANCESOFFICIEL/videos/-cascade-aux-%C3%A9crevisses-lun-des-tr%C3%A9sors-les-plus-accessibles-de-guadeloupela-cas/2517102392093608/",
+    "youtube_id": null,
+    "thumbnail_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Cascade%20aux%20%C3%A9crevisses%20(Guadeloupe).jpg",
+    "account": "Air Vacances",
+    "title": "L'un des trésors les plus accessibles de Guadeloupe",
+    "duration_sec": 26
   },
   {
     "id": "cascade-aux-ecrevisses-3",

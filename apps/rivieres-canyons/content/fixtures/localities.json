@@ -1,7 +1,7 @@
 [
   {
-    "key": "petit-bourg",
     "name": "Petit-Bourg",
+    "key": "petit-bourg",
     "area": "Basse-Terre",
     "intro": null,
     "seo": {
@@ -10,58 +10,8 @@
     }
   },
   {
-    "key": "lamentin",
-    "name": "Lamentin",
-    "area": "Basse-Terre",
-    "intro": null,
-    "seo": {
-      "title": null,
-      "description": null
-    }
-  },
-  {
-    "key": "sainte-rose",
-    "name": "Sainte-Rose",
-    "area": "Basse-Terre",
-    "intro": null,
-    "seo": {
-      "title": null,
-      "description": null
-    }
-  },
-  {
-    "key": "capesterre-belle-eau",
-    "name": "Capesterre-Belle-Eau",
-    "area": "Basse-Terre",
-    "intro": null,
-    "seo": {
-      "title": null,
-      "description": null
-    }
-  },
-  {
-    "key": "goyave",
-    "name": "Goyave",
-    "area": "Basse-Terre",
-    "intro": null,
-    "seo": {
-      "title": null,
-      "description": null
-    }
-  },
-  {
-    "key": "pointe-noire",
-    "name": "Pointe-Noire",
-    "area": "Basse-Terre",
-    "intro": null,
-    "seo": {
-      "title": null,
-      "description": null
-    }
-  },
-  {
-    "key": "bouillante",
     "name": "Bouillante",
+    "key": "bouillante",
     "area": "Basse-Terre",
     "intro": null,
     "seo": {
@@ -70,8 +20,58 @@
     }
   },
   {
-    "key": "vieux-habitants",
+    "name": "Pointe-Noire",
+    "key": "pointe-noire",
+    "area": "Basse-Terre",
+    "intro": null,
+    "seo": {
+      "title": null,
+      "description": null
+    }
+  },
+  {
+    "name": "Goyave",
+    "key": "goyave",
+    "area": "Basse-Terre",
+    "intro": null,
+    "seo": {
+      "title": null,
+      "description": null
+    }
+  },
+  {
+    "name": "Lamentin",
+    "key": "lamentin",
+    "area": "Basse-Terre",
+    "intro": null,
+    "seo": {
+      "title": null,
+      "description": null
+    }
+  },
+  {
     "name": "Vieux-Habitants",
+    "key": "vieux-habitants",
+    "area": "Basse-Terre",
+    "intro": null,
+    "seo": {
+      "title": null,
+      "description": null
+    }
+  },
+  {
+    "name": "Capesterre-Belle-Eau",
+    "key": "capesterre-belle-eau",
+    "area": "Basse-Terre",
+    "intro": null,
+    "seo": {
+      "title": null,
+      "description": null
+    }
+  },
+  {
+    "name": "Sainte-Rose",
+    "key": "sainte-rose",
     "area": "Basse-Terre",
     "intro": null,
     "seo": {
