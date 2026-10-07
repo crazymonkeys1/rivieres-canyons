@@ -7,7 +7,7 @@
 //   pnpm airtable:link     once the base exists: matches its tables and fields to the spec, saves their IDs
 //                          in airtable/map.json (needs AIRTABLE_TOKEN and AIRTABLE_BASE_ID)
 //   pnpm content:pull      reads the base through the API into content/fixtures/, then run the content checks
-import { readFileSync, writeFileSync, mkdirSync, readdirSync, rmSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, appendFileSync, mkdirSync, readdirSync, rmSync, existsSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { Codec, writeCsv, readCsv, checkImportable, fetchBase, linkBase, createBase, pushRows, type Row, type Table, type Field, type BaseMap } from '@orbit/core/airtable';
@@ -154,17 +154,19 @@ async function main() {
     if (errors.length) process.exit(1);
     return;
   }
-  const token = process.env.AIRTABLE_TOKEN, baseId = process.env.AIRTABLE_BASE_ID;
-  if (!token) throw new Error('AIRTABLE_TOKEN is missing');
+  const token = process.env.AIRTABLE_TOKEN?.trim(), baseId = process.env.AIRTABLE_BASE_ID;
   const mapFile = resolve(outDir, 'map.json');
   if (cmd === 'build') {
-    const workspaceId = process.env.AIRTABLE_WORKSPACE_ID?.trim();
-    if (!workspaceId?.startsWith('wsp')) throw new Error('AIRTABLE_WORKSPACE_ID is missing or does not start with "wsp"');
-    if (existsSync(mapFile) && !process.argv.includes('--force'))
-      throw new Error(`airtable/map.json already names base ${JSON.parse(readFileSync(mapFile, 'utf8')).base_id}: refusing to create a second one (use --force)`);
-    const name = process.env.AIRTABLE_BASE_NAME?.trim() || 'Rivières & Canyons — Contenu';
-    const content = readFixtures();
     const errors: string[] = [], log: string[] = [];
+    // Accept the bare ID or a pasted Airtable link: keep the wsp… part.
+    const workspaceId = process.env.AIRTABLE_WORKSPACE_ID?.match(/wsp[A-Za-z0-9]{14}/)?.[0];
+    const name = process.env.AIRTABLE_BASE_NAME?.trim() || 'Rivières & Canyons — Contenu';
+    if (!token) errors.push('The GitHub secret AIRTABLE_TOKEN is missing or empty (Settings → Secrets and variables → Actions → New repository secret, name exactly AIRTABLE_TOKEN).');
+    else if (!token.startsWith('pat')) errors.push('The secret AIRTABLE_TOKEN does not look like an Airtable personal access token (it should start with "pat").');
+    if (!workspaceId) errors.push(`No workspace ID found in "${process.env.AIRTABLE_WORKSPACE_ID ?? ''}": paste the ID that starts with "wsp" (or the whole link of the workspace page).`);
+    if (existsSync(mapFile) && !process.argv.includes('--force'))
+      errors.push(`airtable/map.json already names base ${JSON.parse(readFileSync(mapFile, 'utf8')).base_id}: refusing to create a second base.`);
+    const content = readFixtures();
     const logical = toTables(content);
     const codec = new Codec(TABLES, logical, errors);
     const report = (status: string, baseId?: string) => writeFileSync(resolve(outDir, 'BUILD_REPORT.md'), `# Airtable build report
@@ -173,17 +175,18 @@ Run on ${new Date().toISOString().slice(0, 16).replace('T', ' ')} UTC by \`pnpm 
 ${baseId ? `\nBase: **${name}** · ID \`${baseId}\` · https://airtable.com/${baseId}\n` : ''}
 ${log.map((l) => `- ${l}`).join('\n')}
 ${errors.length ? `\n## Problems\n${errors.map((e) => `- ${e}`).join('\n')}\n` : ''}`);
+    if (errors.length) { report('not started'); finish(); }
     try {
-      const { baseId, problems, manual } = await createBase(TABLES, workspaceId, name, token);
+      const { baseId, problems, manual } = await createBase(TABLES, workspaceId!, name, token!);
       errors.push(...problems);
       log.push(`Base created with ${TABLES.length} tables.`);
-      const linked = await linkBase(TABLES, baseId, token);
+      const linked = await linkBase(TABLES, baseId, token!);
       writeFileSync(mapFile, JSON.stringify(linked.map, null, 2) + '\n');
       errors.push(...linked.problems);
-      const counts = await pushRows(TABLES, linked.map, logical, codec, token);
+      const counts = await pushRows(TABLES, linked.map, logical, codec, token!);
       log.push(`Rows written: ${TABLES.map((t) => `${t.name} ${counts[t.id]}`).join(' · ')}.`);
       // Read everything back through the API and compare with the content we sent.
-      const back = build(toLogical(await fetchBase(TABLES, linked.map, token), errors), errors);
+      const back = build(toLogical(await fetchBase(TABLES, linked.map, token!), errors), errors);
       const diff = back && firstDiff(content, back);
       if (diff) errors.push(`read-back differs at ${diff}`);
       else if (back) log.push('Read back through the API: identical to the content sent.');
@@ -194,10 +197,16 @@ ${errors.length ? `\n## Problems\n${errors.map((e) => `- ${e}`).join('\n')}\n` :
       errors.push((e as Error).message);
       report('failed');
     }
-    console.log(readFileSync(resolve(outDir, 'BUILD_REPORT.md'), 'utf8'));
-    if (errors.length) process.exit(1);
-    return;
+    finish();
+    function finish(): never {
+      const text = readFileSync(resolve(outDir, 'BUILD_REPORT.md'), 'utf8');
+      console.log(text);
+      // Shown on the run's page in GitHub.
+      if (process.env.GITHUB_STEP_SUMMARY) appendFileSync(process.env.GITHUB_STEP_SUMMARY, text);
+      process.exit(errors.length ? 1 : 0);
+    }
   }
+  if (!token) throw new Error('AIRTABLE_TOKEN is missing');
   if (cmd === 'link') {
     if (!baseId) throw new Error('AIRTABLE_BASE_ID is missing');
     const { map, problems } = await linkBase(TABLES, baseId, token);
