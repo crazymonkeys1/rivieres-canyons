@@ -104,7 +104,12 @@ export const LANDING: { min: number; dimensions: LandingDimension[] } = {
 };
 
 /** Where safety claims ("en sécurité", "en toute sécurité") are allowed (decision 2026-10-07): guided content only. */
-export const SAFETY_CLAIMS = { pattern: /en (toute )?sécurité/i, allowed_in: ['offers', 'guides'] as const };
+export const SAFETY_CLAIMS = {
+  pattern: /en (toute )?sécurité/i,
+  allowed_in: ['offers', 'guides'] as const,
+  /** Site texts that describe a guided outing or an operator (copy keys starting with these). */
+  allowed_copy_keys: ['team.operator.'] as const,
+};
 
 /** Sentences on guide-only or closed places that mention a meeting place, reviewed and kept by Jordan (2026-10-07). */
 export const ALLOWED_MEETING_MENTIONS = ["Le rendez-vous se fait au parking du Saut d'Acomat."];

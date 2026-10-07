@@ -13,6 +13,7 @@ on:
           - build-new-base
           - reset-and-refill-base
           - pull-content
+          - fetch-photos
         default: verify-base
       workspace_id:
         description: "Workspace ID (starts with wsp…) or the link of the workspace page, only for build-new-base"
@@ -67,12 +68,17 @@ jobs:
         run: |
           pnpm --filter rivieres-canyons content:pull
           pnpm --filter rivieres-canyons content:verify
+          pnpm --filter rivieres-canyons photos:fetch
+
+      - name: Download the photos (the site serves its own copies)
+        if: inputs.job == 'fetch-photos'
+        run: pnpm --filter rivieres-canyons photos:fetch
 
       - name: Save the results to the repository
         if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
-          git add apps/rivieres-canyons/airtable apps/rivieres-canyons/content/fixtures docs/CONTENT_REPORT.md
+          git add apps/rivieres-canyons/airtable apps/rivieres-canyons/content/fixtures apps/rivieres-canyons/src/assets/photos apps/rivieres-canyons/src/assets/logos docs/CONTENT_REPORT.md
           git diff --cached --quiet || git commit -m "Airtable: ${{ inputs.job }} (run ${{ github.run_number }})"
           git push

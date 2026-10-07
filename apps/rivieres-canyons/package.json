@@ -15,7 +15,8 @@
     "airtable:reset": "tsx scripts/airtable.ts reset",
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "photos:fetch": "tsx scripts/fetch-photos.ts"
   },
   "dependencies": {
     "@orbit/core": "workspace:*",

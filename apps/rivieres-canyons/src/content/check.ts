@@ -4,6 +4,7 @@ import { findPlaceholders, completeness } from '@orbit/core/content';
 import { landingPages, criteriaDimension } from '@orbit/directory/content';
 import { contentSchema, type Content } from './schema';
 import { COMPLETENESS, LANDING, SAFETY_CLAIMS, ARTICLE_RULES, ALLOWED_MEETING_MENTIONS } from './site.config';
+import { COPY_DEFAULTS } from './copy';
 
 /** Every string in a value, with its path. */
 function findText(value: unknown, path = ''): { path: string; text: string }[] {
@@ -75,6 +76,11 @@ export function checkContent(c: Content) {
   const checked = Object.fromEntries(Object.entries(c).filter(([k]) => !(SAFETY_CLAIMS.allowed_in as readonly string[]).includes(k)));
   for (const { path, text } of findText(checked).filter(({ text }) => SAFETY_CLAIMS.pattern.test(text)))
     errors.push(`safety claim outside guided-outing content: \`${path}\`: "${short(text)}"`);
+  // Site texts: the defaults in copy.ts and the Airtable rows that replace them.
+  const siteTexts = { ...COPY_DEFAULTS, ...Object.fromEntries(c.copy.filter((x) => x.text).map((x) => [x.key, x.text])) } as Record<string, string>;
+  for (const [key, text] of Object.entries(siteTexts))
+    if (SAFETY_CLAIMS.pattern.test(text) && !SAFETY_CLAIMS.allowed_copy_keys.some((p) => key.startsWith(p)))
+      errors.push(`safety claim outside guided-outing content: site text \`${key}\`: "${short(text)}"`);
 
   // Production readiness
   const prod: string[] = [];
