@@ -1,0 +1,28 @@
+# Runs on every push: design rules, content checks, Airtable round trip, and the site build.
+name: Checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Design rules (CLAUDE.md §6.12)
+        run: pnpm design:check
+      - name: Content checks
+        run: pnpm --filter rivieres-canyons content:check
+      - name: Airtable spec and round trip
+        run: pnpm --filter rivieres-canyons airtable:export
+      - name: Build the site
+        run: pnpm build

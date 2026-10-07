@@ -1,0 +1,14 @@
+---
+// L3 TextLink: a link in text. "action" = the one link style for actions (accent underline); "quiet" = plain, underline on hover.
+import Icon from './Icon.astro';
+interface Props { href: string; emphasis?: 'action' | 'quiet'; external?: boolean; arrow?: boolean; standalone?: boolean; class?: string }
+const { href, emphasis = 'action', external, arrow, standalone, class: cls } = Astro.props;
+---
+<a href={href} class:list={['text-link', `text-link--${emphasis}`, emphasis === 'action' ? 'link text-body' : 'text-caption', { 'text-link--standalone': standalone }, cls]}
+  {...(external ? { target: '_blank', rel: 'noopener' } : {})}><slot />{arrow && <Icon name="arrow-right" size={15} />}</a>
+<style>
+  .text-link { display: inline-flex; align-items: center; gap: var(--space-1); }
+  .text-link--quiet { color: var(--color-brand); }
+  .text-link--quiet:hover { color: var(--color-brand-hover); text-decoration: underline; }
+  .text-link--standalone { min-block-size: var(--tap-size-min); }
+</style>

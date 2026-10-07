@@ -1,0 +1,16 @@
+---
+// L4 SectionHeader: the H2 of a section (with its id, for anchors and SEO), and an overline only when it adds a category.
+interface Props { id: string; title: string; eyebrow?: string; level?: 2 | 3 }
+const { id, title, eyebrow, level = 2 } = Astro.props;
+const Heading = `h${level}` as 'h2' | 'h3';
+---
+<header class="section-header">
+  {eyebrow && <p class="text-label is-upper section-header__eyebrow">{eyebrow}</p>}
+  <Heading id={id} class:list={[level === 2 ? 'text-heading' : 'text-subheading', 'section-header__title']}>{title}</Heading>
+  <slot />
+</header>
+<style>
+  .section-header { display: grid; gap: var(--space-2); margin-block-end: var(--space-4); }
+  .section-header__eyebrow { margin: 0; color: var(--color-brand); }
+  .section-header__title { margin: 0; color: var(--color-text-strong); }
+</style>

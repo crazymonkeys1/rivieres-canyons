@@ -1,0 +1,176 @@
+---
+// The living style guide: every token, text style, atom and molecule, in every state. Shown inside
+// /style-guide/ at 360, 480 and 1024 px. Development page: noindex, left out of the sitemap.
+import Document from '../../components/styleguide/Document.astro';
+import Specimen from '../../components/styleguide/Specimen.astro';
+import TokenTable from '../../components/styleguide/TokenTable.astro';
+import Button from '@orbit/core/components/atoms/Button.astro';
+import TextLink from '@orbit/core/components/atoms/TextLink.astro';
+import Avatar from '@orbit/core/components/atoms/Avatar.astro';
+import Badge from '@orbit/core/components/atoms/Badge.astro';
+import Tag from '@orbit/core/components/atoms/Tag.astro';
+import FilterOption from '@orbit/core/components/atoms/FilterOption.astro';
+import Icon from '@orbit/core/components/atoms/Icon.astro';
+import { ICONS } from '@orbit/core/components/atoms/icons';
+import Divider from '@orbit/core/components/atoms/Divider.astro';
+import Rating from '@orbit/core/components/atoms/Rating.astro';
+import TextInput from '@orbit/core/components/atoms/TextInput.astro';
+import Checkbox from '@orbit/core/components/atoms/Checkbox.astro';
+import Toggle from '@orbit/core/components/atoms/Toggle.astro';
+import Select from '@orbit/core/components/atoms/Select.astro';
+import FactCell from '@orbit/core/components/molecules/FactCell.astro';
+import KeyFact from '@orbit/core/components/molecules/KeyFact.astro';
+import Price from '@orbit/core/components/molecules/Price.astro';
+import Breadcrumb from '@orbit/core/components/molecules/Breadcrumb.astro';
+import Tooltip from '@orbit/core/components/molecules/Tooltip.astro';
+import Disclosure from '@orbit/core/components/molecules/Disclosure.astro';
+import FilterOptionGroup from '@orbit/core/components/molecules/FilterOptionGroup.astro';
+import SearchField from '@orbit/core/components/molecules/SearchField.astro';
+import Quote from '@orbit/core/components/molecules/Quote.astro';
+import Byline from '@orbit/core/components/molecules/Byline.astro';
+import SectionHeader from '@orbit/core/components/molecules/SectionHeader.astro';
+import Callout from '@orbit/core/components/molecules/Callout.astro';
+import CautionNote from '@orbit/core/components/molecules/CautionNote.astro';
+
+const TEXT_STYLES = [
+  ['text-display', 'Display · H1 de chaque page'], ['text-heading', 'Heading · H2 de section'], ['text-title', 'Title · noms, prix'],
+  ['text-quote', 'Quote · « une citation dans une carte »'], ['text-pull', 'Pull · la citation du guide'],
+  ['text-read', 'Read · la prose : les phrases que l’on lit, de 18 à 20 px, 680 px de ligne au plus.'],
+  ['text-subheading', 'Subheading · sous-titres, questions de FAQ'], ['text-body', 'Body · texte d’interface, boutons, champs'],
+  ['text-caption', 'Caption · méta, légendes, valeurs de repères'], ['text-label', 'Label · étiquettes, crédits (le plancher : 12 px)'],
+];
+---
+<Document title="Style guide · composants">
+  <main class="sg">
+    <h1 class="text-display">Style guide</h1>
+    <p class="text-body">Généré depuis <code>tokens.css</code>, <code>text-styles.css</code> et les composants de <code>packages/core</code>. Les textes ci-dessous sont des exemples, pas du contenu publié.</p>
+
+    <h2 class="text-heading" id="tokens">Tokens</h2>
+    <Specimen title="Couleurs (rôles)" note="Les composants n'utilisent que ces rôles, jamais --palette-*."><TokenTable group="color" /></Specimen>
+    <Specimen title="Espacements et largeurs"><TokenTable group="space" /></Specimen>
+    <Specimen title="Rayons"><TokenTable group="radius" /></Specimen>
+    <Specimen title="Élévations"><TokenTable group="elevation" /></Specimen>
+    <Specimen title="Typographie, couches, mouvement, points de rupture"><TokenTable group="other" /></Specimen>
+
+    <h2 class="text-heading" id="text-styles">Styles de texte</h2>
+    <Specimen title="10 styles + 2 modificateurs" note="is-strong = 600 (la seule graisse d'emphase) · is-upper = surtitre uniquement.">
+      <div class="specimen-stack">
+        {TEXT_STYLES.map(([cls, sample]) => <p class={cls} style="margin: 0"><code class="text-label">{cls}</code><br />{sample}</p>)}
+        <p class="text-body is-strong" style="margin: 0">text-body + is-strong</p>
+        <p class="text-label is-upper" style="margin: 0">text-label + is-upper (surtitre)</p>
+        <p class="text-read" style="margin: 0"><strong>Quand y aller :</strong> une seule attaque en 600 par paragraphe, au plus.</p>
+      </div>
+    </Specimen>
+
+    <h2 class="text-heading" id="atoms">Atomes</h2>
+    <Specimen title="Button" note="primary (une par zone) · secondary · quiet · tone danger · disabled · pleine largeur · formulaire (52 px)">
+      <Button>Réserver</Button>
+      <Button variant="secondary">Voir la sortie</Button>
+      <Button variant="quiet">Tout effacer</Button>
+      <Button tone="danger">Danger</Button>
+      <Button variant="secondary" tone="danger">Danger secondaire</Button>
+      <Button disabled>Désactivé</Button>
+      <Button href="#atoms">Lien bouton</Button>
+      <div class="specimen-stack"><Button fullWidth inForm type="submit">Recevoir le top 5</Button></div>
+    </Specimen>
+    <Specimen title="TextLink" note="action (soulignement accent) · quiet · avec flèche · externe">
+      <TextLink href="#atoms">Voir la fiche</TextLink>
+      <TextLink href="#atoms" arrow standalone>Toutes les cascades</TextLink>
+      <TextLink href="#atoms" emphasis="quiet">Source : Parc national</TextLink>
+      <TextLink href="https://example.org" external emphasis="quiet">Lien externe</TextLink>
+    </Specimen>
+    <Specimen title="Avatar" note="18 · 32 · 44 · 72 · initiales · anneau · anneau couleur opérateur (donnée)">
+      <Avatar alt="Pascal" size={18} /><Avatar alt="Pascal" size={32} /><Avatar alt="Quentin Exemple" size={44} />
+      <Avatar alt="Pascal" size={72} ringColor="var(--color-brand)" />
+      <Avatar alt="Pascal" src="/style-guide/sample-portrait.png" size={44} ring />
+    </Specimen>
+    <Specimen title="Badge" note="neutral · info · danger (rond « ! ») · sur photo">
+      <Badge>Canyon</Badge><Badge tone="info">Sortie guidée</Badge><Badge tone="danger" label="Attention" />
+    </Specimen>
+    <Specimen title="Badge sur photo" dark><Badge onPhoto>Cascade</Badge></Specimen>
+    <Specimen title="Tag"><Tag emoji="👨‍👩‍👧">Famille</Tag><Tag emoji="🪢">Rappel encadré</Tag><Tag>Sans icône</Tag></Specimen>
+    <Specimen title="FilterOption" note="non sélectionné · sélectionné (aria-pressed)">
+      <FilterOption value="a">Cascades</FilterOption><FilterOption value="b" selected>Canyons</FilterOption>
+      <FilterOption value="c"><Avatar slot="avatar" alt="Pascal" size={18} />Avec Pascal</FilterOption>
+    </Specimen>
+    <Specimen title="Icon" note="SVG (ligne, 24 viewBox, trait 1,75) · emoji · encadré · tailles 15 / 17 / 24 / 32">
+      {Object.keys(ICONS).map((n) => <span class="text-label sg-icon"><Icon name={n as keyof typeof ICONS} size={24} />{n}</span>)}
+      <Icon emoji="💦" size={24} /><Icon emoji="⛰️" size={32} framed /><Icon name="clock" size={17} framed />
+    </Specimen>
+    <Specimen title="Divider" note="line · ornament"><div class="specimen-stack"><Divider /><Divider variant="ornament" /></div></Specimen>
+    <Specimen title="Rating" note="les étoiles décorent, le nombre informe"><Rating value={4.9} countText="12 avis" label="Note 4,9 sur 5, 12 avis" /><Rating value={5} label="Note 5 sur 5" /></Specimen>
+    <Specimen title="TextInput" note="text · email · tel · search · invalide · formulaire (52 px)">
+      <div class="specimen-stack">
+        <TextInput id="sg-name" name="name" label="Prénom" />
+        <TextInput id="sg-email" name="email" type="email" label="E-mail" placeholder="vous@exemple.fr" inForm />
+        <TextInput id="sg-tel" name="tel" type="tel" label="Téléphone (facultatif)" />
+        <TextInput id="sg-bad" name="bad" type="email" label="E-mail invalide" value="pas-un-email" invalid />
+      </div>
+    </Specimen>
+    <Specimen title="TextInput sur fond sombre" dark><div class="specimen-stack"><TextInput id="sg-dark" name="d" type="email" label="E-mail" onDark inForm /></div></Specimen>
+    <Specimen title="Checkbox" note="jamais pré-cochée pour un consentement">
+      <div class="specimen-stack"><Checkbox id="sg-c1" name="c1">J'accepte de recevoir le top 5 par e-mail.</Checkbox><Checkbox id="sg-c2" name="c2" checked>Cochée</Checkbox></div>
+    </Specimen>
+    <Specimen title="Toggle" note="off · on">
+      <div class="specimen-stack"><Toggle id="sg-t1" name="t1" label="Avec sortie guidée" hint="Afficher seulement les lieux avec un guide" /><Toggle id="sg-t2" name="t2" label="Activé" on /></div>
+    </Specimen>
+    <Specimen title="Select"><Select id="sg-s" name="s" label="Durée" options={[{ value: '', label: 'Toutes durées' }, { value: 'half', label: 'Demi-journée' }, { value: 'day', label: 'Journée', selected: true }]} /></Specimen>
+
+    <h2 class="text-heading" id="molecules">Molécules</h2>
+    <Specimen title="FactCell (dans une liste <dl>)" note="normal · compact · avec « À confirmer » · avec infobulle">
+      <dl class="sg-facts">
+        <FactCell emoji="⏱️" label="Durée sur place" value="2 à 3 h" />
+        <FactCell emoji="🥾" label="Marche d'approche" value="20 à 30 min"><CautionNote slot="note" label="À confirmer" /></FactCell>
+        <FactCell emoji="🧒" label="Âge conseillé" value="8 ans"><Tooltip slot="note" id="sg-tip-1" label="Plus d'infos sur l'âge" text="Savoir nager quelques mètres." /></FactCell>
+        <FactCell emoji="📶" label="Difficulté" value="Facile" compact />
+      </dl>
+    </Specimen>
+    <Specimen title="KeyFact (« Bon à savoir »)">
+      <dl class="sg-keyfacts">
+        <KeyFact emoji="📏" label="Hauteur" value="Une dizaine de mètres" />
+        <KeyFact emoji="🅿️" label="Parking" value="Privé, participation demandée"><CautionNote slot="note" label="À confirmer" /></KeyFact>
+      </dl>
+    </Specimen>
+    <Specimen title="Price" note="carte (title) · en-tête (heading)">
+      <Price amount={50} prefix="dès" unit="/ adulte" /><Price amount={65} size="header" unit="/ personne" />
+    </Specimen>
+    <Specimen title="Breadcrumb"><Breadcrumb label="Fil d'Ariane" items={[{ label: 'Accueil', href: '#' }, { label: 'Cascades', href: '#' }, { label: 'Cascade aux Écrevisses' }]} /></Specimen>
+    <Specimen title="Breadcrumb sur photo" dark><Breadcrumb onPhoto label="Fil d'Ariane (exemple sur photo)" items={[{ label: 'Accueil', href: '#' }, { label: 'Canyon doré' }]} /></Specimen>
+    <Specimen title="Tooltip" note="survol, focus clavier et toucher · Échap ferme">
+      <span class="text-body">Niveau sportif <Tooltip id="sg-tip-2" label="Que veut dire sportif ?" text="Bonne condition physique, quelques passages techniques." /></span>
+    </Specimen>
+    <Specimen title="Disclosure" note="question (FAQ) · surtitre · note">
+      <div class="specimen-stack">
+        <Disclosure summary="Peut-on s'y baigner ?">Oui, dans les vasques, quand le débit est faible.</Disclosure>
+        <Disclosure summary="Sources" summaryStyle="overline">Parc national de la Guadeloupe.</Disclosure>
+        <Disclosure summary="Avertissement" summaryStyle="note" open>Texte replié par défaut ; ouvert ici pour l'exemple.</Disclosure>
+      </div>
+    </Specimen>
+    <Specimen title="FilterOptionGroup">
+      <FilterOptionGroup title="Type" name="type" hint="Plusieurs choix possibles" multi options={[{ value: 'canyon', label: 'Canyons', selected: true }, { value: 'cascade', label: 'Cascades' }, { value: 'riviere', label: 'Rivières' }]} />
+    </Specimen>
+    <Specimen title="SearchField"><div class="specimen-stack"><SearchField id="sg-q" name="q" label="Rechercher un lieu" placeholder="Rechercher un lieu, une commune…" /></div></Specimen>
+    <Specimen title="Quote" note="inline · pull (filet accent) · avec attribution">
+      <div class="specimen-stack">
+        <Quote attribution="Camille, avis Google">Pascal nous a mis en confiance dès les premiers pas.</Quote>
+        <Quote size="pull" attribution="Pascal, Yalodé">C'est le canyon que je fais découvrir depuis 2012.</Quote>
+      </div>
+    </Specimen>
+    <Specimen title="Byline"><Byline lead="Par" people={[{ name: 'Pascal' }, { name: 'Quentin' }]} date="2026-10-02" dateLabel="mis à jour le" /></Specimen>
+    <Specimen title="Byline sur photo" dark><Byline onPhoto lead="Par" people={[{ name: 'Pascal' }, { name: 'Quentin' }]} /></Specimen>
+    <Specimen title="SectionHeader" note="H2 seul · avec surtitre (seulement s'il ajoute une catégorie)">
+      <div class="specimen-stack"><SectionHeader id="sg-h-1" title="Aperçu" /><SectionHeader id="sg-h-2" eyebrow="Réseaux sociaux" title="Ils y sont allés" /></div>
+    </Specimen>
+    <Specimen title="Callout (conseil d'un guide)"><div class="specimen-stack"><Callout eyebrow="Le conseil de Pascal" name="Pascal">Venez tôt le matin : la lumière est belle et le bassin calme.</Callout></div></Specimen>
+    <Specimen title="CautionNote"><span class="text-body">20 à 30 min</span><CautionNote label="À confirmer" /></Specimen>
+  </main>
+</Document>
+
+<style>
+  .sg > :where(h1, h2, p) { margin: 0; }
+  .sg { display: grid; gap: var(--space-4); max-inline-size: var(--container-page); margin-inline: auto; padding: var(--space-6) var(--page-gutter); }
+  .sg-icon { display: inline-grid; justify-items: center; gap: var(--space-1); inline-size: var(--space-11); color: var(--color-text-muted); }
+  .sg-facts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; margin: 0; inline-size: 100%; background: var(--color-border-default); border: 1px solid var(--color-border-default); border-radius: var(--radius-container); overflow: hidden; }
+  .sg-keyfacts { --keyfacts-min: 240px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--keyfacts-min)), 1fr)); gap: var(--space-2); margin: 0; inline-size: 100%; }
+  @media (min-width: 480px) { .sg-facts { grid-template-columns: repeat(4, 1fr); } }
+</style>

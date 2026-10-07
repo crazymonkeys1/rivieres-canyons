@@ -1,0 +1,32 @@
+---
+// L4 Tooltip: extra detail behind a small button. Opens on hover, keyboard focus AND tap (the script toggles it);
+// Escape closes it. Never the only way to reach information.
+import Icon from '../atoms/Icon.astro';
+interface Props { id: string; text: string; label: string }
+const { id, text, label } = Astro.props;
+---
+<span class="tooltip" data-tooltip>
+  <button type="button" class="tooltip__trigger hit" aria-describedby={id} aria-expanded="false" aria-label={label}><Icon name="info" size={15} /></button>
+  <span class="tooltip__tip text-caption" role="tooltip" id={id}>{text}</span>
+</span>
+<script>
+  for (const el of document.querySelectorAll<HTMLElement>('[data-tooltip]')) {
+    const button = el.querySelector('button')!;
+    const set = (open: boolean) => { el.toggleAttribute('data-open', open); button.setAttribute('aria-expanded', String(open)); };
+    button.addEventListener('click', () => set(!el.hasAttribute('data-open')));
+    el.addEventListener('keydown', (e) => { if (e.key === 'Escape') set(false); });
+    document.addEventListener('click', (e) => { if (!el.contains(e.target as Node)) set(false); });
+  }
+</script>
+<style>
+  .tooltip { position: relative; display: inline-flex; vertical-align: middle; }
+  .tooltip__trigger { display: inline-grid; place-items: center; padding: 0; border: 0; background: none; color: var(--color-text-muted); cursor: pointer; }
+  .tooltip__tip {
+    --tooltip-width: 240px;
+    position: absolute; inset-block-end: calc(100% + var(--space-2)); inset-inline-start: 50%; translate: -50% 0; z-index: var(--z-tooltip);
+    inline-size: max-content; max-inline-size: var(--tooltip-width); padding: var(--space-2) var(--space-3);
+    background: var(--color-surface-card); color: var(--color-text-body); border: 1px solid var(--color-border-default); border-radius: var(--radius-control); box-shadow: var(--elevation-tooltip);
+    visibility: hidden; opacity: 0; transition: opacity var(--duration-fast) var(--easing-standard);
+  }
+  .tooltip:hover .tooltip__tip, .tooltip:focus-within .tooltip__tip, .tooltip[data-open] .tooltip__tip { visibility: visible; opacity: 1; }
+</style>

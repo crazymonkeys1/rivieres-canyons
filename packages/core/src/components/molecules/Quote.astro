@@ -1,0 +1,18 @@
+---
+// L4 Quote: someone's words. "inline" for reviews and tips; "pull" = the one highlighted quote of a tour card or an article.
+interface Props { size?: 'inline' | 'pull'; rule?: boolean; attribution?: string; cite?: string; onPhoto?: boolean }
+const { size = 'inline', rule = size === 'pull', attribution, cite, onPhoto } = Astro.props;
+---
+<figure class:list={['quote', `quote--${size}`, { 'quote--rule': rule, 'quote--on-photo': onPhoto }]}>
+  <blockquote class:list={['quote__text', size === 'pull' ? 'text-pull' : 'text-quote', { 'on-photo': onPhoto }]} cite={cite}><slot /></blockquote>
+  {attribution && <figcaption class="quote__attribution text-caption">{attribution}</figcaption>}
+</figure>
+<style>
+  .quote { margin: 0; display: grid; gap: var(--space-2); }
+  .quote--pull { max-inline-size: var(--container-text); }
+  .quote--rule { padding-inline-start: var(--space-4); border-inline-start: 3px solid var(--color-action-accent); }
+  .quote__text { margin: 0; color: var(--color-text-strong); }
+  .quote__attribution { color: var(--color-text-muted); }
+  .quote--on-photo .quote__text { color: var(--color-text-inverse); }
+  .quote--on-photo .quote__attribution { color: var(--color-text-inverse-secondary); }
+</style>

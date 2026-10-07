@@ -1,0 +1,20 @@
+---
+// L4 FilterOptionGroup: a titled set of FilterOptions (one choice, or several when multi). Options wrap.
+import FilterOption from '../atoms/FilterOption.astro';
+interface Props { title: string; name: string; hint?: string; multi?: boolean; options: { value: string; label: string; selected?: boolean }[] }
+const { title, name, hint, multi, options } = Astro.props;
+const id = `filter-group-${name}`;
+---
+<div class="filter-option-group" role="group" aria-labelledby={id} data-filter-group={name} data-multi={multi ? 'true' : 'false'}>
+  <p class="text-body is-strong filter-option-group__title" id={id}>{title}</p>
+  {hint && <p class="text-caption filter-option-group__hint">{hint}</p>}
+  <div class="filter-option-group__options">
+    {options.map((o) => <FilterOption value={o.value} name={name} selected={o.selected}>{o.label}</FilterOption>)}
+  </div>
+</div>
+<style>
+  .filter-option-group { display: grid; gap: var(--space-2); }
+  .filter-option-group__title { margin: 0; color: var(--color-text-strong); }
+  .filter-option-group__hint { margin: 0; color: var(--color-text-muted); }
+  .filter-option-group__options { display: flex; flex-wrap: wrap; gap: var(--space-1h); }
+</style>

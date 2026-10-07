@@ -1,0 +1,19 @@
+---
+// L4 Callout: a person's tip (avatar + overline + inline quote). Only for real tips (the content says who said it).
+import Avatar from '../atoms/Avatar.astro';
+import Quote from './Quote.astro';
+interface Props { eyebrow: string; name: string; photo?: string; source?: string; ringColor?: string }
+const { eyebrow, name, photo, source, ringColor } = Astro.props;
+---
+<aside class="callout">
+  <Avatar src={photo} alt={name} size={44} ringColor={ringColor} />
+  <div class="callout__body">
+    <p class="text-label is-upper callout__eyebrow">{eyebrow}</p>
+    <Quote attribution={source}><slot /></Quote>
+  </div>
+</aside>
+<style>
+  .callout { display: flex; gap: var(--space-3); align-items: flex-start; padding: var(--space-4); background: var(--color-surface-info); border-radius: var(--radius-container); }
+  .callout__body { display: grid; gap: var(--space-1h); min-inline-size: 0; }
+  .callout__eyebrow { margin: 0; color: var(--color-text-muted); }
+</style>

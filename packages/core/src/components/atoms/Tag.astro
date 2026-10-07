@@ -1,0 +1,10 @@
+---
+// L3 Tag: a static descriptor (icon + label). Not interactive.
+import Icon from './Icon.astro';
+interface Props { emoji?: string; class?: string }
+const { emoji, class: cls } = Astro.props;
+---
+<span class:list={['tag', 'text-caption', cls]}>{emoji && <Icon emoji={emoji} size={15} />}<slot /></span>
+<style>
+  .tag { display: inline-flex; align-items: center; gap: var(--space-1); padding: var(--space-1) var(--space-2); border-radius: var(--radius-tag); background: var(--color-surface-sunken); color: var(--color-text-body); }
+</style>

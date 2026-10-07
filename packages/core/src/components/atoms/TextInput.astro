@@ -1,0 +1,32 @@
+---
+// L3 TextInput: one line of input, 16px (no zoom on iOS). The label is always present (visible or for screen readers).
+// The keyboard and autofill hints follow the type.
+interface Props {
+  id: string; name: string; label: string; hideLabel?: boolean;
+  type?: 'text' | 'email' | 'tel' | 'search'; value?: string; placeholder?: string;
+  required?: boolean; invalid?: boolean; describedBy?: string; onDark?: boolean; inForm?: boolean; class?: string;
+}
+const { id, name, label, hideLabel, type = 'text', value, placeholder, required, invalid, describedBy, onDark, inForm, class: cls } = Astro.props;
+const HINTS = {
+  text: { inputmode: 'text', autocomplete: 'off', enterkeyhint: 'next' },
+  email: { inputmode: 'email', autocomplete: 'email', enterkeyhint: 'next' },
+  tel: { inputmode: 'tel', autocomplete: 'tel', enterkeyhint: 'next' },
+  search: { inputmode: 'search', autocomplete: 'off', enterkeyhint: 'search' },
+} as const;
+---
+<span class:list={['text-input', { 'text-input--dark': onDark, 'text-input--form': inForm }, cls]}>
+  <label for={id} class:list={['text-input__label', 'text-caption', 'is-strong', { 'visually-hidden': hideLabel }]}>{label}</label>
+  <input class="text-input__field text-body" id={id} name={name} type={type} value={value} placeholder={placeholder}
+    required={required} aria-invalid={invalid ? 'true' : undefined} aria-describedby={describedBy} {...HINTS[type]} />
+</span>
+<style>
+  .text-input { display: grid; gap: var(--space-1); }
+  .text-input__label { color: var(--color-text-strong); }
+  .text-input__field { --input-height: var(--tap-size-min); min-block-size: var(--input-height); inline-size: 100%; padding: var(--space-2h) var(--space-3); border: 1px solid var(--color-border-strong); border-radius: var(--radius-control); background: var(--color-surface-card); color: var(--color-text-strong); }
+  .text-input--form .text-input__field { --input-height: 52px; }
+  .text-input__field::placeholder { color: var(--color-text-muted); }
+  .text-input__field[aria-invalid='true'] { border-color: var(--color-status-danger); }
+  .text-input--dark .text-input__label { color: var(--color-text-inverse); }
+  .text-input--dark .text-input__field { box-shadow: var(--elevation-input); border-color: transparent; }
+  .text-input--dark .text-input__field:focus-visible { outline-color: var(--color-focus-ring-inverse); }
+</style>

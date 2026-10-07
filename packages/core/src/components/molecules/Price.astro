@@ -1,0 +1,16 @@
+---
+// L4 Price: an amount and its unit ("dès 50 € / adulte"). Display serif amount, muted unit, aligned digits.
+interface Props { amount: number; currency?: string; locale?: string; prefix?: string; unit?: string; size?: 'card' | 'header' }
+const { amount, currency = 'EUR', locale = 'fr-FR', prefix, unit, size = 'card' } = Astro.props;
+const shown = new Intl.NumberFormat(locale, { style: 'currency', currency, maximumFractionDigits: amount % 1 ? 2 : 0 }).format(amount);
+---
+<p class:list={['price', `price--${size}`]}>
+  {prefix && <span class="text-caption price__unit">{prefix} </span>}
+  <span class:list={[size === 'header' ? 'text-heading' : 'text-title', 'price__amount', 'tnum']}>{shown}</span>
+  {unit && <span class="text-caption price__unit"> {unit}</span>}
+</p>
+<style>
+  .price { margin: 0; display: inline-flex; align-items: baseline; flex-wrap: wrap; gap: var(--space-1); }
+  .price__amount { color: var(--color-text-strong); }
+  .price__unit { color: var(--color-text-muted); }
+</style>

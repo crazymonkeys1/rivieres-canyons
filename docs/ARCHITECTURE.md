@@ -52,7 +52,7 @@ Companion files: `tokens/tokens.css` (values) · `tokens/text-styles.css` (text 
 - **Variants are props, not names.** `Button variant="primary|secondary|quiet"` (emphasis, by purpose), `size="md"`, `tone="neutral|danger"`. Never `ButtonGhost`, `CardDark`, `AlertRed`.
 - **Variant values describe purpose:** `primary` = the one main action; `secondary` = alternative action; `quiet` = low-emphasis; `danger`/`info`/`neutral` = meaning. Never colours.
 - **State** is a prop or attribute (`selected`, `disabled`, `open`), never a name.
-- **Files:** `PascalCase.astro` (or `.tsx`), one component per file, folder = level (`atoms/Button/Button.astro`, `Button.css`, `Button.md`).
+- **Files:** `PascalCase.astro` (or `.tsx`), one component per file, folder = level: `atoms/Button.astro` with its scoped `<style>`; its documentation is its row in `COMPONENTS.md` (2026-10-07: no separate `.css`/`.md` per component).
 - **Slots / props:** camelCase, role-named (`title`, `meta`, `media`, `actions`). Not `left`, `right`, `top`.
 - **CSS classes inside a component:** `{component}__{part}` and `{component}--{modifier}` in kebab-case (`destination-card__title`). Never reused across components.
 

@@ -1,0 +1,21 @@
+---
+// L4 Disclosure: native <details> with a 44px summary and a "+" glyph. Base of the FAQ, the legal notice and the sources fold.
+interface Props { summary: string; summaryStyle?: 'question' | 'overline' | 'note'; open?: boolean; id?: string }
+const { summary, summaryStyle = 'question', open, id } = Astro.props;
+const SUMMARY = { question: 'text-subheading', overline: 'text-label is-upper', note: 'text-caption' } as const;
+const CONTENT = { question: 'text-read', overline: 'text-read', note: 'text-caption' } as const;
+---
+<details class:list={['disclosure', `disclosure--${summaryStyle}`]} open={open} id={id}>
+  <summary class:list={['disclosure__summary', SUMMARY[summaryStyle]]}><span>{summary}</span><span class="disclosure__glyph text-title" aria-hidden="true">+</span></summary>
+  <div class:list={['disclosure__content', CONTENT[summaryStyle]]}><slot /></div>
+</details>
+<style>
+  .disclosure { border-block-end: 1px solid var(--color-border-default); }
+  .disclosure__summary { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); min-block-size: var(--tap-size-min); padding-block: var(--space-2h); color: var(--color-text-strong); cursor: pointer; list-style: none; }
+  .disclosure__summary::-webkit-details-marker { display: none; }
+  .disclosure--overline .disclosure__summary { color: var(--color-brand); }
+  .disclosure--note .disclosure__summary { color: var(--color-text-muted); }
+  .disclosure__glyph { flex: none; color: var(--color-text-muted); transition: transform var(--duration-base) var(--easing-standard); }
+  .disclosure[open] .disclosure__glyph { transform: rotate(45deg); }
+  .disclosure__content { padding-block-end: var(--space-4); color: var(--color-text-body); }
+</style>

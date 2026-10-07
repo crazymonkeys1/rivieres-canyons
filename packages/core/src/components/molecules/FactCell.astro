@@ -1,0 +1,17 @@
+---
+// L4 FactCell: one fact (icon + label + value) inside a fact list (<dl>). Label muted, value strong.
+// The optional "note" slot holds a CautionNote ("À confirmer") or a Tooltip.
+import Icon from '../atoms/Icon.astro';
+interface Props { label: string; value: string; emoji?: string; icon?: import('../atoms/icons').IconName; compact?: boolean }
+const { label, value, emoji, icon, compact } = Astro.props;
+---
+<div class:list={['fact-cell', { 'fact-cell--compact': compact }]}>
+  <dt class="fact-cell__label text-label">{(emoji || icon) && <Icon emoji={emoji} name={icon} size={15} />}{label}</dt>
+  <dd class="fact-cell__value text-caption is-strong tnum">{value}<slot name="note" /></dd>
+</div>
+<style>
+  .fact-cell { display: grid; align-content: start; gap: var(--space-0h); padding: var(--space-3); background: var(--color-surface-card); }
+  .fact-cell--compact { padding: var(--space-2) var(--space-2h); }
+  .fact-cell__label { display: flex; align-items: center; gap: var(--space-1); color: var(--color-text-muted); }
+  .fact-cell__value { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-1h); margin: 0; color: var(--color-text-strong); }
+</style>

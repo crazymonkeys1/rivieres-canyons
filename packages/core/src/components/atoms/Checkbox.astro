@@ -1,0 +1,15 @@
+---
+// L3 Checkbox: a 24px box in a 44px row. Never pre-checked for consent (the parent decides; default unchecked).
+interface Props { id: string; name: string; checked?: boolean; required?: boolean; onDark?: boolean; class?: string }
+const { id, name, checked = false, required, onDark, class: cls } = Astro.props;
+---
+<label class:list={['checkbox', 'text-caption', { 'checkbox--dark': onDark }, cls]} for={id}>
+  <input class="checkbox__box" type="checkbox" id={id} name={name} checked={checked} required={required} />
+  <span class="checkbox__label"><slot /></span>
+</label>
+<style>
+  .checkbox { display: flex; align-items: flex-start; gap: var(--space-2h); min-block-size: var(--tap-size-min); padding-block: var(--space-2h); color: var(--color-text-body); cursor: pointer; }
+  .checkbox__box { --checkbox-size: 24px; flex: none; inline-size: var(--checkbox-size); block-size: var(--checkbox-size); margin: 0; accent-color: var(--color-surface-inverse-strong); cursor: pointer; }
+  .checkbox--dark { color: var(--color-text-inverse-secondary); }
+  .checkbox--dark .checkbox__box { accent-color: var(--color-focus-ring-inverse); }
+</style>

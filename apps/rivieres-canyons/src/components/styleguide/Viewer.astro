@@ -1,0 +1,28 @@
+---
+// Shows one page side by side at several widths (mobile-first check). Each frame is the real page, real CSS.
+interface Props { src: string; widths: number[] }
+const { src, widths } = Astro.props;
+---
+<main class="viewer">
+  <header class="viewer__header">
+    <h1 class="text-heading viewer__title">Style guide</h1>
+    <p class="text-caption viewer__note">La même page à {widths.join(' · ')} px. <a href={src}>Ouvrir en pleine largeur</a>. Faites défiler horizontalement sur petit écran.</p>
+  </header>
+  <div class="viewer__frames">
+    {widths.map((w) => (
+      <figure class="viewer__frame" style={`--frame-width: ${w}px`}>
+        <figcaption class="text-label is-upper viewer__label">{w} px</figcaption>
+        <iframe src={src} title={`Style guide à ${w} px`} loading="lazy"></iframe>
+      </figure>
+    ))}
+  </div>
+</main>
+<style>
+  .viewer { display: grid; gap: var(--space-4); padding: var(--space-4) var(--page-gutter); }
+  .viewer__title, .viewer__note { margin: 0; }
+  .viewer__note { color: var(--color-text-muted); }
+  .viewer__frames { display: flex; gap: var(--space-4); overflow-x: auto; padding-block-end: var(--space-4); }
+  .viewer__frame { --frame-height: 80vh; flex: none; display: grid; gap: var(--space-1); margin: 0; }
+  .viewer__label { color: var(--color-text-muted); }
+  .viewer__frame iframe { inline-size: var(--frame-width); block-size: var(--frame-height); border: 1px solid var(--color-border-strong); border-radius: var(--radius-container); background: var(--color-surface-page); }
+</style>

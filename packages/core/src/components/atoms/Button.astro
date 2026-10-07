@@ -1,0 +1,44 @@
+---
+// L3 Button: the action. A link when it navigates (href), a <button> otherwise.
+// variant = emphasis by purpose (one primary per region); tone = meaning. One size; 52px tall in forms.
+interface Props {
+  variant?: 'primary' | 'secondary' | 'quiet';
+  tone?: 'neutral' | 'danger';
+  href?: string;
+  type?: 'button' | 'submit';
+  fullWidth?: boolean;
+  inForm?: boolean;
+  disabled?: boolean;
+  external?: boolean;
+  class?: string;
+  [attr: `data-${string}` | `aria-${string}`]: string | boolean | undefined;
+}
+const { variant = 'primary', tone = 'neutral', href, type = 'button', fullWidth, inForm, disabled, external, class: cls, ...rest } = Astro.props;
+const classes = ['button', 'text-body', 'is-strong', `button--${variant}`, `button--${tone}`, { 'button--full': fullWidth, 'button--form': inForm }, cls];
+---
+{href && !disabled ? (
+  <a href={href} class:list={classes} {...(external ? { target: '_blank', rel: 'noopener' } : {})} {...rest}><slot /></a>
+) : (
+  <button type={type} class:list={classes} disabled={disabled} aria-disabled={disabled ? 'true' : undefined} {...rest}><slot /></button>
+)}
+<style>
+  .button {
+    --button-height: var(--tap-size-min);
+    display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
+    min-block-size: var(--button-height); padding: var(--space-2h) var(--space-5);
+    border: 1px solid transparent; border-radius: var(--radius-control);
+    text-align: center; text-decoration: none; cursor: pointer;
+    transition: background-color var(--duration-fast) var(--easing-standard), border-color var(--duration-fast) var(--easing-standard), color var(--duration-fast) var(--easing-standard);
+  }
+  .button--form { --button-height: 52px; }
+  .button--full { inline-size: 100%; }
+  .button--primary { background: var(--color-action-primary); color: var(--color-text-inverse); }
+  .button--primary:hover { background: var(--color-action-primary-hover); color: var(--color-text-inverse); }
+  .button--secondary { background: var(--color-surface-card); border-color: var(--color-border-strong); color: var(--color-text-strong); }
+  .button--secondary:hover { border-color: var(--color-text-strong); color: var(--color-text-strong); }
+  .button--quiet { background: transparent; color: var(--color-text-strong); padding-inline: var(--space-2); }
+  .button--quiet:hover { color: var(--color-brand-hover); text-decoration: underline; }
+  .button--danger.button--primary { background: var(--color-status-danger); }
+  .button--danger.button--secondary, .button--danger.button--quiet { color: var(--color-text-danger); border-color: var(--color-border-danger); }
+  .button:disabled, .button[aria-disabled='true'] { opacity: 0.5; cursor: not-allowed; }
+</style>

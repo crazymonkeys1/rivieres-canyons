@@ -1,0 +1,11 @@
+---
+// L3 Divider: separates two blocks. "ornament" = the centred "···".
+interface Props { variant?: 'line' | 'ornament' }
+const { variant = 'line' } = Astro.props;
+---
+{variant === 'line' ? <hr class="divider divider--line" /> : <div class="divider divider--ornament text-body" role="separator"></div>}
+<style>
+  .divider--line { border: 0; border-block-start: 1px solid var(--color-border-default); margin: var(--space-6) 0; }
+  .divider--ornament { text-align: center; color: var(--color-text-faint); margin: var(--space-6) 0; }
+  .divider--ornament::before { content: '·\2002·\2002·'; }   /* decoration: drawn by CSS, not read out */
+</style>

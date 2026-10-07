@@ -1,0 +1,5 @@
+/* The whole foundation, in order: fonts (L0 files) → tokens (L0–L1) → text styles and global rules (L2).
+   A site adds its theme after this file (tier-1 values only, see DIRECTORY_BLUEPRINT.md). */
+@import './fonts.css';
+@import './tokens.css';
+@import './text-styles.css';

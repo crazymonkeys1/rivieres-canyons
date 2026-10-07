@@ -1,0 +1,10 @@
+---
+// L4 CautionNote: marks a value that is an estimate ("À confirmer"), inline next to it. The label comes from the site.
+import Icon from '../atoms/Icon.astro';
+interface Props { label: string; emoji?: string }
+const { label, emoji } = Astro.props;
+---
+<span class="caution-note text-label is-strong">{emoji ? <Icon emoji={emoji} size={15} /> : <Icon name="alert" size={15} />}{label}</span>
+<style>
+  .caution-note { display: inline-flex; align-items: center; gap: var(--space-1); padding: var(--space-0h) var(--space-2); border-radius: var(--radius-control); background: var(--color-surface-caution); color: var(--color-text-caution); white-space: nowrap; }
+</style>

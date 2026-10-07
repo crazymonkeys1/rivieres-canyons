@@ -6,6 +6,13 @@ How to read: **Composed of** lists lower-level pieces. **Variants** are props (n
 
 Status: ✅ in the reference · 🆕 needed by the system but only implied in the reference (build it from this spec).
 
+**Built (phase 3, 2026-10-07):** every L3 atom and L4 molecule below, in `packages/core/src/components/{atoms,molecules}/{Name}.astro` (one file per component: markup, props and scoped CSS; this registry is its documentation). They render in the living style guide (`/style-guide/`, at 360 · 480 · 1024 px), pass `pnpm design:check` and an axe accessibility scan with no violation. Implementation notes:
+- **No site words in the packages:** every visible label (aria labels, "À confirmer", breadcrumb name, rating text) is a prop the site passes.
+- **Component sizes** (Avatar 18/32/44/72, Icon 15/17/24/32, 52px form controls, toggle track) are component-local variables (`--avatar-size`), set from the props; the design check allows px only there.
+- **FactCell / KeyFact** render `<dt>`/`<dd>` inside one `<div>` (valid `<dl>` content); a `note` slot holds a CautionNote or a Tooltip.
+- **Tooltip** is the only atom/molecule with a script (tap to open, Escape and outside tap to close); everything else is HTML + CSS.
+- **Icon** emoji size is the one typography exception, marked `design-check-allow` in the file.
+
 ---
 
 ## L3 Atoms

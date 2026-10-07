@@ -12,17 +12,21 @@
     "content:pull": "tsx scripts/airtable.ts pull",
     "airtable:build": "tsx scripts/airtable.ts build",
     "content:verify": "tsx scripts/check-content.ts --source=Airtable",
-    "airtable:reset": "tsx scripts/airtable.ts reset"
+    "airtable:reset": "tsx scripts/airtable.ts reset",
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
   },
   "dependencies": {
     "@orbit/core": "workspace:*",
     "@orbit/directory": "workspace:*",
     "@orbit/places": "workspace:*",
+    "astro": "^7.3.6",
     "zod": "^3.25.0"
   },
   "devDependencies": {
+    "@types/node": "^22.0.0",
     "tsx": "^4.20.0",
-    "typescript": "^5.9.0",
-    "@types/node": "^22.0.0"
+    "typescript": "^5.9.0"
   }
 }

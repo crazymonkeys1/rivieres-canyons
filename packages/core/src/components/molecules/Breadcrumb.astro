@@ -1,0 +1,24 @@
+---
+// L4 Breadcrumb: where the page sits. The last item is the current page (not a link). Wraps on small screens.
+interface Props { items: { label: string; href?: string }[]; label: string; onPhoto?: boolean }
+const { items, label, onPhoto } = Astro.props;
+---
+<nav class:list={['breadcrumb', 'text-caption', { 'breadcrumb--on-photo': onPhoto }]} aria-label={label}>
+  <ol class="breadcrumb__list">
+    {items.map((it, i) => (
+      <li class="breadcrumb__item">
+        {it.href && i < items.length - 1 ? <a href={it.href} class="breadcrumb__link">{it.label}</a> : <span aria-current="page">{it.label}</span>}
+        {i < items.length - 1 && <span class="breadcrumb__sep" aria-hidden="true">›</span>}
+      </li>
+    ))}
+  </ol>
+</nav>
+<style>
+  .breadcrumb__list { display: flex; flex-wrap: wrap; gap: var(--space-1); margin: 0; padding: 0; list-style: none; }
+  .breadcrumb__item { display: inline-flex; align-items: center; gap: var(--space-1); color: var(--color-text-muted); }
+  .breadcrumb__link { color: var(--color-brand); }
+  .breadcrumb__link:hover { text-decoration: underline; }
+  .breadcrumb__sep { color: var(--color-text-faint); }
+  .breadcrumb--on-photo .breadcrumb__item, .breadcrumb--on-photo .breadcrumb__link { color: var(--color-text-inverse-secondary); }
+  .breadcrumb--on-photo .breadcrumb__sep { color: var(--color-text-inverse-tertiary); }
+</style>

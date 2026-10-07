@@ -1,0 +1,18 @@
+---
+// L3 Rating: stars are decoration; the number is the information and is always written out.
+// Give the visible count text ("12 avis") and the source in the parent; a rating without a source is never shown.
+interface Props { value: number; max?: number; countText?: string; locale?: string; label: string }
+const { value, max = 5, countText, locale = 'fr-FR', label } = Astro.props;
+const shown = new Intl.NumberFormat(locale, { maximumFractionDigits: 1 }).format(value);
+const full = Math.round(value);
+---
+<span class="rating text-caption" role="img" aria-label={label}>
+  <span class="rating__stars" aria-hidden="true">{'★'.repeat(full)}{'☆'.repeat(Math.max(0, max - full))}</span>
+  <span class="rating__value is-strong tnum" aria-hidden="true">{shown}</span>
+  {countText && <span class="rating__count" aria-hidden="true">({countText})</span>}
+</span>
+<style>
+  .rating { display: inline-flex; align-items: center; gap: var(--space-1); color: var(--color-text-strong); }
+  .rating__stars { color: var(--color-rating); }
+  .rating__count { color: var(--color-text-muted); }
+</style>

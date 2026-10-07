@@ -1,0 +1,37 @@
+---
+// Renders every token of tokens.css, read at build time, so the style guide can never drift from the file.
+import raw from '@orbit/core/styles/tokens.css?raw';
+interface Props { group: 'color' | 'space' | 'radius' | 'elevation' | 'other' }
+const { group } = Astro.props;
+const all = [...raw.matchAll(/(--[a-z0-9-]+):\s*([^;]+);\s*(?:\/\*\s*([^*]*?)\s*\*\/)?/g)].map(([, name, value, note]) => ({ name, value: value.trim(), note: note ?? '' }));
+const pick = {
+  color: (n: string) => n.startsWith('--color-') || n.startsWith('--gradient-'),
+  space: (n: string) => n.startsWith('--space-') || ['--section-y', '--article-gap', '--entry-gap', '--page-gutter', '--page-gutter-read', '--tap-size-min'].includes(n) || n.startsWith('--container-'),
+  radius: (n: string) => n.startsWith('--radius-'),
+  elevation: (n: string) => n.startsWith('--elevation-'),
+  other: (n: string) => /^--(z-|duration-|easing-|breakpoint-|font-|line-height-|letter-spacing-|text-shadow)/.test(n),
+}[group];
+const tokens = all.filter((t) => pick(t.name));
+---
+<div class="token-table">
+  {tokens.map((t) => (
+    <div class="token-table__row">
+      {group === 'color' && <span class="token-table__swatch" style={`background: var(${t.name})`}></span>}
+      {group === 'space' && <span class="token-table__bar" style={`inline-size: min(100%, var(${t.name}))`}></span>}
+      {group === 'radius' && <span class="token-table__shape" style={`border-radius: var(${t.name})`}></span>}
+      {group === 'elevation' && <span class="token-table__shape" style={`box-shadow: var(${t.name})`}></span>}
+      <code class="text-caption is-strong token-table__name">{t.name}</code>
+      <code class="text-label token-table__value">{t.value}</code>
+      {t.note && <span class="text-label token-table__note">{t.note}</span>}
+    </div>
+  ))}
+</div>
+<style>
+  .token-table { display: grid; gap: var(--space-2); inline-size: 100%; }
+  .token-table__row { display: grid; grid-template-columns: var(--space-10) 1fr; gap: var(--space-0h) var(--space-3); align-items: center; padding-block: var(--space-1h); border-block-end: 1px solid var(--color-border-default); }
+  .token-table__row > :not(:first-child) { grid-column: 2; }
+  .token-table__swatch, .token-table__shape { grid-row: span 3; inline-size: var(--space-10); block-size: var(--space-10); border: 1px solid var(--color-border-default); background-color: var(--color-surface-page); }
+  .token-table__bar { grid-row: span 3; block-size: var(--space-2); background: var(--color-brand); }
+  .token-table__name { color: var(--color-text-strong); overflow-wrap: anywhere; }
+  .token-table__value, .token-table__note { color: var(--color-text-muted); overflow-wrap: anywhere; }
+</style>

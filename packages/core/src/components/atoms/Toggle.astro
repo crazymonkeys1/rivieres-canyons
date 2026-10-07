@@ -1,0 +1,25 @@
+---
+// L3 Toggle: an on/off switch with its label and an optional hint. Native checkbox with role="switch": no script needed.
+interface Props { id: string; name: string; label: string; hint?: string; on?: boolean; class?: string }
+const { id, name, label, hint, on = false, class: cls } = Astro.props;
+---
+<label class:list={['toggle', cls]} for={id}>
+  <span class="toggle__text">
+    <span class="text-body is-strong toggle__label">{label}</span>
+    {hint && <span class="text-caption toggle__hint" id={`${id}-hint`}>{hint}</span>}
+  </span>
+  <input class="toggle__input" type="checkbox" role="switch" id={id} name={name} checked={on} aria-describedby={hint ? `${id}-hint` : undefined} />
+  <span class="toggle__track" aria-hidden="true"><span class="toggle__knob"></span></span>
+</label>
+<style>
+  .toggle { --toggle-width: 44px; --toggle-height: 26px; --toggle-knob: 20px; position: relative; display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); min-block-size: var(--tap-size-min); cursor: pointer; }
+  .toggle__text { display: grid; gap: var(--space-0h); }
+  .toggle__label { color: var(--color-text-strong); }
+  .toggle__hint { color: var(--color-text-muted); }
+  .toggle__input { position: absolute; opacity: 0; inline-size: 1px; block-size: 1px; }
+  .toggle__track { flex: none; position: relative; inline-size: var(--toggle-width); block-size: var(--toggle-height); border-radius: var(--radius-full); background: var(--color-border-strong); transition: background-color var(--duration-base) var(--easing-standard); }
+  .toggle__knob { position: absolute; inset-block-start: var(--space-0h); inset-inline-start: var(--space-0h); inline-size: var(--toggle-knob); block-size: var(--toggle-knob); margin: 1px; border-radius: 50%; background: var(--color-surface-card); box-shadow: var(--elevation-thumb); transition: transform var(--duration-base) var(--easing-standard); }
+  .toggle__input:checked + .toggle__track { background: var(--color-surface-inverse-strong); }
+  .toggle__input:checked + .toggle__track .toggle__knob { transform: translateX(calc(var(--toggle-width) - var(--toggle-knob) - var(--space-1h))); }
+  .toggle__input:focus-visible + .toggle__track { outline: 3px solid var(--color-focus-ring); outline-offset: 2px; box-shadow: 0 0 0 2px var(--color-focus-halo); }
+</style>

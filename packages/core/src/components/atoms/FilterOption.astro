@@ -1,0 +1,13 @@
+---
+// L3 FilterOption: one choice in a filter. A toggle button (aria-pressed); the page script reads data-value.
+interface Props { selected?: boolean; value: string; name?: string; class?: string }
+const { selected = false, value, name, class: cls } = Astro.props;
+---
+<button type="button" class:list={['filter-option', 'text-caption', { 'is-strong': selected }, cls]} aria-pressed={selected ? 'true' : 'false'} data-value={value} data-name={name}>
+  <slot name="avatar" /><slot />
+</button>
+<style>
+  .filter-option { display: inline-flex; align-items: center; gap: var(--space-1h); min-block-size: var(--tap-size-min); padding: var(--space-1) var(--space-4); border: 1px solid var(--color-border-strong); border-radius: var(--radius-full); background: var(--color-surface-card); color: var(--color-text-strong); cursor: pointer; transition: background-color var(--duration-fast) var(--easing-standard), border-color var(--duration-fast) var(--easing-standard); }
+  .filter-option:hover { border-color: var(--color-brand); }
+  .filter-option[aria-pressed='true'] { background: var(--color-surface-inverse-strong); border-color: var(--color-surface-inverse-strong); color: var(--color-text-inverse); }
+</style>

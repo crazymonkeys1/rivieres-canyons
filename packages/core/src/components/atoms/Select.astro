@@ -1,0 +1,16 @@
+---
+// L3 Select: a native dropdown (inline filters on large screens). Native for keyboard and screen readers.
+interface Props { id: string; name: string; label: string; hideLabel?: boolean; options: { value: string; label: string; selected?: boolean }[]; class?: string }
+const { id, name, label, hideLabel, options, class: cls } = Astro.props;
+---
+<span class:list={['select', cls]}>
+  <label for={id} class:list={['text-caption', 'is-strong', 'select__label', { 'visually-hidden': hideLabel }]}>{label}</label>
+  <select id={id} name={name} class="select__field text-caption">
+    {options.map((o) => <option value={o.value} selected={o.selected}>{o.label}</option>)}
+  </select>
+</span>
+<style>
+  .select { display: inline-grid; gap: var(--space-1); }
+  .select__label { color: var(--color-text-strong); }
+  .select__field { min-block-size: var(--tap-size-min); padding: var(--space-1) var(--space-3); border: 1px solid var(--color-border-strong); border-radius: var(--radius-full); background: var(--color-surface-card); color: var(--color-text-strong); cursor: pointer; }
+</style>

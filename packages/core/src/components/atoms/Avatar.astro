@@ -1,0 +1,16 @@
+---
+// L3 Avatar: a person's portrait, or their initials when there is no photo. Sizes 18 / 32 / 44 / 72 only.
+// ring = separation ring in the surface colour (stacked avatars); ringColor = second ring (e.g. the operator colour, from data).
+interface Props { src?: string; alt: string; initials?: string; size?: 18 | 32 | 44 | 72; ring?: boolean; ringColor?: string; class?: string }
+const { src, alt, initials, size = 44, ring, ringColor, class: cls } = Astro.props;
+const letters = initials ?? alt.split(/\s+/).map((w) => w[0]).join('').slice(0, 2).toUpperCase();
+---
+<span class:list={['avatar', { 'avatar--ring': ring, 'avatar--accent': ringColor }, cls]} style={`--avatar-size: ${size}px;${ringColor ? ` --avatar-ring-color: ${ringColor};` : ''}`}>
+  {src ? <img src={src} alt={alt} width={size} height={size} loading="lazy" decoding="async" /> : <span class="avatar__initials text-label is-strong" role="img" aria-label={alt}>{letters}</span>}
+</span>
+<style>
+  .avatar { display: inline-grid; place-items: center; flex: none; inline-size: var(--avatar-size); block-size: var(--avatar-size); border-radius: 50%; overflow: hidden; background: var(--color-surface-sunken); color: var(--color-text-strong); }
+  .avatar img { inline-size: 100%; block-size: 100%; object-fit: cover; }
+  .avatar--ring { box-shadow: var(--elevation-avatar-ring); }
+  .avatar--accent { box-shadow: var(--elevation-avatar-ring), 0 0 0 4px var(--avatar-ring-color); }
+</style>

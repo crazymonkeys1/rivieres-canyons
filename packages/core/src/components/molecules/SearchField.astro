@@ -1,0 +1,17 @@
+---
+// L4 SearchField: a search input with its icon, as a full-radius field that takes the free width.
+import Icon from '../atoms/Icon.astro';
+interface Props { id: string; name: string; label: string; placeholder?: string; value?: string }
+const { id, name, label, placeholder, value } = Astro.props;
+---
+<div class="search-field" role="search">
+  <label for={id} class="visually-hidden">{label}</label>
+  <Icon name="search" size={17} class="search-field__icon" />
+  <input class="search-field__input text-body" id={id} name={name} type="search" inputmode="search" enterkeyhint="search" autocomplete="off" placeholder={placeholder} value={value} />
+</div>
+<style>
+  .search-field { position: relative; flex: 1; display: flex; align-items: center; min-inline-size: 0; }
+  .search-field :global(.search-field__icon) { position: absolute; inset-inline-start: var(--space-4); color: var(--color-text-muted); pointer-events: none; }
+  .search-field__input { inline-size: 100%; min-block-size: var(--tap-size-min); padding: var(--space-2) var(--space-4) var(--space-2) var(--space-10); border: 1px solid var(--color-border-strong); border-radius: var(--radius-full); background: var(--color-surface-card); color: var(--color-text-strong); }
+  .search-field__input::placeholder { color: var(--color-text-muted); }
+</style>

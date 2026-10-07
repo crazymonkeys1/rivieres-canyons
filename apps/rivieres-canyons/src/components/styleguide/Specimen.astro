@@ -1,0 +1,18 @@
+---
+// One style-guide block: a title, an optional note, and the specimen.
+interface Props { title: string; note?: string; id?: string; dark?: boolean }
+const { title, note, id, dark } = Astro.props;
+---
+<section class="specimen" id={id}>
+  <h3 class="text-subheading specimen__title">{title}</h3>
+  {note && <p class="text-caption specimen__note">{note}</p>}
+  <div class:list={['specimen__body', { 'specimen__body--dark': dark }]}><slot /></div>
+</section>
+<style>
+  .specimen { display: grid; gap: var(--space-2); padding-block: var(--space-4); border-block-start: 1px solid var(--color-border-default); }
+  .specimen__title { margin: 0; color: var(--color-text-strong); }
+  .specimen__note { margin: 0; color: var(--color-text-muted); }
+  .specimen__body { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; padding: var(--space-4); background: var(--color-surface-card); border: 1px solid var(--color-border-default); border-radius: var(--radius-container); }
+  .specimen__body--dark { background: var(--color-surface-inverse-strong); }
+  .specimen__body > :global(.specimen-stack) { display: grid; gap: var(--space-3); inline-size: 100%; }
+</style>

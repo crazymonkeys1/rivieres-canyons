@@ -35,6 +35,20 @@ Layer (which projects a rule applies to):
 
 ## Changes
 
+### 2026-10-07 · Phase 3: design system in code (atoms, molecules, style guide, checks)
+- **Layer:** Core
+- **Change:**
+  - Astro 7 static app; `packages/core/src/styles/` holds `tokens.css` and `text-styles.css` (moved from `tokens/`, which keeps links) plus `fonts.css` and `index.css`.
+  - Fonts self-hosted from `@fontsource` (Latin subset, `font-display: swap`, 6 files); OFL licences in `packages/core/src/fonts/`. Nothing loads from Google.
+  - 13 atoms and 13 molecules from `COMPONENTS.md` in `packages/core/src/components/`; no site words inside (labels are props).
+  - Living style guide `/style-guide/` (tokens read from `tokens.css` at build time, every text style, every component state) shown at 360 · 480 · 1024 px. Development page, `noindex`.
+  - `pnpm design:check` (CLAUDE.md §6.12): raw colours, `--palette-*` in components, typography properties in components, px outside tokens (1–4px borders and rings allowed; component sizes in local variables), raw durations, z-index and shadows, removed outlines, `max-width` and off-scale breakpoints, styling in pages, and with `--production` any `[PLACEHOLDER]` in the built pages. One declaration can opt out with `/* design-check-allow: reason */`.
+  - GitHub workflow "Checks" runs design rules, content checks, the Airtable round trip and the build on every push.
+  - Added `.visually-hidden` to the global rules of `text-styles.css` (labels for screen readers).
+- **Why:** the system now exists as code that a check enforces, not only as documents.
+- **How to apply elsewhere:** a new site imports `@orbit/core/styles/index.css`, adds its `theme.css` (tier-1 values), and uses the components as they are.
+- **Status:** Rivières & Canyons ✅ · Mangrove ⏳ · Template ✅
+
 ### 2026-10-07 · Airtable base built by a GitHub job
 - **Layer:** Core
 - **Change:** `pnpm airtable:build` creates a new base in a workspace through the Airtable API (tables, typed fields, options, links), writes the content, reads it back and compares, and records the field IDs (`airtable/map.json`) and a report (`airtable/BUILD_REPORT.md`). It refuses to create a second base once `map.json` exists. It runs from GitHub Actions (workflow "Airtable", started by hand), because GitHub can reach Airtable and keeps the token as a secret; the same workflow pulls the content later (`pull-content`). Tested against a simulated Airtable API.
