@@ -3,7 +3,11 @@
   "private": true,
   "packageManager": "pnpm@10.28.0",
   "scripts": {
+    "check": "pnpm --filter rivieres-canyons content:check && pnpm --filter rivieres-canyons airtable:export",
     "content:check": "pnpm --filter rivieres-canyons content:check",
-    "content:check:prod": "pnpm --filter rivieres-canyons content:check:prod"
+    "content:check:prod": "pnpm --filter rivieres-canyons content:check:prod",
+    "airtable:export": "pnpm --filter rivieres-canyons airtable:export",
+    "airtable:link": "pnpm --filter rivieres-canyons airtable:link",
+    "content:pull": "pnpm --filter rivieres-canyons content:pull"
   }
 }

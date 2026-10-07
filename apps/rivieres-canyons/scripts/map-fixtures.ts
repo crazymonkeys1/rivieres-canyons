@@ -1,22 +1,20 @@
 // Maps the Claude Design export (data/*.json) to the site schema, validates it,
-// writes normalized fixtures to content/fixtures/ and the review report to docs/CONTENT_REPORT.md.
+// writes normalized fixtures to content/fixtures/ and docs/DESIGN_MIGRATION.md.
 // One-off migration from the prototype: once Airtable is the source (phase 2), the Airtable adapter
 // produces the same fixtures and this script is retired.
-//   pnpm content:check              development: schema + integrity errors fail
-//   pnpm content:check:prod         also fails on placeholders, draft signatures, images needing permission…
+// The content checks and docs/CONTENT_REPORT.md come from scripts/check-content.ts, which runs right after.
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { findPlaceholders, completeness, type Image } from '@orbit/core/content';
-import { matchesRule, landingPages, type Rule } from '@orbit/directory/content';
+import { type Image } from '@orbit/core/content';
+import { select, type Selection, type Criterion } from '@orbit/directory/content';
 import { DIRECTION_FIELDS } from '@orbit/places/content';
-import { contentSchema, type Destination, type SiteOffer, type Content } from '../src/content/schema';
-import { RISKS, COMPLETENESS, LANDING, SAFETY_CLAIMS, PLACE_FACTS, LISTING_TYPES, LOCATION_LABELS } from '../src/content/site.config';
+import { type Destination, type SiteOffer, type Content } from '../src/content/schema';
+import { RISKS, PLACE_FACTS, ARTICLE_RULES } from '../src/content/site.config';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const root = resolve(here, '../../..');
 const outDir = resolve(here, '../content/fixtures');
-const production = process.argv.includes('--production');
 const read = (f: string) => JSON.parse(readFileSync(resolve(root, 'data', f), 'utf8'));
 
 const D = read('destinations.json');
@@ -28,16 +26,49 @@ const dropped: string[] = []; // data removed by a rule
 const errors: string[] = [];
 
 // ---------- helpers ----------
-/** Every string in a value, with its path. */
-function findText(value: unknown, path = ''): { path: string; text: string }[] {
-  if (typeof value === 'string') return [{ path, text: value }];
-  if (Array.isArray(value)) return value.flatMap((v, i) => findText(v, `${path}[${i}]`));
-  if (value && typeof value === 'object') return Object.entries(value).flatMap(([k, v]) => findText(v, path ? `${path}.${k}` : k));
-  return [];
-}
 const kebab = (id: string) => id.replace(/_/g, '-');
 const slugOf = (id: string) => (id === 'saut_d_acomat_site' ? 'saut-d-acomat' : kebab(id));
 const blank = (v: unknown) => (v === undefined || v === '' ? null : (v as any));
+/** "Formule Family" → "formule-family", "Pointe-Noire" → "pointe-noire". */
+const slugify = (s: string) => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/['’]/g, '-').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const SEO_EMPTY = { title: null, description: null };
+
+// ---------- types (decision D2: a table with landing-page text; text to write in Airtable) ----------
+const types: Content['types'] = [
+  { key: 'canyon', label: 'Canyon', plural: 'Canyons', icon: '⛰️', order: 1, aliases: [], intro: null, seo: SEO_EMPTY },
+  { key: 'riviere', label: 'Rivière', plural: 'Rivières', icon: '🌊', order: 2, aliases: [], intro: null, seo: SEO_EMPTY },
+  { key: 'cascade', label: 'Cascade', plural: 'Cascades', icon: '💦', order: 3, aliases: ["Chutes d'eau"], intro: null, seo: SEO_EMPTY },
+  { key: 'bassin-naturel', label: 'Bassin naturel', plural: 'Bassins naturels', icon: '🛁', order: 4, aliases: [], intro: null, seo: SEO_EMPTY },
+];
+const TYPE_OF: Record<string, string> = { 'rivière': 'riviere', bassin_naturel: 'bassin-naturel' };
+
+// ---------- criteria (decision D1): yes/no attributes, editable as rows in Airtable ----------
+const criteria: Criterion[] = [];
+function addCriterion(applies_to: Criterion['applies_to'], label: string, icon: string | null, opts: Partial<Criterion> = {}) {
+  const key = slugify(label);
+  if (!criteria.some((c) => c.key === key))
+    criteria.push({ key, label, applies_to, group: null, icon, order: criteria.filter((c) => c.applies_to === applies_to).length + 1,
+      filter: false, badge: false, key_fact: false, landing: false, intro: null, seo: SEO_EMPTY, ...opts });
+  return key;
+}
+addCriterion('listing', 'Avec cascade', '💦', { filter: true });
+addCriterion('offer', 'Rappel', '🪢', { filter: true, key_fact: true });
+addCriterion('offer', 'Animaux acceptés', '🐕', { filter: true });
+/** Former offer tags: now criteria shown as badges (icons were OFFER_TAG_ICONS). */
+const TAG_ICONS: Record<string, string> = {
+  Famille: '👨‍👩‍👧', 'Formule Family': '👨‍👩‍👧', 'Toboggans naturels': '🎢', 'Bain de forêt': '🌳', 'Petit groupe': '👥',
+  'Forêt primaire': '🌲', 'Hors sentiers': '🥾', Journée: '☀️', 'Journée complète': '☀️', 'Journée entière': '☀️',
+  'Demi-journée': '🕐', 'Initiation technique': '🎓', 'Rappel encadré': '🪢', 'Rappels enchaînés': '🪢', 'Rappels hauts': '🪢',
+  'Pique-nique': '🧺', 'Sauts engagés': '💦', 'Expérience requise': '⚠️',
+};
+
+// ---------- localities (decision D2): communes become records, listings link to them by key ----------
+const localities: Content['localities'] = [];
+function localityKey(name: string, area: string) {
+  const key = slugify(name);
+  if (!localities.some((l) => l.key === key)) localities.push({ key, name, area: area as any, intro: null, seo: SEO_EMPTY });
+  return key;
+}
 
 /** "2 à 3 h", "45 min à 1 h", "1 h 30 sur place", "20 à 25 min aller" → minutes + leftover words. */
 function parseMinutes(text: string | null | undefined, where: string) {
@@ -104,10 +135,13 @@ const sourceType = (label: string, url: string): Content['sources'][number]['typ
   /Parc national|Préfecture|DEAL|legifrance|guadeloupe-parcnational|randoguadeloupe|Rando Guadeloupe/i.test(`${label} ${url}`) ? 'official'
     : /lesilesdeguadeloupe|Les îles de Guadeloupe|Comité du tourisme/i.test(`${label} ${url}`) ? 'tourism_office'
       : /Yalodé|Wild Canyon|kayak-guadeloupe|wild-canyon/i.test(`${label} ${url}`) ? 'operator' : 'media';
-function addSource(owner_kind: 'listing' | 'site', owner_id: string, label: string, url: string, used_for: string | null) {
-  if (sources.some((s) => s.owner_id === owner_id && s.url === url)) return;
+type Press = { title: string; publisher: string | null; note: string | null };
+function addSource(owner_kind: 'listing' | 'site', owner_id: string, label: string, url: string, used_for: string | null, press?: Press) {
+  const existing = sources.find((s) => s.owner_id === owner_id && s.url === url);
+  if (existing) { if (press) Object.assign(existing, { featured: true, ...press }); return; }
   const n = sources.filter((s) => s.owner_id === owner_id).length + 1;
-  sources.push({ id: `${owner_id}-source-${n}`, owner_kind, owner_id, label, url, type: sourceType(label, url), used_for });
+  sources.push({ id: `${owner_id}-source-${n}`, owner_kind, owner_id, label, url, type: sourceType(label, url), used_for,
+    featured: !!press, title: press?.title ?? null, publisher: press?.publisher ?? null, note: press?.note ?? null });
 }
 
 // ---------- destinations ----------
@@ -121,24 +155,25 @@ function mapDestination(x: any): Destination {
   for (const src of x.sitePhotos ?? []) addImage('listing', id, 'site', src, x.sitePhotosCredit, { caption: x.photoCaptions?.site });
   addSource('listing', id, x.sourcePublisher, x.sourceUrl, 'description');
   if (x.access_status?.sourceUrl) addSource('listing', id, x.access_status.sourceName ?? x.access_status.sourceUrl, x.access_status.sourceUrl, "statut d'accès");
+  // Press ("Ils en parlent") is now a featured source.
+  for (const p of x.press ?? []) addSource('listing', id, p.site, p.url, 'presse', { title: p.title, publisher: blank(p.by), note: blank(p.note) });
   return {
-    id, name: x.name, type: x.type === 'rivière' ? 'riviere' : x.type, alt_names: x.alt_names ?? [],
-    status: 'published', confidence: x.verif ? (CONFIDENCE_OF[x.verif] as any) : null, last_reviewed_on: null,
-    location: { area: x.island, zone: null, localities: x.communes === 'inconnu' ? [] : x.communes.split(' / '), geo: null },
+    id, name: x.name, type: TYPE_OF[x.type] ?? x.type, alt_names: x.alt_names ?? [],
+    status: 'published', status_note: null, confidence: x.verif ? (CONFIDENCE_OF[x.verif] as any) : null, last_reviewed_on: null,
+    location: { area: x.island, zone: null, localities: x.communes === 'inconnu' ? [] : x.communes.split(' / ').map((c: string) => localityKey(c, x.island)), geo: null },
     summary: x.desc,
     signature: blank(x.signature), signature_status: x.signature ? (x.signature_status === 'validated' ? 'validated' : 'draft') : null,
     lead: blank(x.lead), intro: blank(x.intro), more_title: blank(x.moreTitle), more_text: blank(x.expect),
     tip: x.insider ? { guide_id: x.insider.op ? GUIDE_OF[x.insider.op] : null, text: x.insider.text } : null,
     faq: (x.faq ?? []).map(([question, answer]: string[]) => ({ question, answer })),
     key_facts: (x.keyInfo ?? []).map(([label, value]: string[]) => ({ label, value })),
-    press: (x.press ?? []).map((p: any) => ({ site: p.site, by: blank(p.by), title: p.title, note: blank(p.note), url: p.url })),
+    criteria: x.has_waterfall ? ['avec-cascade'] : [],
     facts: {
       difficulty: x.difficulty ? DIFFICULTY[x.difficulty] : null,
       duration: parseMinutes(x.duration, `${x.id}.duration`),
       approach: parseMinutes(x.approach, `${x.id}.approach`),
       min_age: x.minAge ?? null,
       swimming: swimming(x.swimming),
-      has_waterfall: x.has_waterfall ?? null,
       season: blank(x.season),
     },
     fact_notes: x.swimming ? { swimming: x.swimming } : {},
@@ -174,8 +209,8 @@ const destinations: Destination[] = D.destinations.map(mapDestination);
     id: 'canyon-d-acomat', name: "Canyon d'Acomat", type: 'canyon', alt_names: [], confidence: null,
     signature: null, signature_status: null, location_policy: 'guide_only', access_status: null, access_restricted: false,
     summary: saut.more_text!, lead: null, intro: null, more_title: null, more_text: null,
-    facts: { difficulty: f.difficulty, duration: f.duration, approach: f.approach, min_age: f.min_age, swimming: null, has_waterfall: null, season: f.season },
-    fact_notes: {}, safety_alert: null, to_bring: [], key_facts: [], press: [],
+    facts: { difficulty: f.difficulty, duration: f.duration, approach: f.approach, min_age: f.min_age, swimming: null, season: f.season },
+    criteria: [], fact_notes: {}, safety_alert: null, to_bring: [], key_facts: [],
     tip: saut.tip, faq: saut.faq.filter((q) => CANYON_FAQ.test(q.question)),
     headings: { overview: null, access: null, offer: null, faq: null },
     estimated_fields: ['facts.difficulty', 'facts.duration'],
@@ -233,6 +268,7 @@ const guides = Object.entries(O.OPERATORS).map(([opId, o]: [string, any]) => {
 });
 const reviews = Object.entries(O.TEST_ARR).flatMap(([opId, list]: [string, any]) =>
   list.map((r: any, i: number) => ({ id: `${opId}-${i + 1}`, operator_id: opId, offer_id: null, quote: r.quote, author: r.author,
+    guide_id: GUIDE_OF[opId] ?? null, rating: null, date: null,
     source: r.source, status: /brouillon/i.test(r.source ?? '') ? 'draft' : 'published' })));
 
 // ---------- offers ----------
@@ -240,15 +276,20 @@ const LISTING_OF = (tourId: string) => (tourId === 'acomat' || tourId === 'wc-ac
 const offers: SiteOffer[] = O.DATA.map((t: any) => {
   const meta = O.TOUR_META[t.id];
   if (t.img) addImage('offer', t.id, 'hero', t.img, `Photo : ${O.OPERATORS[t.op].name}`);
+  const crit = [...(t.rappel ? ['rappel'] : []), ...(t.pets ? ['animaux-acceptes'] : []),
+    ...(t.tags as string[]).map((tag) => addCriterion('offer', tag, TAG_ICONS[tag] ?? null, { badge: true }))];
+  const story = meta.story && meta.story !== t.tip ? meta.story : null;
   return {
-    id: t.id, operator_id: t.op, listing_id: LISTING_OF(t.id), is_main: !!meta.main,
+    id: t.id, status: 'published', operator_id: t.op, listing_id: LISTING_OF(t.id), is_main: !!meta.main,
     name: t.name, subtitle: t.subtitle,
     duration_min: Math.round(t.hours * 60),
     price_eur: t.price, price_child_eur: t.priceChild ?? null, child_price_under_age: t.priceChild ? 12 : null, price_checked_on: null,
-    facts: { level: DIFFICULTY[t.level], spirit: t.esprit, min_age: t.minAge, approach_min: t.approachMin ?? null, has_rappel: !!t.rappel, pets_allowed: !!t.pets },
-    tags: t.tags, highlights: t.imagine, included: t.included, to_bring: t.bring,
+    criteria: crit,
+    facts: { level: DIFFICULTY[t.level], spirit: t.esprit, min_age: t.minAge, approach_min: t.approachMin ?? null },
+    highlights: t.imagine, included: t.included, to_bring: t.bring,
     meeting_note: t.meeting ?? null, guide_tip: t.tip ?? null,
-    guide_story: meta.story && meta.story !== t.tip ? meta.story : null,
+    // Old base: "Histoire validée" unticked on all 7: stories were drafted from the guides' tips.
+    guide_story: story, guide_story_status: story ? 'draft' : null,
     on_site_since: meta.yearsHere ? Number(String(meta.yearsHere).match(/\d{4}/)?.[0]) : null,
   } as SiteOffer;
 });
@@ -274,15 +315,18 @@ const social_posts = Object.entries(D.SOCIAL).flatMap(([siteId, posts]: [string,
 });
 
 // ---------- articles ----------
-const RULES: Record<string, { offer: Rule | null; listing: Rule | null }> = {
-  'canyoning-enfants': { offer: { match: 'all', conditions: [{ field: 'facts.min_age', op: 'lte', value: 10 }] }, listing: null },
-  'cascades-faciles-acces': { offer: { match: 'all', conditions: [{ field: 'facts.level', op: 'eq', value: 'facile' }, { field: 'facts.approach_min', op: 'lte', value: 25 }] }, listing: null },
-  'baignade-riviere': { offer: { match: 'all', conditions: [{ field: 'facts.level', op: 'eq', value: 'facile' }] }, listing: { match: 'all', conditions: [{ field: 'facts.swimming', op: 'filled' }] } },
-  'canyoning-debutant': { offer: { match: 'any', conditions: [{ field: 'facts.level', op: 'eq', value: 'facile' }, { field: 'tags', op: 'includes', value: 'Initiation technique' }] }, listing: null },
-  'randonnee-aquatique': { offer: { match: 'all', conditions: [{ field: 'facts.has_rappel', op: 'eq', value: false }] }, listing: null },
-  'canyoning-sensations': { offer: { match: 'any', conditions: [{ field: 'facts.spirit', op: 'eq', value: 'sensations' }, { field: 'facts.level', op: 'eq', value: 'engage' }] }, listing: null },
-  'canyoning-demi-journee': { offer: { match: 'all', conditions: [{ field: 'duration_min', op: 'lte', value: 270 }] }, listing: null },
+// Selections (decision D3): criteria / types / communes picked in Airtable; comparisons are named rules (ARTICLE_RULES).
+const sel = (s: Partial<Selection>): Selection => ({ types: [], localities: [], with: [], without: [], rule: null, include: [], exclude: [], ...s });
+const SELECTIONS: Record<string, { offer: Selection; listing: Partial<Selection> | null }> = {
+  'canyoning-enfants': { offer: sel({ rule: 'des_10_ans' }), listing: null },
+  'cascades-faciles-acces': { offer: sel({ rule: 'facile_approche_courte' }), listing: null },
+  'baignade-riviere': { offer: sel({ rule: 'niveau_facile' }), listing: { rule: 'baignade_renseignee' } },
+  'canyoning-debutant': { offer: sel({ rule: 'debutant' }), listing: null },
+  'randonnee-aquatique': { offer: sel({ without: ['rappel'] }), listing: null },
+  'canyoning-sensations': { offer: sel({ rule: 'sensations' }), listing: null },
+  'canyoning-demi-journee': { offer: sel({ rule: 'demi_journee' }), listing: null },
 };
+const RULES = Object.fromEntries(Object.entries(ARTICLE_RULES).map(([k, r]) => [k, r.rule]));
 const creditFor = (url: string) =>
   /kayak-guadeloupe\.fr/.test(url) ? 'Photo : Yalodé' : D.destinations.find((x: any) => x.img === url)?.credit ?? 'Photo : Wikimedia Commons';
 const idByName = (name: string): { kind: 'offer' | 'listing'; id: string } | null => {
@@ -300,156 +344,60 @@ const articles = B.SEO_PAGES.map((pg: any) => {
     return [{ ...ref, text: text as string }];
   }) : [];
   return {
-    id: pg.id, label: pg.label, h1: pg.h1, eyebrow: ex.eyebrow ?? 'Guadeloupe', intro: pg.intro, answer: B.SEO_ANSWER[pg.id],
+    id: pg.id, status: 'published' as const, label: pg.label, h1: pg.h1, eyebrow: ex.eyebrow ?? 'Guadeloupe', intro: pg.intro, answer: B.SEO_ANSWER[pg.id],
     author_ids: ['pascal', 'quentin'], featured_offer_id: ex.featured ?? null,
     takeaways: (ex.points ?? []).map((p: any) => ({ title: p.t, text: p.d })),
     editorial: ed ? { eyebrow: ed.eyebrow, h2: ed.h2, sections: ed.blocks.map(([title, text]: string[]) => ({ title, text })),
       tips: ed.tips.map(([label, value]: string[]) => ({ label, value })) } : null,
-    offer_rule: RULES[pg.id].offer, listing_ids: (pg.sites ?? []).map(slugOf), listing_rule: RULES[pg.id].listing,
-    angle_label: angle ? angle[0] : null, angle_notes: angleNotes,
+    offer_selection: SELECTIONS[pg.id].offer,
+    listing_selection: SELECTIONS[pg.id].listing || pg.sites?.length ? sel({ ...SELECTIONS[pg.id].listing, include: (pg.sites ?? []).map(slugOf) }) : null,
+    angle_label: angle ? angle[0] : null, angle_notes: angleNotes, faq: [],
     why_intro: B.SEO_WHY[pg.id], safety_note: pg.safety, published_on: '2026-10-02', updated_on: '2026-10-02',
     seo: { title: null, description: null },
   };
 });
 for (const [name, url] of B.SEO_SOURCES as string[][]) addSource('site', 'site', name, url, 'articles');
 
-// Check: the declarative rules select exactly what the design's JavaScript rules selected.
+// Check: the selections pick exactly what the design's JavaScript rules picked.
+const listingOf = (o: SiteOffer) => destinations.find((d) => d.id === o.listing_id)!;
 for (const pg of B.SEO_PAGES) {
   const jsRule = new Function(`return ${pg.tours_rule}`)() as (x: any) => boolean;
   const before = O.DATA.filter(jsRule).map((t: any) => t.id).sort().join(',');
   const a = articles.find((x: any) => x.id === pg.id)!;
-  const after = offers.filter((o) => matchesRule(o, a.offer_rule!)).map((o) => o.id).sort().join(',');
-  if (before !== after) errors.push(`article ${pg.id}: offer rule selects [${after}] but the design selected [${before}]`);
-  if (pg.sites_rule) {
-    const jsSites = new Function(`return ${pg.sites_rule}`)() as (x: any) => boolean;
-    const b = D.destinations.filter((s: any) => !(D.ACCESS_RESTRICTED as string[]).includes(s.id) && jsSites(s)).map((s: any) => slugOf(s.id)).sort().join(',');
-    const af = destinations.filter((d) => !d.access_restricted && matchesRule(d, a.listing_rule!)).map((d) => d.id).sort().join(',');
-    if (b !== af) errors.push(`article ${pg.id}: listing rule selects [${af}] but the design selected [${b}]`);
-  }
+  const after = select(offers, a.offer_selection!, RULES, listingOf).map((o) => o.id).sort().join(',');
+  if (before !== after) errors.push(`article ${pg.id}: offer selection picks [${after}] but the design picked [${before}]`);
+  const jsSites = pg.sites_rule ? (new Function(`return ${pg.sites_rule}`)() as (x: any) => boolean) : () => false;
+  const b = [...new Set([...D.destinations.filter((s: any) => !(D.ACCESS_RESTRICTED as string[]).includes(s.id) && jsSites(s)).map((s: any) => slugOf(s.id)),
+    ...(pg.sites ?? []).map(slugOf)])].sort().join(',');
+  const af = a.listing_selection ? select(destinations, a.listing_selection, RULES).filter((d) => !d.access_restricted || a.listing_selection!.include.includes(d.id)).map((d) => d.id).sort().join(',') : '';
+  if (b !== af) errors.push(`article ${pg.id}: listing selection picks [${af}] but the design picked [${b}]`);
 }
 
 // Decision 2026-10-07 (Jordan): Yalodé's outing now sits on the canyon page, so it takes the canyon's name.
 offers.find((o) => o.id === 'acomat')!.name = "Canyon d'Acomat";
 notes.push('Yalodé\'s outing `acomat` is renamed "Canyon d\'Acomat" (decision 2026-10-07; confirm with Yalodé).');
 
-// ---------- blocks, shared media ----------
-const blocks = [
-  { key: 'privacy_policy', status: 'placeholder' as const, body: '[PRIVACY_POLICY_TEXT]', updated_on: null },
-  { key: 'why_guide_points', status: 'final' as const, body: B.SEO_WHY_POINTS.map(([icon, title, text]: string[]) => ({ icon, title, text })), updated_on: '2026-10-02' },
+// ---------- site copy (page blocks and lists; interface labels are keyed in phase 4) ----------
+const copy: Content['copy'] = [
+  { key: 'privacy_policy', page: 'Confidentialité', section: 'Texte', format: 'text', text: '[PRIVACY_POLICY_TEXT]', items: [], status: 'placeholder', updated_on: null },
+  { key: 'why_guide_points', page: 'Articles', section: 'Pourquoi un guide', format: 'list', text: null,
+    items: B.SEO_WHY_POINTS.map(([icon, label, value]: string[]) => ({ icon, label, value })), status: 'final', updated_on: '2026-10-02' },
 ];
 for (const url of D.STOCK_POOL as string[]) addImage('site', 'site', 'illustration', url, creditFor(url));
 
-// ---------- validate ----------
-const content = { destinations, operators, guides, offers, reviews, social_posts, articles, blocks, images, sources, copy: [], rejected: [] };
-const parsed = contentSchema.safeParse(content);
-if (!parsed.success) for (const i of parsed.error.issues) errors.push(`schema: ${i.path.join('.')}: ${i.message}`);
-
-// Referential integrity
-const ids = (arr: { id: string }[], label: string) => {
-  const seen = new Set<string>();
-  for (const x of arr) { if (seen.has(x.id)) errors.push(`duplicate ${label} id "${x.id}"`); seen.add(x.id); }
-  return seen;
-};
-const destIds = ids(destinations, 'destination'), opIds = ids(operators, 'operator'), offerIds = ids(offers, 'offer');
-const guideIds = ids(guides, 'guide'), articleIds = ids(articles, 'article');
-ids(images, 'image'); ids(sources, 'source');
-for (const o of offers) {
-  if (!destIds.has(o.listing_id)) errors.push(`offer ${o.id}: unknown destination ${o.listing_id}`);
-  if (!opIds.has(o.operator_id)) errors.push(`offer ${o.id}: unknown operator ${o.operator_id}`);
-}
-for (const d of destinations) {
-  const mains = offers.filter((o) => o.listing_id === d.id && o.is_main);
-  if (offers.some((o) => o.listing_id === d.id) && mains.length !== 1) errors.push(`destination ${d.id}: needs exactly one main offer (has ${mains.length})`);
-  if (d.tip?.guide_id && !guideIds.has(d.tip.guide_id)) errors.push(`destination ${d.id}: unknown guide in tip`);
-}
-for (const a of articles) {
-  if (a.featured_offer_id && !offerIds.has(a.featured_offer_id)) errors.push(`article ${a.id}: unknown featured offer`);
-  for (const id of a.listing_ids) if (!destIds.has(id)) errors.push(`article ${a.id}: unknown destination ${id}`);
-  for (const id of a.author_ids) if (!guideIds.has(id)) errors.push(`article ${a.id}: unknown author ${id}`);
-}
-const owners: Record<string, Set<string>> = { listing: destIds, offer: offerIds, article: articleIds, site: new Set(['site']) };
-for (const i of images) if (!owners[i.owner_kind].has(i.owner_id)) errors.push(`image ${i.id}: unknown ${i.owner_kind} ${i.owner_id}`);
-for (const s of sources) if (!owners[s.owner_kind].has(s.owner_id)) errors.push(`source ${s.id}: unknown ${s.owner_kind} ${s.owner_id}`);
-for (const p of social_posts) if (!destIds.has(p.listing_id)) errors.push(`social post ${p.id}: unknown destination`);
-
-// Safety claims are allowed only where a guide is involved (decision 2026-10-07).
-const checked = Object.fromEntries(Object.entries(content).filter(([k]) => !(SAFETY_CLAIMS.allowed_in as readonly string[]).includes(k)));
-for (const { path, text } of findText(checked).filter(({ text }) => SAFETY_CLAIMS.pattern.test(text)))
-  errors.push(`safety claim outside guided-outing content: \`${path}\`: "${text.length > 140 ? text.slice(0, 137) + '…' : text}"`);
-
-// Production-only checks
-const prodIssues: string[] = [];
-for (const p of findPlaceholders(content)) prodIssues.push(`placeholder ${p.token} at \`${p.path}\``);
-for (const d of destinations) if (d.signature_status === 'draft') prodIssues.push(`draft signature: \`${d.id}\``);
-for (const p of social_posts) if (!p.account) prodIssues.push(`social post \`${p.id}\` has no account name`);
-for (const g of guides) if (!g.full_name) prodIssues.push(`guide \`${g.id}\` has no full name (H1 and Person JSON-LD)`);
-for (const o of operators) if (o.rating !== null && !o.rating_source) prodIssues.push(`operator \`${o.id}\` shows a rating (${o.rating}) without a source`);
-const needPermission = images.filter((i) => i.rights === 'permission_needed');
-if (needPermission.length) prodIssues.push(`${needPermission.length} image(s) need the owner's permission: ${[...new Set(needPermission.map((i) => `\`${i.owner_id}\` (${i.source_name})`))].join(', ')}`);
-
-// ---------- completeness and landing pages ----------
-const heroOf = (id: string) => images.find((i) => i.owner_id === id && i.role === 'hero') ?? null;
-const scores = destinations.map((d) => {
-  const c = completeness({ ...d, hero: heroOf(d.id) }, COMPLETENESS.keys);
-  return { d, ...c, indexable: d.status === 'published' && c.score >= COMPLETENESS.threshold };
-});
-const landings = landingPages(destinations, LANDING.dimensions, LANDING.min);
-const landingLabel = (dim: string, v: string) => (dim === 'type' ? (LISTING_TYPES as any)[v]?.plural ?? v : v);
-
-// Sentences reviewed and kept by Jordan (2026-10-07).
-const KEPT_BY_DECISION = ["Le rendez-vous se fait au parking du Saut d'Acomat."];
-const textLeaks = destinations
-  .filter((d) => d.location_policy === 'guide_only' || d.location_policy === 'closed')
-  .flatMap((d) => [...d.faq.map((f) => f.answer), d.summary, d.intro, d.more_text]
-    .filter((t): t is string => !!t && /rendez-vous|parking|se garer|on se gare/i.test(t) && !KEPT_BY_DECISION.some((k) => t.includes(k)))
-    .map((t) => `\`${d.id}\`: "${t.length > 160 ? t.slice(0, 157) + '…' : t}"`));
-
-// ---------- write ----------
+// ---------- write fixtures and the migration notes (the content checks run next: scripts/check-content.ts) ----------
+criteria.sort((a, b) => (a.applies_to === b.applies_to ? a.order - b.order : a.applies_to === 'listing' ? -1 : 1));
+const content: Content = { destinations, types, localities, criteria, operators, guides, offers, reviews, social_posts, articles, images, sources, copy } as Content;
 mkdirSync(outDir, { recursive: true });
 for (const [k, v] of Object.entries(content)) writeFileSync(resolve(outDir, `${k}.json`), JSON.stringify(v, null, 2) + '\n');
 
-const pct = (n: number) => `${Math.round(n * 100)} %`;
-const count = <T,>(arr: T[], f: (x: T) => string) => Object.entries(arr.reduce<Record<string, number>>((m, x) => ({ ...m, [f(x)]: (m[f(x)] ?? 0) + 1 }), {})).map(([k, n]) => `${k} ${n}`).join(' · ');
-const report = `# Content report
+writeFileSync(resolve(root, 'docs/DESIGN_MIGRATION.md'), `# Design migration notes
 
-Generated by \`pnpm content:check\` from \`data/*.json\` on ${new Date().toISOString().slice(0, 10)}. Do not edit by hand: change the data or the mapping, then run it again.
-
-## Summary
-- **${destinations.length} destinations** (21 from the design + Canyon d'Acomat), ${operators.length} operators, ${guides.length} guides, ${offers.length} outings, ${reviews.length} published reviews, ${social_posts.length} social posts, ${articles.length} articles.
-- Schema and integrity: **${errors.length === 0 ? 'pass' : `${errors.length} error(s)`}**.
-- Production readiness: **${prodIssues.length} item(s) to fill** before launch (they are allowed in development).
-- Indexable places (published and completeness ≥ ${pct(COMPLETENESS.threshold)}): **${scores.filter((s) => s.indexable).length} / ${scores.length}**. The others get \`noindex\` until filled.
-- Images: ${images.length}, every one with a credit. Rights: ${count(images, (i) => i.rights)}.
-- Sources: ${sources.length}. Types: ${count(sources, (s) => s.type)}.
+Generated by \`pnpm content:check\` (\`scripts/map-fixtures.ts\`): how the Claude Design export (\`data/*.json\`) became the content. One-off: once the Airtable base is filled, \`pnpm content:pull\` replaces this step.
 ${errors.length ? `\n## Errors\n${errors.map((e) => `- ${e}`).join('\n')}\n` : ''}
-## Completeness per destination
-Key fields (${COMPLETENESS.keys.length}, from \`site.config.ts\`): ${COMPLETENESS.keys.map((k) => `\`${k}\``).join(', ')}.
-
-| Destination | Policy | Score | Indexed | Signature | Missing key fields | Estimates to confirm |
-|---|---|---|---|---|---|---|
-${scores.map(({ d, score, missing, indexable }) => `| ${d.name} (\`${d.id}\`) | ${d.location_policy ?? '—'} | ${pct(score)} | ${indexable ? 'yes' : 'no'} | ${d.signature_status ?? 'empty'} | ${missing.join(', ') || '—'} | ${d.estimated_fields.join(', ') || '—'} |`).join('\n')}
-
-## Landing pages (computed: ${LANDING.min}+ published places)
-${landings.map((l) => `- ${LANDING.dimensions.find((d) => d.key === l.dimension)!.label} › **${landingLabel(l.dimension, l.value)}**: ${l.listing_ids.length} places`).join('\n')}
-
-## To fill before launch (Airtable)
-${prodIssues.map((p) => `- ${p}`).join('\n')}
-- Yalodé logo: \`logo_url\` is empty.
-- Location policies to confirm with the guides: Chutes Moreau = \`public\`, Rivière Bourceau = \`guide_only\`.
-- 4 rivers with no ${LOCATION_LABELS.locality.toLowerCase()} and no policy (Grande Anse, Pérou, Lostau, Ziotte): they show "Commune non confirmée" and stay out of commune pages.
-
-## Worth adding (not blocking)
-- \`last_reviewed_on\`: empty on all ${destinations.length} places. It feeds "Mis à jour le" and \`dateModified\` (freshness for Google and AI assistants).
-- \`location.geo\`: empty on the ${destinations.filter((d) => d.location_policy === 'public').length} public places. Needed for the map link, "À proximité" and JSON-LD \`geo\`. Only from a published source.
-- \`price_checked_on\`: empty on all ${offers.length} outings. Prices should carry the date they were read.
-- \`rating_count\` and \`rating_source\` for both operators.
-
 ## Removed by a rule
 Directions are never published for \`guide_only\` and \`closed\` places (decision Q2, 2026-10-07); mock content is never published.
 ${dropped.map((d) => `- ${d}`).join('\n')}
-
-## Text to review (guide-only or closed places that still mention a meeting place or parking)
-${textLeaks.length ? textLeaks.map((t) => `- ${t}`).join('\n') : '- none'}
 
 ## Mapping decisions
 ${notes.map((n) => `- ${n}`).join('\n')}
@@ -457,14 +405,15 @@ ${notes.map((n) => `- ${n}`).join('\n')}
 - Photos are their own records with a rights status, read from where they come from: Wikimedia = \`free\`, Yalodé and Wild Canyon sites = \`partner\`, anything else (here: Parc national / Rando Guadeloupe photos, shown as "tous droits réservés") = \`permission_needed\`.
 - Sources are typed records: each place's main source and the source of its access status; the article sources are site-wide.
 - Durations and approaches are minute ranges (\`{min, max, note}\`): "2 à 3 h" → 120–180, "20 à 25 min aller (descente raide)" → 20–25 + note.
-- The design's JavaScript selection rules for articles are declarative rules (dotted field, operator, value); the check confirms each selects exactly the same outings and places as before.
+- Article selections (decision D3): types, communes and criteria (with / without) picked in Airtable, plus include / exclude; comparisons on measured facts are named rules in \`site.config.ts\` (\`ARTICLE_RULES\`). The check confirms each article picks exactly the same outings and places as the design's JavaScript.
+- Yes/no attributes are criteria (decision D1): \`has_waterfall\` → "Avec cascade"; \`has_rappel\` → "Rappel"; \`pets_allowed\` → "Animaux acceptés"; the ${criteria.filter((c) => c.badge).length} offer tags → criteria shown as badges. Near-duplicate tags are kept as written (see \`docs/OPEN_LOOPS.md\`).
+- Types and communes are records with landing-page text (decision D2); places link to communes by key.
+- Press ("Ils en parlent") is a featured source (title, publisher, note).
+- Guide stories ("Pourquoi je vous emmène ici") are drafts until the guide approves them (old base: "Histoire validée" unticked).
+- Page blocks (privacy text, "why a guide" points) are site texts (\`copy\`); interface labels are keyed in phase 4, when the templates exist.
 - Safety claims ("en sécurité", "en toute sécurité") are allowed only in guided-outing content (outings, guides); the check fails anywhere else (decision 2026-10-07). Template copy (\`data/ui-copy.json\`) is checked when it is placed in phase 4.
 - Canyon doré keeps its FAQ sentence about the meeting place (decision 2026-10-07).
-`;
-writeFileSync(resolve(root, 'docs/CONTENT_REPORT.md'), report);
-
-console.log(`destinations ${destinations.length} · offers ${offers.length} · articles ${articles.length} · images ${images.length} · sources ${sources.length}`);
-console.log(`errors ${errors.length} · production items ${prodIssues.length} · indexable ${scores.filter((s) => s.indexable).length}/${scores.length}`);
+`);
+console.log(`migration: places ${destinations.length} · outings ${offers.length} · articles ${articles.length} · images ${images.length} · sources ${sources.length} · criteria ${criteria.length}`);
 for (const e of errors) console.error('ERROR', e);
-if (production) for (const p of prodIssues) console.error('PRODUCTION', p);
-if (errors.length || (production && prodIssues.length)) process.exit(1);
+if (errors.length) process.exit(1);

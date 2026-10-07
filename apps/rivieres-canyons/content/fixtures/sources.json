@@ -6,7 +6,11 @@
     "label": "Parc national de la Guadeloupe",
     "url": "https://guadeloupe-parcnational.fr/fr/des-connaissances/patrimoines-naturels/les-milieux/milieux-humides/eau-douce-cascades-et-rivieres",
     "type": "official",
-    "used_for": "description"
+    "used_for": "description",
+    "featured": false,
+    "title": null,
+    "publisher": null,
+    "note": null
   },
   {
     "id": "riviere-lezarde-source-1",
@@ -15,7 +19,11 @@
     "label": "Parc national de la Guadeloupe",
     "url": "https://guadeloupe-parcnational.fr/fr/des-connaissances/patrimoines-naturels/les-milieux/milieux-humides/eau-douce-cascades-et-rivieres",
     "type": "official",
-    "used_for": "description"
+    "used_for": "description",
+    "featured": false,
+    "title": null,
+    "publisher": null,
+    "note": null
   },
   {
     "id": "saut-de-la-lezarde-source-1",
@@ -24,7 +32,11 @@
     "label": "Parc national de la Guadeloupe",
     "url": "https://guadeloupe-parcnational.fr/fr/des-connaissances/patrimoines-naturels/les-milieux/milieux-humides/eau-douce-cascades-et-rivieres",
     "type": "official",
-    "used_for": "description"
+    "used_for": "description",
+    "featured": false,
+    "title": null,
+    "publisher": null,
+    "note": null
   },
   {
     "id": "riviere-moustique-source-1",
@@ -33,7 +45,11 @@
     "label": "Préfecture de Guadeloupe (DEAL)",
     "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000031496919",
     "type": "official",
-    "used_for": "description"
+    "used_for": "description",
+    "featured": false,
+    "title": null,
+    "publisher": null,
+    "note": null
   },
   {
     "id": "riviere-bras-david-source-1",
@@ -42,7 +58,11 @@
     "label": "Parc national de la Guadeloupe",
     "url": "https://guadeloupe-parcnational.fr/fr/raa/2022",
     "type": "official",
-    "used_for": "description"
+    "used_for": "description",
+    "featured": false,
+    "title": null,
+    "publisher": null,
+    "note": null
   },
   {
     "id": "riviere-corossol-source-1",
@@ -51,7 +71,11 @@
     "label": "Parc national de la Guadeloupe",
     "url": "https://www.guadeloupe-parcnational.fr/fr/raa/2021",
     "type": "official",
-    "used_for": "description"
+    "used_for": "description",
+    "featured": false,
+    "title": null,
+    "publisher": null,
+    "note": null
   },
   {
     "id": "cascade-aux-ecrevisses-source-1",
@@ -60,7 +84,63 @@
     "label": "Parc national de la Guadeloupe",
     "url": "https://guadeloupe-parcnational.fr/fr/actualites/cascade-aux-ecrevisses-une-nouvelle-phase-de-travaux-pour-un-sentier-plus-sur-et",
     "type": "official",
-    "used_for": "description"
+    "used_for": "description",
+    "featured": false,
+    "title": null,
+    "publisher": null,
+    "note": null
+  },
+  {
+    "id": "cascade-aux-ecrevisses-source-2",
+    "owner_kind": "listing",
+    "owner_id": "cascade-aux-ecrevisses",
+    "label": "Rando Guadeloupe",
+    "url": "https://www.randoguadeloupe.gp/fr/trek/2752-Cascade-aux-Ecrevisses",
+    "type": "official",
+    "used_for": "presse",
+    "featured": true,
+    "title": "Fiche randonnée : Cascade aux Écrevisses",
+    "publisher": "Parc national de la Guadeloupe",
+    "note": "Tracé GPX, profil, accessibilité et accès en bus."
+  },
+  {
+    "id": "cascade-aux-ecrevisses-source-3",
+    "owner_kind": "listing",
+    "owner_id": "cascade-aux-ecrevisses",
+    "label": "Les îles de Guadeloupe",
+    "url": "https://www.lesilesdeguadeloupe.com/decouvrir/espaces-naturels/les-cascades/la-cascade-aux-ecrevisses/",
+    "type": "tourism_office",
+    "used_for": "presse",
+    "featured": true,
+    "title": "La Cascade aux Écrevisses",
+    "publisher": "Comité du tourisme",
+    "note": "Présentation officielle du site et conseils de visite."
+  },
+  {
+    "id": "cascade-aux-ecrevisses-source-4",
+    "owner_kind": "listing",
+    "owner_id": "cascade-aux-ecrevisses",
+    "label": "Wikipédia",
+    "url": "https://fr.wikipedia.org/wiki/Cascade_aux_%C3%A9crevisses",
+    "type": "media",
+    "used_for": "presse",
+    "featured": true,
+    "title": "Cascade aux écrevisses",
+    "publisher": "Encyclopédie",
+    "note": "Localisation, hauteur et fréquentation."
+  },
+  {
+    "id": "cascade-aux-ecrevisses-source-5",
+    "owner_kind": "listing",
+    "owner_id": "cascade-aux-ecrevisses",
+    "label": "Guadeloupe Tourisme",
+    "url": "https://fr.guadeloupe-tourisme.com/366/cascade-aux-ecrevisses-petitbourg/",
+    "type": "media",
+    "used_for": "presse",
+    "featured": true,
+    "title": "Cascade aux écrevisses, Petit-Bourg",
+    "publisher": "Guide en ligne",
+    "note": "Le second bassin en amont et les carbets de pique-nique."
   },
   {
     "id": "chutes-du-carbet-source-1",
@@ -69,7 +149,11 @@
     "label": "Parc national de la Guadeloupe",
     "url": "https://www.guadeloupe-parcnational.fr/sites/guadeloupe-parcnational.fr/files/atoms/files/depliant_chutes_carbet.pdf",
     "type": "official",
-    "used_for": "description"
+    "used_for": "description",
+    "featured": false,
+    "title": null,
+    "publisher": null,
+    "note": null
   },
   {
     "id": "chutes-du-carbet-source-2",
@@ -78,7 +162,11 @@
     "label": "Sailoe (2026)",
     "url": "https://www.sailoe.com/en/carbet-falls-guadeloupe/",
     "type": "media",
-    "used_for": "statut d'accès"
+    "used_for": "statut d'accès",
+    "featured": false,
+    "title": null,
+    "publisher": null,
+    "note": null
   },
   {
     "id": "chutes-moreau-source-1",
@@ -87,7 +175,11 @@
     "label": "Parc national de la Guadeloupe",
     "url": "https://geotrek.guadeloupe-parcnational.fr/api/fr/treks/1576/chutes-moreau.pdf",
     "type": "official",
-    "used_for": "description"
+    "used_for": "description",
+    "featured": false,
+    "title": null,
+    "publisher": null,
+    "note": null
   },
   {
     "id": "riviere-moreau-source-1",
@@ -96,7 +188,11 @@
     "label": "Parc national de la Guadeloupe",
     "url": "https://geotrek.guadeloupe-parcnational.fr/api/fr/treks/1576/chutes-moreau.pdf",
     "type": "official",
-    "used_for": "description"
+    "used_for": "description",
+    "featured": false,
+    "title": null,
+    "publisher": null,
+    "note": null
   },
   {
     "id": "saut-d-acomat-source-1",
@@ -105,7 +201,11 @@
     "label": "Visite Guadeloupe",
     "url": "https://visiteguadeloupe.com/en/most-beautiful-waterfalls-guadeloupe-swimming-hikes/",
     "type": "media",
-    "used_for": "description"
+    "used_for": "description",
+    "featured": false,
+    "title": null,
+    "publisher": null,
+    "note": null
   },
   {
     "id": "saut-d-acomat-source-2",
@@ -114,7 +214,11 @@
     "label": "Wikipédia",
     "url": "https://fr.wikipedia.org/wiki/Saut_de_l%27Acomat",
     "type": "media",
-    "used_for": "statut d'accès"
+    "used_for": "statut d'accès",
+    "featured": false,
+    "title": null,
+    "publisher": null,
+    "note": null
   },
   {
     "id": "riviere-bourceau-source-1",
@@ -123,7 +227,11 @@
     "label": "Préfecture de Guadeloupe (DEAL)",
     "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000031496919",
     "type": "official",
-    "used_for": "description"
+    "used_for": "description",
+    "featured": false,
+    "title": null,
+    "publisher": null,
+    "note": null
   },
   {
     "id": "riviere-beaugendre-source-1",
@@ -132,7 +240,11 @@
     "label": "Préfecture de Guadeloupe (DEAL)",
     "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000031496919",
     "type": "official",
-    "used_for": "description"
+    "used_for": "description",
+    "featured": false,
+    "title": null,
+    "publisher": null,
+    "note": null
   },
   {
     "id": "riviere-grande-anse-source-1",
@@ -141,7 +253,11 @@
     "label": "Préfecture de Guadeloupe (DEAL)",
     "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000031496919",
     "type": "official",
-    "used_for": "description"
+    "used_for": "description",
+    "featured": false,
+    "title": null,
+    "publisher": null,
+    "note": null
   },
   {
     "id": "riviere-du-perou-source-1",
@@ -150,7 +266,11 @@
     "label": "Préfecture de Guadeloupe (DEAL)",
     "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000031496919",
     "type": "official",
-    "used_for": "description"
+    "used_for": "description",
+    "featured": false,
+    "title": null,
+    "publisher": null,
+    "note": null
   },
   {
     "id": "riviere-lostau-source-1",
@@ -159,7 +279,11 @@
     "label": "Préfecture de Guadeloupe (DEAL)",
     "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000031496919",
     "type": "official",
-    "used_for": "description"
+    "used_for": "description",
+    "featured": false,
+    "title": null,
+    "publisher": null,
+    "note": null
   },
   {
     "id": "grande-riviere-de-vieux-habitants-source-1",
@@ -168,7 +292,11 @@
     "label": "Parc national de la Guadeloupe",
     "url": "https://www.guadeloupe-parcnational.fr/fr/node/2307",
     "type": "official",
-    "used_for": "description"
+    "used_for": "description",
+    "featured": false,
+    "title": null,
+    "publisher": null,
+    "note": null
   },
   {
     "id": "riviere-ziotte-source-1",
@@ -177,7 +305,11 @@
     "label": "Préfecture de Guadeloupe (DEAL)",
     "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000031496919",
     "type": "official",
-    "used_for": "description"
+    "used_for": "description",
+    "featured": false,
+    "title": null,
+    "publisher": null,
+    "note": null
   },
   {
     "id": "canyon-dore-source-1",
@@ -186,7 +318,11 @@
     "label": "Yalodé (kayak-guadeloupe.fr)",
     "url": "https://www.kayak-guadeloupe.fr/",
     "type": "operator",
-    "used_for": "description"
+    "used_for": "description",
+    "featured": false,
+    "title": null,
+    "publisher": null,
+    "note": null
   },
   {
     "id": "canyon-ferry-source-1",
@@ -195,7 +331,11 @@
     "label": "Wild Canyon (wild-canyon.fr)",
     "url": "https://wild-canyon.fr/",
     "type": "operator",
-    "used_for": "description"
+    "used_for": "description",
+    "featured": false,
+    "title": null,
+    "publisher": null,
+    "note": null
   },
   {
     "id": "canyon-bois-malaise-source-1",
@@ -204,7 +344,11 @@
     "label": "Wild Canyon (wild-canyon.fr)",
     "url": "https://wild-canyon.fr/",
     "type": "operator",
-    "used_for": "description"
+    "used_for": "description",
+    "featured": false,
+    "title": null,
+    "publisher": null,
+    "note": null
   },
   {
     "id": "canyon-d-acomat-source-1",
@@ -213,7 +357,11 @@
     "label": "Yalodé (kayak-guadeloupe.fr)",
     "url": "https://www.kayak-guadeloupe.fr/",
     "type": "operator",
-    "used_for": "description"
+    "used_for": "description",
+    "featured": false,
+    "title": null,
+    "publisher": null,
+    "note": null
   },
   {
     "id": "site-source-1",
@@ -222,7 +370,11 @@
     "label": "Parc national de la Guadeloupe",
     "url": "https://www.guadeloupe-parcnational.fr/",
     "type": "official",
-    "used_for": "articles"
+    "used_for": "articles",
+    "featured": false,
+    "title": null,
+    "publisher": null,
+    "note": null
   },
   {
     "id": "site-source-2",
@@ -231,7 +383,11 @@
     "label": "Rando Guadeloupe",
     "url": "https://www.randoguadeloupe.gp/",
     "type": "official",
-    "used_for": "articles"
+    "used_for": "articles",
+    "featured": false,
+    "title": null,
+    "publisher": null,
+    "note": null
   },
   {
     "id": "site-source-3",
@@ -240,7 +396,11 @@
     "label": "Les îles de Guadeloupe",
     "url": "https://www.lesilesdeguadeloupe.com/",
     "type": "tourism_office",
-    "used_for": "articles"
+    "used_for": "articles",
+    "featured": false,
+    "title": null,
+    "publisher": null,
+    "note": null
   },
   {
     "id": "site-source-4",
@@ -249,7 +409,11 @@
     "label": "Yalodé",
     "url": "https://www.kayak-guadeloupe.fr/",
     "type": "operator",
-    "used_for": "articles"
+    "used_for": "articles",
+    "featured": false,
+    "title": null,
+    "publisher": null,
+    "note": null
   },
   {
     "id": "site-source-5",
@@ -258,6 +422,10 @@
     "label": "Wild Canyon",
     "url": "https://wild-canyon.fr/",
     "type": "operator",
-    "used_for": "articles"
+    "used_for": "articles",
+    "featured": false,
+    "title": null,
+    "publisher": null,
+    "note": null
   }
 ]

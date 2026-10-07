@@ -4,7 +4,8 @@
   "private": true,
   "type": "module",
   "exports": {
-    "./content": "./src/content/index.ts"
+    "./content": "./src/content/index.ts",
+    "./airtable": "./src/airtable/index.ts"
   },
   "dependencies": {
     "zod": "^3.25.0"

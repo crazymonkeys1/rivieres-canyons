@@ -8,23 +8,24 @@ The boilerplate is the four packages (`core`, `directory`, `places`) plus one ap
 
 | Layer | Entities and rules |
 |---|---|
-| **Core** | Images: rights (`free` / `partner` / `permission_needed`), credit, licence, source page. Typed sources. Interface copy by key. Research memory (rejected listings). SEO overrides. Placeholder check. Completeness score. The facts system (`FactDefinition` → generated schema). |
-| **Directory** | Listing (generic fields, `facts`, three publication gates). Operator, Guide, Offer (0..n per listing, one main). Review (sourced only). Social post. Article (selection rules, authors). Block. Declarative rules (`matchesRule`). Landing pages (`landingPages`, threshold). |
-| **Places** | Location policy (`public` / `commune_only` / `guide_only` / `closed`), dated access status, restricted access, directions (public only), safety alert, risks, things to bring. |
+| **Core** | Images: rights (`free` / `partner` / `permission_needed`), credit, licence, source page. Typed sources (featured = press). Site texts and lists by key. SEO overrides. Placeholder check. Completeness score. The facts system (`FactDefinition` → generated schema). The Airtable engine (field spec, CSV, round trip, API by field ID). |
+| **Directory** | Listing (generic fields, criteria, `facts`, status incl. draft / rejected, three publication gates). Types and localities (with landing text). Criteria (yes/no rows: filter, badge, key fact, landing). Operator, Guide, Offer (0..n per listing, one main). Review (sourced only). Social post. Article (selection: types, localities, criteria with/without, named rule, include/exclude; sections; FAQ). Landing pages (`landingPages`, threshold, criteria dimension). The Airtable tables for all of these. |
+| **Places** | Location policy (`public` / `commune_only` / `guide_only` / `closed`), dated access status, restricted access, directions (public only), safety alert, risks, things to bring. The places table in Airtable, with its "Ce qui manque" formula. |
 
 ## 2. What a new site writes (the app)
 
 1. **`src/content/site.config.ts`**:
-   - **Facts:** place facts and offer facts (`FactDefinition[]`): key, label, type, options, unit, icon, `filter`, `key_fact`, `completeness`, `schema_org`.
-   - **Vocabularies:** listing types (label, plural, icon, aliases), risks, levels and others.
-   - **Location labels** (area / zone / locality) and the list of areas. Localities are read from the data.
+   - **Facts** (measured values only; yes/no attributes are Criteria rows in Airtable): place facts and offer facts (`FactDefinition[]`): key, label, type, options + labels, unit, icon, `filter`, `key_fact`, `completeness`, `schema_org`, `note`.
+   - **Vocabularies:** risks, levels and others. Types, communes and criteria are Airtable tables.
+   - **Location labels** (area / zone / locality), the list of areas and zones.
+   - **Article rules:** named comparisons on facts (`ARTICLE_RULES`), picked by editors from a list.
    - **Confidence levels:** label, note, and `hide`.
    - **Completeness:** key fields and threshold (default 0.6).
    - **Landing dimensions** and minimum (default 3): type, locality, zone, an activity, an audience.
    - **Conversion:** UTM source name, icon style (`svg` line icons or `emoji`: choose per site, no default), copy rules (e.g. where safety claims are allowed).
 2. **`src/content/schema.ts`:** narrows the package shapes with the site's vocabularies and facts. It is usually a copy of the reference app's file.
 3. **Theme:** tier-1 palette values, font files and families, radius values, breakpoint values. Semantic token names never change (§6.13 of `CLAUDE.md`).
-4. **Content:** a mapping from the design export (first time), then the Airtable adapter.
+4. **Content:** a mapping from the design export (first time), then Airtable: `pnpm airtable:export` writes the base spec and import-ready CSVs from the packages' tables and the site config (table names, facts, vocabularies), checks the round trip, and `content:pull` reads the base at build time. Copy `src/content/airtable.ts` from the reference app and change the table names and site extras.
 5. **Glossary:** the site's domain words (Mangroves: site, zone, operator, guide, tour, article).
 
 ## 3. Gap analysis for a new design (what matches, what's missing, what doesn't fit)

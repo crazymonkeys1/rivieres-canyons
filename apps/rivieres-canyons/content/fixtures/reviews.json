@@ -5,6 +5,9 @@
     "offer_id": null,
     "quote": "Super moniteur, super site et superbe vue tout au long de la journée, avec de bonnes sensations.",
     "author": "Andy S.",
+    "guide_id": "quentin",
+    "rating": null,
+    "date": null,
     "source": "avis Google",
     "status": "published"
   },
@@ -14,6 +17,9 @@
     "offer_id": null,
     "quote": "J'ai passé un très bon moment, l'activité était super, beaucoup de sensations.",
     "author": "Catherine A.",
+    "guide_id": "quentin",
+    "rating": null,
+    "date": null,
     "source": "avis Google",
     "status": "published"
   },
@@ -23,6 +29,9 @@
     "offer_id": null,
     "quote": "Quant au cadre… rien à dire, c’est magnifique !",
     "author": "Benjamin L.",
+    "guide_id": "quentin",
+    "rating": null,
+    "date": null,
     "source": "avis Google",
     "status": "published"
   }

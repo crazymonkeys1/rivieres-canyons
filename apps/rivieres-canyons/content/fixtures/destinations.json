@@ -5,15 +5,16 @@
     "type": "riviere",
     "alt_names": [],
     "status": "published",
+    "status_note": null,
     "confidence": "eleve",
     "last_reviewed_on": null,
     "location": {
       "area": "Basse-Terre",
       "zone": null,
       "localities": [
-        "Petit-Bourg",
-        "Lamentin",
-        "Sainte-Rose"
+        "petit-bourg",
+        "lamentin",
+        "sainte-rose"
       ],
       "geo": null
     },
@@ -27,14 +28,13 @@
     "tip": null,
     "faq": [],
     "key_facts": [],
-    "press": [],
+    "criteria": [],
     "facts": {
       "difficulty": null,
       "duration": null,
       "approach": null,
       "min_age": null,
       "swimming": null,
-      "has_waterfall": null,
       "season": null
     },
     "fact_notes": {},
@@ -72,13 +72,14 @@
     "type": "riviere",
     "alt_names": [],
     "status": "published",
+    "status_note": null,
     "confidence": "moyen",
     "last_reviewed_on": null,
     "location": {
       "area": "Basse-Terre",
       "zone": null,
       "localities": [
-        "Petit-Bourg"
+        "petit-bourg"
       ],
       "geo": null
     },
@@ -92,14 +93,13 @@
     "tip": null,
     "faq": [],
     "key_facts": [],
-    "press": [],
+    "criteria": [],
     "facts": {
       "difficulty": null,
       "duration": null,
       "approach": null,
       "min_age": null,
       "swimming": null,
-      "has_waterfall": null,
       "season": null
     },
     "fact_notes": {},
@@ -140,13 +140,14 @@
       "Lézarde Falls"
     ],
     "status": "published",
+    "status_note": null,
     "confidence": "moyen",
     "last_reviewed_on": null,
     "location": {
       "area": "Basse-Terre",
       "zone": null,
       "localities": [
-        "Petit-Bourg"
+        "petit-bourg"
       ],
       "geo": null
     },
@@ -198,7 +199,9 @@
         "value": "Privé, participation demandée"
       }
     ],
-    "press": [],
+    "criteria": [
+      "avec-cascade"
+    ],
     "facts": {
       "difficulty": "moyen",
       "duration": {
@@ -213,7 +216,6 @@
       },
       "min_age": 8,
       "swimming": "conditional",
-      "has_waterfall": true,
       "season": "De décembre à mai, par temps sec. Le sentier devient très glissant après la pluie."
     },
     "fact_notes": {
@@ -296,13 +298,14 @@
     "type": "riviere",
     "alt_names": [],
     "status": "published",
+    "status_note": null,
     "confidence": "moyen",
     "last_reviewed_on": null,
     "location": {
       "area": "Basse-Terre",
       "zone": null,
       "localities": [
-        "Sainte-Rose"
+        "sainte-rose"
       ],
       "geo": null
     },
@@ -316,14 +319,13 @@
     "tip": null,
     "faq": [],
     "key_facts": [],
-    "press": [],
+    "criteria": [],
     "facts": {
       "difficulty": null,
       "duration": null,
       "approach": null,
       "min_age": null,
       "swimming": null,
-      "has_waterfall": null,
       "season": null
     },
     "fact_notes": {},
@@ -365,13 +367,14 @@
       "Rivière Bras David"
     ],
     "status": "published",
+    "status_note": null,
     "confidence": "moyen",
     "last_reviewed_on": null,
     "location": {
       "area": "Basse-Terre",
       "zone": null,
       "localities": [
-        "Petit-Bourg"
+        "petit-bourg"
       ],
       "geo": null
     },
@@ -423,7 +426,7 @@
         "value": "Maison de la Forêt"
       }
     ],
-    "press": [],
+    "criteria": [],
     "facts": {
       "difficulty": "facile",
       "duration": {
@@ -438,7 +441,6 @@
       },
       "min_age": 4,
       "swimming": "conditional",
-      "has_waterfall": null,
       "season": "Toute l'année ; la forêt reste humide même en saison sèche. Évitez la rivière après de fortes pluies."
     },
     "fact_notes": {
@@ -519,13 +521,14 @@
     "type": "riviere",
     "alt_names": [],
     "status": "published",
+    "status_note": null,
     "confidence": "moyen",
     "last_reviewed_on": null,
     "location": {
       "area": "Basse-Terre",
       "zone": null,
       "localities": [
-        "Petit-Bourg"
+        "petit-bourg"
       ],
       "geo": null
     },
@@ -539,14 +542,13 @@
     "tip": null,
     "faq": [],
     "key_facts": [],
-    "press": [],
+    "criteria": [],
     "facts": {
       "difficulty": null,
       "duration": null,
       "approach": null,
       "min_age": null,
       "swimming": null,
-      "has_waterfall": null,
       "season": null
     },
     "fact_notes": {},
@@ -588,13 +590,14 @@
       "Crayfish Waterfall"
     ],
     "status": "published",
+    "status_note": null,
     "confidence": "eleve",
     "last_reviewed_on": null,
     "location": {
       "area": "Basse-Terre",
       "zone": null,
       "localities": [
-        "Petit-Bourg"
+        "petit-bourg"
       ],
       "geo": null
     },
@@ -681,35 +684,8 @@
         "value": "Maison de la Forêt, à 2 km sur la RD23"
       }
     ],
-    "press": [
-      {
-        "site": "Rando Guadeloupe",
-        "by": "Parc national de la Guadeloupe",
-        "title": "Fiche randonnée : Cascade aux Écrevisses",
-        "note": "Tracé GPX, profil, accessibilité et accès en bus.",
-        "url": "https://www.randoguadeloupe.gp/fr/trek/2752-Cascade-aux-Ecrevisses"
-      },
-      {
-        "site": "Les îles de Guadeloupe",
-        "by": "Comité du tourisme",
-        "title": "La Cascade aux Écrevisses",
-        "note": "Présentation officielle du site et conseils de visite.",
-        "url": "https://www.lesilesdeguadeloupe.com/decouvrir/espaces-naturels/les-cascades/la-cascade-aux-ecrevisses/"
-      },
-      {
-        "site": "Wikipédia",
-        "by": "Encyclopédie",
-        "title": "Cascade aux écrevisses",
-        "note": "Localisation, hauteur et fréquentation.",
-        "url": "https://fr.wikipedia.org/wiki/Cascade_aux_%C3%A9crevisses"
-      },
-      {
-        "site": "Guadeloupe Tourisme",
-        "by": "Guide en ligne",
-        "title": "Cascade aux écrevisses, Petit-Bourg",
-        "note": "Le second bassin en amont et les carbets de pique-nique.",
-        "url": "https://fr.guadeloupe-tourisme.com/366/cascade-aux-ecrevisses-petitbourg/"
-      }
+    "criteria": [
+      "avec-cascade"
     ],
     "facts": {
       "difficulty": "tres_facile",
@@ -725,7 +701,6 @@
       },
       "min_age": 2,
       "swimming": "conditional",
-      "has_waterfall": true,
       "season": "Toute l'année ; tôt le matin en semaine pour éviter la foule. Ne pas se baigner après de fortes pluies."
     },
     "fact_notes": {
@@ -811,13 +786,14 @@
       "Chutes du Grand Carbet"
     ],
     "status": "published",
+    "status_note": null,
     "confidence": "eleve",
     "last_reviewed_on": null,
     "location": {
       "area": "Basse-Terre",
       "zone": null,
       "localities": [
-        "Capesterre-Belle-Eau"
+        "capesterre-belle-eau"
       ],
       "geo": null
     },
@@ -880,7 +856,9 @@
         "value": "Grand Étang, bassin Paradise"
       }
     ],
-    "press": [],
+    "criteria": [
+      "avec-cascade"
+    ],
     "facts": {
       "difficulty": "facile",
       "duration": {
@@ -895,7 +873,6 @@
       },
       "min_age": 4,
       "swimming": "no",
-      "has_waterfall": true,
       "season": "Toute l'année ; le matin pour éviter les groupes et les nuages qui couvrent souvent la chute l'après-midi. Le site ferme en cas d'alerte météo."
     },
     "fact_notes": {
@@ -983,13 +960,14 @@
       "Moreau Falls"
     ],
     "status": "published",
+    "status_note": null,
     "confidence": "eleve",
     "last_reviewed_on": null,
     "location": {
       "area": "Basse-Terre",
       "zone": null,
       "localities": [
-        "Goyave"
+        "goyave"
       ],
       "geo": null
     },
@@ -1045,7 +1023,9 @@
         "value": "Randonneurs expérimentés, dès 12 ans"
       }
     ],
-    "press": [],
+    "criteria": [
+      "avec-cascade"
+    ],
     "facts": {
       "difficulty": "difficile",
       "duration": {
@@ -1060,7 +1040,6 @@
       },
       "min_age": 12,
       "swimming": null,
-      "has_waterfall": true,
       "season": "Uniquement par temps sec, de préférence de février à avril. Ne pas partir si de la pluie est annoncée : les gués deviennent infranchissables."
     },
     "fact_notes": {},
@@ -1142,13 +1121,14 @@
     "type": "riviere",
     "alt_names": [],
     "status": "published",
+    "status_note": null,
     "confidence": "eleve",
     "last_reviewed_on": null,
     "location": {
       "area": "Basse-Terre",
       "zone": null,
       "localities": [
-        "Goyave"
+        "goyave"
       ],
       "geo": null
     },
@@ -1162,14 +1142,13 @@
     "tip": null,
     "faq": [],
     "key_facts": [],
-    "press": [],
+    "criteria": [],
     "facts": {
       "difficulty": null,
       "duration": null,
       "approach": null,
       "min_age": null,
       "swimming": null,
-      "has_waterfall": null,
       "season": null
     },
     "fact_notes": {},
@@ -1205,20 +1184,21 @@
   {
     "id": "saut-d-acomat",
     "name": "Saut d'Acomat",
-    "type": "bassin_naturel",
+    "type": "bassin-naturel",
     "alt_names": [
       "Saut de l'Acomat",
       "Cascade Acomat",
       "Acomat waterfall"
     ],
     "status": "published",
+    "status_note": null,
     "confidence": "faible",
     "last_reviewed_on": null,
     "location": {
       "area": "Basse-Terre",
       "zone": null,
       "localities": [
-        "Pointe-Noire"
+        "pointe-noire"
       ],
       "geo": null
     },
@@ -1270,14 +1250,15 @@
         "value": "Maison du Cacao, plage de Caraïbe"
       }
     ],
-    "press": [],
+    "criteria": [
+      "avec-cascade"
+    ],
     "facts": {
       "difficulty": null,
       "duration": null,
       "approach": null,
       "min_age": null,
       "swimming": "conditional",
-      "has_waterfall": true,
       "season": "De décembre à mai (carême), quand le débit est stable. À éviter pendant et après de fortes pluies."
     },
     "fact_notes": {
@@ -1341,13 +1322,14 @@
     "type": "canyon",
     "alt_names": [],
     "status": "published",
+    "status_note": null,
     "confidence": null,
     "last_reviewed_on": null,
     "location": {
       "area": "Basse-Terre",
       "zone": null,
       "localities": [
-        "Pointe-Noire"
+        "pointe-noire"
       ],
       "geo": null
     },
@@ -1389,7 +1371,7 @@
       }
     ],
     "key_facts": [],
-    "press": [],
+    "criteria": [],
     "facts": {
       "difficulty": "facile",
       "duration": {
@@ -1404,7 +1386,6 @@
       },
       "min_age": 8,
       "swimming": null,
-      "has_waterfall": null,
       "season": "De décembre à mai (carême), quand le débit est stable. À éviter pendant et après de fortes pluies."
     },
     "fact_notes": {},
@@ -1449,13 +1430,14 @@
       "Canyon de Bourceau"
     ],
     "status": "published",
+    "status_note": null,
     "confidence": "eleve_nom",
     "last_reviewed_on": null,
     "location": {
       "area": "Basse-Terre",
       "zone": null,
       "localities": [
-        "Bouillante"
+        "bouillante"
       ],
       "geo": null
     },
@@ -1514,7 +1496,7 @@
         "value": "Demi-journée ou journée"
       }
     ],
-    "press": [],
+    "criteria": [],
     "facts": {
       "difficulty": "sportif",
       "duration": {
@@ -1529,7 +1511,6 @@
       },
       "min_age": 10,
       "swimming": "yes",
-      "has_waterfall": null,
       "season": "Praticable toute l'année avec un guide ; le carême (décembre à mai) offre les conditions les plus régulières."
     },
     "fact_notes": {
@@ -1584,13 +1565,14 @@
     "type": "riviere",
     "alt_names": [],
     "status": "published",
+    "status_note": null,
     "confidence": "eleve_nom",
     "last_reviewed_on": null,
     "location": {
       "area": "Basse-Terre",
       "zone": null,
       "localities": [
-        "Vieux-Habitants"
+        "vieux-habitants"
       ],
       "geo": null
     },
@@ -1604,14 +1586,13 @@
     "tip": null,
     "faq": [],
     "key_facts": [],
-    "press": [],
+    "criteria": [],
     "facts": {
       "difficulty": null,
       "duration": null,
       "approach": null,
       "min_age": null,
       "swimming": null,
-      "has_waterfall": null,
       "season": null
     },
     "fact_notes": {},
@@ -1648,6 +1629,7 @@
     "type": "riviere",
     "alt_names": [],
     "status": "published",
+    "status_note": null,
     "confidence": "eleve_nom",
     "last_reviewed_on": null,
     "location": {
@@ -1666,14 +1648,13 @@
     "tip": null,
     "faq": [],
     "key_facts": [],
-    "press": [],
+    "criteria": [],
     "facts": {
       "difficulty": null,
       "duration": null,
       "approach": null,
       "min_age": null,
       "swimming": null,
-      "has_waterfall": null,
       "season": null
     },
     "fact_notes": {},
@@ -1710,6 +1691,7 @@
     "type": "riviere",
     "alt_names": [],
     "status": "published",
+    "status_note": null,
     "confidence": "eleve_nom",
     "last_reviewed_on": null,
     "location": {
@@ -1728,14 +1710,13 @@
     "tip": null,
     "faq": [],
     "key_facts": [],
-    "press": [],
+    "criteria": [],
     "facts": {
       "difficulty": null,
       "duration": null,
       "approach": null,
       "min_age": null,
       "swimming": null,
-      "has_waterfall": null,
       "season": null
     },
     "fact_notes": {},
@@ -1772,6 +1753,7 @@
     "type": "riviere",
     "alt_names": [],
     "status": "published",
+    "status_note": null,
     "confidence": "eleve_nom",
     "last_reviewed_on": null,
     "location": {
@@ -1790,14 +1772,13 @@
     "tip": null,
     "faq": [],
     "key_facts": [],
-    "press": [],
+    "criteria": [],
     "facts": {
       "difficulty": null,
       "duration": null,
       "approach": null,
       "min_age": null,
       "swimming": null,
-      "has_waterfall": null,
       "season": null
     },
     "fact_notes": {},
@@ -1834,13 +1815,14 @@
     "type": "riviere",
     "alt_names": [],
     "status": "published",
+    "status_note": null,
     "confidence": "eleve_nom",
     "last_reviewed_on": null,
     "location": {
       "area": "Basse-Terre",
       "zone": null,
       "localities": [
-        "Vieux-Habitants"
+        "vieux-habitants"
       ],
       "geo": null
     },
@@ -1854,14 +1836,13 @@
     "tip": null,
     "faq": [],
     "key_facts": [],
-    "press": [],
+    "criteria": [],
     "facts": {
       "difficulty": null,
       "duration": null,
       "approach": null,
       "min_age": null,
       "swimming": null,
-      "has_waterfall": null,
       "season": null
     },
     "fact_notes": {},
@@ -1898,6 +1879,7 @@
     "type": "riviere",
     "alt_names": [],
     "status": "published",
+    "status_note": null,
     "confidence": "eleve_nom",
     "last_reviewed_on": null,
     "location": {
@@ -1916,14 +1898,13 @@
     "tip": null,
     "faq": [],
     "key_facts": [],
-    "press": [],
+    "criteria": [],
     "facts": {
       "difficulty": null,
       "duration": null,
       "approach": null,
       "min_age": null,
       "swimming": null,
-      "has_waterfall": null,
       "season": null
     },
     "fact_notes": {},
@@ -1963,13 +1944,14 @@
       "Canyon des Mamelles"
     ],
     "status": "published",
+    "status_note": null,
     "confidence": null,
     "last_reviewed_on": null,
     "location": {
       "area": "Basse-Terre",
       "zone": null,
       "localities": [
-        "Pointe-Noire"
+        "pointe-noire"
       ],
       "geo": null
     },
@@ -2032,7 +2014,7 @@
         "value": "Sportifs réguliers, dès 13 ans"
       }
     ],
-    "press": [],
+    "criteria": [],
     "facts": {
       "difficulty": "sportif",
       "duration": {
@@ -2047,7 +2029,6 @@
       },
       "min_age": 13,
       "swimming": "yes",
-      "has_waterfall": null,
       "season": "De décembre à mai de préférence. La sortie peut être annulée la veille si de la pluie est annoncée sur les hauteurs."
     },
     "fact_notes": {
@@ -2114,13 +2095,14 @@
       "Ferry canyon"
     ],
     "status": "published",
+    "status_note": null,
     "confidence": null,
     "last_reviewed_on": null,
     "location": {
       "area": "Basse-Terre",
       "zone": null,
       "localities": [
-        "Bouillante"
+        "bouillante"
       ],
       "geo": null
     },
@@ -2172,7 +2154,7 @@
         "value": "Journée, repas à prévoir"
       }
     ],
-    "press": [],
+    "criteria": [],
     "facts": {
       "difficulty": "sportif",
       "duration": {
@@ -2187,7 +2169,6 @@
       },
       "min_age": 14,
       "swimming": "yes",
-      "has_waterfall": null,
       "season": "De décembre à mai de préférence. Sortie confirmée la veille selon la météo."
     },
     "fact_notes": {
@@ -2252,13 +2233,14 @@
       "Bois Malaisé"
     ],
     "status": "published",
+    "status_note": null,
     "confidence": null,
     "last_reviewed_on": null,
     "location": {
       "area": "Basse-Terre",
       "zone": null,
       "localities": [
-        "Vieux-Habitants"
+        "vieux-habitants"
       ],
       "geo": null
     },
@@ -2310,7 +2292,7 @@
         "value": "Journée complète"
       }
     ],
-    "press": [],
+    "criteria": [],
     "facts": {
       "difficulty": "engage",
       "duration": {
@@ -2325,7 +2307,6 @@
       },
       "min_age": 16,
       "swimming": "yes",
-      "has_waterfall": null,
       "season": "De décembre à mai de préférence. Le guide peut annuler si le débit est trop fort."
     },
     "fact_notes": {

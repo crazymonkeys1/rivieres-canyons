@@ -1,9 +1,10 @@
 # Content model (v12)
 
 > **Since phase 1b (2026-10-07) the schema lives in code and wins over this file.**
-> - Generic entities: `packages/core|directory|places/src/content/` (listing, offer, operator, guide, review, article, image, source, copy, rejected; place fields).
+> - Generic entities: `packages/core|directory|places/src/content/` (listing, type, locality, criterion, offer, operator, guide, review, article + selection, image, source, copy; place fields).
 > - Site settings: `apps/rivieres-canyons/src/content/site.config.ts` (facts, vocabularies, location labels, confidence levels, completeness, landing pages) and `schema.ts`.
-> - `pnpm content:check` maps `data/*.json` (the design export, kept as the raw source) to `apps/rivieres-canyons/content/fixtures/*.json` and writes `docs/CONTENT_REPORT.md`.
+> - `pnpm content:check` maps `data/*.json` (the design export, kept as the raw source) to `apps/rivieres-canyons/content/fixtures/*.json` (`docs/DESIGN_MIGRATION.md`), then checks it (`docs/CONTENT_REPORT.md`).
+> - Airtable (phase 2): `apps/rivieres-canyons/airtable/SPEC.md` (generated) and `docs/AIRTABLE_BASE_DESIGN.md`.
 > - How to reuse it for another directory: `docs/DIRECTORY_BLUEPRINT.md`.
 > - The tables below describe the design export.
 

@@ -1,1 +1,43 @@
-[]
+[
+  {
+    "key": "privacy_policy",
+    "page": "Confidentialité",
+    "section": "Texte",
+    "format": "text",
+    "text": "[PRIVACY_POLICY_TEXT]",
+    "items": [],
+    "status": "placeholder",
+    "updated_on": null
+  },
+  {
+    "key": "why_guide_points",
+    "page": "Articles",
+    "section": "Pourquoi un guide",
+    "format": "list",
+    "text": null,
+    "items": [
+      {
+        "icon": "🌦️",
+        "label": "Conditions vérifiées",
+        "value": "Débit et météo contrôlés avant chaque départ."
+      },
+      {
+        "icon": "🧭",
+        "label": "Les bons passages",
+        "value": "Sauts sûrs, vasques profondes, spots hors des sentiers."
+      },
+      {
+        "icon": "🎓",
+        "label": "Guide diplômé",
+        "value": "Brevet d'État ou DE JEPS canyoning."
+      },
+      {
+        "icon": "🎒",
+        "label": "Équipement fourni",
+        "value": "Casque, combinaison, gilet, baudrier."
+      }
+    ],
+    "status": "final",
+    "updated_on": "2026-10-02"
+  }
+]

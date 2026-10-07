@@ -4,8 +4,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "content:check": "tsx scripts/map-fixtures.ts",
-    "content:check:prod": "tsx scripts/map-fixtures.ts --production"
+    "content:migrate": "tsx scripts/map-fixtures.ts",
+    "content:check": "tsx scripts/map-fixtures.ts && tsx scripts/check-content.ts",
+    "content:check:prod": "tsx scripts/map-fixtures.ts && tsx scripts/check-content.ts --production",
+    "airtable:export": "tsx scripts/airtable.ts export",
+    "airtable:link": "tsx scripts/airtable.ts link",
+    "content:pull": "tsx scripts/airtable.ts pull"
   },
   "dependencies": {
     "@orbit/core": "workspace:*",
@@ -13,5 +17,9 @@
     "@orbit/places": "workspace:*",
     "zod": "^3.25.0"
   },
-  "devDependencies": { "tsx": "^4.20.0", "typescript": "^5.9.0", "@types/node": "^22.0.0" }
+  "devDependencies": {
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0",
+    "@types/node": "^22.0.0"
+  }
 }

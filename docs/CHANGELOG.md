@@ -35,6 +35,21 @@ Layer (which projects a rule applies to):
 
 ## Changes
 
+### 2026-10-07 · Airtable base: generated from code, criteria as rows, French columns read by ID (decisions D1–D6)
+- **Layer:** Core (Airtable engine: field spec, CSV, round trip, API by field ID; site texts merged with page blocks) · Directory (types, localities and criteria entities; article selections; generic tables) · Places (places table, "Ce qui manque" formula) · Site (table names, `ARTICLE_RULES`, social posts table)
+- **Change:**
+  - **D1:** yes/no attributes are rows of a Critères table (filter, badge, key fact, landing page); measured facts stay columns declared in `site.config.ts`. `has_waterfall`, `has_rappel`, `pets_allowed` and the 18 outing tags became criteria.
+  - **D2:** Types and Communes are tables with their landing-page text; listings link to communes by key.
+  - **D3:** an article's selection = types, communes, criteria with / without, a named rule on facts (`ARTICLE_RULES`), include / exclude. Verified to pick exactly what the design picked.
+  - **D4:** listing status `draft` / `published` / `hidden` / `rejected` (+ reason); the rejected-listings entity is gone.
+  - **D5:** one base per site. **D6:** French column names; the site reads fields by ID (`airtable/map.json`), so renaming a column is harmless.
+  - Roles (Business plan): Orbit technical owner = Creator; Orbit team = Editor; the clients (guides) = interface-only editors of their own outings, profile, company and photos. Field permissions protect slugs, keys, statuses and rights.
+  - `pnpm airtable:export` writes `airtable/SPEC.md` and import-ready CSVs and checks the round trip; `airtable:link` and `content:pull` read the base at build time and refuse invalid content with the row and field named.
+  - Also: outings and articles get a status; guide stories a validation status (from the old base's "Histoire validée"); reviews a guide, rating and date; articles a FAQ; press is a featured source; page blocks are site texts; checks moved to `src/content/check.ts`.
+- **Why:** the two edits editors make most (a new listing, a new criterion) need no code and cannot break the site; one description of the base serves the spec, the import and the adapter, so they never drift; nothing ties the content to Airtable (keys, not record IDs).
+- **How to apply elsewhere:** a new directory writes its `site.config.ts` and copies `src/content/airtable.ts` (table names, site extras), then runs `pnpm airtable:export`. Mangroves: its Activities, Protection and the four checkboxes become criteria; its tours move to Sorties; Hero Palettes, Islands' design columns, Operator Features / Practical and Reference Sources are dropped or merged (`docs/AIRTABLE_BASE_DESIGN.md` §1).
+- **Status:** Rivières & Canyons ✅ (base to create) · Mangrove ⏳ · Template ✅
+
 ### 2026-10-07 · B1: grouped token and text-style names (aligned with Mangroves)
 - **Layer:** Core
 - **Change:** Every token and text-style class is renamed to grouped names: tier 1 `--palette-*`, then `--color-text-*`, `--color-surface-*`, `--color-border-*`, `--color-action-*`, `--color-status-*`, `--font-*`, `--container-*`, `--radius-*`, `--elevation-*`, `--duration-*`, `--easing-*`. Text styles become `text-*` classes; modifiers `is-strong` and `is-upper` are kept. Applied to `tokens/`, `CLAUDE.md` and the current docs. The operator tokens (`--op-*`, `--avatar-*`) and the palette entries teal, indigo and peach are removed (see "Operator colours from data").

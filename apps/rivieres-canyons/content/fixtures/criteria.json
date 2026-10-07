@@ -1,0 +1,359 @@
+[
+  {
+    "key": "avec-cascade",
+    "label": "Avec cascade",
+    "applies_to": "listing",
+    "group": null,
+    "icon": "💦",
+    "order": 1,
+    "filter": true,
+    "badge": false,
+    "key_fact": false,
+    "landing": false,
+    "intro": null,
+    "seo": {
+      "title": null,
+      "description": null
+    }
+  },
+  {
+    "key": "rappel",
+    "label": "Rappel",
+    "applies_to": "offer",
+    "group": null,
+    "icon": "🪢",
+    "order": 1,
+    "filter": true,
+    "badge": false,
+    "key_fact": true,
+    "landing": false,
+    "intro": null,
+    "seo": {
+      "title": null,
+      "description": null
+    }
+  },
+  {
+    "key": "animaux-acceptes",
+    "label": "Animaux acceptés",
+    "applies_to": "offer",
+    "group": null,
+    "icon": "🐕",
+    "order": 2,
+    "filter": true,
+    "badge": false,
+    "key_fact": false,
+    "landing": false,
+    "intro": null,
+    "seo": {
+      "title": null,
+      "description": null
+    }
+  },
+  {
+    "key": "famille",
+    "label": "Famille",
+    "applies_to": "offer",
+    "group": null,
+    "icon": "👨‍👩‍👧",
+    "order": 3,
+    "filter": false,
+    "badge": true,
+    "key_fact": false,
+    "landing": false,
+    "intro": null,
+    "seo": {
+      "title": null,
+      "description": null
+    }
+  },
+  {
+    "key": "toboggans-naturels",
+    "label": "Toboggans naturels",
+    "applies_to": "offer",
+    "group": null,
+    "icon": "🎢",
+    "order": 4,
+    "filter": false,
+    "badge": true,
+    "key_fact": false,
+    "landing": false,
+    "intro": null,
+    "seo": {
+      "title": null,
+      "description": null
+    }
+  },
+  {
+    "key": "bain-de-foret",
+    "label": "Bain de forêt",
+    "applies_to": "offer",
+    "group": null,
+    "icon": "🌳",
+    "order": 5,
+    "filter": false,
+    "badge": true,
+    "key_fact": false,
+    "landing": false,
+    "intro": null,
+    "seo": {
+      "title": null,
+      "description": null
+    }
+  },
+  {
+    "key": "petit-groupe",
+    "label": "Petit groupe",
+    "applies_to": "offer",
+    "group": null,
+    "icon": "👥",
+    "order": 6,
+    "filter": false,
+    "badge": true,
+    "key_fact": false,
+    "landing": false,
+    "intro": null,
+    "seo": {
+      "title": null,
+      "description": null
+    }
+  },
+  {
+    "key": "foret-primaire",
+    "label": "Forêt primaire",
+    "applies_to": "offer",
+    "group": null,
+    "icon": "🌲",
+    "order": 7,
+    "filter": false,
+    "badge": true,
+    "key_fact": false,
+    "landing": false,
+    "intro": null,
+    "seo": {
+      "title": null,
+      "description": null
+    }
+  },
+  {
+    "key": "hors-sentiers",
+    "label": "Hors sentiers",
+    "applies_to": "offer",
+    "group": null,
+    "icon": "🥾",
+    "order": 8,
+    "filter": false,
+    "badge": true,
+    "key_fact": false,
+    "landing": false,
+    "intro": null,
+    "seo": {
+      "title": null,
+      "description": null
+    }
+  },
+  {
+    "key": "journee",
+    "label": "Journée",
+    "applies_to": "offer",
+    "group": null,
+    "icon": "☀️",
+    "order": 9,
+    "filter": false,
+    "badge": true,
+    "key_fact": false,
+    "landing": false,
+    "intro": null,
+    "seo": {
+      "title": null,
+      "description": null
+    }
+  },
+  {
+    "key": "formule-family",
+    "label": "Formule Family",
+    "applies_to": "offer",
+    "group": null,
+    "icon": "👨‍👩‍👧",
+    "order": 10,
+    "filter": false,
+    "badge": true,
+    "key_fact": false,
+    "landing": false,
+    "intro": null,
+    "seo": {
+      "title": null,
+      "description": null
+    }
+  },
+  {
+    "key": "initiation-technique",
+    "label": "Initiation technique",
+    "applies_to": "offer",
+    "group": null,
+    "icon": "🎓",
+    "order": 11,
+    "filter": false,
+    "badge": true,
+    "key_fact": false,
+    "landing": false,
+    "intro": null,
+    "seo": {
+      "title": null,
+      "description": null
+    }
+  },
+  {
+    "key": "demi-journee",
+    "label": "Demi-journée",
+    "applies_to": "offer",
+    "group": null,
+    "icon": "🕐",
+    "order": 12,
+    "filter": false,
+    "badge": true,
+    "key_fact": false,
+    "landing": false,
+    "intro": null,
+    "seo": {
+      "title": null,
+      "description": null
+    }
+  },
+  {
+    "key": "rappel-encadre",
+    "label": "Rappel encadré",
+    "applies_to": "offer",
+    "group": null,
+    "icon": "🪢",
+    "order": 13,
+    "filter": false,
+    "badge": true,
+    "key_fact": false,
+    "landing": false,
+    "intro": null,
+    "seo": {
+      "title": null,
+      "description": null
+    }
+  },
+  {
+    "key": "journee-complete",
+    "label": "Journée complète",
+    "applies_to": "offer",
+    "group": null,
+    "icon": "☀️",
+    "order": 14,
+    "filter": false,
+    "badge": true,
+    "key_fact": false,
+    "landing": false,
+    "intro": null,
+    "seo": {
+      "title": null,
+      "description": null
+    }
+  },
+  {
+    "key": "pique-nique",
+    "label": "Pique-nique",
+    "applies_to": "offer",
+    "group": null,
+    "icon": "🧺",
+    "order": 15,
+    "filter": false,
+    "badge": true,
+    "key_fact": false,
+    "landing": false,
+    "intro": null,
+    "seo": {
+      "title": null,
+      "description": null
+    }
+  },
+  {
+    "key": "sauts-engages",
+    "label": "Sauts engagés",
+    "applies_to": "offer",
+    "group": null,
+    "icon": "💦",
+    "order": 16,
+    "filter": false,
+    "badge": true,
+    "key_fact": false,
+    "landing": false,
+    "intro": null,
+    "seo": {
+      "title": null,
+      "description": null
+    }
+  },
+  {
+    "key": "rappels-enchaines",
+    "label": "Rappels enchaînés",
+    "applies_to": "offer",
+    "group": null,
+    "icon": "🪢",
+    "order": 17,
+    "filter": false,
+    "badge": true,
+    "key_fact": false,
+    "landing": false,
+    "intro": null,
+    "seo": {
+      "title": null,
+      "description": null
+    }
+  },
+  {
+    "key": "journee-entiere",
+    "label": "Journée entière",
+    "applies_to": "offer",
+    "group": null,
+    "icon": "☀️",
+    "order": 18,
+    "filter": false,
+    "badge": true,
+    "key_fact": false,
+    "landing": false,
+    "intro": null,
+    "seo": {
+      "title": null,
+      "description": null
+    }
+  },
+  {
+    "key": "rappels-hauts",
+    "label": "Rappels hauts",
+    "applies_to": "offer",
+    "group": null,
+    "icon": "🪢",
+    "order": 19,
+    "filter": false,
+    "badge": true,
+    "key_fact": false,
+    "landing": false,
+    "intro": null,
+    "seo": {
+      "title": null,
+      "description": null
+    }
+  },
+  {
+    "key": "experience-requise",
+    "label": "Expérience requise",
+    "applies_to": "offer",
+    "group": null,
+    "icon": "⚠️",
+    "order": 20,
+    "filter": false,
+    "badge": true,
+    "key_fact": false,
+    "landing": false,
+    "intro": null,
+    "seo": {
+      "title": null,
+      "description": null
+    }
+  }
+]

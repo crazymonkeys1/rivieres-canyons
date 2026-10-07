@@ -1,0 +1,82 @@
+[
+  {
+    "key": "petit-bourg",
+    "name": "Petit-Bourg",
+    "area": "Basse-Terre",
+    "intro": null,
+    "seo": {
+      "title": null,
+      "description": null
+    }
+  },
+  {
+    "key": "lamentin",
+    "name": "Lamentin",
+    "area": "Basse-Terre",
+    "intro": null,
+    "seo": {
+      "title": null,
+      "description": null
+    }
+  },
+  {
+    "key": "sainte-rose",
+    "name": "Sainte-Rose",
+    "area": "Basse-Terre",
+    "intro": null,
+    "seo": {
+      "title": null,
+      "description": null
+    }
+  },
+  {
+    "key": "capesterre-belle-eau",
+    "name": "Capesterre-Belle-Eau",
+    "area": "Basse-Terre",
+    "intro": null,
+    "seo": {
+      "title": null,
+      "description": null
+    }
+  },
+  {
+    "key": "goyave",
+    "name": "Goyave",
+    "area": "Basse-Terre",
+    "intro": null,
+    "seo": {
+      "title": null,
+      "description": null
+    }
+  },
+  {
+    "key": "pointe-noire",
+    "name": "Pointe-Noire",
+    "area": "Basse-Terre",
+    "intro": null,
+    "seo": {
+      "title": null,
+      "description": null
+    }
+  },
+  {
+    "key": "bouillante",
+    "name": "Bouillante",
+    "area": "Basse-Terre",
+    "intro": null,
+    "seo": {
+      "title": null,
+      "description": null
+    }
+  },
+  {
+    "key": "vieux-habitants",
+    "name": "Vieux-Habitants",
+    "area": "Basse-Terre",
+    "intro": null,
+    "seo": {
+      "title": null,
+      "description": null
+    }
+  }
+]

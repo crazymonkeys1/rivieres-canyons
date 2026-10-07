@@ -7,13 +7,15 @@ import { slug, isoDate, httpUrl, urlOrPlaceholder, placeholder, faqItem, seoOver
 export const whatsappNumber = z.union([z.string().regex(/^\d{8,15}$/, 'digits only, country code first'), placeholder]);
 export const labelledFact = z.object({ icon: z.string(), label: z.string().min(1), value: z.string().min(1) });
 
-/** Where a listing is: area (island, region) > zone (optional group) > localities (communes). Labels come from the site config. */
+/** Where a listing is: area (island, region) > zone (optional group) > localities (communes, by key). Labels come from the site config. */
 export const location = z.object({
   area: z.string().min(1),
   zone: z.string().nullable(),
-  localities: z.array(z.string().min(1)),
+  localities: z.array(slug),
   geo: z.object({ lat: z.number().min(-90).max(90), lng: z.number().min(-180).max(180) }).nullable(),
 });
+
+export const LISTING_STATUSES = ['draft', 'published', 'hidden', 'rejected'] as const;
 
 /** Every directory entry. Places, products or services extend it. */
 export const listingShape = z.object({
@@ -22,12 +24,14 @@ export const listingShape = z.object({
   type: z.string(),
   alt_names: z.array(z.string()),
   // Publication gates: status = shown or not; confidence = how verified (site levels); completeness = indexed or not (computed).
-  status: z.enum(['published', 'hidden']),
+  // `rejected` keeps research memory in the same table (decision D4): never shown, reason in status_note.
+  status: z.enum(LISTING_STATUSES),
+  status_note: z.string().nullable(),
   confidence: z.string().nullable(),
   last_reviewed_on: isoDate.nullable(),
   location,
   // Editorial
-  summary: z.string().min(1),
+  summary: z.string().nullable(),
   signature: z.string().nullable(),
   signature_status: z.enum(['draft', 'validated']).nullable(),
   lead: z.string().nullable(),
@@ -37,8 +41,8 @@ export const listingShape = z.object({
   tip: z.object({ guide_id: slug.nullable(), text: z.string().min(1) }).nullable(),
   faq: z.array(faqItem),
   key_facts: z.array(z.object({ label: z.string().min(1), value: z.string().min(1) })),  // "Bon à savoir"
-  press: z.array(z.object({ site: z.string().min(1), by: z.string().nullable(), title: z.string().min(1), note: z.string().nullable(), url: httpUrl })),
-  // Site-declared facts and their optional notes ("possible sous conditions, dans les petits bassins")
+  // Yes/no criteria (keys of the Criteria table, decision D1) and site-declared measured facts
+  criteria: z.array(slug),
   facts: z.record(z.unknown()),
   fact_notes: z.record(z.string()),
   estimated_fields: z.array(z.string()),
@@ -49,6 +53,8 @@ export const listingShape = z.object({
 });
 
 export function listingRules(l: z.infer<typeof listingShape>, ctx: z.RefinementCtx) {
+  if (l.status === 'published' && !l.summary) ctx.addIssue({ code: 'custom', path: ['summary'], message: 'a published listing needs a summary' });
+  if (l.status === 'rejected' && !l.status_note) ctx.addIssue({ code: 'custom', path: ['status_note'], message: 'a rejected listing needs the reason' });
   if (l.signature && !l.signature_status) ctx.addIssue({ code: 'custom', path: ['signature_status'], message: 'signature needs a status' });
   if (!l.signature && l.signature_status) ctx.addIssue({ code: 'custom', path: ['signature_status'], message: 'status without signature' });
 }
@@ -80,9 +86,10 @@ export const guide = z.object({
   whatsapp: whatsappNumber,
 });
 
-/** A bookable offer, linked to exactly one listing. Price and duration are generic; the rest is site facts. */
+/** A bookable offer, linked to exactly one listing. Price and duration are generic; the rest is criteria and site facts. */
 export const offerShape = z.object({
   id: slug,
+  status: z.enum(['draft', 'published']),
   operator_id: slug,
   listing_id: slug,
   is_main: z.boolean(),
@@ -93,18 +100,21 @@ export const offerShape = z.object({
   price_child_eur: z.number().positive().nullable(),
   child_price_under_age: z.number().int().positive().nullable(),
   price_checked_on: isoDate.nullable(),
+  criteria: z.array(slug),
   facts: z.record(z.unknown()),
-  tags: z.array(z.string()),
   highlights: z.array(z.string()),
   included: z.array(z.string()),
   to_bring: z.array(z.string()),
   meeting_note: z.string().nullable(),
   guide_tip: z.string().nullable(),
   guide_story: z.string().nullable(),
+  /** Stories written for a guide stay drafts until the guide approves them (production fails on draft). */
+  guide_story_status: z.enum(['draft', 'validated']).nullable(),
   on_site_since: z.number().int().min(1950).max(2100).nullable(),
 });
 
 export function offerRules(o: z.infer<typeof offerShape>, ctx: z.RefinementCtx) {
+  if (!!o.guide_story !== !!o.guide_story_status) ctx.addIssue({ code: 'custom', path: ['guide_story_status'], message: 'a guide story needs a status, and only then' });
   if ((o.price_child_eur === null) !== (o.child_price_under_age === null)) {
     ctx.addIssue({ code: 'custom', path: ['child_price_under_age'], message: 'a child price needs child_price_under_age, and only then' });
   }
@@ -115,8 +125,11 @@ export const review = z.object({
   id: slug,
   operator_id: slug,
   offer_id: slug.nullable(),
+  guide_id: slug.nullable(),
   quote: z.string().min(1),
   author: z.string().min(1),
+  rating: z.number().min(0).max(5).nullable(),
+  date: isoDate.nullable(),
   source: z.string().min(1, 'a review without a source is never published'),
   status: z.enum(['published', 'draft']),
 });
@@ -159,9 +172,45 @@ export function matchesRule(record: unknown, r: Rule): boolean {
   return r.match === 'all' ? r.conditions.every(test) : r.conditions.some(test);
 }
 
+/**
+ * What an article lists (decision D3): editors pick types, localities and criteria (with / without),
+ * plus manual include / exclude. A rule on measured facts ("dès 10 ans") is named by key and lives in the site config.
+ * Result = (items matching every filled filter) ∪ include − exclude. No filter and no rule = include only.
+ */
+export const selection = z.object({
+  types: z.array(slug),
+  localities: z.array(slug),
+  with: z.array(slug),
+  without: z.array(slug),
+  rule: z.string().nullable(),
+  include: z.array(slug),
+  exclude: z.array(slug),
+});
+export type Selection = z.infer<typeof selection>;
+type Selectable = { id: string; type?: string; location?: { localities: string[] }; criteria: string[] };
+
+function hasFilter(s: Selection) {
+  return s.types.length + s.localities.length + s.with.length + s.without.length > 0 || !!s.rule;
+}
+/** Applies a selection. `context` gives an offer its listing (for types and localities); `rules` are the site's named rules. */
+export function select<T extends Selectable>(items: T[], s: Selection, rules: Record<string, Rule>, context: (x: T) => Selectable = (x) => x): T[] {
+  if (s.rule && !rules[s.rule]) throw new Error(`unknown selection rule "${s.rule}"`);
+  const base = !hasFilter(s) ? [] : items.filter((x) => {
+    const c = context(x);
+    return (!s.types.length || s.types.includes(c.type ?? ''))
+      && (!s.localities.length || (c.location?.localities ?? []).some((l) => s.localities.includes(l)))
+      && s.with.every((k) => x.criteria.includes(k))
+      && !s.without.some((k) => x.criteria.includes(k))
+      && (!s.rule || matchesRule(x, rules[s.rule]));
+  });
+  const ids = new Set([...base.map((x) => x.id), ...s.include].filter((id) => !s.exclude.includes(id)));
+  return items.filter((x) => ids.has(x.id));
+}
+
 /** Intent article ("Canyoning avec enfants"): editorial copy + a computed selection. */
 export const article = z.object({
   id: slug,
+  status: z.enum(['draft', 'published']),
   label: z.string().min(1),
   h1: z.string().min(1),
   eyebrow: z.string().min(1),
@@ -176,11 +225,11 @@ export const article = z.object({
     sections: z.array(z.object({ title: z.string().min(1), text: z.string().min(1) })),
     tips: z.array(z.object({ label: z.string().min(1), value: z.string().min(1) })),
   }).nullable(),
-  offer_rule: rule.nullable(),
-  listing_ids: z.array(slug),
-  listing_rule: rule.nullable(),
+  listing_selection: selection.nullable(),
+  offer_selection: selection.nullable(),
   angle_label: z.string().nullable(),
   angle_notes: z.array(z.object({ kind: z.enum(['offer', 'listing']), id: slug, text: z.string().min(1) })),
+  faq: z.array(faqItem),
   why_intro: z.string().min(1),
   safety_note: z.string().min(1),
   published_on: isoDate,
@@ -188,12 +237,42 @@ export const article = z.object({
   seo: seoOverrides,
 });
 
-/** Structured page copy (privacy policy, shared lists). `placeholder` blocks fail a production build. */
-export const block = z.object({
-  key: z.string().regex(/^[a-z0-9_]+$/),
-  status: z.enum(['placeholder', 'final']),
-  body: z.unknown(),
-  updated_on: isoDate.nullable(),
+/** A yes/no criterion ("Avec cascade", "Kayak", "Rappel"): a row editors add without code (decision D1). */
+export const criterion = z.object({
+  key: slug,
+  label: z.string().min(1),
+  applies_to: z.enum(['listing', 'offer']),
+  group: z.string().nullable(),       // filter group ("Activités", "Public")
+  icon: z.string().nullable(),
+  order: z.number().int().nonnegative(),
+  filter: z.boolean(),                // offered as a filter
+  badge: z.boolean(),                 // shown as a tag on cards and pages
+  key_fact: z.boolean(),              // shown as "Label : Oui / Non" in the key facts
+  landing: z.boolean(),               // gets a landing page at the site's minimum count
+  intro: z.string().nullable(),       // landing-page introduction
+  seo: seoOverrides,
+});
+export type Criterion = z.infer<typeof criterion>;
+
+/** A listing type, with its landing-page text (decision D2). */
+export const listingType = z.object({
+  key: slug,
+  label: z.string().min(1),
+  plural: z.string().min(1),
+  icon: z.string().nullable(),
+  order: z.number().int().nonnegative(),
+  aliases: z.array(z.string()),       // other names people use ("Chutes d'eau")
+  intro: z.string().nullable(),
+  seo: seoOverrides,
+});
+
+/** A locality (commune), with its landing-page text (decision D2). */
+export const locality = z.object({
+  key: slug,
+  name: z.string().min(1),
+  area: z.string().min(1),
+  intro: z.string().nullable(),
+  seo: seoOverrides,
 });
 
 /** A dimension that can produce landing pages (type, locality, zone, an activity…). */
@@ -202,6 +281,12 @@ export interface LandingDimension {
   label: string;
   /** Values of a listing for this dimension (a listing can have several). */
   values: (listing: z.infer<typeof listingShape>) => string[];
+}
+
+/** Landing dimension for the criteria marked `landing`. */
+export function criteriaDimension(criteria: Criterion[]): LandingDimension {
+  const keys = new Set(criteria.filter((c) => c.applies_to === 'listing' && c.landing).map((c) => c.key));
+  return { key: 'criterion', label: 'Par critère', values: (l) => l.criteria.filter((c) => keys.has(c)) };
 }
 
 /** Landing pages exist only for values with at least `min` published listings. */

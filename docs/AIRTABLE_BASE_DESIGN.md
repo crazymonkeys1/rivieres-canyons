@@ -1,9 +1,10 @@
-# Airtable base design: audit and boilerplate proposal
+# Airtable base design: audit and boilerplate
 
-Status: **proposal, waiting for Jordan's choices** (§6). Written 2026-10-07, before phase 2.
+Status: **applied 2026-10-07** (Jordan chose every recommendation, D1–D6 in §6). The generated base spec is `apps/rivieres-canyons/airtable/SPEC.md`.
 Inputs:
 - Base 1: the **Mangroves** base (17 tables, CSV export + `README.md`, from `Guadeloupe_Mangrove_Directory_3.zip`).
-- Base 2: **Rivières & Canyons**. Its Airtable base is "to be rebuilt" (`CONTENT_MODEL.md`), so there is no live base to audit. Its data model is the phase 1b schema (`packages/*/src/content`, `site.config.ts`) and the fixtures.
+- Base 2: the old **Rivières & Canyons** base "v2" (7 tables, CSV export + `README.md`, from `airtable-v2 2.zip`, built from the v4 design), plus the phase 1b data model.
+- Jordan's answers: Business plan; the clients (the guides) edit their own content.
 
 **Goal:** one generic base that any directory reuses, which a non-technical person can run day to day. The two easiest actions must be **adding a listing** and **adding a criterion**.
 
@@ -19,7 +20,12 @@ Inputs:
   - Article Sections and Article FAQ as child tables;
   - "never rename a slug or key" as a written rule;
   - the suggested views ("À compléter", "Droits à obtenir").
-- **Canyons:**
+- **Canyons (old base v2 and the 1b model):**
+  - a Types table (one row per type, with icon and SEO description);
+  - operators as rows, not tables, so every site has the same structure;
+  - a `Published` checkbox and an `Order` on every table;
+  - "Histoire validée" on outings: guide stories stay drafts until the guide approves;
+  - links checked before conversion, expected counts after each step (its README);
   - outings (Offers) as their own table, linked to one place and one operator;
   - guides separate from operators (WhatsApp, guide page);
   - location policy;
@@ -38,6 +44,11 @@ Inputs:
 | 6 | **Multi-value fields as comma text** (Activities "Kayak, Bateau", Protection) | Mangroves | Order and spelling drift ("Bateau, Kayak" vs "Kayak, Bateau") | Linked criteria (§3) |
 | 7 | **Two source tables** (Sources + Reference Sources) | Mangroves | Same thing twice | One Sources table; site-wide sources have no listing |
 | 8 | **FAQ stored inside the listing** (list of Q/A) | Canyons | Long text with a convention is easy to break | One FAQ table for listings and articles |
+| 8b | **Durations twice** ("Durée" text + "Durée (h)", "Approche" + "Approche (min)") | Old canyon base | Two values drift apart | One number in minutes (+ précision) |
+| 8c | **"Conditions du jour"** ("Praticable") on outings | Old canyon base | Live data, forbidden (`CLAUDE.md` §8): it goes stale the next day | Dropped |
+| 8d | **Commune on outings** | Old canyon base | Duplicates the place's commune | Comes from the place |
+| 8e | **Photos as URL columns** inside each table, one credit for all | Old canyon base | No rights per photo, no order, no caption | Photos table |
+| 8f | **41 "Blocs" with layout fields** (Fond, Groupe, Bouton lien) | Old canyon base | Layout belongs to code; copy belongs to keys | Textes du site (key → text or list); layout stays in templates |
 | 9 | **Rejected sites as a separate table** | Mangroves | Re-research can't see a duplicate | Status "Rejeté" + reason in Listings (D4) |
 | 10 | **Mixed naming** (English Title Case in Mangroves, snake_case in canyons, French values) | Both | Renaming a column silently breaks the site | Field IDs in the adapter (§4) |
 
@@ -47,101 +58,82 @@ Inputs:
 - **Access:** Mangroves "libre / guidé / payant" describes cost and supervision. The canyon location policy describes what we publish. These are two different facts, so keep both concepts.
 - **Compare table:** a Mangroves article feature. It stays in that site only.
 
-## 2. Proposed boilerplate base: 13 tables
+## 2. The boilerplate base: 13 generic tables + site extras
 
-Legend:
-- **Core** = every directory.
-- **Places** = every directory of places.
-- **Site** = generated from `site.config.ts`.
-- **Who** = who edits it day to day.
+Built from code (`packages/*/src/airtable`, composed in `apps/rivieres-canyons/src/content/airtable.ts`). Column names are French (D6). Table names a site may rename are in brackets.
 
-| # | Table | Layer | What one row is | Who | Notes |
+| # | Table | Layer | One row is | Clients (guides) | Notes |
 |---|---|---|---|---|---|
-| 1 | **Listings** | Core + Places | a place | Operator | Generic fields + fact columns (§3). Grouped in the editing interface: Contenu · Lieu & accès · Sécurité · SEO · Suivi |
-| 2 | **Images** | Core | a photo | Operator | Link to Listing / Offer / Article; rights; credit; order |
-| 3 | **Sources** | Core | a source | Operator | Link to Listing or Article, or none (= site-wide); type |
-| 4 | **FAQ** | Core | a question | Operator | Link to Listing **or** Article; order |
-| 5 | **Criteria** | Core | a yes/no criterion ("Avec cascade", "Kayak", "Accessible PMR") | Operator | Group, label, icon, "show as filter", "landing page", landing intro (§3) |
-| 6 | **Types** | Core | a listing type | Technical | Label, plural, icon, landing intro and SEO |
-| 7 | **Localities** | Core | a commune | Operator | Zone, area, landing intro and SEO. The site counts 3+ listings |
-| 8 | **Operators** | Directory | a business | Operator | Name, brand colour, logo, URLs, rating + source |
-| 9 | **Guides** | Directory | a person | Operator | Operator, names, photo, bio, WhatsApp |
-| 10 | **Offers** | Directory | an outing | Operator | Listing, operator, main flag, minutes, prices, price checked on, lists (one per line), offer fact columns |
-| 11 | **Reviews** | Directory | a review | Operator | Operator / offer, quote, author, source, status |
-| 12 | **Articles** + **Article Sections** | Directory | an intent page / a section | Operator | Selection by Criteria / Types / Localities + include / exclude (D3) |
-| 13 | **Site Copy** | Core | a text on the site | Operator (value only) | Key, page, section, value. Also holds long blocks (privacy text) and global tips |
+| 1 | Types | Directory | a listing type | read | Label, plural, icon, aliases, landing intro + SEO (D2) |
+| 2 | [Communes] | Directory | a locality | read | Name, area, landing intro + SEO (D2) |
+| 3 | Critères | Directory | a yes/no criterion | read | Applies to places or outings; filter / badge / key fact / landing page; icon, group, order (D1) |
+| 4 | Opérateurs | Directory | a business | own row | Brand colour, logo, URLs, rating + source, "Comptes" (Airtable users) |
+| 5 | Guides | Directory | a person | own row | Operator, names, photo, bio, "Repères", WhatsApp, "Compte Airtable" |
+| 6 | [Lieux] | Directory + Places | a listing | read + comment | Generic columns, fact columns, location policy, access, safety; status incl. Rejeté (D4); "Ce qui manque" |
+| 7 | [Sorties] | Directory | an outing | own rows | Place, operator, main flag, minutes, prices + date, criteria, fact columns, lists, guide story + status |
+| 8 | Avis | Directory | a review | read + comment | Operator / outing / guide, quote, rating, date, source, status |
+| 9 | Articles | Directory | an intent page | read | Texts + selection: types, communes, criteria with / without, named rule, include / exclude (D3) |
+| 10 | Sections d'article | Directory | a block of an article | read | Point clé · Section · Conseil · Note d'angle (on a place or outing) |
+| 11 | FAQ | Directory | a question | read + comment | On a place or an article |
+| 12 | Photos | Directory | a photo | own rows | Owner (place / outing / article / site), role, order, credit, licence, rights, source |
+| 13 | Sources | Directory | a source | read | Owner, type; "Presse" + title shows it in "Ils en parlent" |
+| 14 | Textes du site | Core | a site text | hidden | Key → text or list with icons; status "À écrire" fails production |
+| + | Publications | Site (canyons) | a social post | read | Account name required for production |
 
-**Site-only extras** stay outside the boilerplate: Social posts (canyons; it could become a table if Mangroves needs it), Compare Rows (Mangroves).
+Mangroves' Compare Rows would be its own site extra.
 
 **Rules that keep it simple:**
-- A list whose items are one line each (things to bring, highlights, key facts) is a **long text with one item per line**.
-- A list whose items have several fields (FAQ, sections, photos, sources) is a **child table**.
-- The site **never reads formulas, lookups or rollups**. Helper fields for the operator (e.g. "Ce qui manque") are allowed. They sit in a "Suivi" group and the site ignores them.
+- A list of one-line items (things to bring, highlights) is a **long text, one item per line**.
+- A list of short labelled items ("Bon à savoir", a guide's "Repères", access hints) is a long text, one "Libellé : valeur" per line (optionally an icon first, " — précision" last). The build names the row and line when the format is wrong.
+- Items with several long fields (FAQ, article sections, photos, sources) are **child tables**.
+- The site **never reads formulas, lookups or rollups**. Helper fields ("Ce qui manque", "Comptes") exist for editors only.
 
-## 3. Adding listings and criteria (the operator's main jobs)
+## 3. Adding listings and criteria (the editor's main jobs)
 
-- **Add a listing:**
-  1. "Nouveau lieu" form in the interface: name, type, commune, status = Brouillon.
-  2. The slug is suggested from the name and locked once published.
-  3. A "Ce qui manque" panel shows the missing key fields (same list as the completeness score).
-- **Add a yes/no criterion** (most filters: kid friendly, waterfall, kayak, PMR, pets…):
-  1. Add one row in **Criteria** (label, icon, group, filter yes/no).
-  2. Tick it on the listings.
-  3. Done: the filter, the card icon and, at 3+ listings, a landing page appear on the next build. No column and no code.
-- **Add a measured fact** (a number, duration, level: e.g. "Profondeur max", "Marche d'approche"):
-  1. The technical owner adds a column and one line in `site.config.ts`.
-  2. This takes about 5 minutes and is rare.
-  3. A typed value needs a typed column to be filtered and sorted correctly.
+- **Add a listing:** "Nouveau lieu" form: name, type, commune, status = Brouillon. The slug is calculated from the name when empty, and locked (Tech field) once set. "Ce qui manque" lists the empty key fields (same list as the completeness score).
+- **Add a yes/no criterion** (kid friendly, kayak, PMR, pets…): one row in **Critères**, then tick it on the places or outings. The filter, the badge or key fact and, at 3+ places, a landing page follow on the next build. No column, no code.
+- **Add a measured fact** (a number, duration, level): the technical owner adds a column and one line in `site.config.ts`, then reruns `pnpm airtable:export`. About 5 minutes; rare.
 
-## 4. Roles and safety nets
+## 4. Roles and safety nets (Business plan; the clients edit)
 
-- **Technical owner = Creator.** Owns the tables, the fields, the Types and the field IDs.
-- **Operator = Editor.**
-  - Edits records, cannot add, rename or delete fields or tables.
-  - Works through an **Airtable Interface** (one page per job: Lieux, Sorties, Photos, Articles, Textes du site), so the operator never sees the raw structure.
-  - Read-only fields in the interface: slug after publication, Image rights "libre" (only after a check), field IDs.
-- **Nothing the operator does can break the live site silently:**
-  - The adapter reads fields **by ID**, so renaming a column label changes nothing.
-  - The build validates every record (Zod) and stops with a clear French message ("Lieu *Rivière Moustique* : commune inconnue « Petit Bourg »").
-  - The previous version stays online.
-  - A deleted published slug is reported by the build (a redirect is needed).
-- **Field-level and table-level edit restrictions** depend on the Airtable plan (to check with Jordan, Q2). The interface plus the build checks cover the free plan.
+| Who | Airtable role | Sees and edits |
+|---|---|---|
+| Orbit technical owner | Creator | Everything; the only role that changes tables and fields |
+| Orbit team | Editor | Interface "Orbit · Contenu" and grids; fields marked **Orbit** are theirs only (status, verification, rights, main outing…) |
+| Clients (guides, operators) | Interface-only Editor | Interface "Mon espace": their outings, profile, company and photos (edit); places, articles, reviews (read + comment) |
+
+- **Field permissions:** Tech fields (slugs, keys, formats) editable by Creators only; Orbit fields by Orbit only. A guide can change a price or a programme, not publish an outing or move it to another place.
+- **Their rows only:** interface pages filter on "Comptes contains current user" (through the operator for outings and photos). Interface-only collaborators never see the base. Airtable has no hard row-level security: this keeps each guide in their own rows, and the build refuses anything invalid.
+- **Guide stories and reviews:** the guide validates "Pourquoi je vous emmène ici" ("Histoire — statut"); reviews are added by Orbit with their source (guides comment).
+- **Nothing breaks the live site silently:** the adapter reads fields **by ID** (renaming a column is harmless); every update runs the content checks; an error stops the update with the row and field named, and the current site stays online.
 
 ## 5. Generating the base for a new directory; CMS migration
 
-- **Generation:** the base comes from code, not by hand.
-  1. `pnpm airtable:spec` reads the package schemas + `site.config.ts` and writes `airtable/SPEC.md` (tables, fields, types, help text) and one empty CSV per table.
-  2. Optionally (later), the same script creates the tables and fields through the Airtable API (needs a token with schema rights) and records the field IDs in `airtable.map.json`.
-  3. A new directory = a new `site.config.ts` + one command.
-- **Kept CMS-ready:**
-  - stable `slug`/`key` as identity (never Airtable record IDs);
-  - links resolved to slugs in the adapter;
-  - no site logic in formulas;
-  - plain paragraphs in long text;
-  - every photo downloaded at build time.
-- **Things that would make the migration harder (avoided):**
-  - **Airtable attachment URLs expire after a few hours**, so never store them. Download at build, or keep the original URL in `src`.
-  - Rules written as text.
-  - Design settings in content.
-  - Single-select labels used as identifiers. Labels are mapped to stable keys in `site.config.ts`. An unknown value fails the build; it is never guessed.
+- **One description, three uses** (`pnpm airtable:export`):
+  1. `airtable/SPEC.md`: tables, fields, types, options, who edits, help text, import steps, views and interfaces;
+  2. `airtable/csv/`: import-ready CSVs, in link order;
+  3. a round-trip check: content → CSV → content must be identical, so nothing is lost on import.
+- After import: `pnpm airtable:link` saves the table and field IDs (`airtable/map.json`); `pnpm content:pull` reads the base, runs the checks, and writes the content only if everything passes.
+- **A new directory** = its `site.config.ts` (facts, vocabularies, table names) + the same command. The tables come from the packages.
+- **Kept CMS-ready:** stable keys as identity (never Airtable record IDs); links resolved to keys; no site logic in formulas; plain text; photos downloaded at build time (Airtable attachment URLs expire within hours); option labels mapped to stable keys, unknown values refused.
 
-## 6. Choices for Jordan
+## 6. Decisions (Jordan, 2026-10-07: every recommendation)
 
-| ID | Question | Options | Recommendation |
-|---|---|---|---|
-| **D1** | How are criteria added? | **A** Columns only (tech adds each) · **B** Yes/no criteria as rows in a Criteria table (operator adds), measured facts as columns (tech adds) · **C** Everything as rows (very flexible, hard to edit and filter) | **B**: the most frequent change becomes a no-code one |
-| **D2** | Types and communes | **A** Linked tables with their landing-page text · **B** Simple dropdowns | **A**: they become pages and need SEO text |
-| **D3** | How does an article pick its listings and outings? | **A** Links to criteria (with / without), types and communes, plus manual include/exclude; numeric rules ("dès 10 ans", "≤ 4 h 30") stay in code · **B** Manual list only · **C** Rule rows in Airtable | **A**: covers every Mangroves rule with no code. The canyon numeric rules stay as they are |
-| **D4** | Rejected listings | **A** Status "Rejeté" + reason in Listings · **B** Separate table | **A**: one place to check before adding |
-| **D5** | One base per site or one for all? | **A** One per site · **B** One shared base | **A**: simpler, per-client access, smaller record limits. Yalodé (in both sites) is entered twice until the CRM holds partners |
-| **D6** | Column names | **A** French names for the operator, read by ID · **B** English names | **A**: easiest to use, safe because of the IDs |
+| ID | Question | Decision |
+|---|---|---|
+| **D1** | How are criteria added? | **B:** yes/no criteria are rows in Critères (editors add them); measured facts are columns (technical owner adds them) |
+| **D2** | Types and communes | **A:** their own tables, with landing-page text |
+| **D3** | How does an article pick its places and outings? | **A:** types, communes, criteria with / without, include / exclude in Airtable; comparisons on measured facts are named rules in `site.config.ts` (`ARTICLE_RULES`), picked from a list |
+| **D4** | Rejected places | **A:** status "Rejeté" + reason in Lieux |
+| **D5** | One base per site or one for all | **A:** one per site |
+| **D6** | Column names | **A:** French, read by field ID |
 
-**Questions:**
-- **Q1:** Is there an old canyon Airtable base, or a CSV export of it? If yes, I audit it too.
-- **Q2:** Which Airtable plan (Free, Team, Business)? It decides the field-level permissions.
-- **Q3:** Who will edit day to day: your team, the guides (Pascal, Quentin), or both? If the guides edit, they should only see their own outings and profile.
+Answers: Q1 old canyon base audited (§1); Q2 Business plan (field permissions used, §4); Q3 the clients edit (interface-only access, §4).
 
-## 7. What changes in the current code if D1-B is chosen
-- `has_waterfall` (place) and `has_rappel` / `pets_allowed` (offer) move from `facts` to Criteria. Measured and level facts stay in `facts`.
-- The canyon article rules that test them become criteria links, and `matchesRule` keeps the numeric rules.
-- Done at the start of phase 2, with the same "selects exactly the same items" check as in phase 1.
+## 7. What changed in the code
+- `has_waterfall` → criterion "Avec cascade"; `has_rappel` → "Rappel"; `pets_allowed` → "Animaux acceptés"; the 18 offer tags → criteria shown as badges.
+- `LISTING_TYPES` moved from code to the Types table; communes became records linked by key.
+- Article `offer_rule` / `listing_rule` / `listing_ids` → `offer_selection` / `listing_selection`; the check confirms every article picks exactly what the design picked.
+- Listing status adds `draft` and `rejected` (+ `status_note`); the `rejected` entity is gone. Outings and articles get a status; outings get `guide_story_status`; reviews get guide, rating and date; articles get a FAQ.
+- Press is a featured source; page blocks are site texts.
+- Checks moved to `src/content/check.ts` (same checks for the design migration and for Airtable).

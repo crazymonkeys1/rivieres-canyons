@@ -1,6 +1,7 @@
 [
   {
     "id": "canyoning-enfants",
+    "status": "published",
     "label": "Canyoning avec enfants",
     "h1": "Canyoning avec des enfants en Guadeloupe",
     "eyebrow": "En famille",
@@ -65,20 +66,26 @@
         }
       ]
     },
-    "offer_rule": {
-      "match": "all",
-      "conditions": [
-        {
-          "field": "facts.min_age",
-          "op": "lte",
-          "value": 10
-        }
-      ]
+    "offer_selection": {
+      "types": [],
+      "localities": [],
+      "with": [],
+      "without": [],
+      "rule": "des_10_ans",
+      "include": [],
+      "exclude": []
     },
-    "listing_ids": [
-      "cascade-aux-ecrevisses"
-    ],
-    "listing_rule": null,
+    "listing_selection": {
+      "types": [],
+      "localities": [],
+      "with": [],
+      "without": [],
+      "rule": null,
+      "include": [
+        "cascade-aux-ecrevisses"
+      ],
+      "exclude": []
+    },
     "angle_label": "Avec des enfants",
     "angle_notes": [
       {
@@ -102,6 +109,7 @@
         "text": "Sans guide, c'est la sortie la plus simple : dix minutes de sentier aménagé. Gardez les enfants hors de l'eau si elle se trouble."
       }
     ],
+    "faq": [],
     "why_intro": "Avec des enfants, le guide fait plus que montrer le chemin : il choisit le parcours selon l'âge, adapte chaque passage et surveille le groupe en permanence. Les parents profitent de la sortie au lieu de la gérer.",
     "safety_note": "Même sur un parcours facile, un enfant se fatigue et se refroidit vite dans l'eau. Les sites sans guide ne sont pas surveillés.",
     "published_on": "2026-10-02",
@@ -113,6 +121,7 @@
   },
   {
     "id": "cascades-faciles-acces",
+    "status": "published",
     "label": "Cascades faciles d'accès",
     "h1": "Cascades faciles d'accès en Guadeloupe",
     "eyebrow": "Accès facile",
@@ -173,26 +182,27 @@
         }
       ]
     },
-    "offer_rule": {
-      "match": "all",
-      "conditions": [
-        {
-          "field": "facts.level",
-          "op": "eq",
-          "value": "facile"
-        },
-        {
-          "field": "facts.approach_min",
-          "op": "lte",
-          "value": 25
-        }
-      ]
+    "offer_selection": {
+      "types": [],
+      "localities": [],
+      "with": [],
+      "without": [],
+      "rule": "facile_approche_courte",
+      "include": [],
+      "exclude": []
     },
-    "listing_ids": [
-      "cascade-aux-ecrevisses",
-      "chutes-du-carbet"
-    ],
-    "listing_rule": null,
+    "listing_selection": {
+      "types": [],
+      "localities": [],
+      "with": [],
+      "without": [],
+      "rule": null,
+      "include": [
+        "cascade-aux-ecrevisses",
+        "chutes-du-carbet"
+      ],
+      "exclude": []
+    },
     "angle_label": "Accès",
     "angle_notes": [
       {
@@ -216,6 +226,7 @@
         "text": "La 2e chute se rejoint en 20 à 25 minutes par un sentier aménagé. Droit d'entrée sur place."
       }
     ],
+    "faq": [],
     "why_intro": "Les cascades faciles se visitent seul. Avec un guide, on découvre les vasques et les passages en amont que l'on ne trouve pas depuis le sentier.",
     "safety_note": "Un accès facile ne veut pas dire sans risque : les rochers sont glissants et l'eau peut monter après une pluie en amont. Aux Chutes du Carbet, seule la 2e chute est ouverte.",
     "published_on": "2026-10-02",
@@ -227,6 +238,7 @@
   },
   {
     "id": "baignade-riviere",
+    "status": "published",
     "label": "Baignade en rivière",
     "h1": "Se baigner en rivière en Guadeloupe",
     "eyebrow": "Baignade",
@@ -287,25 +299,23 @@
         }
       ]
     },
-    "offer_rule": {
-      "match": "all",
-      "conditions": [
-        {
-          "field": "facts.level",
-          "op": "eq",
-          "value": "facile"
-        }
-      ]
+    "offer_selection": {
+      "types": [],
+      "localities": [],
+      "with": [],
+      "without": [],
+      "rule": "niveau_facile",
+      "include": [],
+      "exclude": []
     },
-    "listing_ids": [],
-    "listing_rule": {
-      "match": "all",
-      "conditions": [
-        {
-          "field": "facts.swimming",
-          "op": "filled"
-        }
-      ]
+    "listing_selection": {
+      "types": [],
+      "localities": [],
+      "with": [],
+      "without": [],
+      "rule": "baignade_renseignee",
+      "include": [],
+      "exclude": []
     },
     "angle_label": "Baignade",
     "angle_notes": [
@@ -355,6 +365,7 @@
         "text": "Réservée aux sorties encadrées : le canyon enchaîne rappels et sauts."
       }
     ],
+    "faq": [],
     "why_intro": "Une rivière change vite. Le guide lit le débit, connaît les fonds et sait quand sortir de l'eau : vous vous baignez dans les meilleurs coins, sans prendre de risque.",
     "safety_note": "Plusieurs sites connus sont interdits d'accès par arrêté : vérifiez la réglementation avant de partir. Sortez de l'eau dès qu'elle se trouble ou monte.",
     "published_on": "2026-10-02",
@@ -366,6 +377,7 @@
   },
   {
     "id": "canyoning-debutant",
+    "status": "published",
     "label": "Canyoning débutant",
     "h1": "Canyoning pour débutants en Guadeloupe",
     "eyebrow": "Première fois",
@@ -426,23 +438,16 @@
         }
       ]
     },
-    "offer_rule": {
-      "match": "any",
-      "conditions": [
-        {
-          "field": "facts.level",
-          "op": "eq",
-          "value": "facile"
-        },
-        {
-          "field": "tags",
-          "op": "includes",
-          "value": "Initiation technique"
-        }
-      ]
+    "offer_selection": {
+      "types": [],
+      "localities": [],
+      "with": [],
+      "without": [],
+      "rule": "debutant",
+      "include": [],
+      "exclude": []
     },
-    "listing_ids": [],
-    "listing_rule": null,
+    "listing_selection": null,
     "angle_label": "Pour débuter",
     "angle_notes": [
       {
@@ -461,6 +466,7 @@
         "text": "Le premier rappel, expliqué au sol puis assuré par le guide."
       }
     ],
+    "faq": [],
     "why_intro": "Pour une première fois, le guide est indispensable : il fournit le matériel, enseigne les gestes et vous assure à chaque rappel.",
     "safety_note": "Un parcours débutant reste une activité en milieu naturel : le guide peut annuler si la météo l'impose.",
     "published_on": "2026-10-02",
@@ -472,6 +478,7 @@
   },
   {
     "id": "randonnee-aquatique",
+    "status": "published",
     "label": "Randonnée aquatique",
     "h1": "Randonnée aquatique en Guadeloupe (sans rappel)",
     "eyebrow": "Sans corde",
@@ -532,18 +539,18 @@
         }
       ]
     },
-    "offer_rule": {
-      "match": "all",
-      "conditions": [
-        {
-          "field": "facts.has_rappel",
-          "op": "eq",
-          "value": false
-        }
-      ]
+    "offer_selection": {
+      "types": [],
+      "localities": [],
+      "with": [],
+      "without": [
+        "rappel"
+      ],
+      "rule": null,
+      "include": [],
+      "exclude": []
     },
-    "listing_ids": [],
-    "listing_rule": null,
+    "listing_selection": null,
     "angle_label": "Le parcours",
     "angle_notes": [
       {
@@ -562,6 +569,7 @@
         "text": "Version raccourcie, au rythme des enfants."
       }
     ],
+    "faq": [],
     "why_intro": "Le guide connaît l'itinéraire, les sauts sûrs et les sorties de secours. Vous profitez de la rivière sans chercher votre chemin.",
     "safety_note": "Sans rappel ne veut pas dire sans effort : la marche d'approche peut être longue (1 h 30 pour le Canyon doré).",
     "published_on": "2026-10-02",
@@ -573,6 +581,7 @@
   },
   {
     "id": "canyoning-sensations",
+    "status": "published",
     "label": "Sensations fortes",
     "h1": "Canyoning sensations fortes en Guadeloupe",
     "eyebrow": "Sensations fortes",
@@ -633,23 +642,16 @@
         }
       ]
     },
-    "offer_rule": {
-      "match": "any",
-      "conditions": [
-        {
-          "field": "facts.spirit",
-          "op": "eq",
-          "value": "sensations"
-        },
-        {
-          "field": "facts.level",
-          "op": "eq",
-          "value": "engage"
-        }
-      ]
+    "offer_selection": {
+      "types": [],
+      "localities": [],
+      "with": [],
+      "without": [],
+      "rule": "sensations",
+      "include": [],
+      "exclude": []
     },
-    "listing_ids": [],
-    "listing_rule": null,
+    "listing_selection": null,
     "angle_label": "Sensations",
     "angle_notes": [
       {
@@ -663,6 +665,7 @@
         "text": "Le plus sportif de la sélection. Une première expérience est conseillée."
       }
     ],
+    "faq": [],
     "why_intro": "Sur les canyons engagés, l'encadrement n'est pas une option : cordes, rappels et sauts se font avec un professionnel qui connaît chaque obstacle.",
     "safety_note": "Ces parcours demandent une bonne condition physique. Ne les tentez jamais sans guide.",
     "published_on": "2026-10-02",
@@ -674,6 +677,7 @@
   },
   {
     "id": "canyoning-demi-journee",
+    "status": "published",
     "label": "Canyoning à la demi-journée",
     "h1": "Canyoning à la demi-journée en Guadeloupe",
     "eyebrow": "Demi-journée",
@@ -734,18 +738,16 @@
         }
       ]
     },
-    "offer_rule": {
-      "match": "all",
-      "conditions": [
-        {
-          "field": "duration_min",
-          "op": "lte",
-          "value": 270
-        }
-      ]
+    "offer_selection": {
+      "types": [],
+      "localities": [],
+      "with": [],
+      "without": [],
+      "rule": "demi_journee",
+      "include": [],
+      "exclude": []
     },
-    "listing_ids": [],
-    "listing_rule": null,
+    "listing_selection": null,
     "angle_label": "Le timing",
     "angle_notes": [
       {
@@ -764,6 +766,7 @@
         "text": "Environ 3 h : l'après-midi reste libre."
       }
     ],
+    "faq": [],
     "why_intro": "En demi-journée, chaque minute compte. Le guide vous mène directement aux plus beaux passages, avec le matériel prêt au départ.",
     "safety_note": "Le guide confirme la sortie la veille selon la météo.",
     "published_on": "2026-10-02",

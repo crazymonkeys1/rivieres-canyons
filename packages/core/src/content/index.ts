@@ -46,17 +46,32 @@ export const source = z.object({
   id: slug,
   owner_kind: z.enum(['listing', 'article', 'site']),
   owner_id: z.string().min(1),
-  label: z.string().min(1),
+  label: z.string().min(1),          // the site or publication ("Rando Guadeloupe")
   url: httpUrl,
   type: z.enum(SOURCE_TYPES),
   used_for: z.string().nullable(),  // "accès", "statut", "description"…
-});
+  // Press ("Ils en parlent"): a source shown on the page, with its title
+  featured: z.boolean(),
+  title: z.string().nullable(),
+  publisher: z.string().nullable(),
+  note: z.string().nullable(),
+}).refine((s) => !s.featured || !!s.title, { message: 'a featured source needs a title', path: ['title'] });
 
-/** Interface text editable without code, found by a permanent key. */
-export const copyEntry = z.object({ key: z.string().regex(/^[a-z0-9_.]+$/), page: z.string(), section: z.string(), value: z.string() });
-
-/** Research memory: candidates deliberately left out, so nobody re-adds them. */
-export const rejectedListing = z.object({ name: z.string().min(1), reason: z.string().min(1) });
+/**
+ * Site text editable without code, found by a permanent key: interface labels, page blocks (privacy policy)
+ * and short lists with icons ("why a guide" points). `placeholder` entries fail a production build.
+ */
+export const copyItem = z.object({ icon: z.string(), label: z.string().min(1), value: z.string().min(1) });
+export const copyEntry = z.object({
+  key: z.string().regex(/^[a-z0-9_.]+$/),
+  page: z.string().nullable(),
+  section: z.string().nullable(),
+  format: z.enum(['text', 'list']),
+  text: z.string().nullable(),
+  items: z.array(copyItem),
+  status: z.enum(['placeholder', 'final']),
+  updated_on: isoDate.nullable(),
+}).refine((c) => (c.format === 'text' ? !!c.text && c.items.length === 0 : !c.text && c.items.length > 0), 'text entries hold text, list entries hold items');
 
 /** Optional overrides; templates compute the default when empty. */
 export const seoOverrides = z.object({ title: z.string().nullable(), description: z.string().nullable() });
@@ -69,6 +84,8 @@ export interface FactDefinition {
   type: FactType;
   /** Allowed values for choice / choices (stable keys). */
   options?: readonly string[];
+  /** Label of each option, as editors pick it in Airtable. */
+  labels?: Readonly<Record<string, string>>;
   unit?: string;
   icon?: string;
   /** Usable as a listing filter. */
@@ -79,6 +96,10 @@ export interface FactDefinition {
   completeness?: boolean;
   /** schema.org property for JSON-LD (additionalProperty when omitted). */
   schema_org?: string;
+  /** Accepts a short note next to the value ("possible sous conditions"). */
+  note?: boolean;
+  /** Help text shown to the editor (Airtable field description). */
+  help?: string;
 }
 
 function factValue(def: FactDefinition): z.ZodTypeAny {
