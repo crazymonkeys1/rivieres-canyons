@@ -1,15 +1,5 @@
 [
   {
-    "name": "Petit-Bourg",
-    "key": "petit-bourg",
-    "area": "Basse-Terre",
-    "intro": null,
-    "seo": {
-      "title": null,
-      "description": null
-    }
-  },
-  {
     "name": "Bouillante",
     "key": "bouillante",
     "area": "Basse-Terre",
@@ -20,8 +10,8 @@
     }
   },
   {
-    "name": "Pointe-Noire",
-    "key": "pointe-noire",
+    "name": "Capesterre-Belle-Eau",
+    "key": "capesterre-belle-eau",
     "area": "Basse-Terre",
     "intro": null,
     "seo": {
@@ -50,8 +40,8 @@
     }
   },
   {
-    "name": "Vieux-Habitants",
-    "key": "vieux-habitants",
+    "name": "Petit-Bourg",
+    "key": "petit-bourg",
     "area": "Basse-Terre",
     "intro": null,
     "seo": {
@@ -60,8 +50,8 @@
     }
   },
   {
-    "name": "Capesterre-Belle-Eau",
-    "key": "capesterre-belle-eau",
+    "name": "Pointe-Noire",
+    "key": "pointe-noire",
     "area": "Basse-Terre",
     "intro": null,
     "seo": {
@@ -72,6 +62,16 @@
   {
     "name": "Sainte-Rose",
     "key": "sainte-rose",
+    "area": "Basse-Terre",
+    "intro": null,
+    "seo": {
+      "title": null,
+      "description": null
+    }
+  },
+  {
+    "name": "Vieux-Habitants",
+    "key": "vieux-habitants",
     "area": "Basse-Terre",
     "intro": null,
     "seo": {

@@ -1,17 +1,5 @@
 [
   {
-    "name": "Yalodé",
-    "id": "yalode",
-    "brand_color": "#0A8577",
-    "logo_url": null,
-    "website_url": "https://www.kayak-guadeloupe.fr/",
-    "contact_url": "https://www.kayak-guadeloupe.fr/contact.html",
-    "booking_url": "[BOOKING_URL_YALODE]",
-    "rating": 4.9,
-    "rating_count": null,
-    "rating_source": null
-  },
-  {
     "name": "Wild Canyon",
     "id": "wildcanyon",
     "brand_color": "#3D4AA0",
@@ -20,6 +8,18 @@
     "contact_url": "https://wild-canyon.fr/#contact",
     "booking_url": "[BOOKING_URL_WILDCANYON]",
     "rating": 5,
+    "rating_count": null,
+    "rating_source": null
+  },
+  {
+    "name": "Yalodé",
+    "id": "yalode",
+    "brand_color": "#0A8577",
+    "logo_url": null,
+    "website_url": "https://www.kayak-guadeloupe.fr/",
+    "contact_url": "https://www.kayak-guadeloupe.fr/contact.html",
+    "booking_url": "[BOOKING_URL_YALODE]",
+    "rating": 4.9,
     "rating_count": null,
     "rating_source": null
   }

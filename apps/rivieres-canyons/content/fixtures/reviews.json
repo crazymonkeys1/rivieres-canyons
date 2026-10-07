@@ -1,11 +1,11 @@
 [
   {
-    "id": "wildcanyon-3",
+    "id": "wildcanyon-1",
     "operator_id": "wildcanyon",
     "offer_id": null,
     "guide_id": "quentin",
-    "quote": "Quant au cadre… rien à dire, c’est magnifique !",
-    "author": "Benjamin L.",
+    "quote": "Super moniteur, super site et superbe vue tout au long de la journée, avec de bonnes sensations.",
+    "author": "Andy S.",
     "rating": null,
     "date": null,
     "source": "avis Google",
@@ -24,12 +24,12 @@
     "status": "published"
   },
   {
-    "id": "wildcanyon-1",
+    "id": "wildcanyon-3",
     "operator_id": "wildcanyon",
     "offer_id": null,
     "guide_id": "quentin",
-    "quote": "Super moniteur, super site et superbe vue tout au long de la journée, avec de bonnes sensations.",
-    "author": "Andy S.",
+    "quote": "Quant au cadre… rien à dire, c’est magnifique !",
+    "author": "Benjamin L.",
     "rating": null,
     "date": null,
     "source": "avis Google",

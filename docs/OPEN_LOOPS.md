@@ -40,7 +40,7 @@ The detailed, always-current list of data gaps is generated in `docs/CONTENT_REP
 | N5 | ~~"Ce qui manque" formula and "Comptes" lookup~~: done | — | 2026-10-07 | done |
 | N3 | ~~Allow `api.airtable.com` in the cloud environment~~: the settings screen fails ("Couldn't update environment"); replaced by the GitHub job, which reaches Airtable | — | 2026-10-07 | replaced |
 | N4 | Interfaces (`docs/AIRTABLE_INTERFACES.md`): **deferred** (Jordan, 2026-10-07: only Orbit edits for now, in the base directly). "Mon espace" for the guides when they start editing; "Orbit · Contenu" optional | Jordan | 2026-10-07 | deferred |
-| N6 | Run the GitHub job Airtable → `pull-content` once: proves an Airtable edit reaches the site's content | Jordan | 2026-10-07 | open |
+| N6 | ~~`pull-content` test~~: done, content identical | — | 2026-10-07 | done |
 
 ## Worth adding (improves SEO, not blocking)
 

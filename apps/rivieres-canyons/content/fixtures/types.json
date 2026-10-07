@@ -1,10 +1,23 @@
 [
   {
-    "label": "Rivière",
-    "key": "riviere",
-    "plural": "Rivières",
-    "icon": "🌊",
-    "order": 2,
+    "label": "Bassin naturel",
+    "key": "bassin-naturel",
+    "plural": "Bassins naturels",
+    "icon": "🛁",
+    "order": 4,
+    "aliases": [],
+    "intro": null,
+    "seo": {
+      "title": null,
+      "description": null
+    }
+  },
+  {
+    "label": "Canyon",
+    "key": "canyon",
+    "plural": "Canyons",
+    "icon": "⛰️",
+    "order": 1,
     "aliases": [],
     "intro": null,
     "seo": {
@@ -28,24 +41,11 @@
     }
   },
   {
-    "label": "Canyon",
-    "key": "canyon",
-    "plural": "Canyons",
-    "icon": "⛰️",
-    "order": 1,
-    "aliases": [],
-    "intro": null,
-    "seo": {
-      "title": null,
-      "description": null
-    }
-  },
-  {
-    "label": "Bassin naturel",
-    "key": "bassin-naturel",
-    "plural": "Bassins naturels",
-    "icon": "🛁",
-    "order": 4,
+    "label": "Rivière",
+    "key": "riviere",
+    "plural": "Rivières",
+    "icon": "🌊",
+    "order": 2,
     "aliases": [],
     "intro": null,
     "seo": {

@@ -1,33 +1,4 @@
 ﻿Titre,Article,Genre,Ordre,Texte,Lieu,Sortie
-Dès 8 ans,Canyoning avec enfants,Point clé,1,"Acomat avec Yalodé ou Wild Canyon, sans rappel.",,
-Tout se contourne,Canyoning avec enfants,Point clé,2,Toboggans et sauts sont facultatifs : personne ne reste au bord.,,
-Équipement fourni,Canyoning avec enfants,Point clé,3,"Casque et néoprène prêtés par le guide, gilet chez Yalodé.",,
-À partir de quel âge ?,Canyoning avec enfants,Section,1,"La plupart des sorties familiales acceptent les enfants dès 8 ans. À cet âge, il faut savoir nager quelques mètres et être à l'aise dans l'eau fraîche. Les parcours techniques avec rappels hauts restent réservés aux plus de 14 ou 16 ans.",,
-Quel parcours choisir ?,Canyoning avec enfants,Section,2,"Pour une première fois, privilégiez une randonnée aquatique sans rappel, où toboggans et sauts se contournent. Acomat, à Pointe-Noire, est le parcours le plus proposé aux familles. Pour une simple balade avec de jeunes enfants, la Cascade aux Écrevisses se rejoint en dix minutes par un sentier aménagé.",,
-Comment se passe la sortie ?,Canyoning avec enfants,Section,3,"Le guide fournit casque, combinaison et gilet, puis explique chaque passage. Le groupe avance au rythme du plus jeune, avec des pauses régulières. Comptez une demi-journée, marche d'approche comprise.",,
-Âge minimum,Canyoning avec enfants,Conseil,1,Dès 8 ans pour les sorties sans rappel,,
-Savoir nager,Canyoning avec enfants,Conseil,2,"Oui, quelques mètres",,
-Durée,Canyoning avec enfants,Conseil,3,3 h à 3 h 30 en moyenne,,
-Équipement,Canyoning avec enfants,Conseil,4,Fourni par le guide,,
-À prévoir,Canyoning avec enfants,Conseil,5,"Chaussures fermées, maillot, vêtement chaud pour après",,
-,Canyoning avec enfants,Note d'angle,1,"Le parcours le plus doux de la sélection. Toboggans et sauts se contournent, et le guide cale le rythme sur le plus jeune.",,Canyon d'Acomat
-,Canyoning avec enfants,Note d'angle,2,"Une formule pensée pour les familles, sans rappel, avec une courte marche d'approche.",,Randonnée aquatique Acomat – Family
-,Canyoning avec enfants,Note d'angle,3,"Une journée complète pour des enfants déjà à l'aise dans l'eau, avec un premier rappel encadré.",,Canyon Bourceau – Journée family
-,Canyoning avec enfants,Note d'angle,4,"Sans guide, c'est la sortie la plus simple : dix minutes de sentier aménagé. Gardez les enfants hors de l'eau si elle se trouble.",Cascade aux Écrevisses,
-10 min de marche,Cascades faciles d'accès,Point clé,1,La Cascade aux Écrevisses se rejoint par un sentier aménagé depuis le parking.,,
-110 m de chute,Cascades faciles d'accès,Point clé,2,"La 2e chute du Carbet, la seule ouverte des trois, par un sentier aménagé.",,
-Ou avec un guide,Cascades faciles d'accès,Point clé,3,"Acomat en sortie guidée, 20 à 25 min d'approche.",,
-Où les trouver ?,Cascades faciles d'accès,Section,1,"Les cascades les plus simples se concentrent en Basse-Terre, dans le Parc national. La Cascade aux Écrevisses, sur la Route de la Traversée, et la 2e chute du Carbet, à Capesterre-Belle-Eau, se rejoignent par des sentiers aménagés.",,
-Ce qui change d’un site à l’autre,Cascades faciles d'accès,Section,2,"Certaines cascades sont gratuites et en bord de route, d'autres demandent un droit d'entrée ou une marche de 20 à 30 minutes. La baignade est possible à certains endroits et interdite à d'autres, comme au pied de la chute du Carbet.",,
-Le bon moment,Cascades faciles d'accès,Section,3,"Venez tôt le matin, en semaine si possible : les sites les plus connus sont très fréquentés à partir de 10 h et le week-end.",,
-Marche,Cascades faciles d'accès,Conseil,1,5 à 30 min depuis le parking,,
-Coût,Cascades faciles d'accès,Conseil,2,Gratuit ou petit droit d’entrée,,
-Avec enfants,Cascades faciles d'accès,Conseil,3,"Oui, sur les sentiers aménagés",,
-À éviter,Cascades faciles d'accès,Conseil,4,Après de fortes pluies,,
-,Cascades faciles d'accès,Note d'angle,1,"Le site est proche de la route, mais la descente de la rivière se fait avec un guide qui connaît les passages.",,Canyon d'Acomat
-,Cascades faciles d'accès,Note d'angle,2,"Courte marche, puis progression dans l'eau au rythme du groupe.",,Randonnée aquatique Acomat – Family
-,Cascades faciles d'accès,Note d'angle,3,"La plus facile de l'île : dix minutes depuis le parking, sur la Route de la Traversée.",Cascade aux Écrevisses,
-,Cascades faciles d'accès,Note d'angle,4,La 2e chute se rejoint en 20 à 25 minutes par un sentier aménagé. Droit d'entrée sur place.,Chutes du Carbet,
 Non surveillée,Baignade en rivière,Point clé,1,La baignade en rivière n'est pas surveillée : on reste en groupe.,,
 La pluie en amont,Baignade en rivière,Point clé,2,"Une pluie en amont suffit à faire monter la rivière, même par ciel clair.",,
 Le guide choisit,Baignade en rivière,Point clé,3,"Avec un guide, on nage là où il connaît le fond et le courant.",,
@@ -60,31 +31,6 @@ Matériel,Canyoning débutant,Conseil,4,Fourni,,
 ,Canyoning débutant,Note d'angle,1,"Idéal pour découvrir sans corde, en apprenant à lire la rivière.",,Canyon d'Acomat
 ,Canyoning débutant,Note d'angle,2,La formule la plus accessible : il suffit de savoir nager.,,Randonnée aquatique Acomat – Family
 ,Canyoning débutant,Note d'angle,3,"Le premier rappel, expliqué au sol puis assuré par le guide.",,Canyon Bourceau – Demi-journée découverte
-Sans rappel,Randonnée aquatique,Point clé,1,"Marche, nage, sauts et floating, sans descente sur corde.",,
-Du facile au sportif,Randonnée aquatique,Point clé,2,"Acomat pour débuter, Canyon doré pour les marcheurs (+700 m de dénivelé).",,
-Dès 8 ans,Randonnée aquatique,Point clé,3,"Sur Acomat, avec Yalodé ou Wild Canyon.",,
-Le principe,Randonnée aquatique,Section,1,"On descend le lit d'une rivière en marchant, en nageant et en se laissant porter par le courant. Il n'y a pas de rappel, mais il faut être à l'aise dans l'eau et sur les rochers.",,
-Du facile au sportif,Randonnée aquatique,Section,2,"Acomat convient dès 8 ans avec une courte marche. Le Canyon doré demande 1 h 30 de montée et 700 m de dénivelé, pour des marcheurs réguliers.",,
-Ce qu’il faut prévoir,Randonnée aquatique,Section,3,"Des chaussures fermées qui tiennent bien au pied, un maillot et de quoi se changer. Le guide fournit le gilet, la combinaison et le casque.",,
-Rappel,Randonnée aquatique,Conseil,1,Aucun,,
-Âge,Randonnée aquatique,Conseil,2,Dès 8 ans selon le parcours,,
-Durée,Randonnée aquatique,Conseil,3,3 h 30 à 5 h 30,,
-Équipement,Randonnée aquatique,Conseil,4,Fourni,,
-,Randonnée aquatique,Note d'angle,1,"1 h 30 de montée et 700 m de dénivelé, puis la descente dans l'eau. Pour marcheurs réguliers.",,Canyon doré
-,Randonnée aquatique,Note d'angle,2,"Marche courte, nage et glissades dans les vasques.",,Canyon d'Acomat
-,Randonnée aquatique,Note d'angle,3,"Version raccourcie, au rythme des enfants.",,Randonnée aquatique Acomat – Family
-Rappels enchaînés,Sensations fortes,Point clé,1,"Ferry et Bois Malaisé, dans des gorges resserrées.",,
-Journée entière,Sensations fortes,Point clé,2,"6 h à 6 h 30 sur le terrain, repas à prévoir.",,
-Dès 14 ans,Sensations fortes,Point clé,3,"Bonne condition physique requise, 16 ans pour Bois Malaisé.",,
-Les parcours engagés,Sensations fortes,Section,1,"Ferry, à Bouillante, et Bois Malaisé, à Vieux-Habitants, enchaînent rappels et sauts dans des gorges étroites. Ce sont des journées entières dans l'eau.",,
-Pour qui ?,Sensations fortes,Section,2,"Pour des personnes en bonne condition physique, sans vertige et à l'aise dans l'eau. Une première expérience en canyoning est conseillée pour Bois Malaisé.",,
-La météo décide,Sensations fortes,Section,3,Ces canyons sont sensibles aux crues. Le guide confirme la sortie la veille et peut l'annuler si le débit est trop fort.,,
-Âge,Sensations fortes,Conseil,1,Dès 14 ou 16 ans,,
-Durée,Sensations fortes,Conseil,2,6 h à 6 h 30,,
-Repas,Sensations fortes,Conseil,3,À prévoir,,
-Sans guide,Sensations fortes,Conseil,4,Jamais,,
-,Sensations fortes,Note d'angle,1,"Rappels et sauts enchaînés dans des gorges étroites, sur une journée.",,Canyon Ferry – Journée sensation
-,Sensations fortes,Note d'angle,2,Le plus sportif de la sélection. Une première expérience est conseillée.,,Canyon Bois Malaisé – Journée sportif
 3 h à 4 h 30,Canyoning à la demi-journée,Point clé,1,Le reste de la journée reste libre.,,
 Départ le matin,Canyoning à la demi-journée,Point clé,2,"9 h à Acomat avec Yalodé, départ matinal avec Wild Canyon.",,
 Dès 50 €,Canyoning à la demi-journée,Point clé,3,"Par personne, équipement compris.",,
@@ -98,3 +44,57 @@ Après-midi,Canyoning à la demi-journée,Conseil,4,Libre,,
 ,Canyoning à la demi-journée,Note d'angle,1,"Départ le matin, retour pour le déjeuner.",,Canyon Bourceau – Demi-journée découverte
 ,Canyoning à la demi-journée,Note d'angle,2,"Rendez-vous à 9 h, fini en début d'après-midi.",,Canyon d'Acomat
 ,Canyoning à la demi-journée,Note d'angle,3,Environ 3 h : l'après-midi reste libre.,,Randonnée aquatique Acomat – Family
+Dès 8 ans,Canyoning avec enfants,Point clé,1,"Acomat avec Yalodé ou Wild Canyon, sans rappel.",,
+Tout se contourne,Canyoning avec enfants,Point clé,2,Toboggans et sauts sont facultatifs : personne ne reste au bord.,,
+Équipement fourni,Canyoning avec enfants,Point clé,3,"Casque et néoprène prêtés par le guide, gilet chez Yalodé.",,
+À partir de quel âge ?,Canyoning avec enfants,Section,1,"La plupart des sorties familiales acceptent les enfants dès 8 ans. À cet âge, il faut savoir nager quelques mètres et être à l'aise dans l'eau fraîche. Les parcours techniques avec rappels hauts restent réservés aux plus de 14 ou 16 ans.",,
+Quel parcours choisir ?,Canyoning avec enfants,Section,2,"Pour une première fois, privilégiez une randonnée aquatique sans rappel, où toboggans et sauts se contournent. Acomat, à Pointe-Noire, est le parcours le plus proposé aux familles. Pour une simple balade avec de jeunes enfants, la Cascade aux Écrevisses se rejoint en dix minutes par un sentier aménagé.",,
+Comment se passe la sortie ?,Canyoning avec enfants,Section,3,"Le guide fournit casque, combinaison et gilet, puis explique chaque passage. Le groupe avance au rythme du plus jeune, avec des pauses régulières. Comptez une demi-journée, marche d'approche comprise.",,
+Âge minimum,Canyoning avec enfants,Conseil,1,Dès 8 ans pour les sorties sans rappel,,
+Savoir nager,Canyoning avec enfants,Conseil,2,"Oui, quelques mètres",,
+Durée,Canyoning avec enfants,Conseil,3,3 h à 3 h 30 en moyenne,,
+Équipement,Canyoning avec enfants,Conseil,4,Fourni par le guide,,
+À prévoir,Canyoning avec enfants,Conseil,5,"Chaussures fermées, maillot, vêtement chaud pour après",,
+,Canyoning avec enfants,Note d'angle,1,"Le parcours le plus doux de la sélection. Toboggans et sauts se contournent, et le guide cale le rythme sur le plus jeune.",,Canyon d'Acomat
+,Canyoning avec enfants,Note d'angle,2,"Une formule pensée pour les familles, sans rappel, avec une courte marche d'approche.",,Randonnée aquatique Acomat – Family
+,Canyoning avec enfants,Note d'angle,3,"Une journée complète pour des enfants déjà à l'aise dans l'eau, avec un premier rappel encadré.",,Canyon Bourceau – Journée family
+,Canyoning avec enfants,Note d'angle,4,"Sans guide, c'est la sortie la plus simple : dix minutes de sentier aménagé. Gardez les enfants hors de l'eau si elle se trouble.",Cascade aux Écrevisses,
+Rappels enchaînés,Sensations fortes,Point clé,1,"Ferry et Bois Malaisé, dans des gorges resserrées.",,
+Journée entière,Sensations fortes,Point clé,2,"6 h à 6 h 30 sur le terrain, repas à prévoir.",,
+Dès 14 ans,Sensations fortes,Point clé,3,"Bonne condition physique requise, 16 ans pour Bois Malaisé.",,
+Les parcours engagés,Sensations fortes,Section,1,"Ferry, à Bouillante, et Bois Malaisé, à Vieux-Habitants, enchaînent rappels et sauts dans des gorges étroites. Ce sont des journées entières dans l'eau.",,
+Pour qui ?,Sensations fortes,Section,2,"Pour des personnes en bonne condition physique, sans vertige et à l'aise dans l'eau. Une première expérience en canyoning est conseillée pour Bois Malaisé.",,
+La météo décide,Sensations fortes,Section,3,Ces canyons sont sensibles aux crues. Le guide confirme la sortie la veille et peut l'annuler si le débit est trop fort.,,
+Âge,Sensations fortes,Conseil,1,Dès 14 ou 16 ans,,
+Durée,Sensations fortes,Conseil,2,6 h à 6 h 30,,
+Repas,Sensations fortes,Conseil,3,À prévoir,,
+Sans guide,Sensations fortes,Conseil,4,Jamais,,
+,Sensations fortes,Note d'angle,1,"Rappels et sauts enchaînés dans des gorges étroites, sur une journée.",,Canyon Ferry – Journée sensation
+,Sensations fortes,Note d'angle,2,Le plus sportif de la sélection. Une première expérience est conseillée.,,Canyon Bois Malaisé – Journée sportif
+10 min de marche,Cascades faciles d'accès,Point clé,1,La Cascade aux Écrevisses se rejoint par un sentier aménagé depuis le parking.,,
+110 m de chute,Cascades faciles d'accès,Point clé,2,"La 2e chute du Carbet, la seule ouverte des trois, par un sentier aménagé.",,
+Ou avec un guide,Cascades faciles d'accès,Point clé,3,"Acomat en sortie guidée, 20 à 25 min d'approche.",,
+Où les trouver ?,Cascades faciles d'accès,Section,1,"Les cascades les plus simples se concentrent en Basse-Terre, dans le Parc national. La Cascade aux Écrevisses, sur la Route de la Traversée, et la 2e chute du Carbet, à Capesterre-Belle-Eau, se rejoignent par des sentiers aménagés.",,
+Ce qui change d’un site à l’autre,Cascades faciles d'accès,Section,2,"Certaines cascades sont gratuites et en bord de route, d'autres demandent un droit d'entrée ou une marche de 20 à 30 minutes. La baignade est possible à certains endroits et interdite à d'autres, comme au pied de la chute du Carbet.",,
+Le bon moment,Cascades faciles d'accès,Section,3,"Venez tôt le matin, en semaine si possible : les sites les plus connus sont très fréquentés à partir de 10 h et le week-end.",,
+Marche,Cascades faciles d'accès,Conseil,1,5 à 30 min depuis le parking,,
+Coût,Cascades faciles d'accès,Conseil,2,Gratuit ou petit droit d’entrée,,
+Avec enfants,Cascades faciles d'accès,Conseil,3,"Oui, sur les sentiers aménagés",,
+À éviter,Cascades faciles d'accès,Conseil,4,Après de fortes pluies,,
+,Cascades faciles d'accès,Note d'angle,1,"Le site est proche de la route, mais la descente de la rivière se fait avec un guide qui connaît les passages.",,Canyon d'Acomat
+,Cascades faciles d'accès,Note d'angle,2,"Courte marche, puis progression dans l'eau au rythme du groupe.",,Randonnée aquatique Acomat – Family
+,Cascades faciles d'accès,Note d'angle,3,"La plus facile de l'île : dix minutes depuis le parking, sur la Route de la Traversée.",Cascade aux Écrevisses,
+,Cascades faciles d'accès,Note d'angle,4,La 2e chute se rejoint en 20 à 25 minutes par un sentier aménagé. Droit d'entrée sur place.,Chutes du Carbet,
+Sans rappel,Randonnée aquatique,Point clé,1,"Marche, nage, sauts et floating, sans descente sur corde.",,
+Du facile au sportif,Randonnée aquatique,Point clé,2,"Acomat pour débuter, Canyon doré pour les marcheurs (+700 m de dénivelé).",,
+Dès 8 ans,Randonnée aquatique,Point clé,3,"Sur Acomat, avec Yalodé ou Wild Canyon.",,
+Le principe,Randonnée aquatique,Section,1,"On descend le lit d'une rivière en marchant, en nageant et en se laissant porter par le courant. Il n'y a pas de rappel, mais il faut être à l'aise dans l'eau et sur les rochers.",,
+Du facile au sportif,Randonnée aquatique,Section,2,"Acomat convient dès 8 ans avec une courte marche. Le Canyon doré demande 1 h 30 de montée et 700 m de dénivelé, pour des marcheurs réguliers.",,
+Ce qu’il faut prévoir,Randonnée aquatique,Section,3,"Des chaussures fermées qui tiennent bien au pied, un maillot et de quoi se changer. Le guide fournit le gilet, la combinaison et le casque.",,
+Rappel,Randonnée aquatique,Conseil,1,Aucun,,
+Âge,Randonnée aquatique,Conseil,2,Dès 8 ans selon le parcours,,
+Durée,Randonnée aquatique,Conseil,3,3 h 30 à 5 h 30,,
+Équipement,Randonnée aquatique,Conseil,4,Fourni,,
+,Randonnée aquatique,Note d'angle,1,"1 h 30 de montée et 700 m de dénivelé, puis la descente dans l'eau. Pour marcheurs réguliers.",,Canyon doré
+,Randonnée aquatique,Note d'angle,2,"Marche courte, nage et glissades dans les vasques.",,Canyon d'Acomat
+,Randonnée aquatique,Note d'angle,3,"Version raccourcie, au rythme des enfants.",,Randonnée aquatique Acomat – Family

@@ -253,7 +253,8 @@ ${errors.length ? `\n## Problems\n${errors.map((e) => `- ${e}`).join('\n')}\n` :
     if (content) {
       const r = checkContent(content);
       errors.push(...r.errors);
-      if (!errors.length) for (const [k, v] of Object.entries(content)) writeFileSync(resolve(fixtures, `${k}.json`), JSON.stringify(v, null, 2) + '\n');
+      // Sorted by key: Airtable's row order changes between reads, the files should not.
+      if (!errors.length) for (const [k, v] of Object.entries(byIdentity(content))) writeFileSync(resolve(fixtures, `${k}.json`), JSON.stringify(v, null, 2) + '\n');
     }
     console.log(`content:pull: ${errors.length ? 'refused, the fixtures are unchanged' : 'fixtures updated'}`);
     for (const e of errors) console.error('ERROR', e);
