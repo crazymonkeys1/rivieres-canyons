@@ -27,6 +27,7 @@ The detailed, always-current list of data gaps is generated in `docs/CONTENT_REP
 | V3 | 4 rivers with no commune and no policy (Grande Anse, Pérou, Lostau, Ziotte) | Jordan / guides | 2026-10-07 | open |
 | V4 | Values marked "À confirmer" (estimates, see the last column of the completeness table in `CONTENT_REPORT.md`) | Guides | 2026-10-07 | open |
 | V5 | Yalodé logo | Jordan → Airtable | 2026-10-07 | open |
+| V6 | Airtable base choices D1–D6 and questions Q1–Q3 (`docs/AIRTABLE_BASE_DESIGN.md` §6) | Jordan | 2026-10-07 | open |
 
 ## Worth adding (improves SEO, not blocking)
 
