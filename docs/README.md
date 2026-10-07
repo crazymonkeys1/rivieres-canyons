@@ -65,7 +65,7 @@ The HTML prototype is the **reference for structure, content, behaviour and colo
 - **Lead magnet:** e-mail first, explicit consent checkbox, link to the privacy page; phone optional in step 2.
 - **No live conditions** anywhere.
 - **Responsive:** mobile-first; `min-width` queries at 480px and 1024px only; layout never decided in JavaScript.
-- **Motion:** `riseIn`, `sheetUp`, `fadeIn` and `--dur-*` tokens; `prefers-reduced-motion` respected.
+- **Motion:** `riseIn`, `sheetUp`, `fadeIn` and `--duration-*` tokens; `prefers-reduced-motion` respected.
 
 ## Placeholders to replace before launch
 `[WHATSAPP_PASCAL]`, `[WHATSAPP_QUENTIN]`, `[BOOKING_URL_YALODE]`, `[BOOKING_URL_WILDCANYON]`, Yalodé logo, `[PRIVACY_POLICY_TEXT]` (text to be generated later, see `docs/PRIVACY_CONTEXT.md`), `signature` per destination (10 drafts written on 2026-10-06 in the design, to validate with the guides; 11 still empty).

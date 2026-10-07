@@ -7,7 +7,8 @@ Jordan (Orbit founder) is non-technical. He directs, you build.
 - Explain every step in plain language. Give exact copy-paste commands when he must run something.
 - Work **one phase at a time** (§12). At the end of each phase: summarise what changed, show how to check it, and **stop for his OK**.
 - Ask before any irreversible action (deleting data, pushing to production, buying or changing a domain).
-- **Never decide a judgment call silently.** If something is not covered by these documents (a new token, a new component, a rename, a copy claim, a deviation), stop and give Jordan 2–3 options with your recommendation.
+- **Small design gaps: use the nearest, then say so** (decision B3, 2026-10-07). If a design value or a component variant is missing, use the nearest existing token, text style or component, and list it under **"Proposed additions"** at the end of your reply (name, role, value, why).
+- **Stop and ask Jordan** (2–3 options with your recommendation) for anything about content or facts, copy claims, legal or privacy, prices and money, renames of existing names, and deviations from this file.
 
 ## 2. Mission
 Orbit builds lead magnets that create value first and sell second: *"Devenez indispensable avant même d'avoir à vendre."*
@@ -60,17 +61,17 @@ To place something, ask: *"Would this still make sense if we listed cars?"* Yes 
 
 ## 6. Design system: how to use it (hard rules)
 1. **Values come from tokens.** Never write a raw hex, px size outside the scale, shadow, duration or z-index in a component. Use `var(--…)` from `tokens.css`. Components use L1 semantic tokens only, never `--c-*` primitives.
-2. **Text comes from the 10 text styles + 2 modifiers** (`t-h1 t-h2 t-title t-quote t-pull t-read t-h3 t-body t-small t-micro`, `is-strong`, `is-upper`). Components never set `font-family`, `font-size`, `font-weight`, `line-height` or `letter-spacing`.
+2. **Text comes from the 10 text styles + 2 modifiers** (`text-display text-heading text-title text-quote text-pull text-read text-subheading text-body text-caption text-label`, `is-strong`, `is-upper`). Components never set `font-family`, `font-size`, `font-weight`, `line-height` or `letter-spacing`.
 3. **Fonts and weights:** Instrument Serif 400 + 400 italic (identity), Source Serif 4 400 + 600 (prose), Archivo 400 + 600 (UI). Weights 400 and 600 only. No other family, weight, italic, or uppercase (uppercase = overline only).
-4. **Colour roles:** content text `--text-body`, headings and values `--text-strong`, meta only `--text-muted`. `--accent` is decoration (underline, bullet, quote rule), never text and never a fill behind text. Filled CTAs use `--accent-strong`. Danger palette is for safety only, at most one danger surface per viewport.
-5. **Floors:** nothing below 12px, prose ≥18px on mobile, inputs 16px, touch targets ≥44px (`--target`).
-6. **Mobile-first:** write CSS for ~360px; add only `@media (min-width: 480px)` and `(min-width: 1024px)` (`--bp-sm`, `--bp-lg`). No `max-width` queries. **No layout decisions in JavaScript** (the prototype's `isWide` flag is a prototype shortcut; replace it with CSS). Prefer `auto-fit`/`minmax`/`flex-wrap`/`clamp()`.
-7. **Accessibility:** interactive things are `<button>` or `<a>` (no `div role="button"`), a global two-tone `:focus-visible` ring (in `text-styles.css`), `prefers-reduced-motion` honoured, one H1 per page, H2 with `id`, tooltips also open on tap and focus, emoji icons are decorative (`aria-hidden`) and followed by text.
-8. **Do not create a token, text style or component** until you have searched `tokens.css` and `COMPONENTS.md` and followed `ARCHITECTURE.md` §2. A new value needs a UX purpose and a role-based name, a comment in `tokens.css`, and an entry in `docs/CHANGELOG.md`, all in the same change. A new text style is almost never right: use the nearest.
+4. **Colour roles:** content text `--color-text-body`, headings and values `--color-text-strong`, meta only `--color-text-muted`. `--color-action-accent` is decoration (underline, bullet, quote rule), never text and never a fill behind text. Filled CTAs use `--color-action-primary`. Danger palette is for safety only, at most one danger surface per viewport.
+5. **Floors:** nothing below 12px, prose ≥18px on mobile, inputs 16px, touch targets ≥44px (`--tap-size-min`).
+6. **Mobile-first:** write CSS for ~360px; add only `@media (min-width: 480px)` and `(min-width: 1024px)` (`--breakpoint-sm`, `--breakpoint-lg`). No `max-width` queries. **No layout decisions in JavaScript** (the prototype's `isWide` flag is a prototype shortcut; replace it with CSS). Prefer `auto-fit`/`minmax`/`flex-wrap`/`clamp()`.
+7. **Accessibility:** interactive things are `<button>` or `<a>` (no `div role="button"`), a global two-tone `:focus-visible` ring (in `text-styles.css`), `prefers-reduced-motion` honoured, one H1 per page, H2 with `id`, tooltips also open on tap and focus, icons are decorative (`aria-hidden`) and followed by text. Icon style (decision B2): SVG line icons by default; emoji only when the site's `icon_style` is `emoji` (Rivières & Canyons: emoji).
+8. **Search before creating.** Look in `tokens.css` and `COMPONENTS.md` and follow `ARCHITECTURE.md` §2. Reuse with props, then compose, and only then create. A missing value: use the nearest and list a "Proposed addition" (§1). A component you do create is registered in `COMPONENTS.md` and logged in `docs/CHANGELOG.md` in the same change. A new text style is almost never right: use the nearest.
 9. **Naming (role, not appearance):** components PascalCase `{Subject}{Role}` (`DestinationCard`, `FactList`); variants are props (`variant="primary"`), never separate components (`ButtonGhost` is wrong); no banned appearance words (Pill, Chip, Tile, Strip, Bar, Band, Box, Glass, Dark…). Variables `--{category}-{role}[-{variant}]`. Test: *does the name stay true if the colour, size or layout changes?* Full convention: `ARCHITECTURE.md` §3.
-10. **Component names are the ones in `docs/COMPONENTS.md`.** Legacy names in older documents are mapped there. Variable naming: weights `--fw-*`, font sizes `--fs-*`, widths `--w-*`, text colours `--text-*` (decision J-N2, applied). Keep these four families distinct.
+10. **Component names are the ones in `docs/COMPONENTS.md`.** Legacy names in older documents are mapped there. Variable naming (decision B1, 2026-10-07): colours `--color-{group}-{role}`, fonts `--font-family-*` / `--font-weight-*` / `--font-size-*`, widths `--container-*`, shapes `--radius-*`, shadows `--elevation-*`, motion `--duration-*`; text styles `text-{role}`. Old → new table in `docs/CHANGELOG.md`.
 11. **Definition of done for a component:** (a) listed in `COMPONENTS.md` with level, composition, props, text styles, mobile layout; (b) uses tokens and text styles only; (c) works at 360px first, then 480 and 1024; (d) keyboard and screen-reader pass; (e) takes data through props/slots, reads no source directly; (f) logged in `docs/CHANGELOG.md`.
-12. **Automated checks (build them in phase 3, run on every change):** fail on raw hex outside `tokens.css`, `font-weight` other than 400/600 (tokens), font sizes outside the token scale, text under 12px, `outline: none` without replacement, `max-width` media queries, `--c-*` used in components, and any `[...]` placeholder in a production build.
+12. **Automated checks (build them in phase 3, run on every change):** fail on raw hex outside `tokens.css`, `font-weight` other than 400/600 (tokens), font sizes outside the token scale, text under 12px, `outline: none` without replacement, `max-width` media queries, `--palette-*` used in components, and any `[...]` placeholder in a production build.
 13. **Restyling must not rename.** A redesign edits L0/L1/L2 values (and re-points semantic tokens); components, props and file names do not change.
 
 ## 7. Open decisions (use the stated default; do not change it without Jordan)
@@ -78,14 +79,18 @@ To place something, ask: *"Would this still make sense if we listed cars?"* Yes 
 |---|---|---|---|
 | J1 | Fact lists on phones: 2 columns / scroll / stack | 2 columns <480px | AUDIT §5 |
 | J2 | Filters on mobile | One-line search + "Filtres" button (built) | AUDIT §5 |
-| J3–J8 | signature location, article gutter, emoji icons, listing H1, "en sécurité" CTA copy, Yalodé teal | see AUDIT §5 | AUDIT §5 |
+| J3–J8 | signature location, article gutter, listing H1, "en sécurité" CTA copy, Yalodé teal | see AUDIT §5 (J5 icons: resolved by B2) | AUDIT §5 |
+| B1–B4 | Boilerplate decisions (naming, icons, way of working, order of work) | **Applied 2026-10-07** | `docs/BOILERPLATE_AUDIT_2026-10-07.md` §7 |
 | J-T1…J-T8 | families (3), UI scale (12/14/16/18), weights (400/600), tour price size, quote sizes, heading ink, uppercase, tabular numerals | recommended options are already in the tokens | TYPOGRAPHY §7 |
 | J-N1 | Role-based component names | applied in `COMPONENTS.md` (reversible) | REVIEW §4 |
-| J-N2 | Variable renames | **Applied (option B):** `--fw-*`, `--fs-*`. Further renames only on request | REVIEW §4 |
+| J-N2 | Variable renames | **Superseded by B1 (2026-10-07):** grouped naming shared with Mangroves | CHANGELOG |
 | J-N3 | One changelog | **Resolved:** `docs/CHANGELOG.md` only | REVIEW §4 |
 
 ## 8. Data rules
-- **Entities:** `destinations` (places), `offers` (guided outings, each linked to exactly ONE destination, with an `is_main` flag), `operators`, `guides`, `reviews`, `articles` (intent/blog pages with selection rules), `taxonomies` (types, risks, gear, levels, access status, verification), `blocks` (static page copy).
+- **Entities:** `destinations` (places: a generic listing + place fields), `offers` (guided outings, each linked to exactly ONE destination, with an `is_main` flag), `operators`, `guides`, `reviews`, `articles` (intent/blog pages with selection rules), `images` (one record per photo, with rights), `sources` (typed), `blocks` (structured page copy), `copy` (interface text by key), `rejected` (research memory).
+- **Generic fields vs site facts:** what every directory has lives in the packages; what is specific to this site (difficulty, approach, swimming, waterfall…) is declared once in `apps/rivieres-canyons/src/content/site.config.ts` and stored under `facts`. Filters, key facts, completeness and Airtable columns follow that declaration. Vocabularies, location labels, landing-page dimensions and confidence levels are there too.
+- **Three publication gates:** `status` (published / hidden), `confidence` (site levels; a level can hide a listing), completeness (indexed or `noindex`).
+- **Images:** rights `free` / `partner` / `permission_needed`; a production build fails on `permission_needed`.
 - Field names are `snake_case` English (future database columns). `slug` is unique and permanent; URLs come from it.
 - Numbers are numbers (`duration_min: 210`, not "3 h 30"). Vocabularies are enums. Relations are IDs, not text.
 - FR fields now. Structure is ready for `_en` later.
@@ -126,8 +131,8 @@ Log every reusable decision in `docs/CHANGELOG.md`: date, layer (Core / Director
 
 ## 13. Build plan (one phase at a time, stop after each)
 0. **Check the handoff.** Compare `design/` with this file and the docs. Report what is missing or contradictory. No code.
-1. **Content audit + schema.** Zod schemas; map every fixture; `docs/CONTENT_REPORT.md` (completeness per destination, missing fields, placeholders, `signature` drafts, and a check that every image has a `credit` and source `url` in the data files: image licences are already documented there, so only report gaps).
-2. **Airtable base spec.** Base design from the schemas, import-ready CSVs; Jordan creates the base; Airtable adapter and import check.
+1. **Content audit + schema.** Done 2026-10-07; **1b** (generic listing + site config + images and sources) done 2026-10-07. Zod schemas; map every fixture; `docs/CONTENT_REPORT.md` (completeness per destination, missing fields, placeholders, `signature` drafts, and a check that every image has a `credit` and source `url` in the data files: image licences are already documented there, so only report gaps).
+2. **Airtable base spec.** Base design from the schemas (start from the Mangroves base: 17 tables, see `docs/BOILERPLATE_AUDIT_2026-10-07.md`), import-ready CSVs; Jordan creates the base; Airtable adapter and import check.
 3. **Scaffold + design system implementation.** Monorepo, the four packages, `tokens.css` and `text-styles.css` as shipped, self-hosted fonts, all **atoms and molecules** from `COMPONENTS.md` with a living style guide page rendering tokens, text styles and every component state at 360 / 480 / 1024, the automated checks from §6.12.
 4. **Organisms and templates, in order:** destination page (fixtures: Saut d'Acomat, Cascade aux Écrevisses, Canyon doré) → listing + filters → intent article → filter landing page → guide page → blog index → static pages (about, legal notice, privacy, contact).
 5. **SEO/LLM layer** and the completeness `noindex` rule.

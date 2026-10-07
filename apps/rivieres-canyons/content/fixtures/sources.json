@@ -1,0 +1,263 @@
+[
+  {
+    "id": "grande-riviere-a-goyaves-source-1",
+    "owner_kind": "listing",
+    "owner_id": "grande-riviere-a-goyaves",
+    "label": "Parc national de la Guadeloupe",
+    "url": "https://guadeloupe-parcnational.fr/fr/des-connaissances/patrimoines-naturels/les-milieux/milieux-humides/eau-douce-cascades-et-rivieres",
+    "type": "official",
+    "used_for": "description"
+  },
+  {
+    "id": "riviere-lezarde-source-1",
+    "owner_kind": "listing",
+    "owner_id": "riviere-lezarde",
+    "label": "Parc national de la Guadeloupe",
+    "url": "https://guadeloupe-parcnational.fr/fr/des-connaissances/patrimoines-naturels/les-milieux/milieux-humides/eau-douce-cascades-et-rivieres",
+    "type": "official",
+    "used_for": "description"
+  },
+  {
+    "id": "saut-de-la-lezarde-source-1",
+    "owner_kind": "listing",
+    "owner_id": "saut-de-la-lezarde",
+    "label": "Parc national de la Guadeloupe",
+    "url": "https://guadeloupe-parcnational.fr/fr/des-connaissances/patrimoines-naturels/les-milieux/milieux-humides/eau-douce-cascades-et-rivieres",
+    "type": "official",
+    "used_for": "description"
+  },
+  {
+    "id": "riviere-moustique-source-1",
+    "owner_kind": "listing",
+    "owner_id": "riviere-moustique",
+    "label": "Préfecture de Guadeloupe (DEAL)",
+    "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000031496919",
+    "type": "official",
+    "used_for": "description"
+  },
+  {
+    "id": "riviere-bras-david-source-1",
+    "owner_kind": "listing",
+    "owner_id": "riviere-bras-david",
+    "label": "Parc national de la Guadeloupe",
+    "url": "https://guadeloupe-parcnational.fr/fr/raa/2022",
+    "type": "official",
+    "used_for": "description"
+  },
+  {
+    "id": "riviere-corossol-source-1",
+    "owner_kind": "listing",
+    "owner_id": "riviere-corossol",
+    "label": "Parc national de la Guadeloupe",
+    "url": "https://www.guadeloupe-parcnational.fr/fr/raa/2021",
+    "type": "official",
+    "used_for": "description"
+  },
+  {
+    "id": "cascade-aux-ecrevisses-source-1",
+    "owner_kind": "listing",
+    "owner_id": "cascade-aux-ecrevisses",
+    "label": "Parc national de la Guadeloupe",
+    "url": "https://guadeloupe-parcnational.fr/fr/actualites/cascade-aux-ecrevisses-une-nouvelle-phase-de-travaux-pour-un-sentier-plus-sur-et",
+    "type": "official",
+    "used_for": "description"
+  },
+  {
+    "id": "chutes-du-carbet-source-1",
+    "owner_kind": "listing",
+    "owner_id": "chutes-du-carbet",
+    "label": "Parc national de la Guadeloupe",
+    "url": "https://www.guadeloupe-parcnational.fr/sites/guadeloupe-parcnational.fr/files/atoms/files/depliant_chutes_carbet.pdf",
+    "type": "official",
+    "used_for": "description"
+  },
+  {
+    "id": "chutes-du-carbet-source-2",
+    "owner_kind": "listing",
+    "owner_id": "chutes-du-carbet",
+    "label": "Sailoe (2026)",
+    "url": "https://www.sailoe.com/en/carbet-falls-guadeloupe/",
+    "type": "media",
+    "used_for": "statut d'accès"
+  },
+  {
+    "id": "chutes-moreau-source-1",
+    "owner_kind": "listing",
+    "owner_id": "chutes-moreau",
+    "label": "Parc national de la Guadeloupe",
+    "url": "https://geotrek.guadeloupe-parcnational.fr/api/fr/treks/1576/chutes-moreau.pdf",
+    "type": "official",
+    "used_for": "description"
+  },
+  {
+    "id": "riviere-moreau-source-1",
+    "owner_kind": "listing",
+    "owner_id": "riviere-moreau",
+    "label": "Parc national de la Guadeloupe",
+    "url": "https://geotrek.guadeloupe-parcnational.fr/api/fr/treks/1576/chutes-moreau.pdf",
+    "type": "official",
+    "used_for": "description"
+  },
+  {
+    "id": "saut-d-acomat-source-1",
+    "owner_kind": "listing",
+    "owner_id": "saut-d-acomat",
+    "label": "Visite Guadeloupe",
+    "url": "https://visiteguadeloupe.com/en/most-beautiful-waterfalls-guadeloupe-swimming-hikes/",
+    "type": "media",
+    "used_for": "description"
+  },
+  {
+    "id": "saut-d-acomat-source-2",
+    "owner_kind": "listing",
+    "owner_id": "saut-d-acomat",
+    "label": "Wikipédia",
+    "url": "https://fr.wikipedia.org/wiki/Saut_de_l%27Acomat",
+    "type": "media",
+    "used_for": "statut d'accès"
+  },
+  {
+    "id": "riviere-bourceau-source-1",
+    "owner_kind": "listing",
+    "owner_id": "riviere-bourceau",
+    "label": "Préfecture de Guadeloupe (DEAL)",
+    "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000031496919",
+    "type": "official",
+    "used_for": "description"
+  },
+  {
+    "id": "riviere-beaugendre-source-1",
+    "owner_kind": "listing",
+    "owner_id": "riviere-beaugendre",
+    "label": "Préfecture de Guadeloupe (DEAL)",
+    "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000031496919",
+    "type": "official",
+    "used_for": "description"
+  },
+  {
+    "id": "riviere-grande-anse-source-1",
+    "owner_kind": "listing",
+    "owner_id": "riviere-grande-anse",
+    "label": "Préfecture de Guadeloupe (DEAL)",
+    "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000031496919",
+    "type": "official",
+    "used_for": "description"
+  },
+  {
+    "id": "riviere-du-perou-source-1",
+    "owner_kind": "listing",
+    "owner_id": "riviere-du-perou",
+    "label": "Préfecture de Guadeloupe (DEAL)",
+    "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000031496919",
+    "type": "official",
+    "used_for": "description"
+  },
+  {
+    "id": "riviere-lostau-source-1",
+    "owner_kind": "listing",
+    "owner_id": "riviere-lostau",
+    "label": "Préfecture de Guadeloupe (DEAL)",
+    "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000031496919",
+    "type": "official",
+    "used_for": "description"
+  },
+  {
+    "id": "grande-riviere-de-vieux-habitants-source-1",
+    "owner_kind": "listing",
+    "owner_id": "grande-riviere-de-vieux-habitants",
+    "label": "Parc national de la Guadeloupe",
+    "url": "https://www.guadeloupe-parcnational.fr/fr/node/2307",
+    "type": "official",
+    "used_for": "description"
+  },
+  {
+    "id": "riviere-ziotte-source-1",
+    "owner_kind": "listing",
+    "owner_id": "riviere-ziotte",
+    "label": "Préfecture de Guadeloupe (DEAL)",
+    "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000031496919",
+    "type": "official",
+    "used_for": "description"
+  },
+  {
+    "id": "canyon-dore-source-1",
+    "owner_kind": "listing",
+    "owner_id": "canyon-dore",
+    "label": "Yalodé (kayak-guadeloupe.fr)",
+    "url": "https://www.kayak-guadeloupe.fr/",
+    "type": "operator",
+    "used_for": "description"
+  },
+  {
+    "id": "canyon-ferry-source-1",
+    "owner_kind": "listing",
+    "owner_id": "canyon-ferry",
+    "label": "Wild Canyon (wild-canyon.fr)",
+    "url": "https://wild-canyon.fr/",
+    "type": "operator",
+    "used_for": "description"
+  },
+  {
+    "id": "canyon-bois-malaise-source-1",
+    "owner_kind": "listing",
+    "owner_id": "canyon-bois-malaise",
+    "label": "Wild Canyon (wild-canyon.fr)",
+    "url": "https://wild-canyon.fr/",
+    "type": "operator",
+    "used_for": "description"
+  },
+  {
+    "id": "canyon-d-acomat-source-1",
+    "owner_kind": "listing",
+    "owner_id": "canyon-d-acomat",
+    "label": "Yalodé (kayak-guadeloupe.fr)",
+    "url": "https://www.kayak-guadeloupe.fr/",
+    "type": "operator",
+    "used_for": "description"
+  },
+  {
+    "id": "site-source-1",
+    "owner_kind": "site",
+    "owner_id": "site",
+    "label": "Parc national de la Guadeloupe",
+    "url": "https://www.guadeloupe-parcnational.fr/",
+    "type": "official",
+    "used_for": "articles"
+  },
+  {
+    "id": "site-source-2",
+    "owner_kind": "site",
+    "owner_id": "site",
+    "label": "Rando Guadeloupe",
+    "url": "https://www.randoguadeloupe.gp/",
+    "type": "official",
+    "used_for": "articles"
+  },
+  {
+    "id": "site-source-3",
+    "owner_kind": "site",
+    "owner_id": "site",
+    "label": "Les îles de Guadeloupe",
+    "url": "https://www.lesilesdeguadeloupe.com/",
+    "type": "tourism_office",
+    "used_for": "articles"
+  },
+  {
+    "id": "site-source-4",
+    "owner_kind": "site",
+    "owner_id": "site",
+    "label": "Yalodé",
+    "url": "https://www.kayak-guadeloupe.fr/",
+    "type": "operator",
+    "used_for": "articles"
+  },
+  {
+    "id": "site-source-5",
+    "owner_kind": "site",
+    "owner_id": "site",
+    "label": "Wild Canyon",
+    "url": "https://wild-canyon.fr/",
+    "type": "operator",
+    "used_for": "articles"
+  }
+]

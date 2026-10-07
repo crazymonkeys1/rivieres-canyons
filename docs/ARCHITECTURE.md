@@ -11,9 +11,9 @@ Companion files: `tokens/tokens.css` (values) · `tokens/text-styles.css` (text 
 
 | Level | What it is | Where it lives | May use |
 |---|---|---|---|
-| **L0 Primitives** | Raw palette values (`--c-green-900`) | `tokens.css` §0 | nothing |
+| **L0 Primitives** | Raw palette values (`--palette-green-900`) | `tokens.css` §0 | nothing |
 | **L1 Tokens** | Semantic variables: colour roles, type scale, spacing, radius, shadow, z-index, motion, layout | `tokens.css` §1–10 | L0 |
-| **L2 Text styles** | Named combinations of font, size, weight, line-height, spacing (`t-h2`, `t-body`…) | `text-styles.css` | L1 |
+| **L2 Text styles** | Named combinations of font, size, weight, line-height, spacing (`text-heading`, `text-body`…) | `text-styles.css` | L1 |
 | **L3 Atoms** | One element with one job: Button, TextLink, Avatar, Badge, Tag, Icon, Divider, TextInput, Checkbox, Toggle, Rating | `packages/core/atoms/` | L1, L2 |
 | **L4 Molecules** | 2+ atoms with one purpose: FactCell, KeyFact, Price, Breadcrumb, Tooltip, FilterOption, Disclosure, SearchField, Byline | `packages/core/molecules/` (generic) or `packages/{directory,places}/molecules/` | L1–L3 |
 | **L5 Organisms** | A self-contained section or card: DestinationCard, FactList, SafetyAlert, FaqList, SiteHeader, FilterBar, FiltersSheet, LeadCapture | `packages/{core,directory,places}/organisms/` | L1–L4 |
@@ -61,46 +61,41 @@ Pattern: **`--{category}-{role}[-{variant}]`**, lowercase kebab-case.
 
 | Category | Prefix | Examples | Name by |
 |---|---|---|---|
-| Primitive colour (L0 only) | `--c-{hue}-{step}` | `--c-green-900` | hue + step (the only place appearance is allowed) |
-| Text colour | `--text-{role}` | `--text-strong`, `--text-muted` | role |
-| Surface colour | `--surface-{role}` | `--surface-card`, `--surface-info` | role |
-| Border | `--border[-{role}]` | `--border`, `--border-strong` | role |
-| Action / brand / status | `--brand`, `--accent`, `--accent-strong`, `--danger[-*]`, `--success-*`, `--warning-*` | | role |
-| Font family | `--font-{role}` | `--font-display`, `--font-read`, `--font-ui` | role |
-| Font weight | `--fw-regular`, `--fw-semibold` | | role |
-| Font size | `--fs-{style}` | `--fs-h2`, `--fs-body` | text style |
-| Line height / spacing | `--lh-{role}`, `--ls-{role}` | | role |
+| Primitive colour (tier 1 only) | `--palette-{hue}-{step}` | `--palette-green-900` | hue + step (the only place appearance is allowed) |
+| Colour (tier 2) | `--color-{group}-{role}[-{variant}]`, groups: `text`, `surface`, `border`, `action`, `status`, `overlay`, `focus`, plus `--color-brand*`, `--color-rating` | `--color-text-strong`, `--color-surface-inverse`, `--color-action-primary` | role |
+| Font | `--font-family-{role}`, `--font-weight-{regular|strong}`, `--font-size-{text style}` | `--font-family-read`, `--font-size-heading` | role / text style |
+| Line height / letter-spacing | `--line-height-{role}`, `--letter-spacing-{role}` | `--line-height-read` | role |
 | Space | `--space-{n}` | `--space-4` | scale step |
-| Radius | `--r-{s|m|l|sheet|pill}` | | scale step |
-| Shadow | `--sh-{role}` | `--sh-float`, `--sh-tooltip` | role (the layer it serves) |
+| Radius | `--radius-{tag|control|container|sheet|full}` | `--radius-container` | what it shapes |
+| Elevation | `--elevation-{role}` | `--elevation-overlap`, `--elevation-tooltip` | the layer it serves |
 | Z-index | `--z-{role}` | `--z-sheet` | role |
-| Motion | `--dur-{speed}`, `--ease*` | | scale |
-| Layout | `--w-{container}`, `--gutter*`, `--bp-*`, `--target` | | role |
+| Motion | `--duration-{speed}`, `--easing-{role}` | `--duration-fast`, `--easing-sheet` | scale / role |
+| Layout | `--container-{role}`, `--page-gutter*`, `--breakpoint-*`, `--tap-size-min` | `--container-read` | role |
 | Component-local | `--{component}-{property}` | `--destination-card-gap` | declared on the component, never global |
 
-- **Scale tokens** (`--space-*`, `--r-s/m/l`, `--fs-*` sizes) may use an ordinal or a size word because the scale itself is the meaning. Everything else is named by role.
-- **Never** reference a primitive (`--c-*`) from a component. Never write a raw value (hex, px outside the scale, ms, shadow) in a component.
-- **Component-local variables** are allowed for values specific to one component, but they must be set from global tokens (`--card-pad: var(--space-4)`).
+- **Scale tokens** (`--space-*`) may use an ordinal because the scale itself is the meaning. Everything else is named by role.
+- **Never** reference a primitive (`--palette-*`) from a component. Never write a raw value (hex, px outside the scale, ms, shadow) in a component.
+- **Component-local variables** are allowed for values specific to one component, but they must be set from global tokens (`--card-padding: var(--space-4)`). This is tier 3: local, never in `tokens.css`.
 
 ### 3.4 Text styles
-Classes `t-{role}` (`t-h2`, `t-body`) and modifiers `is-{state}` (`is-strong`, `is-upper`). See `TYPOGRAPHY.md`.
+Classes `text-{role}` (`text-heading`, `text-body`) and modifiers `is-{state}` (`is-strong`, `is-upper`). See `TYPOGRAPHY.md`.
 
 ### 3.5 Renames (decisions J-N1 and J-N2 applied, see `REVIEW_2026-10-06.md` §4)
 - **Components (J-N1): applied in the docs, reversible.** `COMPONENTS.md` uses the role-based names (e.g. `FactList`, `LeadCapture`) and lists the legacy name next to each. No code exists yet, so nothing breaks. If Jordan chooses to keep the legacy names, swap the two columns; no other change.
-- **Variables (J-N2): applied, option B (2026-10-06).** Font weights are `--fw-*` and font sizes are `--fs-*`, which frees `--w-*` for widths (`--w-layout`, `--w-article`, `--w-read`…) and `--t-*` is no longer used. Colour roles stay `--text-*`. Other proposed renames (`--surface-sunken`, `--accent-strong`…) were **not** applied: see `REVIEW_2026-10-06.md` §4 option C if you want them later.
+- **Variables and text styles (B1, 2026-10-07): grouped naming shared with the Mangroves directory.** Colours `--color-{group}-{role}`, fonts `--font-{family|weight|size}-*`, `--radius-*`, `--elevation-*`, `--duration-*`, `--container-*`; text styles `text-{role}`. Full old → new table: `docs/CHANGELOG.md` (2026-10-07). Supersedes J-N2.
 
 ## 4. How the pieces work together (worked example)
 
 `DestinationCard` (L5) =
 - `Media` slot: image with `Badge` (type) and `Badge` (status);
-- body: `t-title` name · `Meta` line (`t-small`, muted) · `t-body` subtitle · `TagList` of `Tag`s;
-- `FactList` (L5, compact) of `FactCell` (L4) = `t-micro` label + `t-small` strong value;
-- footer: `Price` (L4: `t-title` + `t-small` unit) and `Button variant="primary"` (L3) pinned bottom-right.
+- body: `text-title` name · `Meta` line (`text-caption`, muted) · `text-body` subtitle · `TagList` of `Tag`s;
+- `FactList` (L5, compact) of `FactCell` (L4) = `text-label` label + `text-caption` strong value;
+- footer: `Price` (L4: `text-title` + `text-caption` unit) and `Button variant="primary"` (L3) pinned bottom-right.
 
 All colour, spacing and type come from L1/L2. The card knows nothing about Airtable: it receives `{name, commune, subtitle, tags, facts, price, cta}`. A redesign that changes surfaces, radii or fonts only edits L0/L1/L2.
 
 ## 5. Mobile-first contract
-- Write the base CSS for ~360px. Add `@media (min-width: 480px)` and `(min-width: 1024px)` only (`--bp-sm`, `--bp-lg`). No `max-width` queries. No layout switching in JavaScript.
+- Write the base CSS for ~360px. Add `@media (min-width: 480px)` and `(min-width: 1024px)` only (`--breakpoint-sm`, `--breakpoint-lg`). No `max-width` queries. No layout switching in JavaScript.
 - Prefer intrinsic layout: `grid-template-columns: repeat(auto-fit, minmax(min(100%, Npx), 1fr))`, `flex-wrap`, `clamp()`.
 - Every tappable element has a 44px hit area. Inputs are 16px.
 - A component's documentation states its mobile layout first, then what changes at 480 and 1024.

@@ -4,6 +4,8 @@ Reusable design rules for all Orbit directory sites. Apply each entry to every s
 
 > **Single changelog:** this file (`docs/CHANGELOG.md`). Add every entry here.
 >
+> **Naming changed on 2026-10-07 (decision B1):** grouped names (`--palette-*`, `--color-*`, `--font-size-*`, `text-*` classes…). Full old → new table in the entry "2026-10-07 · B1" below. Entries older than that keep the names they used when written.
+>
 > **Token and name renames since the early 2026-10-06 entries** (older entries keep the names they used when written):
 > `--w-regular`/`--w-semibold` → `--fw-regular`/`--fw-semibold` · `--t-h1…--t-micro` → `--fs-h1…--fs-micro` (2026-10-06, J-N2) · `--text-display` → `--text-strong` (merged) · `--danger-title` → `--danger-text` (merged) · `--t-display-xl/l/m/s` → `--t-h1` (xl, l merged), `--t-h2`, `--t-title` · `--t-price`, `--t-price-l` → `--t-title` / `--t-h2` · `--t-quote-l` → `--t-pull` · `--t-signature` (removed) · `--t-caption`, `--t-label`, `--t-overline`, `--t-input` → `--t-small`, `--t-micro`, `--t-micro` + `is-upper`, `--t-body` · `--w-medium`, `--w-bold` (removed) · component legacy names → `docs/COMPONENTS.md`.
 
@@ -32,6 +34,170 @@ Layer (which projects a rule applies to):
 | B10 | **[Core]** No absolute safety claims in copy. | ⏳ hero subhead still says "en toute sécurité" | ⏳ | ⏳ |
 
 ## Changes
+
+### 2026-10-07 · B1: grouped token and text-style names (aligned with Mangroves)
+- **Layer:** Core
+- **Change:** Every token and text-style class is renamed to grouped names: tier 1 `--palette-*`, then `--color-text-*`, `--color-surface-*`, `--color-border-*`, `--color-action-*`, `--color-status-*`, `--font-*`, `--container-*`, `--radius-*`, `--elevation-*`, `--duration-*`, `--easing-*`. Text styles become `text-*` classes; modifiers `is-strong` and `is-upper` are kept. Applied to `tokens/`, `CLAUDE.md` and the current docs. The operator tokens (`--op-*`, `--avatar-*`) and the palette entries teal, indigo and peach are removed (see "Operator colours from data").
+- **Why:** One naming scheme across the canyon and mangrove sites, so the boilerplate has a single vocabulary. The values do not change.
+- **How to apply elsewhere:** Use these names in every new site and component. Historical docs (this changelog's older entries, AUDIT, REVIEW, PHASE0, BOILERPLATE_AUDIT) keep the old names.
+- **Status:** Rivières & Canyons ✅ · Mangrove ✅ (already uses this scheme) · Template ⏳
+
+| Old token | New token |
+|---|---|
+| `--c-` | `--palette-` |
+| `--text-strong` | `--color-text-strong` |
+| `--text-body` | `--color-text-body` |
+| `--text-muted` | `--color-text-muted` |
+| `--text-faint` | `--color-text-faint` |
+| `--text-on-dark-accent` | `--color-text-inverse-accent` |
+| `--text-on-dark-3` | `--color-text-inverse-tertiary` |
+| `--text-on-dark-2` | `--color-text-inverse-secondary` |
+| `--text-on-dark` | `--color-text-inverse` |
+| `--text-shadow-photo` | `--text-shadow-on-photo` |
+| `--surface-page` | `--color-surface-page` |
+| `--surface-card` | `--color-surface-card` |
+| `--surface-subtle` | `--color-surface-inset` |
+| `--surface-sunken` | `--color-surface-sunken` |
+| `--surface-info` | `--color-surface-info` |
+| `--surface-footer` | `--color-surface-footer` |
+| `--surface-dark-2` | `--color-surface-inverse-strong` |
+| `--surface-dark` | `--color-surface-inverse` |
+| `--surface-glass` | `--color-surface-overlay` |
+| `--surface-chip-on-photo` | `--color-surface-on-photo` |
+| `--surface-scrim` | `--color-overlay-lightbox` |
+| `--scrim-hero` | `--gradient-hero-scrim` |
+| `--border-strong` | `--color-border-strong` |
+| `--border-on-dark` | `--color-border-inverse` |
+| `--border` | `--color-border-default` |
+| `--brand-hover` | `--color-brand-hover` |
+| `--brand` | `--color-brand` |
+| `--accent-strong-hover` | `--color-action-primary-hover` |
+| `--accent-strong` | `--color-action-primary` |
+| `--accent` | `--color-action-accent` |
+| `--focus-ring-dark` | `--color-focus-ring-inverse` |
+| `--focus-ring` | `--color-focus-ring` |
+| `--focus-halo` | `--color-focus-halo` |
+| `--danger-surface` | `--color-surface-danger` |
+| `--danger-border` | `--color-border-danger` |
+| `--danger-text` | `--color-text-danger` |
+| `--danger` | `--color-status-danger` |
+| `--success-surface` | `--color-surface-success` |
+| `--success-ink` | `--color-text-success` |
+| `--warning-surface` | `--color-surface-caution` |
+| `--warning-ink` | `--color-text-caution` |
+| `--star` | `--color-rating` |
+| `--font-display` | `--font-family-display` |
+| `--font-read` | `--font-family-read` |
+| `--font-ui` | `--font-family-ui` |
+| `--fw-regular` | `--font-weight-regular` |
+| `--fw-semibold` | `--font-weight-strong` |
+| `--fs-h1` | `--font-size-display` |
+| `--fs-h2` | `--font-size-heading` |
+| `--fs-title` | `--font-size-title` |
+| `--fs-quote` | `--font-size-quote` |
+| `--fs-pull` | `--font-size-pull` |
+| `--fs-read` | `--font-size-read` |
+| `--fs-h3` | `--font-size-subheading` |
+| `--fs-body` | `--font-size-body` |
+| `--fs-small` | `--font-size-caption` |
+| `--fs-micro` | `--font-size-label` |
+| `--lh-display` | `--line-height-display` |
+| `--lh-tight` | `--line-height-tight` |
+| `--lh-ui` | `--line-height-ui` |
+| `--lh-read` | `--line-height-read` |
+| `--ls-read` | `--letter-spacing-read` |
+| `--ls-overline` | `--letter-spacing-eyebrow` |
+| `--ls-wordmark` | `--letter-spacing-wordmark` |
+| `--gutter-read` | `--page-gutter-read` |
+| `--gutter` | `--page-gutter` |
+| `--w-layout` | `--container-page` |
+| `--w-article` | `--container-article` |
+| `--w-read` | `--container-read` |
+| `--w-text` | `--container-text` |
+| `--w-narrow` | `--container-narrow` |
+| `--w-side` | `--container-side` |
+| `--target` | `--tap-size-min` |
+| `--bp-sm` | `--breakpoint-sm` |
+| `--bp-lg` | `--breakpoint-lg` |
+| `--r-sheet` | `--radius-sheet` |
+| `--r-pill` | `--radius-full` |
+| `--r-s` | `--radius-tag` |
+| `--r-m` | `--radius-control` |
+| `--r-l` | `--radius-container` |
+| `--sh-card-hover` | `--elevation-hover` |
+| `--sh-float` | `--elevation-overlap` |
+| `--sh-tooltip` | `--elevation-tooltip` |
+| `--sh-sheet` | `--elevation-sheet` |
+| `--sh-sticky-bottom` | `--elevation-bar` |
+| `--sh-input` | `--elevation-input` |
+| `--sh-knob` | `--elevation-thumb` |
+| `--sh-avatar-ring` | `--elevation-avatar-ring` |
+| `--dur-fast` | `--duration-fast` |
+| `--dur-base` | `--duration-base` |
+| `--dur-slow` | `--duration-slow` |
+| `--dur-enter` | `--duration-enter` |
+| `--ease-out` | `--easing-sheet` |
+| `--ease` | `--easing-standard` |
+| `--op-*`, `--avatar-*` | removed: `operator.brand_color` → local `--operator-color` |
+
+| Old text style | New text style |
+|---|---|
+| `t-h1` | `text-display` |
+| `t-h2` | `text-heading` |
+| `t-title` | `text-title` |
+| `t-quote` | `text-quote` |
+| `t-pull` | `text-pull` |
+| `t-read` | `text-read` |
+| `t-h3` | `text-subheading` |
+| `t-body` | `text-body` |
+| `t-small` | `text-caption` |
+| `t-micro` | `text-label` |
+
+### 2026-10-07 · B2: SVG line icons by default, emoji as a site option
+- **Layer:** Core
+- **Change:** The `Icon` atom renders SVG line icons by default. A site may choose emoji in its config (`SITE.icon_style`). Rivières & Canyons keeps emoji (the design is built on them). Emoji stay decorative (`aria-hidden`) and are always followed by text.
+- **Why:** SVG icons render the same on every device and match the type; emoji remain cheap for a first site.
+- **How to apply elsewhere:** Set `icon_style` in `site.config.ts`. Icon keys in vocabularies stay the same in both modes.
+- **Status:** Rivières & Canyons ✅ (emoji) · Mangrove ⏳ · Template ⏳ (svg)
+
+### 2026-10-07 · B3: small design gaps use the nearest existing item
+- **Layer:** Core
+- **Change:** When a design needs a value, style or component the system lacks, use the nearest existing one and list it under "Proposed additions" in the phase report. Stop and ask Jordan only for content, legal, money and renames.
+- **Why:** Keeps the build moving without growing the system silently.
+- **How to apply elsewhere:** Same way of working on every site (`CLAUDE.md` §1).
+- **Status:** Rivières & Canyons ✅ · Mangrove ⏳ · Template ✅
+
+### 2026-10-07 · Phase 1b: generic listing, site facts, Images and Sources entities
+- **Layer:** Core (images with rights, typed sources, facts system, completeness by dotted path, copy, rejected listings, SEO overrides) · Directory (generic listing, publication gates, offers, articles with authors, landing pages) · Places (`access_restricted`, direction fields) · Site (`site.config.ts`)
+- **Change:**
+  - **Listing** holds only fields every directory has (identity, status, confidence, `last_reviewed_on`, location `area / zone / localities / geo`, editorial text, FAQ, `estimated_fields`, SEO overrides). Kind-specific data goes in `facts`, declared per site as `FactDefinition[]` (key, label, type, options, unit, icon, `filter`, `key_fact`, `completeness`, `schema_org`). The schema is generated from those declarations.
+  - **Three publication gates:** `status` (published / hidden), `confidence` (site levels, each may `hide`), completeness (below the threshold: `noindex`).
+  - **Images** become their own entity: owner, role (hero / gallery / site / guided / illustration), order, credit, licence, rights `free` / `partner` / `permission_needed`, source page. `content:check:prod` fails on any `permission_needed` image.
+  - **Sources** become their own entity, typed (official, tourism office, operator, media, reference), attached to a listing, an article or the site.
+  - **Landing pages** are computed from declared dimensions (type, commune, secteur) with the 3+ rule.
+  - Offers: `price_checked_on` added; `commune` removed (it comes from the place). Articles: `author_ids`. Places: `access_restricted` (never shown as "accès libre").
+  - `vocabularies.ts` is now `site.config.ts` (facts, vocabularies, location labels, confidence, completeness, landing dimensions, UTM source, icon style, safety-claim rule).
+- **Why:** A new directory writes only its settings and content mapping (`docs/DIRECTORY_BLUEPRINT.md`); the packages hold everything common. Same entity set as the Mangroves base, so phase 2 can start from it.
+- **How to apply elsewhere:** Follow `docs/DIRECTORY_BLUEPRINT.md`.
+- **Status:** Rivières & Canyons ✅ · Mangrove ⏳ · Template ⏳
+
+### 2026-10-07 · Operator colours come from data, not tokens
+- **Layer:** Directory
+- **Change:** `--op-*` and `--avatar-*` tokens are removed. Each operator carries `brand_color`; a component sets it as a local `--operator-color`. Buttons still use `--color-action-primary` (rule C9).
+- **Why:** Operators change per site; tokens are for the system, not for content.
+- **Status:** Rivières & Canyons ✅ · Mangrove ⏳ · Template ⏳
+
+### 2026-10-07 · CautionNote molecule (from Mangroves)
+- **Layer:** Directory
+- **Change:** New molecule in `COMPONENTS.md`: icon + "À confirmer", shown next to any value listed in a listing's `estimated_fields`.
+- **Why:** Lets us publish useful estimates honestly instead of hiding them.
+- **Status:** Rivières & Canyons ⏳ (built in phase 3) · Mangrove ✅ · Template ⏳
+
+### 2026-10-07 · Safety claims only where a guide is involved
+- **Layer:** Site (rule reusable by any guided-offer directory)
+- **Change:** "En sécurité" / "en toute sécurité" may describe a guided outing or a guide (offers, guide bios, guided CTAs), never a place, an article, the listing or the disclaimer. `pnpm content:check` fails on them elsewhere. Supersedes the "pending" note in the Q1-A/Q3 entry and settles B10.
+- **Why:** Jordan, 2026-10-07: safety is what the guide brings, not a property of the place.
+- **Status:** Rivières & Canyons ✅ · Mangrove ⏳ · Template ⏳
 
 ### 2026-10-07 · Phase 1: content schema, normalized fixtures, content report
 - **Layer:** Core (primitives: image with credit, placeholders, completeness) · Directory (operator, guide, offer, review, social post, article, block, declarative selection rules) · Places (place, location policy, access status, safety alert, minute ranges) · Site (vocabularies, mapping)

@@ -8,6 +8,7 @@
     "contact_url": "https://www.kayak-guadeloupe.fr/contact.html",
     "booking_url": "[BOOKING_URL_YALODE]",
     "rating": 4.9,
+    "rating_count": null,
     "rating_source": null
   },
   {
@@ -19,6 +20,7 @@
     "contact_url": "https://wild-canyon.fr/#contact",
     "booking_url": "[BOOKING_URL_WILDCANYON]",
     "rating": 5,
+    "rating_count": null,
     "rating_source": null
   }
 ]

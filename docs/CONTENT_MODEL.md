@@ -1,9 +1,11 @@
 # Content model (v12)
 
-> **Since phase 1 (2026-10-07)** the schema lives in code and wins over this file:
-> `packages/core|directory|places/src/content/` (generic entities) and `apps/rivieres-canyons/src/content/schema.ts` + `vocabularies.ts` (site enums).
-> `pnpm content:check` maps `data/*.json` (the design export, kept as the raw source) to `apps/rivieres-canyons/content/fixtures/*.json`
-> (snake_case, numbers as numbers, enums) and writes `docs/CONTENT_REPORT.md`. The tables below describe the design export.
+> **Since phase 1b (2026-10-07) the schema lives in code and wins over this file.**
+> - Generic entities: `packages/core|directory|places/src/content/` (listing, offer, operator, guide, review, article, image, source, copy, rejected; place fields).
+> - Site settings: `apps/rivieres-canyons/src/content/site.config.ts` (facts, vocabularies, location labels, confidence levels, completeness, landing pages) and `schema.ts`.
+> - `pnpm content:check` maps `data/*.json` (the design export, kept as the raw source) to `apps/rivieres-canyons/content/fixtures/*.json` and writes `docs/CONTENT_REPORT.md`.
+> - How to reuse it for another directory: `docs/DIRECTORY_BLUEPRINT.md`.
+> - The tables below describe the design export.
 
 ## Data files
 | File | Contents |

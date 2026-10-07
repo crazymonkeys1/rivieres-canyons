@@ -32,7 +32,7 @@ Rights and withdrawal: one-click unsubscribe in every e-mail; the consent text a
 
 ## 4. Build rules
 1. Content lives in the `blocks` entity under key `privacy_policy`, with `status: placeholder | final`. While `placeholder`, the page shows the single token `[PRIVACY_POLICY_TEXT]`, has `noindex`, and the **production build fails** (it is a `[...]` placeholder).
-2. The page uses DocumentTemplate: `t-h1` title, `t-read` prose in the 680px column, H2 per section with an `id`, a table of contents when there are 4+ sections, "Dernière mise à jour : {date}" in `t-small` muted. No new styles: if the generated text needs headings, lists or links, use `t-h2`, `t-h3`, `t-read`, `TextLink`.
+2. The page uses DocumentTemplate: `text-display` title, `text-read` prose in the 680px column, H2 per section with an `id`, a table of contents when there are 4+ sections, "Dernière mise à jour : {date}" in `text-caption` muted. No new styles: if the generated text needs headings, lists or links, use `text-heading`, `text-subheading`, `text-read`, `TextLink`.
 3. The consent link target must exist in every build, even when the text is a placeholder.
 4. `consent_text_version` is stored with every lead and changes only when the consent wording changes.
 5. Do not add analytics, tracking pixels, third-party scripts or cookies that are not in §2 without asking Jordan: each one changes this page.

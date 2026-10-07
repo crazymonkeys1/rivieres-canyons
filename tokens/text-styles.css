@@ -1,58 +1,58 @@
 /* ==========================================================================
    Orbit Directory — text styles. 10 styles + 2 modifiers. Built only from tokens.css.
    Components compose these classes; they never set font-family, size, weight, line-height
-   or letter-spacing themselves. They only choose a colour (--text-* token).
+   or letter-spacing themselves. They only choose a colour (--color-text-* token).
    Mobile-first: sizes are fluid or fixed, no media queries needed.
    Why each exists: docs/TYPOGRAPHY.md §4.
    ========================================================================== */
 
 /* Display serif (Instrument Serif 400) — identity */
-.t-h1    { font: 400 var(--fs-h1)/var(--lh-display) var(--font-display); text-wrap: balance; }
-.t-h2    { font: 400 var(--fs-h2)/var(--lh-display) var(--font-display); text-wrap: balance; }
-.t-title { font: 400 var(--fs-title)/var(--lh-display) var(--font-display); }
-.t-quote { font: italic 400 var(--fs-quote)/var(--lh-tight) var(--font-display); text-wrap: pretty; }
-.t-pull  { font: italic 400 var(--fs-pull)/var(--lh-tight) var(--font-display); text-wrap: pretty; }
+.text-display    { font: 400 var(--font-size-display)/var(--line-height-display) var(--font-family-display); text-wrap: balance; }
+.text-heading    { font: 400 var(--font-size-heading)/var(--line-height-display) var(--font-family-display); text-wrap: balance; }
+.text-title { font: 400 var(--font-size-title)/var(--line-height-display) var(--font-family-display); }
+.text-quote { font: italic 400 var(--font-size-quote)/var(--line-height-tight) var(--font-family-display); text-wrap: pretty; }
+.text-pull  { font: italic 400 var(--font-size-pull)/var(--line-height-tight) var(--font-family-display); text-wrap: pretty; }
 
 /* Reading serif (Source Serif 4) — sentences people read */
-.t-read  { font: 400 var(--fs-read)/var(--lh-read) var(--font-read); letter-spacing: var(--ls-read); text-wrap: pretty; }
-.t-read strong { font-weight: var(--fw-semibold); color: var(--text-strong); }   /* lead-in: once per paragraph, max */
+.text-read  { font: 400 var(--font-size-read)/var(--line-height-read) var(--font-family-read); letter-spacing: var(--letter-spacing-read); text-wrap: pretty; }
+.text-read strong { font-weight: var(--font-weight-strong); color: var(--color-text-strong); }   /* lead-in: once per paragraph, max */
 
 /* UI sans (Archivo 400 / 600) — things people scan and tap */
-.t-h3    { font: var(--fw-semibold) var(--fs-h3)/var(--lh-tight) var(--font-ui); text-wrap: balance; }
-.t-body  { font: 400 var(--fs-body)/var(--lh-ui) var(--font-ui); text-wrap: pretty; }
-.t-small { font: 400 var(--fs-small)/var(--lh-ui) var(--font-ui); }
-.t-micro { font: 400 var(--fs-micro)/var(--lh-tight) var(--font-ui); }
+.text-subheading    { font: var(--font-weight-strong) var(--font-size-subheading)/var(--line-height-tight) var(--font-family-ui); text-wrap: balance; }
+.text-body  { font: 400 var(--font-size-body)/var(--line-height-ui) var(--font-family-ui); text-wrap: pretty; }
+.text-caption { font: 400 var(--font-size-caption)/var(--line-height-ui) var(--font-family-ui); }
+.text-label { font: 400 var(--font-size-label)/var(--line-height-tight) var(--font-family-ui); }
 
 /* Modifiers (the only two) */
-.is-strong { font-weight: var(--fw-semibold); }   /* emphasis: values, buttons, links, selected, badges */
-.is-upper  { text-transform: uppercase; letter-spacing: var(--ls-overline); font-weight: var(--fw-semibold); }  /* overline = t-micro + is-upper. Nothing else is uppercase. */
+.is-strong { font-weight: var(--font-weight-strong); }   /* emphasis: values, buttons, links, selected, badges */
+.is-upper  { text-transform: uppercase; letter-spacing: var(--letter-spacing-eyebrow); font-weight: var(--font-weight-strong); }  /* overline = text-label + is-upper. Nothing else is uppercase. */
 
 /* Effects */
-.on-photo { text-shadow: var(--text-shadow-photo); }   /* white text directly on a photo only */
+.on-photo { text-shadow: var(--text-shadow-on-photo); }   /* white text directly on a photo only */
 
 /* ---------- Global rules ---------- */
 *, *::before, *::after { box-sizing: border-box; }
-body { margin: 0; background: var(--surface-page); color: var(--text-body); font: 400 var(--fs-body)/var(--lh-ui) var(--font-ui); -webkit-font-smoothing: antialiased; }
-input, select, textarea, button { font: inherit; }          /* inputs inherit t-body (16px): no iOS zoom */
-a { color: var(--brand); text-decoration: none; }
-a:hover { color: var(--brand-hover); }
-.link { font-weight: var(--fw-semibold); color: var(--text-strong); text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px; }
-.link:hover { color: var(--brand-hover); }   /* TextLink: the one link style for actions. Quiet links: plain a + underline on hover. */
+body { margin: 0; background: var(--color-surface-page); color: var(--color-text-body); font: 400 var(--font-size-body)/var(--line-height-ui) var(--font-family-ui); -webkit-font-smoothing: antialiased; }
+input, select, textarea, button { font: inherit; }          /* inputs inherit text-body (16px): no iOS zoom */
+a { color: var(--color-brand); text-decoration: none; }
+a:hover { color: var(--color-brand-hover); }
+.link { font-weight: var(--font-weight-strong); color: var(--color-text-strong); text-decoration: underline; text-decoration-color: var(--color-action-accent); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.link:hover { color: var(--color-brand-hover); }   /* TextLink: the one link style for actions. Quiet links: plain a + underline on hover. */
 .tnum { font-variant-numeric: tabular-nums; }   /* prices, durations, ratings: aligned digits */
 
 /* Focus: two-tone ring, visible on light, dark and photo surfaces */
-:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 2px; box-shadow: 0 0 0 2px var(--focus-halo); }
+:focus-visible { outline: 3px solid var(--color-focus-ring); outline-offset: 2px; box-shadow: 0 0 0 2px var(--color-focus-halo); }
 input:focus-visible { outline-offset: 0; }
 
 /* Touch target: any tappable element that is visually smaller keeps a 44px hit area */
 .hit { position: relative; }
-.hit::after { content: ''; position: absolute; inset: 50% auto auto 50%; width: max(100%, var(--target)); height: max(100%, var(--target)); transform: translate(-50%, -50%); }
+.hit::after { content: ''; position: absolute; inset: 50% auto auto 50%; width: max(100%, var(--tap-size-min)); height: max(100%, var(--tap-size-min)); transform: translate(-50%, -50%); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
 }
 
-/* Keyframes (durations come from --dur-*) */
+/* Keyframes (durations come from --duration-*) */
 @keyframes riseIn  { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 @keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
 @keyframes sheetUp { from { transform: translateY(100%); } to { transform: none; } }
