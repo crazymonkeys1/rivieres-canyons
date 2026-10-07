@@ -37,9 +37,9 @@ The detailed, always-current list of data gaps is generated in `docs/CONTENT_REP
 |---|---|---|---|---|
 | N1 | ~~Build the base~~: done, `appQss9sjY59pUxtM` (verified identical; the old base `appiXWOUutTEdu4PK` stays as an archive) | — | 2026-10-07 | done |
 | N2 | ~~GitHub secret `AIRTABLE_TOKEN`~~: done | — | 2026-10-07 | done |
-| N5 | Add the "Ce qui manque" formula (Lieux) and the "Comptes" lookup (Sorties) by hand | Jordan | 2026-10-07 | open |
+| N5 | ~~"Ce qui manque" formula and "Comptes" lookup~~: done | — | 2026-10-07 | done |
 | N3 | ~~Allow `api.airtable.com` in the cloud environment~~: the settings screen fails ("Couldn't update environment"); replaced by the GitHub job, which reaches Airtable | — | 2026-10-07 | replaced |
-| N4 | Build the two interfaces ("Orbit · Contenu", "Mon espace") and invite the guides as interface-only collaborators (SPEC §2, §5) | Jordan + Claude | 2026-10-07 | open |
+| N4 | Build the two interfaces and invite the guides: step by step in `docs/AIRTABLE_INTERFACES.md` | Jordan + Claude | 2026-10-07 | open |
 
 ## Worth adding (improves SEO, not blocking)
 
