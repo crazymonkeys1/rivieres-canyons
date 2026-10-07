@@ -1,0 +1,11 @@
+---
+// L5 FaqList: questions and answers as native disclosures. The page adds the matching FAQPage JSON-LD.
+import Disclosure from '../molecules/Disclosure.astro';
+interface Props { items: { question: string; answer: string }[] }
+const { items } = Astro.props;
+---
+<div class="faq-list">{items.map((q) => <Disclosure summary={q.question}><p>{q.answer}</p></Disclosure>)}</div>
+<style>
+  .faq-list { border-block-start: 1px solid var(--color-border-default); }
+  .faq-list :global(.disclosure__content p) { margin: 0; }
+</style>

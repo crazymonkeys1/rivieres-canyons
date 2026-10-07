@@ -1,0 +1,30 @@
+---
+// L6 PageShell: the HTML document every page shares: language, meta, canonical, robots, social preview,
+// structured data. The site imports its CSS (foundation + theme) in its own layout before using this.
+interface Props {
+  title: string; description: string; canonical: string; lang?: string; noindex?: boolean;
+  image?: string; jsonLd?: object[]; siteName: string;
+}
+const { title, description, canonical, lang = 'fr', noindex, image, jsonLd = [], siteName } = Astro.props;
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    {image && <meta property="og:image" content={image} />}
+    <meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />
+    {jsonLd.map((ld) => <script type="application/ld+json" set:html={JSON.stringify(ld)} />)}
+    <slot name="head" />
+  </head>
+  <body><slot /></body>
+</html>

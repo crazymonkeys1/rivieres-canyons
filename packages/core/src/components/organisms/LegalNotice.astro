@@ -1,0 +1,22 @@
+---
+// L5 LegalNotice: the safety disclaimer, always folded. "inline" (on a page): one-line summary, short text, a link to
+// the full notice. "full" (footer, id for the link): overline summary and the full paragraphs.
+import Disclosure from '../molecules/Disclosure.astro';
+interface Props { scope: 'inline' | 'full'; summary: string; paragraphs: string[]; link?: { label: string; href: string }; id?: string }
+const { scope, summary, paragraphs, link, id } = Astro.props;
+---
+<div class:list={['legal-notice', `legal-notice--${scope}`]}>
+  <Disclosure summary={summary} summaryStyle={scope === 'inline' ? 'note' : 'overline'} id={id}>
+    {paragraphs.map((p) => <p class="text-caption legal-notice__text">{p}</p>)}
+    {link && <p class="text-caption"><a class="link" href={link.href}>{link.label}</a></p>}
+  </Disclosure>
+</div>
+<script>
+  // A link to the full notice opens it before scrolling to it.
+  for (const a of document.querySelectorAll<HTMLAnchorElement>('.legal-notice a[href^="#"]')) {
+    a.addEventListener('click', () => { const target = document.querySelector<HTMLDetailsElement>(a.hash); if (target) target.open = true; });
+  }
+</script>
+<style>
+  .legal-notice__text { margin: 0 0 var(--space-2); color: var(--color-text-muted); }
+</style>

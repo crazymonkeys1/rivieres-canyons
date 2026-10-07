@@ -1,0 +1,10 @@
+---
+// L5 RiskList: the risks reported for a place, as tags with their icon.
+import Tag from '@orbit/core/components/atoms/Tag.astro';
+interface Props { items: { label: string; emoji?: string }[] }
+const { items } = Astro.props;
+---
+<ul class="risk-list">{items.map((r) => <li><Tag emoji={r.emoji}>{r.label}</Tag></li>)}</ul>
+<style>
+  .risk-list { display: flex; flex-wrap: wrap; gap: var(--space-1h); margin: 0; padding: 0; list-style: none; }
+</style>

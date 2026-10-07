@@ -1,0 +1,27 @@
+---
+// L5 StickyBooking: on phones only, a bottom strip with the guide and "Réserver" when the place has an outing.
+// Hides while scrolling down, comes back when scrolling up.
+import Avatar from '@orbit/core/components/atoms/Avatar.astro';
+import Button from '@orbit/core/components/atoms/Button.astro';
+import type { ImageMetadata } from 'astro';
+interface Props { guideName: string; portrait?: ImageMetadata | null; summary: string; book: { label: string; href: string } }
+const { guideName, portrait, summary, book } = Astro.props;
+---
+<div class="sticky-booking" data-sticky-booking>
+  <Avatar src={portrait?.src} alt={guideName} size={32} />
+  <p class="text-caption is-strong sticky-booking__summary">{summary}</p>
+  <Button href={book.href} external>{book.label}</Button>
+</div>
+<script>
+  const bar = document.querySelector<HTMLElement>('[data-sticky-booking]');
+  if (bar) {
+    let last = scrollY;
+    addEventListener('scroll', () => { bar.toggleAttribute('data-hidden', scrollY > last && scrollY > 200); last = scrollY; }, { passive: true });
+  }
+</script>
+<style>
+  .sticky-booking { position: fixed; inset-inline: 0; inset-block-end: 0; z-index: var(--z-cta); display: flex; align-items: center; gap: var(--space-3); padding: var(--space-2) var(--page-gutter); background: var(--color-surface-card); border-block-start: 1px solid var(--color-border-strong); box-shadow: var(--elevation-bar); transition: transform var(--duration-slow) var(--easing-sheet); }
+  .sticky-booking[data-hidden] { transform: translateY(100%); }
+  .sticky-booking__summary { flex: 1; margin: 0; color: var(--color-text-strong); }
+  @media (min-width: 1024px) { .sticky-booking { display: none; } }
+</style>

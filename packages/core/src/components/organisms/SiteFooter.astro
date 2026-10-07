@@ -1,0 +1,28 @@
+---
+// L5 SiteFooter: link groups (only to pages that exist), the full legal notice (slot), the independence note.
+interface Props { groups: { title: string; links: { label: string; href: string }[] }[]; note?: string; label: string }
+const { groups, note, label } = Astro.props;
+---
+<footer class="site-footer">
+  <nav class="site-footer__groups" aria-label={label}>
+    {groups.filter((g) => g.links.length).map((g) => (
+      <div class="site-footer__group">
+        <p class="text-label is-upper site-footer__title">{g.title}</p>
+        <ul>{g.links.map((l) => <li><a class="text-caption site-footer__link" href={l.href}>{l.label}</a></li>)}</ul>
+      </div>
+    ))}
+  </nav>
+  <div class="site-footer__legal"><slot /></div>
+  {note && <p class="text-label site-footer__note">{note}</p>}
+</footer>
+<style>
+  .site-footer { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-6); padding: var(--space-8) var(--page-gutter) var(--space-10); background: var(--color-surface-footer); }
+  .site-footer__groups { --footer-col: 150px; display: grid; grid-template-columns: repeat(auto-fit, minmax(var(--footer-col), 1fr)); gap: var(--space-6); max-inline-size: var(--container-page); margin-inline: auto; inline-size: 100%; }
+  .site-footer__group ul { margin: var(--space-2) 0 0; padding: 0; list-style: none; }
+  .site-footer__title { margin: 0; color: var(--color-text-body); }   /* muted is below 4.5:1 on the footer surface */
+  .site-footer__link { display: flex; align-items: center; min-block-size: var(--tap-size-min); color: var(--color-text-strong); }
+  .site-footer__link:hover { color: var(--color-brand); text-decoration: underline; }
+  .site-footer__legal, .site-footer__note { max-inline-size: var(--container-page); margin-inline: auto; inline-size: 100%; }
+  .site-footer__note { margin-block: 0; color: var(--color-text-body); }
+  @media (min-width: 1024px) { .site-footer__link { min-block-size: auto; padding-block: var(--space-1); } }
+</style>

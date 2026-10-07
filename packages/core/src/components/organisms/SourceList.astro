@@ -1,0 +1,23 @@
+---
+// L5 SourceList: where the information and the photos come from, folded.
+import Disclosure from '../molecules/Disclosure.astro';
+interface Props { summary: string; id?: string; groups: { title: string; items: { label: string; href?: string; note?: string }[] }[] }
+const { summary, id, groups } = Astro.props;
+---
+<div class="source-list">
+  <Disclosure summary={summary} summaryStyle="note" id={id}>
+    {groups.filter((g) => g.items.length).map((g) => (
+      <div class="source-list__group">
+        <p class="text-caption is-strong source-list__title">{g.title}</p>
+        <ul>{g.items.map((s) => <li class="text-caption">{s.href ? <a href={s.href} target="_blank" rel="noopener">{s.label}</a> : s.label}{s.note && <span class="source-list__note"> · {s.note}</span>}</li>)}</ul>
+      </div>
+    ))}
+  </Disclosure>
+</div>
+<style>
+  .source-list__group { margin-block-end: var(--space-3); }
+  .source-list__title { margin: 0 0 var(--space-1); color: var(--color-text-strong); }
+  .source-list ul { margin: 0; padding-inline-start: var(--space-4); }
+  .source-list li { margin-block: var(--space-1); color: var(--color-text-body); overflow-wrap: anywhere; }
+  .source-list__note { color: var(--color-text-muted); }
+</style>

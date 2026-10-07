@@ -1,0 +1,39 @@
+---
+// L5 Hero: the page opening on a photo with its legibility scrim: back link, breadcrumb, badges, H1, meta line.
+// The photo comes in the "media" slot (a Photo); the credit is shown on the photo.
+interface Props { variant?: 'destination' | 'article' | 'listing'; title: string; credit?: string; back?: { label: string; href: string } }
+const { variant = 'destination', title, credit, back } = Astro.props;
+---
+<section class:list={['hero', `hero--${variant}`]}>
+  <div class="hero__media" aria-hidden="true"><slot name="media" /></div>
+  <div class="hero__scrim"></div>
+  <div class="hero__top">
+    {back && <a class="hero__back text-body is-strong" href={back.href}>{back.label}</a>}
+    {credit && <p class="hero__credit text-label">{credit}</p>}
+  </div>
+  <div class="hero__content">
+    <slot name="breadcrumb" />
+    <div class="hero__badges"><slot name="badges" /></div>
+    <h1 class="hero__title text-display on-photo">{title}</h1>
+    <div class="hero__meta text-body"><slot name="meta" /></div>
+  </div>
+  <slot name="after" />
+</section>
+<style>
+  .hero { --hero-height: clamp(360px, 62vh, 520px); position: relative; display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr auto; min-block-size: var(--hero-height); color: var(--color-text-inverse); background: var(--color-surface-inverse); isolation: isolate; }
+  .hero--article, .hero--listing { --hero-height: clamp(320px, 52vh, 460px); }
+  .hero__media { position: absolute; inset: 0; }   /* photo, then scrim, then text: stacked by order, no z-index */
+  .hero__media :global(.photo) { block-size: 100%; aspect-ratio: auto; }
+  .hero__scrim { position: absolute; inset: 0; background: var(--gradient-hero-scrim); }
+  .hero__top { position: relative; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: var(--space-2); padding: var(--space-4) var(--page-gutter) 0; }
+  .hero__back { display: inline-flex; align-items: center; min-block-size: var(--tap-size-min); padding-inline: var(--space-4); border-radius: var(--radius-full); background: var(--color-surface-on-photo); color: var(--color-text-strong); }
+  .hero__back:hover { color: var(--color-text-strong); background: var(--color-surface-card); }
+  .hero__credit { margin: 0 0 0 auto; color: var(--color-text-inverse-tertiary); }
+  .hero__content { position: relative; grid-row: 3; display: grid; gap: var(--space-2); inline-size: 100%; max-inline-size: var(--container-page); margin-inline: auto; padding: var(--space-6) var(--page-gutter) var(--space-8); }
+  .hero__badges { display: flex; flex-wrap: wrap; gap: var(--space-1h); align-items: center; }
+  .hero__badges:empty { display: none; }
+  .hero__title { margin: 0; color: var(--color-text-inverse); }
+  .hero__meta { display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-2); color: var(--color-text-inverse-secondary); }
+  .hero__meta:empty { display: none; }
+  @media (min-width: 1024px) { .hero--destination .hero__content { padding-block-end: calc(var(--space-10) + var(--space-6)); } }   /* room for HeroFacts, which overlaps the bottom edge */
+</style>

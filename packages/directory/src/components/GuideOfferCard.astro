@@ -1,0 +1,47 @@
+---
+// L5 GuideOfferCard: the guided outing in one card: guide, price, "Réserver" (through /go/book), "Écrire à {guide}"
+// (through /go/whatsapp), and the other outings on the same place. Inline on phones; a sticky side column from 1024px.
+import Avatar from '@orbit/core/components/atoms/Avatar.astro';
+import Button from '@orbit/core/components/atoms/Button.astro';
+import TextLink from '@orbit/core/components/atoms/TextLink.astro';
+import Price from '@orbit/core/components/molecules/Price.astro';
+import type { ImageMetadata } from 'astro';
+interface Props {
+  kindLabel: string; title: string; withLine: string; credential?: string; portrait?: ImageMetadata | null; guideName: string;
+  operatorColor: string; price: { amount: number; prefix: string; unit: string }; childLine?: string;
+  book: { label: string; href: string }; write: { label: string; href: string };
+  alternatives?: { label: string; href: string }[]; alternativesLabel?: string; id?: string;
+}
+const { kindLabel, title, withLine, credential, portrait, guideName, operatorColor, price, childLine, book, write, alternatives = [], alternativesLabel, id } = Astro.props;
+---
+<aside class="guide-offer-card" style={`--operator-color: ${operatorColor}`} id={id}>
+  <p class="text-label is-upper guide-offer-card__kind">{kindLabel}</p>
+  <p class="text-title guide-offer-card__title">{title}</p>
+  <div class="guide-offer-card__guide">
+    <Avatar src={portrait?.src} alt={guideName} size={44} ringColor="var(--operator-color)" />
+    <div><p class="text-body is-strong guide-offer-card__with">{withLine}</p>{credential && <p class="text-caption guide-offer-card__credential">{credential}</p>}</div>
+  </div>
+  <Price amount={price.amount} prefix={price.prefix} unit={price.unit} />
+  {childLine && <p class="text-caption guide-offer-card__child">{childLine}</p>}
+  <Button href={book.href} fullWidth external>{book.label}</Button>
+  <TextLink href={write.href} standalone external>{write.label}</TextLink>
+  {alternatives.length > 0 && (
+    <div class="guide-offer-card__alternatives">
+      <p class="text-label is-upper guide-offer-card__alt-title">{alternativesLabel}</p>
+      <ul>{alternatives.map((a) => <li><TextLink href={a.href} emphasis="quiet">{a.label}</TextLink></li>)}</ul>
+    </div>
+  )}
+</aside>
+<style>
+  .guide-offer-card { display: grid; gap: var(--space-3); padding: var(--space-5); background: var(--color-surface-card); border: 1px solid var(--color-border-default); border-block-start: 4px solid var(--operator-color); border-radius: var(--radius-container); }
+  .guide-offer-card p { margin: 0; }
+  .guide-offer-card__kind { color: var(--operator-color); }
+  .guide-offer-card__title { color: var(--color-text-strong); }
+  .guide-offer-card__guide { display: flex; gap: var(--space-3); align-items: center; }
+  .guide-offer-card__with { color: var(--color-text-strong); }
+  .guide-offer-card__credential, .guide-offer-card__child { color: var(--color-text-muted); }
+  .guide-offer-card__alternatives { border-block-start: 1px solid var(--color-border-default); padding-block-start: var(--space-3); }
+  .guide-offer-card__alt-title { color: var(--color-text-muted); }
+  .guide-offer-card__alternatives ul { margin: var(--space-1) 0 0; padding: 0; list-style: none; }
+  @media (min-width: 1024px) { .guide-offer-card { position: sticky; inset-block-start: var(--space-4); } }
+</style>

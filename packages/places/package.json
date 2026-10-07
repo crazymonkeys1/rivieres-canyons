@@ -5,11 +5,16 @@
   "type": "module",
   "exports": {
     "./content": "./src/content/index.ts",
-    "./airtable": "./src/airtable/index.ts"
+    "./airtable": "./src/airtable/index.ts",
+    "./components/*": "./src/components/*",
+    "./templates/*": "./src/templates/*"
   },
   "dependencies": {
     "zod": "^3.25.0",
     "@orbit/core": "workspace:*",
     "@orbit/directory": "workspace:*"
+  },
+  "peerDependencies": {
+    "astro": "*"
   }
 }

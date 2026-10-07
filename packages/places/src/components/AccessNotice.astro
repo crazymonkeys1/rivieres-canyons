@@ -1,0 +1,23 @@
+---
+// L5 AccessNotice: what we publish about getting there when the itinerary is not public
+// (commune only, guide only, closed). For guide-only and closed places it also carries the guide link.
+import Icon from '@orbit/core/components/atoms/Icon.astro';
+interface Props { policy: 'commune_only' | 'guide_only' | 'closed'; title: string; text: string; link?: { label: string; href: string } }
+const { policy, title, text, link } = Astro.props;
+const EMOJI = { commune_only: '📍', guide_only: '🧭', closed: '🚫' } as const;
+---
+<aside class="access-notice" role="note">
+  <Icon emoji={EMOJI[policy]} size={24} />
+  <div class="access-notice__body">
+    <p class="text-body is-strong access-notice__title">{title}</p>
+    <p class="text-body access-notice__text">{text}</p>
+    {link && <p class="text-body"><a class="link" href={link.href}>{link.label} →</a></p>}
+  </div>
+</aside>
+<style>
+  .access-notice { display: flex; gap: var(--space-3); align-items: flex-start; padding: var(--space-4); background: var(--color-surface-info); border-radius: var(--radius-container); }
+  .access-notice__body { display: grid; gap: var(--space-1); }
+  .access-notice__body p { margin: 0; }
+  .access-notice__title { color: var(--color-text-strong); }
+  .access-notice__text { color: var(--color-text-body); }
+</style>

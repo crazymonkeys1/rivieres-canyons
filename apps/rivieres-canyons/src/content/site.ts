@@ -20,7 +20,7 @@ export const content: Content = parsed.data;
 const overrides = new Map(content.copy.filter((c) => c.status === 'final' && c.format === 'text' && c.text).map((c) => [c.key, c.text!]));
 /** A site text by key, Airtable first, then the default; {vars} filled in. */
 export function t(key: CopyKey, vars: Record<string, string | number> = {}): string {
-  const text = overrides.get(key) ?? COPY_DEFAULTS[key];
+  const text = overrides.get(key) ?? (COPY_DEFAULTS as Record<string, string>)[key] ?? '';
   return text.replace(/\{(\w+)\}/g, (m, k) => (k in vars ? String(vars[k]) : m));
 }
 /** A list text (icon + label + value), or [] when absent or not final. */

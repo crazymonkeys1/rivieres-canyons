@@ -1,0 +1,75 @@
+---
+// L5 DestinationCard: one listing as a card that opens its page. Photo with type badge, name, meta line, subtitle,
+// tags, key facts, and for a guided listing the guide and price with the action pinned bottom-right.
+// layout "grid" (listing, collections) or "row" (compact: nearby, lists).
+import type { ImageMetadata } from 'astro';
+import Photo from '@orbit/core/components/atoms/Photo.astro';
+import Badge from '@orbit/core/components/atoms/Badge.astro';
+import Tag from '@orbit/core/components/atoms/Tag.astro';
+import Avatar from '@orbit/core/components/atoms/Avatar.astro';
+import Icon from '@orbit/core/components/atoms/Icon.astro';
+import Price from '@orbit/core/components/molecules/Price.astro';
+import FactCell from '@orbit/core/components/molecules/FactCell.astro';
+interface Props {
+  href: string; name: string; image: ImageMetadata | null; imageAlt: string; placeholderLabel: string;
+  typeLabel: string; typeEmoji?: string; meta: string; subtitle?: string | null; alert?: string | null;
+  tags?: { label: string; emoji?: string }[]; facts?: { label: string; value: string; emoji?: string }[];
+  guided?: { guideName: string; portrait?: ImageMetadata | null; color: string; label: string; price?: { amount: number; prefix: string; unit: string } } | null;
+  cta: string; layout?: 'grid' | 'row'; factsLabel?: string;
+}
+const { href, name, image, imageAlt, placeholderLabel, typeLabel, typeEmoji, meta, subtitle, alert, tags = [], facts = [], guided, cta, layout = 'grid', factsLabel } = Astro.props;
+---
+<article class:list={['destination-card', `destination-card--${layout}`]} style={guided ? `--operator-color: ${guided.color}` : undefined}>
+  <div class="destination-card__media">
+    <Photo image={image} alt={imageAlt} ratio="3:2" widths={[320, 640]} sizes="(min-width: 1024px) 360px, 100vw" placeholderLabel={placeholderLabel} />
+    <span class="destination-card__badges">
+      <Badge onPhoto>{typeEmoji && <Icon emoji={typeEmoji} size={15} />}{typeLabel}</Badge>
+      {alert && <Badge tone="danger" label={alert} />}
+    </span>
+  </div>
+  <div class="destination-card__body">
+    <h3 class="text-title destination-card__name"><a class="destination-card__link" href={href}>{name}</a></h3>
+    <p class="text-caption destination-card__meta">{meta}</p>
+    {subtitle && layout === 'grid' && <p class="text-body destination-card__subtitle">{subtitle}</p>}
+    {tags.length > 0 && layout === 'grid' && <ul class="destination-card__tags">{tags.map((t) => <li><Tag emoji={t.emoji}>{t.label}</Tag></li>)}</ul>}
+    {facts.length > 0 && layout === 'grid' && <dl class="destination-card__facts" aria-label={factsLabel}>{facts.map((f) => <FactCell label={f.label} value={f.value} emoji={f.emoji} compact />)}</dl>}
+    {layout === 'grid' && (
+      <div class="destination-card__footer">
+        {guided && (
+          <div class="destination-card__guide">
+            <Avatar src={guided.portrait?.src} alt={guided.guideName} size={32} ringColor="var(--operator-color)" />
+            <span class="text-caption is-strong destination-card__guided">{guided.label}</span>
+            {guided.price && <Price amount={guided.price.amount} prefix={guided.price.prefix} unit={guided.price.unit} />}
+          </div>
+        )}
+        <span class="destination-card__cta text-body is-strong" aria-hidden="true">{cta} →</span>
+      </div>
+    )}
+  </div>
+</article>
+<style>
+  .destination-card { position: relative; display: grid; background: var(--color-surface-card); border: 1px solid var(--color-border-default); border-radius: var(--radius-container); overflow: hidden; transition: border-color var(--duration-fast) var(--easing-standard), box-shadow var(--duration-fast) var(--easing-standard); }
+  .destination-card:hover { border-color: var(--color-border-strong); }
+  .destination-card--row:hover { box-shadow: var(--elevation-hover); }
+  .destination-card__media { position: relative; }
+  .destination-card__badges { position: absolute; inset-block-start: var(--space-2h); inset-inline-start: var(--space-2h); z-index: var(--z-raised); display: flex; gap: var(--space-1h); align-items: center; }
+  .destination-card__body { display: grid; gap: var(--space-2); align-content: start; padding: var(--space-4); }
+  .destination-card__body p, .destination-card__name { margin: 0; }
+  .destination-card__name { color: var(--color-text-strong); }
+  .destination-card__link { color: inherit; }
+  .destination-card__link::after { content: ''; position: absolute; inset: 0; }   /* the whole card opens the page */
+  .destination-card__meta { color: var(--color-text-muted); }
+  .destination-card__subtitle { color: var(--color-text-body); }
+  .destination-card__tags { display: flex; flex-wrap: wrap; gap: var(--space-1h); margin: 0; padding: 0; list-style: none; }
+  .destination-card__facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin: 0; background: var(--color-border-default); border: 1px solid var(--color-border-default); border-radius: var(--radius-control); overflow: hidden; }
+  .destination-card__footer { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--space-3); margin-block-start: var(--space-2); }
+  .destination-card__guide { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); }
+  .destination-card__guided { color: var(--operator-color); }
+  .destination-card__cta { margin-inline-start: auto; color: var(--color-text-strong); text-decoration: underline; text-decoration-color: var(--color-action-accent); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+  .destination-card--row { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); }
+  .destination-card--row .destination-card__media :global(.photo) { block-size: 100%; aspect-ratio: auto; }
+  .destination-card--row .destination-card__badges { display: none; }
+  .destination-card--row .destination-card__body { gap: var(--space-1); padding: var(--space-3); align-content: center; }
+  .destination-card--row .destination-card__name { order: 2; }
+  .destination-card--row .destination-card__meta { order: 1; }
+</style>

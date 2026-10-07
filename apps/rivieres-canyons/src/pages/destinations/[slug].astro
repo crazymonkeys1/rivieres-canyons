@@ -1,0 +1,301 @@
+---
+// L7 Place page: PlaceTemplate filled from the content. No styling here: every look comes from the components.
+import { getImage } from 'astro:assets';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import PlaceTemplate from '@orbit/places/templates/PlaceTemplate.astro';
+import Hero from '@orbit/core/components/organisms/Hero.astro';
+import HeroFacts from '@orbit/core/components/organisms/HeroFacts.astro';
+import FactList from '@orbit/core/components/organisms/FactList.astro';
+import KeyFacts from '@orbit/core/components/organisms/KeyFacts.astro';
+import BenefitList from '@orbit/core/components/organisms/BenefitList.astro';
+import FaqList from '@orbit/core/components/organisms/FaqList.astro';
+import SourceList from '@orbit/core/components/organisms/SourceList.astro';
+import PressMentions from '@orbit/core/components/organisms/PressMentions.astro';
+import Gallery from '@orbit/core/components/organisms/Gallery.astro';
+import Lightbox from '@orbit/core/components/organisms/Lightbox.astro';
+import LegalNotice from '@orbit/core/components/organisms/LegalNotice.astro';
+import SafetyAlert from '@orbit/places/components/SafetyAlert.astro';
+import AccessNotice from '@orbit/places/components/AccessNotice.astro';
+import RiskList from '@orbit/places/components/RiskList.astro';
+import GearList from '@orbit/places/components/GearList.astro';
+import GuideOfferCard from '@orbit/directory/components/GuideOfferCard.astro';
+import ReviewCard from '@orbit/directory/components/ReviewCard.astro';
+import SocialPosts from '@orbit/directory/components/SocialPosts.astro';
+import StickyBooking from '@orbit/directory/components/StickyBooking.astro';
+import GuideSection from '@orbit/directory/components/GuideSection.astro';
+import DestinationCard from '@orbit/directory/components/DestinationCard.astro';
+import Photo from '@orbit/core/components/atoms/Photo.astro';
+import Badge from '@orbit/core/components/atoms/Badge.astro';
+import Icon from '@orbit/core/components/atoms/Icon.astro';
+import Button from '@orbit/core/components/atoms/Button.astro';
+import TextLink from '@orbit/core/components/atoms/TextLink.astro';
+import FactCell from '@orbit/core/components/molecules/FactCell.astro';
+import KeyFact from '@orbit/core/components/molecules/KeyFact.astro';
+import CautionNote from '@orbit/core/components/molecules/CautionNote.astro';
+import Tooltip from '@orbit/core/components/molecules/Tooltip.astro';
+import SectionHeader from '@orbit/core/components/molecules/SectionHeader.astro';
+import Breadcrumb from '@orbit/core/components/molecules/Breadcrumb.astro';
+import Callout from '@orbit/core/components/molecules/Callout.astro';
+import Quote from '@orbit/core/components/molecules/Quote.astro';
+import {
+  content, publishedPlaces, t, tList, url, types, operators, guides, criteria, offersOf, guideOf, imagesOf, sourcesOf,
+  socialOf, reviewsOf, localityNames, photoFile, portraitOf,
+} from '../../content/site';
+import { keyFacts, placeFact, offerFact, factValue, minutes, gearIcon, keyFactIcon, risk, date } from '../../content/format';
+import { PLACE_FACTS, OFFER_FACTS } from '../../content/site.config';
+import { landings } from '../../content/nav';
+import type { Destination } from '../../content/schema';
+
+export function getStaticPaths() {
+  return publishedPlaces.map((place) => ({ params: { slug: place.id }, props: { place } }));
+}
+const { place } = Astro.props as { place: Destination };
+const p = place;
+const name = p.name;
+const type = types.get(p.type);
+const communes = localityNames(p.location.localities);
+const place_line = [communes.join(' / ') || t('place.access_unknown_commune'), p.location.area].join(' · ');
+const policy = p.location_policy ?? 'commune_only';
+const est = (path: string) => p.estimated_fields.includes(path);
+
+// Photos
+const toItem = async (im: (typeof content.images)[number]) => {
+  const file = photoFile(im.id);
+  return { image: file, full: file ? (await getImage({ src: file, width: 1600 })).src : null, alt: im.caption ?? name, caption: [im.caption, im.credit].filter(Boolean).join(' · '), sourceHref: im.source_url };
+};
+const hero = imagesOf('listing', p.id, 'hero')[0] ?? imagesOf('listing', p.id)[0] ?? null;
+const sitePhotos = await Promise.all(imagesOf('listing', p.id).filter((i) => ['site', 'gallery', 'hero'].includes(i.role)).map(toItem));
+const guidedPhotos = await Promise.all(imagesOf('listing', p.id, 'guided').map(toItem));
+
+// Offers
+const offerList = offersOf(p.id);
+const offer = offerList[0] ?? null;
+const operator = offer ? operators.get(offer.operator_id)! : null;
+const guide = operator ? guideOf(operator.id) : null;
+const portrait = guide ? portraitOf(guide.photo) : null;
+const offerFacts = offer ? [
+  { label: t('place.offer_duration'), value: minutes(offer.duration_min), emoji: '⏱️' },
+  ...keyFacts({ facts: offer.facts }, OFFER_FACTS),
+  ...offer.criteria.map((k) => criteria.get(k)).filter((c) => c?.key_fact).map((c) => ({ label: c!.label, value: t('place.yes'), emoji: c!.icon ?? undefined })),
+] : [];
+const offerTags = offer ? offer.criteria.map((k) => criteria.get(k)).filter((c) => c?.badge) : [];
+const reviews = offer && operator ? reviewsOf(operator.id, offer.id) : [];
+const guideName = guide?.first_name ?? '';
+const bookHref = offer ? url.book(offer.id) : '#';
+const writeHref = guide ? url.whatsapp(guide.id, url.place(p.id)) : '#';
+const priceProps = offer ? { amount: offer.price_eur, prefix: t('place.offer_from'), unit: t('place.offer_per_adult') } : null;
+
+// Facts
+const heroFacts = keyFacts(p, PLACE_FACTS);
+const tipGuide = p.tip?.guide_id ? guides.get(p.tip.guide_id) : null;
+const keyFactRows = [
+  ...(p.facts.season ? [{ label: t('place.when'), value: String(p.facts.season), estimated: est('facts.season') }] : []),
+  ...p.key_facts.map((k) => ({ ...k, estimated: false })),
+  ...(p.alt_names.length ? [{ label: t('place.also_called'), value: p.alt_names.join(' · '), estimated: false }] : []),
+];
+const swimmingNote = p.fact_notes.swimming;
+
+// Sections that exist
+const pressItems = sourcesOf('listing', p.id).filter((s) => s.featured).map((s) => ({ title: s.title!, publisher: s.publisher ?? s.label, href: s.url, note: s.note }));
+const socialItems = socialOf(p.id).map((s) => ({ href: s.url, title: s.title, platform: s.platform, account: s.account ?? t('place.account_unknown'), duration: s.duration_sec ? `${Math.floor(s.duration_sec / 60)}:${String(s.duration_sec % 60).padStart(2, '0')}` : null }));
+const nearby = publishedPlaces
+  .filter((x) => x.id !== p.id)
+  .map((x) => ({ x, score: (x.location.localities.some((l) => p.location.localities.includes(l)) ? 2 : 0) + (x.location.area === p.location.area ? 1 : 0) + (offersOf(x.id).length ? 0.5 : 0) }))
+  .filter((n) => n.score >= 1).sort((a, b) => b.score - a.score).slice(0, 3).map((n) => n.x);
+const typeLanding = landings.find((l) => l.dimension === 'type' && l.value === p.type);
+const breadcrumb = [{ label: t('nav.home'), href: url.home() }, ...(typeLanding && type ? [{ label: type.plural, href: url.type(p.type) }] : []), { label: name }];
+const sources = sourcesOf('listing', p.id).filter((s) => !s.featured);
+const description = (p.signature ?? p.summary ?? '').slice(0, 155);
+const companies = content.operators.map((o) => {
+  const g = guideOf(o.id);
+  return {
+    name: o.name, color: o.brand_color, guideName: g?.first_name ?? o.name, portrait: g ? portraitOf(g.photo) : null,
+    withLine: t('team.with', { guide: g?.first_name ?? '' }), credential: t(`team.credential.${o.id}` as any), text: t(`team.operator.${o.id}` as any),
+    write: { label: t('place.offer_write', { guide: g?.first_name ?? '' }), href: g ? url.whatsapp(g.id, url.place(p.id)) : o.contact_url ?? o.website_url },
+    profile: { label: t('team.profile'), href: g ? url.guide(g.id) : url.about() },
+    website: { label: new URL(o.website_url).hostname.replace(/^www\./, ''), href: o.website_url },
+  };
+});
+---
+<SiteLayout title={`${name} · ${t('site.name')}`} description={description} path={url.place(p.id)}>
+  <PlaceTemplate>
+    <Hero slot="hero" title={name} credit={hero?.credit} back={{ label: t('nav.back_to_results'), href: url.home() }}>
+      <Photo slot="media" image={hero ? photoFile(hero.id) : null} alt="" ratio="16:9" eager widths={[640, 1024, 1600]} sizes="100vw" />
+      <Breadcrumb slot="breadcrumb" onPhoto label={t('nav.breadcrumb')} items={breadcrumb} />
+      <Fragment slot="badges">
+        <Badge onPhoto>{type?.icon && <Icon emoji={type.icon} size={15} />}{type?.label ?? p.type}</Badge>
+        {p.safety_alert && <a href="#alerte-site"><Badge tone="danger" label={`${t('place.danger_badge')} : ${p.safety_alert.short_label}`} /></a>}
+      </Fragment>
+      <span slot="meta"><Icon emoji="📍" size={15} /> {place_line}</span>
+    </Hero>
+
+    {heroFacts.length > 0 && (
+      <HeroFacts slot="facts" label={t('place.facts_label')}>
+        {heroFacts.map((f) => (
+          <FactCell label={f.label} value={f.value} emoji={f.emoji}>
+            {f.key === 'swimming' && swimmingNote && <Tooltip slot="note" id={`tip-${f.key}`} label={f.label} text={swimmingNote} />}
+            {f.estimated && <CautionNote slot="note" label={t('place.estimate')} />}
+          </FactCell>
+        ))}
+      </HeroFacts>
+    )}
+
+    <section id="apercu" aria-labelledby="apercu-title">
+      <SectionHeader id="apercu-title" eyebrow={t('place.overview_eyebrow')} title={p.headings.overview ?? name} />
+      {(p.intro ?? p.summary) && <p class="text-read">{p.intro ?? p.summary}</p>}
+      {p.tip && (
+        <Callout eyebrow={tipGuide ? t('place.tip_guide', { guide: tipGuide.first_name }) : t('place.tip_team')} name={tipGuide?.first_name ?? t('site.name')} photo={tipGuide ? portraitOf(tipGuide.photo)?.src : undefined}>{p.tip.text}</Callout>
+      )}
+      {p.more_title && p.more_text && <h3 class="text-subheading">{p.more_title}</h3>}
+      {p.more_text && <p class="text-read">{p.more_text}</p>}
+      {keyFactRows.length > 0 && <h3 class="text-subheading">{t('place.key_facts')}</h3>}
+      {keyFactRows.length > 0 && (
+        <KeyFacts label={t('place.key_facts')}>
+          {keyFactRows.map((k) => <KeyFact label={k.label} value={k.value} emoji={keyFactIcon(k.label)}>{k.estimated && <CautionNote slot="note" label={t('place.estimate')} />}</KeyFact>)}
+        </KeyFacts>
+      )}
+      {p.safety_alert && policy !== 'closed' && <SafetyAlert id="alerte-site" title={p.safety_alert.title} text={p.safety_alert.text} items={p.safety_alert.items} badgeLabel={t('place.danger_badge')} />}
+      {p.safety_alert && policy === 'closed' && <SafetyAlert id="alerte-site" variant="site-closed" title={p.safety_alert.title} text={p.safety_alert.text} items={p.safety_alert.items} badgeLabel={t('place.danger_badge')} />}
+      <LegalNotice scope="inline" summary={t('legal.inline_summary')} paragraphs={[t('legal.inline_text')]} link={{ label: t('legal.inline_link'), href: '#avertissement' }} />
+    </section>
+
+    {(sitePhotos.length > 0 || guidedPhotos.length > 0) && (
+      <section id="photos" aria-labelledby="photos-title" class="is-wide">
+        <SectionHeader id="photos-title" title={t('place.photos_title', { name })} />
+        <Gallery group="photos" placeholderLabel={t('place.photo_missing')} groups={[
+          { title: t('place.photos_site'), items: sitePhotos },
+          { title: guide ? t('place.photos_guided', { guide: guide.first_name }) : t('place.offer_kind'), items: guidedPhotos },
+        ]} />
+        <p class="text-caption">{t('place.photos_credit')} <a class="link" href="#sources">{t('place.photos_sources')}</a></p>
+      </section>
+    )}
+
+    <section id="acces" aria-labelledby="acces-title">
+      {policy === 'public' && <SectionHeader id="acces-title" title={p.headings.access ?? t('place.access_title_public', { name })} />}
+      {policy === 'commune_only' && <SectionHeader id="acces-title" title={t('place.access_title_commune', { name })} />}
+      {policy === 'guide_only' && <SectionHeader id="acces-title" title={t('place.access_title_guide', { name })} />}
+      {policy === 'closed' && <SectionHeader id="acces-title" title={t('place.access_title_closed')} />}
+
+      {policy === 'public' && p.access_tiles.length > 0 && (
+        <FactList label={t('place.access_title_public', { name })} columns={3}>
+          {p.access_tiles.map((a, i) => (
+            <FactCell label={a.label} value={a.value} emoji={a.icon}>
+              {a.tip && <Tooltip slot="note" id={`access-tip-${i}`} label={a.label} text={a.tip} />}
+              {((a.label === 'Parking' && est('parking')) || (i === 0 && est('drive'))) && <CautionNote slot="note" label={t('place.estimate')} />}
+            </FactCell>
+          ))}
+        </FactList>
+      )}
+      {policy === 'public' && (p.itinerary_text ?? p.itinerary) && <h3 class="text-subheading">{t('place.access_own')}</h3>}
+      {policy === 'public' && (p.itinerary_text ?? p.itinerary) && <p class="text-read">{p.itinerary_text ?? p.itinerary}</p>}
+      {policy === 'public' && p.location.geo && <TextLink href={url.maps(p.location.geo.lat, p.location.geo.lng)} external standalone>{t('place.access_maps')} ↗</TextLink>}
+      {policy === 'public' && p.guided_access_text && <p class="text-read">{p.guided_access_text}</p>}
+
+      {policy === 'commune_only' && <AccessNotice policy="commune_only" title={communes.length ? t('place.access_commune_title', { commune: communes.join(' / ') }) : t('place.access_unknown_commune')} text={t('place.access_commune_text')} />}
+      {policy === 'guide_only' && <AccessNotice policy="guide_only" title={t('place.access_guide_title')} text={t('place.access_guide_text')} link={guide ? { label: t('place.access_go_with', { guide: guide.first_name }), href: '#sortie' } : undefined} />}
+      {policy === 'closed' && p.safety_alert && <SafetyAlert variant="site-closed" title={p.safety_alert.title} text={p.safety_alert.text} badgeLabel={t('place.danger_badge')} />}
+      {policy === 'closed' && <AccessNotice policy="closed" title={t('place.access_closed_title')} text={t('place.access_closed_text')} />}
+      {p.access_status && <p class="text-caption">{p.access_status.note}{p.access_status.checked_on && ` (${t('place.access_status_checked', { date: date(p.access_status.checked_on) })})`}</p>}
+    </section>
+
+    <section id="securite" aria-labelledby="securite-title">
+      <SectionHeader id="securite-title" title={t('place.safety_title')} />
+      <BenefitList items={[{ emoji: '🌊', title: t('place.rules_title'), text: t('place.rules_text') }]} />
+      {p.risks.length > 0 && <h3 class="text-subheading">{t('place.risks_title')}</h3>}
+      {p.risks.length > 0 && <RiskList items={p.risks.map(risk)} />}
+      {p.to_bring.length > 0 && <h3 class="text-subheading">{t('place.bring_title')}</h3>}
+      {p.to_bring.length > 0 && <GearList items={p.to_bring.map((label) => ({ label, emoji: gearIcon(label) }))} />}
+      {!offer && <p class="text-caption">{t('place.no_guide')} <a class="link" href={url.blog()}>{t('place.no_guide_link')} →</a></p>}
+    </section>
+
+    {offer && operator && guide && (
+      <section id="sortie" aria-labelledby="sortie-title">
+        <SectionHeader id="sortie-title" eyebrow={`${t('place.offer_kind')} · ${operator.name}`} title={p.headings.offer ?? t('place.offer_title', { name })} />
+        <p class="text-title">{offer.name}</p>
+        <p class="text-body">{offer.subtitle}</p>
+        {offer.guide_tip && <Quote size="pull" attribution={`${guide.first_name}, ${operator.name}`}>{offer.guide_tip}</Quote>}
+        <h3 class="text-subheading">{t('place.offer_programme')}</h3>
+        <FactList label={t('place.offer_programme')} columns={4}>{offerFacts.map((f) => <FactCell label={f.label} value={f.value} emoji={f.emoji} />)}</FactList>
+        {offer.highlights.length > 0 && <h3 class="text-subheading">{t('place.offer_highlights')}</h3>}
+        {offer.highlights.length > 0 && <ul class="text-read">{offer.highlights.map((h) => <li>{h}</li>)}</ul>}
+        {offerTags.length > 0 && <p class="text-caption">{offerTags.map((c) => `${c!.icon ?? ''} ${c!.label}`).join(' · ')}</p>}
+        <h3 class="text-subheading">{t('place.offer_why', { guide: guide.first_name })}</h3>
+        {tList('why_guide_points').length > 0 && <BenefitList items={tList('why_guide_points').map((b) => ({ emoji: b.icon, title: b.label, text: b.value }))} />}
+        {p.offer_why && <p class="text-read">{p.offer_why}</p>}
+        {offer.included.length > 0 && <h3 class="text-subheading">{t('place.offer_provided')}</h3>}
+        {offer.included.length > 0 && <GearList tone="provided" items={offer.included.map((label) => ({ label, emoji: gearIcon(label) }))} />}
+        {offer.to_bring.length > 0 && <h3 class="text-subheading">{t('place.offer_bring')}</h3>}
+        {offer.to_bring.length > 0 && <GearList items={offer.to_bring.map((label) => ({ label, emoji: gearIcon(label) }))} />}
+        {offer.guide_story && <Callout eyebrow={t('place.offer_story')} name={guide.first_name} photo={portrait?.src} ringColor={operator.brand_color}>{offer.guide_story}</Callout>}
+        {reviews.length > 0 && <h3 class="text-subheading">{t('place.offer_reviews', { guide: guide.first_name })}</h3>}
+        {reviews.map((r) => <ReviewCard quote={r.quote} author={r.author} source={r.source} rating={r.rating} />)}
+        <p class="place-template__actions"><Button href={bookHref} external>{t('place.offer_book')}</Button><TextLink href={writeHref} external>{t('place.offer_write', { guide: guide.first_name })}</TextLink></p>
+      </section>
+    )}
+
+    {socialItems.length > 0 && (
+      <section id="social" aria-labelledby="social-title" class="is-wide">
+        <SectionHeader id="social-title" eyebrow={t('place.social_eyebrow')} title={t('place.social_title', { name })} />
+        <SocialPosts items={socialItems} />
+      </section>
+    )}
+
+    {pressItems.length > 0 && (
+      <section id="ils-en-parlent" aria-labelledby="press-title">
+        <SectionHeader id="press-title" eyebrow={t('place.press_eyebrow')} title={t('place.press_title')} />
+        <PressMentions items={pressItems} />
+      </section>
+    )}
+
+    {p.faq.length > 0 && (
+      <section id="faq" aria-labelledby="faq-title">
+        <SectionHeader id="faq-title" title={p.headings.faq ?? t('place.faq_title', { name })} />
+        <FaqList items={p.faq} />
+      </section>
+    )}
+
+    {nearby.length > 0 && (
+      <section id="proximite" aria-labelledby="proximite-title" class="is-wide">
+        <SectionHeader id="proximite-title" title={t('place.nearby_title')} />
+        <ul class="place-template__cards">
+          {nearby.map((n) => {
+            const nType = types.get(n.type);
+            const nHero = imagesOf('listing', n.id, 'hero')[0];
+            return <li><DestinationCard layout="row" href={url.place(n.id)} name={n.name} image={nHero ? photoFile(nHero.id) : null} imageAlt="" placeholderLabel={t('place.photo_missing')} typeLabel={nType?.label ?? n.type} meta={[nType?.label, localityNames(n.location.localities).join(' / ')].filter(Boolean).join(' · ')} cta={t('place.view')} /></li>;
+          })}
+        </ul>
+      </section>
+    )}
+
+    {content.articles.length > 0 && (
+      <section id="explorer" aria-labelledby="explorer-title">
+        <SectionHeader id="explorer-title" title={t('place.explore_title')} />
+        <p class="place-template__actions">{content.articles.filter((a) => a.status === 'published').map((a) => <Button variant="secondary" href={url.article(a.id)}>{a.label} →</Button>)}</p>
+      </section>
+    )}
+
+    <section id="sources" aria-labelledby="sources-title">
+      <h2 id="sources-title" class="visually-hidden">{t('place.sources_title')}</h2>
+      <SourceList summary={t('place.sources_title')} groups={[
+        { title: t('place.sources_source'), items: sources.map((s) => ({ label: s.label, href: s.url, note: s.used_for ?? undefined })) },
+        { title: t('place.sources_access'), items: p.access_status?.source_url ? [{ label: p.access_status.source_name ?? p.access_status.source_url, href: p.access_status.source_url }] : [] },
+        { title: t('place.sources_photos'), items: [...new Map(imagesOf('listing', p.id).map((i) => [i.credit, { label: i.credit, href: i.source_url ?? undefined, note: i.licence ?? undefined }])).values()] },
+      ]} />
+    </section>
+
+    {offer && operator && guide && priceProps && (
+      <GuideOfferCard slot="aside" kindLabel={`${t('place.offer_kind')} · ${operator.name}`} title={offer.name} withLine={t('place.offer_with', { guide: guide.first_name, company: operator.name })}
+        credential={guide.role} portrait={portrait} guideName={guide.first_name} operatorColor={operator.brand_color} price={priceProps}
+        childLine={offer.price_child_eur && offer.child_price_under_age ? t('place.offer_child', { age: offer.child_price_under_age, price: `${offer.price_child_eur} €` }) : undefined}
+        book={{ label: t('place.offer_book'), href: bookHref }} write={{ label: t('place.offer_write', { guide: guide.first_name }), href: writeHref }}
+        alternatives={offerList.slice(1).map((o) => ({ label: `${o.name} · ${operators.get(o.operator_id)?.name}`, href: url.book(o.id) }))} alternativesLabel={t('place.offer_alternative')} />
+    )}
+
+    <Fragment slot="after">
+      <GuideSection id="qui-sommes-nous" eyebrow={t('team.eyebrow')} title={t('team.title')} paragraphs={[t('team.text_1'), t('team.text_2')]} companies={companies} />
+      <Lightbox labels={{ close: t('place.photo_close'), previous: t('place.photo_previous'), next: t('place.photo_next'), source: t('place.sources_source'), dialog: t('place.photos_title', { name }) }} />
+    </Fragment>
+
+    {offer && guide && priceProps && <StickyBooking slot="sticky" guideName={guide.first_name} portrait={portrait} summary={`${t('place.offer_go')} · ${t('place.offer_from')} ${offer.price_eur} €`} book={{ label: t('place.offer_book'), href: bookHref }} />}
+  </PlaceTemplate>
+</SiteLayout>

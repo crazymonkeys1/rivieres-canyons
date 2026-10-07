@@ -1,0 +1,54 @@
+---
+// L5 Lightbox: full-screen photo viewer for every [data-lightbox-group] on the page. Native <dialog>:
+// Escape closes, arrow keys and swipe move, counter and source link per photo. Labels come from the site.
+interface Props { labels: { close: string; previous: string; next: string; source: string; dialog: string } }
+const { labels } = Astro.props;
+---
+<dialog class="lightbox" aria-label={labels.dialog} data-lightbox>
+  <figure class="lightbox__figure">
+    <img class="lightbox__img" alt="" />
+    <figcaption class="lightbox__caption text-caption"><span data-lightbox-counter></span> · <span data-lightbox-text></span> <a data-lightbox-source target="_blank" rel="noopener">{labels.source}</a></figcaption>
+  </figure>
+  <button type="button" class="lightbox__button lightbox__close text-title" aria-label={labels.close} data-lightbox-close>×</button>
+  <button type="button" class="lightbox__button lightbox__prev text-title" aria-label={labels.previous} data-lightbox-prev>‹</button>
+  <button type="button" class="lightbox__button lightbox__next text-title" aria-label={labels.next} data-lightbox-next>›</button>
+</dialog>
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>('[data-lightbox]');
+  if (dialog) {
+    const img = dialog.querySelector('img')!, counter = dialog.querySelector('[data-lightbox-counter]')!, text = dialog.querySelector('[data-lightbox-text]')!;
+    const source = dialog.querySelector<HTMLAnchorElement>('[data-lightbox-source]')!;
+    let items: HTMLAnchorElement[] = [], index = 0;
+    const show = (i: number) => {
+      index = (i + items.length) % items.length;
+      const a = items[index];
+      img.src = a.href; img.alt = a.querySelector('img')?.alt ?? '';
+      counter.textContent = `${index + 1} / ${items.length}`; text.textContent = a.dataset.caption ?? '';
+      source.hidden = !a.dataset.source; if (a.dataset.source) source.href = a.dataset.source;
+    };
+    for (const group of document.querySelectorAll<HTMLElement>('[data-lightbox-group]')) {
+      const groupItems = [...group.querySelectorAll<HTMLAnchorElement>('[data-lightbox-item]')];
+      groupItems.forEach((a, i) => a.addEventListener('click', (e) => { e.preventDefault(); items = groupItems; show(i); dialog.showModal(); }));
+    }
+    dialog.querySelector('[data-lightbox-close]')!.addEventListener('click', () => dialog.close());
+    dialog.querySelector('[data-lightbox-prev]')!.addEventListener('click', () => show(index - 1));
+    dialog.querySelector('[data-lightbox-next]')!.addEventListener('click', () => show(index + 1));
+    dialog.addEventListener('keydown', (e) => { if (e.key === 'ArrowLeft') show(index - 1); if (e.key === 'ArrowRight') show(index + 1); });
+    let startX = 0;
+    dialog.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; }, { passive: true });
+    dialog.addEventListener('touchend', (e) => { const dx = e.changedTouches[0].clientX - startX; if (Math.abs(dx) > 40) show(index + (dx < 0 ? 1 : -1)); });
+  }
+</script>
+<style>
+  .lightbox { inline-size: 100%; block-size: 100%; max-inline-size: none; max-block-size: none; margin: 0; padding: var(--space-10) var(--space-2) var(--space-6); border: 0; background: var(--color-overlay-lightbox); color: var(--color-text-inverse); }
+  .lightbox::backdrop { background: var(--color-overlay-lightbox); }
+  .lightbox[open] { display: grid; place-items: center; z-index: var(--z-lightbox); }
+  .lightbox__figure { display: grid; gap: var(--space-2); justify-items: center; margin: 0; max-block-size: 100%; }
+  .lightbox__img { max-inline-size: 100%; max-block-size: 80dvh; object-fit: contain; border-radius: var(--radius-control); }
+  .lightbox__caption { color: var(--color-text-inverse-secondary); text-align: center; }
+  .lightbox__caption a { color: var(--color-text-inverse); text-decoration: underline; }
+  .lightbox__button { position: absolute; display: grid; place-items: center; inline-size: var(--tap-size-min); block-size: var(--tap-size-min); border: 0; border-radius: 50%; background: var(--color-surface-overlay); color: var(--color-text-inverse); cursor: pointer; }
+  .lightbox__close { inset-block-start: var(--space-2); inset-inline-end: var(--space-2); }
+  .lightbox__prev { inset-inline-start: var(--space-2); inset-block-start: 50%; }
+  .lightbox__next { inset-inline-end: var(--space-2); inset-block-start: 50%; }
+</style>

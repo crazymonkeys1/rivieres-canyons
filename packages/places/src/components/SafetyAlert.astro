@@ -1,0 +1,23 @@
+---
+// L5 SafetyAlert: a safety warning (danger surface). At most one danger surface per viewport.
+// "site-closed" = an access ban, shown in the overview and in access. "compact" = the listing banner.
+import Badge from '@orbit/core/components/atoms/Badge.astro';
+interface Props { title: string; text: string; items?: string[]; variant?: 'default' | 'compact' | 'site-closed'; id?: string; badgeLabel: string; source?: string }
+const { title, text, items = [], variant = 'default', id, badgeLabel, source } = Astro.props;
+---
+<aside class:list={['safety-alert', `safety-alert--${variant}`]} id={id} role="note">
+  <Badge tone="danger" label={badgeLabel} />
+  <div class="safety-alert__body">
+    <p class:list={['safety-alert__title', variant === 'compact' ? 'text-caption' : 'text-body', 'is-strong']}>{title}</p>
+    <p class:list={['safety-alert__text', variant === 'compact' ? 'text-caption' : 'text-body']}>{text}</p>
+    {items.length > 0 && <ul class:list={['safety-alert__items', variant === 'compact' ? 'text-caption' : 'text-body']}>{items.map((i) => <li>{i}</li>)}</ul>}
+    {source && <p class="text-caption safety-alert__source">{source}</p>}
+  </div>
+</aside>
+<style>
+  .safety-alert { display: flex; gap: var(--space-3); align-items: flex-start; padding: var(--space-4); background: var(--color-surface-danger); border: 1px solid var(--color-border-danger); border-radius: var(--radius-container); color: var(--color-text-danger); }
+  .safety-alert--compact { padding: var(--space-3); }
+  .safety-alert__body { display: grid; gap: var(--space-1); min-inline-size: 0; }
+  .safety-alert__title, .safety-alert__text, .safety-alert__source { margin: 0; color: var(--color-text-danger); }
+  .safety-alert__items { margin: 0; padding-inline-start: var(--space-5); }
+</style>

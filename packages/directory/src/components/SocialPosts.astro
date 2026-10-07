@@ -1,0 +1,26 @@
+---
+// L5 SocialPosts: posts and videos about a place, always with the platform and the account name.
+// A scrolling row on phones, a grid from 1024px. Each opens the post on its platform.
+interface Props { items: { href: string; title: string; platform: string; account: string; duration?: string | null }[] }
+const { items } = Astro.props;
+const MARK: Record<string, string> = { YouTube: '▶', Instagram: '◎', Facebook: 'f', TikTok: '♪' };
+---
+<ul class="social-posts">
+  {items.map((p) => (
+    <li class="social-posts__item"><a class="social-posts__link" href={p.href} target="_blank" rel="noopener">
+      <span class="social-posts__media" aria-hidden="true"><span class="social-posts__play text-label is-strong">▶{p.duration && ` ${p.duration}`}</span></span>
+      <span class="text-body social-posts__title">{p.title}</span>
+      <span class="text-caption social-posts__meta"><span aria-hidden="true">{MARK[p.platform] ?? ''}</span> {p.platform} · {p.account}</span>
+    </a></li>
+  ))}
+</ul>
+<style>
+  .social-posts { --social-card: 62%; display: grid; grid-auto-flow: column; grid-auto-columns: var(--social-card); gap: var(--space-3); margin: 0; padding: 0 0 var(--space-2); list-style: none; overflow-x: auto; scroll-snap-type: x mandatory; }
+  .social-posts__item { scroll-snap-align: start; }
+  .social-posts__link { display: grid; gap: var(--space-1h); color: var(--color-text-strong); }
+  .social-posts__media { display: flex; align-items: flex-end; aspect-ratio: 9 / 12; padding: var(--space-2); border-radius: var(--radius-container); background: var(--color-brand); }
+  .social-posts__play { padding: var(--space-0h) var(--space-2); border-radius: var(--radius-full); background: var(--color-surface-inverse-strong); color: var(--color-text-inverse); }
+  .social-posts__title { color: var(--color-text-strong); }
+  .social-posts__meta { color: var(--color-text-muted); }
+  @media (min-width: 1024px) { .social-posts { grid-auto-flow: row; grid-template-columns: repeat(4, 1fr); overflow: visible; } }
+</style>

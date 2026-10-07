@@ -1,0 +1,22 @@
+---
+// L5 PressMentions: pages that talk about the place (title + publisher), 44px link rows.
+interface Props { items: { title: string; publisher: string; href: string; note?: string | null }[] }
+const { items } = Astro.props;
+---
+<ul class="press-mentions">
+  {items.map((p) => (
+    <li><a class="press-mentions__link" href={p.href} target="_blank" rel="noopener">
+      <span class="press-mentions__text"><span class="text-body press-mentions__title">{p.title}</span><span class="text-caption press-mentions__publisher">{p.publisher}{p.note && ` · ${p.note}`}</span></span>
+      <span class="text-body press-mentions__arrow" aria-hidden="true">↗</span>
+    </a></li>
+  ))}
+</ul>
+<style>
+  .press-mentions { margin: 0; padding: 0; list-style: none; border-block-start: 1px solid var(--color-border-default); }
+  .press-mentions__link { display: flex; justify-content: space-between; align-items: center; gap: var(--space-3); min-block-size: var(--tap-size-min); padding-block: var(--space-2h); border-block-end: 1px solid var(--color-border-default); color: var(--color-text-strong); }
+  .press-mentions__link:hover .press-mentions__title { text-decoration: underline; }
+  .press-mentions__text { display: grid; gap: var(--space-0h); }
+  .press-mentions__title { color: var(--color-text-strong); }
+  .press-mentions__publisher { color: var(--color-text-muted); }
+  .press-mentions__arrow { color: var(--color-text-muted); }
+</style>

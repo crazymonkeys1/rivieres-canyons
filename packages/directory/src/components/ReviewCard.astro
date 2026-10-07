@@ -1,0 +1,14 @@
+---
+// L5 ReviewCard: one real, sourced review (rating if any, quote, author · source). Drafts never reach this component.
+import Rating from '@orbit/core/components/atoms/Rating.astro';
+import Quote from '@orbit/core/components/molecules/Quote.astro';
+interface Props { quote: string; author: string; source: string; rating?: number | null; ratingLabel?: string }
+const { quote, author, source, rating, ratingLabel } = Astro.props;
+---
+<article class="review-card">
+  {rating != null && <Rating value={rating} label={ratingLabel ?? String(rating)} />}
+  <Quote attribution={`${author} · ${source}`}>{quote}</Quote>
+</article>
+<style>
+  .review-card { display: grid; gap: var(--space-2); padding: var(--space-4); background: var(--color-surface-card); border: 1px solid var(--color-border-default); border-radius: var(--radius-container); }
+</style>

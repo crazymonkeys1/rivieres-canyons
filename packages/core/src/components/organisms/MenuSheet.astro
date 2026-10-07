@@ -1,0 +1,42 @@
+---
+// L5 MenuSheet: the phone menu. A native <dialog> (focus kept inside, Escape closes) that drops from the top;
+// a chosen link, the close button or a tap on the scrim closes it.
+interface Props { id: string; closeLabel: string; label: string; primary: { label: string; href: string }[]; groups: { title: string; links: { label: string; href: string }[] }[] }
+const { id, closeLabel, label, primary, groups } = Astro.props;
+---
+<dialog class="menu-sheet" id={id} aria-label={label}>
+  <div class="menu-sheet__panel">
+    <button type="button" class="menu-sheet__close text-title" aria-label={closeLabel} data-menu-close>×</button>
+    <nav aria-label={label}>
+      <ul class="menu-sheet__primary">{primary.map((l) => <li><a class="menu-sheet__row text-title" href={l.href}>{l.label}</a></li>)}</ul>
+      {groups.filter((g) => g.links.length).map((g) => (
+        <div class="menu-sheet__group">
+          <p class="text-label is-upper menu-sheet__group-title">{g.title}</p>
+          <ul>{g.links.map((l) => <li><a class="menu-sheet__link text-body" href={l.href}>{l.label}</a></li>)}</ul>
+        </div>
+      ))}
+    </nav>
+  </div>
+</dialog>
+<script>
+  for (const button of document.querySelectorAll<HTMLButtonElement>('[data-menu-open]')) {
+    const dialog = document.getElementById(button.dataset.menuOpen!) as HTMLDialogElement | null;
+    if (!dialog) continue;
+    const close = () => { dialog.close(); };
+    button.addEventListener('click', () => { dialog.showModal(); button.setAttribute('aria-expanded', 'true'); });
+    dialog.addEventListener('close', () => button.setAttribute('aria-expanded', 'false'));
+    dialog.addEventListener('click', (e) => { if (e.target === dialog || (e.target as Element).closest('a, [data-menu-close]')) close(); });
+  }
+</script>
+<style>
+  .menu-sheet { inset-block-start: 0; inset-block-end: auto; inline-size: 100%; max-inline-size: none; max-block-size: 100dvh; margin: 0; padding: 0; border: 0; background: transparent; }
+  .menu-sheet::backdrop { background: var(--color-overlay-lightbox); }
+  .menu-sheet[open] { animation: fadeIn var(--duration-slow) var(--easing-sheet); }
+  .menu-sheet__panel { position: relative; padding: var(--space-4) var(--page-gutter) var(--space-6); background: var(--color-surface-page); border-end-start-radius: var(--radius-sheet); border-end-end-radius: var(--radius-sheet); box-shadow: var(--elevation-sheet); overflow-y: auto; max-block-size: 100dvh; }
+  .menu-sheet__close { position: absolute; inset-block-start: var(--space-2); inset-inline-end: var(--space-2); inline-size: var(--tap-size-min); block-size: var(--tap-size-min); border: 0; border-radius: 50%; background: none; color: var(--color-text-strong); cursor: pointer; }
+  .menu-sheet ul { margin: 0; padding: 0; list-style: none; }
+  .menu-sheet__row { --row-height: 56px; display: flex; align-items: center; min-block-size: var(--row-height); color: var(--color-text-strong); border-block-end: 1px solid var(--color-border-default); }
+  .menu-sheet__group { display: grid; gap: var(--space-1); margin-block-start: var(--space-5); }
+  .menu-sheet__group-title { margin: 0; color: var(--color-text-muted); }
+  .menu-sheet__link { display: flex; align-items: center; min-block-size: var(--tap-size-min); color: var(--color-text-strong); }
+</style>

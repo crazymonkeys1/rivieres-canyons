@@ -7,7 +7,8 @@
     "./content": "./src/content/index.ts",
     "./airtable": "./src/airtable/index.ts",
     "./styles/*": "./src/styles/*",
-    "./components/*": "./src/components/*"
+    "./components/*": "./src/components/*",
+    "./templates/*": "./src/templates/*"
   },
   "dependencies": {
     "zod": "^3.25.0",

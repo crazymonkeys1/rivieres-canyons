@@ -122,4 +122,11 @@ export const GEAR_ICONS: [string, string][] = [
   ['Eau', '💧'], ['Repas', '🍱'], ['Serviette', '🏖️'], ['En-cas', '🍫'], ['Vêtements de rechange', '👕'],
 ];
 
+/** "Bon à savoir" icon chosen by keyword in the label (first match wins; default 🔹). */
+export const KEY_FACT_ICONS: [string, string][] = [
+  ['Quand', '🗓️'], ['Hauteur', '📏'], ['Dénivelé', '⛰️'], ['Bassin', '💧'], ['Sentier', '🥾'], ['Accessib', '♿'], ['Parking', '🅿️'],
+  ['Rappel', '🪢'], ['Pour qui', '👥'], ['Sur place', '🧺'], ['renseigner', 'ℹ️'], ['Aussi appelé', '🏷️'], ['Protection', '🌿'],
+];
+export const RISK_DEFAULT_ICON = '⚠️';
+
 export const ACCESS_STATUS_LABELS = { open: 'Accès ouvert', partial: 'Accès partiel', closed: 'Accès interdit' } as const;

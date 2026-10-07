@@ -1,0 +1,15 @@
+---
+// L5 GearList: things to bring or provided by the guide (icon + label), as many columns as fit.
+import Icon from '@orbit/core/components/atoms/Icon.astro';
+interface Props { items: { label: string; emoji?: string }[]; tone?: 'provided' | 'bring' }
+const { items, tone = 'bring' } = Astro.props;
+---
+<ul class:list={['gear-list', `gear-list--${tone}`]}>
+  {items.map((g) => <li class="gear-list__item text-caption">{g.emoji && <Icon emoji={g.emoji} size={17} />}{g.label}</li>)}
+</ul>
+<style>
+  .gear-list { --gear-min: 140px; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--gear-min)), 1fr)); gap: var(--space-1h); margin: 0; padding: 0; list-style: none; }
+  .gear-list__item { display: flex; align-items: center; gap: var(--space-2); min-block-size: var(--tap-size-min); padding: var(--space-1h) var(--space-3); border-radius: var(--radius-control); color: var(--color-text-body); }
+  .gear-list--bring .gear-list__item { background: var(--color-surface-inset); border: 1px solid var(--color-border-default); }
+  .gear-list--provided .gear-list__item { background: var(--color-surface-info); }
+</style>

@@ -1,0 +1,16 @@
+---
+// L5 FactList: a set of facts as a <dl>. 2 columns on phones, then one cell per column (4 at most) from 480px;
+// an odd last cell spans the row. Cells come in the default slot (FactCell molecules).
+interface Props { label?: string; columns?: 2 | 3 | 4; attached?: boolean }
+const { label, columns = 4, attached } = Astro.props;
+---
+<dl class:list={['fact-list', { 'fact-list--attached': attached }]} aria-label={label} style={`--fact-columns: ${columns}`}><slot /></dl>
+<style>
+  .fact-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; margin: 0; background: var(--color-border-default); border: 1px solid var(--color-border-default); border-radius: var(--radius-container); overflow: hidden; }
+  .fact-list > :global(:last-child:nth-child(odd)) { grid-column: 1 / -1; }
+  .fact-list--attached { border-start-start-radius: 0; border-start-end-radius: 0; }
+  @media (min-width: 480px) {
+    .fact-list { grid-template-columns: repeat(auto-fit, minmax(calc(100% / var(--fact-columns) - 1px), 1fr)); }
+    .fact-list > :global(:last-child:nth-child(odd)) { grid-column: auto; }
+  }
+</style>

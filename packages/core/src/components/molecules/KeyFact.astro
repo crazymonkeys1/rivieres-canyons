@@ -11,7 +11,7 @@ const { label, value, emoji, icon } = Astro.props;
 </div>
 <style>
   /* dt and dd stay direct children of the div (valid <dl> structure); the icon sits in the left gutter. */
-  .key-fact { --key-fact-icon: 24px; position: relative; display: grid; gap: var(--space-0h); padding: var(--space-3) var(--space-4); background: var(--color-surface-inset); border: 1px solid var(--color-border-default); border-radius: var(--radius-control); }
+  .key-fact { --key-fact-icon: 24px; position: relative; display: grid; align-content: start; gap: var(--space-0h); padding: var(--space-3) var(--space-4); background: var(--color-surface-inset); border: 1px solid var(--color-border-default); border-radius: var(--radius-control); }
   .key-fact--icon { padding-inline-start: calc(var(--space-4) + var(--key-fact-icon) + var(--space-3)); }
   .key-fact :global(.key-fact__icon) { position: absolute; inset-block-start: var(--space-3); inset-inline-start: var(--space-4); }
   .key-fact__label { color: var(--color-text-muted); }

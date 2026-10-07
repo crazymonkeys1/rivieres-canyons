@@ -1,0 +1,22 @@
+---
+// L5 BenefitList: reasons as tiles (icon + title + text), as many columns as fit.
+import Icon from '../atoms/Icon.astro';
+interface Props { items: { emoji?: string; title: string; text: string }[] }
+const { items } = Astro.props;
+---
+<ul class="benefit-list">
+  {items.map((b) => (
+    <li class="benefit-list__item">
+      {b.emoji && <Icon emoji={b.emoji} size={24} />}
+      <p class="text-body is-strong benefit-list__title">{b.title}</p>
+      <p class="text-body benefit-list__text">{b.text}</p>
+    </li>
+  ))}
+</ul>
+<style>
+  .benefit-list { --benefit-min: 220px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--benefit-min)), 1fr)); gap: var(--space-2); margin: 0; padding: 0; list-style: none; }
+  .benefit-list__item { display: grid; gap: var(--space-1); align-content: start; padding: var(--space-4); background: var(--color-surface-card); border: 1px solid var(--color-border-default); border-radius: var(--radius-control); }
+  .benefit-list__title, .benefit-list__text { margin: 0; }
+  .benefit-list__title { color: var(--color-text-strong); }
+  .benefit-list__text { color: var(--color-text-body); }
+</style>

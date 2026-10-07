@@ -1,0 +1,33 @@
+---
+// L6 PlaceTemplate: the order and layout of a place page, no content. Phones: one column; the offer card is not shown
+// (the outing section and the sticky booking strip carry it). From 1024px: sections left, offer card in a sticky 340px column.
+// Slots, in order: hero · facts · default (the sections, each a <section>) · aside · after · sticky
+---
+<div class="place-template">
+  <slot name="hero" />
+  <slot name="facts" />
+  <div class="place-template__body">
+    <div class="place-template__main"><slot /></div>
+    {Astro.slots.has('aside') && <div class="place-template__aside"><slot name="aside" /></div>}
+  </div>
+  <slot name="after" />
+  <slot name="sticky" />
+</div>
+<style>
+  .place-template__body { display: grid; gap: var(--space-6); inline-size: 100%; max-inline-size: var(--container-page); margin-inline: auto; padding: 0 var(--page-gutter) var(--space-10); }
+  .place-template__main { display: grid; grid-template-columns: minmax(0, 1fr); min-inline-size: 0; }
+  .place-template__main > :global(section) { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-4); padding-block: var(--section-y); border-block-start: 1px solid var(--color-border-default); scroll-margin-top: var(--space-6); }
+  .place-template__main > :global(section:first-child) { border-block-start: 0; }
+  .place-template__main > :global(section) > :global(:where(p, h2, h3, ul, ol, dl, figure)) { margin: 0; }   /* the section's gap is the only vertical rhythm */
+  .place-template__main > :global(section) > :global(*) { max-inline-size: var(--container-text); }
+  .place-template__main > :global(section.is-wide) > :global(*) { max-inline-size: none; }
+  .place-template__main :global(h2) { scroll-margin-top: var(--space-6); }
+  .place-template__aside { display: none; }
+  /* Layout helpers the page uses for lists of cards and rows of actions (layout only). */
+  .place-template__main :global(.place-template__cards) { --cards-min: 280px; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--cards-min)), 1fr)); gap: var(--space-3); margin: 0; padding: 0; list-style: none; }
+  .place-template__main :global(.place-template__actions) { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-4); margin: 0; }
+  @media (min-width: 1024px) {
+    .place-template__body:has(.place-template__aside) { grid-template-columns: minmax(0, 1fr) var(--container-side); align-items: start; }
+    .place-template__aside { display: block; position: sticky; inset-block-start: var(--space-4); padding-block-start: var(--section-y); }
+  }
+</style>
