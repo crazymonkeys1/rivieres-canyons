@@ -1,0 +1,21 @@
+# Cloudflare Pages headers (https://developers.cloudflare.com/pages/configuration/headers/).
+
+# The .pages.dev addresses (preview and every deployment) stay out of search engines: only the real domain is indexed.
+https://:project.pages.dev/*
+  X-Robots-Tag: noindex
+https://:version.:project.pages.dev/*
+  X-Robots-Tag: noindex
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: SAMEORIGIN
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
+
+# Built files have a content hash in their name: cache them for a year.
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Where each /go/ link leads: read by the functions only.
+/go/targets.json
+  X-Robots-Tag: noindex

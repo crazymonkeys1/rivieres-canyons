@@ -23,7 +23,7 @@ export interface GoTargets {
   home: string;                       // where an unknown id goes
   book: Record<string, { url: string; fallback: string; campaign: string }>;
   whatsapp: Record<string, { number: string; fallback: string; message: string; subjects: Record<string, string>; subject_default: string }>;
-  lead: { magnets: string[]; sources: string[]; consent_versions: string[] };
+  lead: { magnets: string[]; sources: string[]; consent_versions: string[]; phone_consent_versions: string[] };
 }
 
 const PLACEHOLDER = /\[[A-Z][A-Z0-9_]*\]/;
@@ -121,7 +121,7 @@ const randomId = () => [...crypto.getRandomValues(new Uint8Array(16))].map((b) =
  * POST /api/lead (JSON).
  *   Step 1: { site, source, magnet, page, email, consent: true, consent_text, consent_text_version, utm, turnstile }
  *           → { ok, id, token }   (token lets the same visitor add a phone number, once)
- *   Step 2: { id, token, phone } → { ok }
+ *   Step 2: { id, token, phone, phone_consent_text, phone_consent_text_version } → { ok }
  */
 export async function handleLead(ctx: EdgeContext): Promise<Response> {
   if (ctx.request.method !== 'POST') return json({ ok: false, error: 'method' }, 405);
@@ -133,11 +133,14 @@ export async function handleLead(ctx: EdgeContext): Promise<Response> {
   // Step 2: add the optional phone number to the lead created in step 1.
   if (body.id) {
     const id = str(body.id, 40), token = str(body.token, 40), phone = str(body.phone, 30);
+    const phoneConsent = str(body.phone_consent_text, 1000), phoneConsentVersion = str(body.phone_consent_text_version, 40);
     if (!PHONE.test(phone)) return json({ ok: false, error: 'phone' }, 400);
+    if (!phoneConsent || !t.lead.phone_consent_versions.includes(phoneConsentVersion)) return json({ ok: false, error: 'consent_text' }, 400);
     const row = await ctx.env.DB.prepare('SELECT update_token FROM leads WHERE id = ?').bind(id).first<{ update_token: string | null }>();
     if (!row || !row.update_token || row.update_token !== token) return json({ ok: false, error: 'lead' }, 404);
-    await ctx.env.DB.prepare('UPDATE leads SET phone = ?, update_token = NULL, updated_at = ? WHERE id = ?').bind(phone, now(), id).run();
-    if (ctx.env.LEAD_ENDPOINT) ctx.waitUntil(forward(ctx, { id, phone, updated_at: now() }));
+    await ctx.env.DB.prepare('UPDATE leads SET phone = ?, phone_consent_text = ?, phone_consent_text_version = ?, update_token = NULL, updated_at = ? WHERE id = ?')
+      .bind(phone, phoneConsent, phoneConsentVersion, now(), id).run();
+    if (ctx.env.LEAD_ENDPOINT) ctx.waitUntil(forward(ctx, { id, phone, phone_consent_text: phoneConsent, phone_consent_text_version: phoneConsentVersion, updated_at: now() }));
     return json({ ok: true });
   }
 
@@ -175,10 +178,10 @@ async function forward(ctx: EdgeContext, payload: Record<string, unknown>) {
   } catch { /* the lead is safe in D1; forwarding can be replayed */ }
 }
 
-/** D1 schema (also in the site's migrations folder). */
+/** D1 schema, complete (the site's migrations folder builds the same thing step by step). */
 export const SCHEMA_SQL = `CREATE TABLE IF NOT EXISTS leads (
   id TEXT PRIMARY KEY, site TEXT NOT NULL, source TEXT NOT NULL, magnet TEXT NOT NULL, page TEXT NOT NULL,
-  email TEXT NOT NULL, phone TEXT, consent INTEGER NOT NULL, consent_text TEXT NOT NULL, consent_text_version TEXT NOT NULL,
+  email TEXT NOT NULL, phone TEXT, phone_consent_text TEXT, phone_consent_text_version TEXT, consent INTEGER NOT NULL, consent_text TEXT NOT NULL, consent_text_version TEXT NOT NULL,
   utm TEXT NOT NULL DEFAULT '{}', bot_check TEXT NOT NULL, update_token TEXT, created_at TEXT NOT NULL, updated_at TEXT
 );
 CREATE TABLE IF NOT EXISTS clicks (

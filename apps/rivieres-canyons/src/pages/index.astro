@@ -71,7 +71,7 @@ const sortOptions = [{ value: 'default', label: t('listing.sort_default'), selec
             <LeadCapture id="top5" eyebrow={t('lead.eyebrow')} title={t('lead.title')} text={t('lead.text')} action="/api/lead"
               emailLabel={t('lead.email')} emailPlaceholder={t('lead.email_placeholder')} submitLabel={t('lead.submit')} sendingLabel={t('lead.sending')}
               consentText={LEAD.consentText()} consentVersion={consentVersion(LEAD.consentText())} privacy={{ label: t('lead.privacy'), href: url.privacy() }}
-              phone={{ text: t('lead.phone_text'), placeholder: t('lead.phone_placeholder'), submit: t('lead.phone_submit'), skip: t('lead.phone_skip') }}
+              phone={{ text: t('lead.phone_text'), placeholder: t('lead.phone_placeholder'), submit: t('lead.phone_submit'), skip: t('lead.phone_skip'), consentText: LEAD.phoneConsentText(), consentVersion: consentVersion(LEAD.phoneConsentText()) }}
               doneText={t('lead.done')} errorText={t('lead.error')} turnstileSiteKey={import.meta.env.PUBLIC_TURNSTILE_SITE_KEY}
               hidden={{ site: LEAD.site, source: 'listing', magnet: LEAD.magnet, page: url.home() }} />
           </li>

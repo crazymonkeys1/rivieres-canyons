@@ -80,6 +80,7 @@ export const COPY_DEFAULTS = {
   'lead.phone_text': 'Ajoutez votre numéro pour recevoir la surprise sur WhatsApp (facultatif)',
   'lead.phone_placeholder': 'votre numéro',
   'lead.phone_submit': 'Ajouter',
+  'lead.phone_consent': 'En ajoutant votre numéro, vous acceptez que Pascal et Quentin vous écrivent sur WhatsApp. Vous pouvez retirer votre accord à tout moment.',
   'lead.phone_skip': 'Non merci',
   'lead.done': 'Le top 5 (et sa petite surprise) arrive vite.',
   'lead.error': "L'envoi n'a pas abouti. Vérifiez votre e-mail et réessayez dans un instant.",

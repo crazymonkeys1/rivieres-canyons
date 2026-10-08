@@ -13,6 +13,7 @@ export const LEAD = {
   magnet: 'top5',
   sources: ['listing'],
   consentText: () => t('lead.consent'),
+  phoneConsentText: () => t('lead.phone_consent'),
 };
 
 export function goTargets(): GoTargets {
@@ -40,6 +41,6 @@ export function goTargets(): GoTargets {
   }
   return {
     site: LEAD.site, home: url.home(), book, whatsapp,
-    lead: { magnets: [LEAD.magnet], sources: LEAD.sources, consent_versions: [consentVersion(LEAD.consentText())] },
+    lead: { magnets: [LEAD.magnet], sources: LEAD.sources, consent_versions: [consentVersion(LEAD.consentText())], phone_consent_versions: [consentVersion(LEAD.phoneConsentText())] },
   };
 }

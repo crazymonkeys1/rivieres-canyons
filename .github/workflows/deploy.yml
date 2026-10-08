@@ -1,0 +1,105 @@
+# Puts the site online on Cloudflare Pages (docs/DEPLOY.md). GitHub reaches Cloudflare and Airtable; this workspace cannot.
+#   push to main            → checks, build, deploy the code as it is in the repository
+#   Run workflow (by hand)  → "deploy" the same, or "publish-content": pull Airtable first, then deploy
+#   Airtable automation     → repository_dispatch "airtable-publish": pull Airtable, then deploy
+#   every night (03:17 Guadeloupe) → pull Airtable; deploys only when the content changed
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      job:
+        description: "What to do"
+        type: choice
+        options:
+          - deploy
+          - publish-content
+        default: publish-content
+  repository_dispatch:
+    types: [airtable-publish]
+  schedule:
+    - cron: "17 7 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      PULL: ${{ github.event_name == 'repository_dispatch' || github.event_name == 'schedule' || inputs.job == 'publish-content' }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+
+      - name: Pull the content from Airtable (refused if invalid; then nothing is deployed)
+        if: env.PULL == 'true'
+        env:
+          AIRTABLE_TOKEN: ${{ secrets.AIRTABLE_TOKEN }}
+        run: |
+          pnpm --filter rivieres-canyons content:pull
+          pnpm --filter rivieres-canyons photos:fetch
+
+      - name: Nightly run without content changes stops here
+        id: changes
+        run: |
+          if [ "${{ github.event_name }}" = "schedule" ] && git diff --quiet && [ -z "$(git ls-files --others --exclude-standard)" ]; then
+            echo "deploy=false" >> "$GITHUB_OUTPUT"; echo "No content change since the last deployment." >> "$GITHUB_STEP_SUMMARY"
+          else echo "deploy=true" >> "$GITHUB_OUTPUT"; fi
+
+      - name: Checks (design, content, edge functions)
+        if: steps.changes.outputs.deploy == 'true'
+        run: |
+          pnpm design:check
+          pnpm --filter rivieres-canyons content:check
+          pnpm edge:test
+
+      - name: Prepare Cloudflare (project, database, secrets)
+        id: prepare
+        if: steps.changes.outputs.deploy == 'true'
+        env:
+          TURNSTILE_SECRET: ${{ secrets.TURNSTILE_SECRET }}
+          LEAD_ENDPOINT: ${{ secrets.LEAD_ENDPOINT }}
+          LEAD_ENDPOINT_TOKEN: ${{ secrets.LEAD_ENDPOINT_TOKEN }}
+          SITE_URL: ${{ vars.SITE_URL }}
+        run: pnpm --filter rivieres-canyons exec tsx scripts/cloudflare.ts prepare
+
+      - name: Build the site
+        if: steps.prepare.outputs.ready == 'true'
+        env:
+          SITE_URL: ${{ steps.prepare.outputs.site_url }}
+          PUBLIC_TURNSTILE_SITE_KEY: ${{ vars.PUBLIC_TURNSTILE_SITE_KEY }}
+          PUBLIC_CF_BEACON_TOKEN: ${{ vars.PUBLIC_CF_BEACON_TOKEN }}
+        run: |
+          pnpm build
+          pnpm seo:check
+
+      - name: Deploy to Cloudflare Pages and check the live site
+        if: steps.prepare.outputs.ready == 'true'
+        env:
+          PAGES_HOST: ${{ steps.prepare.outputs.pages_host }}
+          COMMIT_MESSAGE: ${{ github.event.head_commit.message || github.event_name }}
+        run: pnpm --filter rivieres-canyons exec tsx scripts/cloudflare.ts deploy
+
+      - name: Save content, photos and the database id to the repository
+        if: always() && (env.PULL == 'true' || steps.prepare.outputs.ready == 'true')
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add apps/rivieres-canyons/wrangler.toml apps/rivieres-canyons/content/fixtures apps/rivieres-canyons/src/assets/photos apps/rivieres-canyons/src/assets/logos docs/CONTENT_REPORT.md
+          git diff --cached --quiet || git commit -m "Deploy: ${{ github.event_name }} (run ${{ github.run_number }})"
+          git push

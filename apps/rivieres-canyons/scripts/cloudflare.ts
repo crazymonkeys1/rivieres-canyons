@@ -1,0 +1,117 @@
+// Cloudflare deployment, run by the GitHub workflow "Deploy" (this workspace cannot reach Cloudflare; GitHub can).
+//   prepare  checks the keys, creates what is missing (Pages project, D1 database), applies the database migrations,
+//            sets the server secrets, and tells the build which address the site has.
+//   deploy   uploads dist/ (pages + functions), then checks the live site answers as it should.
+// Everything it does is written to the GitHub step summary in plain language.
+import { execFileSync } from 'node:child_process';
+import { readFileSync, writeFileSync, appendFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+
+const app = resolve(import.meta.dirname, '..');
+const PROJECT = 'rivieres-canyons';
+const DATABASE = 'rivieres-canyons';
+const tomlFile = resolve(app, 'wrangler.toml');
+const cmd = process.argv[2];
+const lines: string[] = [];
+const say = (s: string) => { lines.push(s); console.log(s); };
+const summary = (title: string) => {
+  const text = `# ${title}\n\n${lines.map((l) => `- ${l}`).join('\n')}\n`;
+  if (process.env.GITHUB_STEP_SUMMARY) appendFileSync(process.env.GITHUB_STEP_SUMMARY, text);
+};
+const output = (k: string, v: string) => { if (process.env.GITHUB_OUTPUT) appendFileSync(process.env.GITHUB_OUTPUT, `${k}=${v}\n`); };
+const wrangler = (args: string[], input?: string) =>
+  execFileSync('npx', ['wrangler', ...args], { cwd: app, encoding: 'utf8', input, env: { ...process.env, WRANGLER_SEND_METRICS: 'false' }, stdio: ['pipe', 'pipe', 'pipe'] });
+const fail = (title: string, why: string): never => { say(`**Stopped:** ${why}`); summary(title); process.exit(1); };
+
+if (cmd === 'prepare') {
+  const title = 'Cloudflare: preparation';
+  if (!process.env.CLOUDFLARE_API_TOKEN || !process.env.CLOUDFLARE_ACCOUNT_ID) {
+    say('Cloudflare is not connected yet: add the GitHub secrets `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` (docs/DEPLOY.md, step 1). Nothing was deployed; the checks still ran.');
+    output('ready', 'false'); summary(title); process.exit(0);
+  }
+  try {
+    // 1. Pages project (its address is <subdomain>.pages.dev; Cloudflare adds a suffix when the name is taken).
+    const list = () => JSON.parse(wrangler(['pages', 'project', 'list', '--json'])) as Record<string, string>[];
+    let project = list().find((p) => (p['Project Name'] ?? p.name) === PROJECT);
+    if (!project) {
+      wrangler(['pages', 'project', 'create', PROJECT, '--production-branch', 'main']);
+      project = list().find((p) => (p['Project Name'] ?? p.name) === PROJECT);
+      say(`Pages project « ${PROJECT} » created.`);
+    } else say(`Pages project « ${PROJECT} » found.`);
+    const domains = String(project?.['Project Domains'] ?? project?.domains ?? '');
+    const pagesHost = domains.split(/[,\s]+/).find((d) => d.endsWith('.pages.dev')) ?? `${PROJECT}.pages.dev`;
+
+    // 2. D1 database, and its id written into wrangler.toml (committed by the workflow).
+    let toml = readFileSync(tomlFile, 'utf8');
+    const current = toml.match(/database_id = "([^"]+)"/)?.[1] ?? '';
+    if (/^0{8}-/.test(current)) {
+      const existing = (JSON.parse(wrangler(['d1', 'list', '--json'])) as { name: string; uuid: string }[]).find((d) => d.name === DATABASE);
+      let id = existing?.uuid;
+      if (!id) {
+        const out = wrangler(['d1', 'create', DATABASE]);
+        id = out.match(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/)?.[0];
+        if (!id) fail(title, `the database was created but its id was not found in Cloudflare's answer:\n\n${out}`);
+        say(`Database « ${DATABASE} » created.`);
+      } else say(`Database « ${DATABASE} » found.`);
+      toml = toml.replace(/database_id = "[^"]+"/, `database_id = "${id}"`);
+      writeFileSync(tomlFile, toml);
+      say('Database id saved in `apps/rivieres-canyons/wrangler.toml`.');
+    } else say(`Database « ${DATABASE} » already linked.`);
+
+    // 3. Migrations (only the new ones run).
+    const applied = wrangler(['d1', 'migrations', 'apply', DATABASE, '--remote']);
+    say(/No migrations to apply/i.test(applied) ? 'Database tables: up to date.' : 'Database tables: migrations applied.');
+
+    // 4. Server secrets, from GitHub secrets (never written anywhere else).
+    for (const name of ['TURNSTILE_SECRET', 'LEAD_ENDPOINT', 'LEAD_ENDPOINT_TOKEN']) {
+      const value = process.env[name];
+      if (value) { wrangler(['pages', 'secret', 'put', name, '--project-name', PROJECT], value); say(`Secret ${name}: set.`); }
+      else if (name === 'TURNSTILE_SECRET') say('**Secret TURNSTILE_SECRET is missing: the form works but its bot check is skipped** (docs/DEPLOY.md, step 3).');
+    }
+    const siteUrl = process.env.SITE_URL || `https://${pagesHost}`;
+    say(`The build uses the address ${siteUrl}${process.env.SITE_URL ? '' : ' (the preview address; set the variable SITE_URL when the domain is connected)'}.`);
+    output('ready', 'true'); output('site_url', siteUrl); output('pages_host', pagesHost);
+    summary(title);
+  } catch (e) {
+    const err = e as { stderr?: string; message: string };
+    fail(title, `Cloudflare refused a step. Its answer:\n\n\`\`\`\n${(err.stderr || err.message).slice(0, 1500)}\n\`\`\`\nMost often: the API token lacks a permission (docs/DEPLOY.md, step 1).`);
+  }
+}
+
+if (cmd === 'deploy') {
+  const title = 'Cloudflare: deployment';
+  const host = process.env.PAGES_HOST!;
+  try {
+    const out = wrangler(['pages', 'deploy', 'dist', '--project-name', PROJECT, '--branch', 'main',
+      '--commit-hash', process.env.GITHUB_SHA ?? '', '--commit-message', (process.env.COMMIT_MESSAGE ?? 'deploy').slice(0, 200)]);
+    const url = out.match(/https:\/\/[a-z0-9.-]+\.pages\.dev/)?.[0];
+    say(`Uploaded. This deployment: ${url ?? '(address not found in the output)'} · the site: https://${host}`);
+  } catch (e) {
+    const err = e as { stderr?: string; message: string };
+    fail(title, `the upload failed:\n\n\`\`\`\n${(err.stderr || err.message).slice(0, 1500)}\n\`\`\``);
+  }
+  // Smoke test of the live site (a new deployment can take a few seconds to answer everywhere).
+  const base = `https://${host}`;
+  const expectations: [string, (r: Response) => boolean, string][] = [
+    ['/', (r) => r.status === 200, 'home page answers 200'],
+    ['/destinations/canyon-dore/', (r) => r.status === 200, 'a place page answers 200'],
+    ['/robots.txt', (r) => r.status === 200, 'robots.txt is served'],
+    ['/sitemap.xml', (r) => r.status === 200, 'sitemap.xml is served'],
+    ['/page-qui-n-existe-pas/', (r) => r.status === 404, 'an unknown address answers 404'],
+    ['/go/book/acomat/', (r) => r.status === 302, '« Réserver » redirects (302)'],
+    ['/go/whatsapp/pascal/?ref=/', (r) => r.status === 302, '« Écrire à Pascal » redirects (302)'],
+    ['/', (r) => /noindex/i.test(r.headers.get('X-Robots-Tag') ?? ''), 'the .pages.dev address is hidden from Google (X-Robots-Tag: noindex)'],
+  ];
+  let bad = 0;
+  for (const [path, ok, label] of expectations) {
+    let pass = false, status = 0;
+    for (let i = 0; i < 6 && !pass; i++) {
+      try { const r = await fetch(base + path, { redirect: 'manual' }); status = r.status; pass = ok(r); } catch { /* retry */ }
+      if (!pass) await new Promise((r) => setTimeout(r, 5000));
+    }
+    if (!pass) bad++;
+    say(`${pass ? '✅' : '❌'} ${label} (${path} → ${status})`);
+  }
+  summary(title);
+  process.exit(bad ? 1 : 0);
+}

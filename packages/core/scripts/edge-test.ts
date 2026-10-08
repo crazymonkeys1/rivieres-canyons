@@ -8,7 +8,7 @@ const targets: GoTargets = {
     ana: { number: '590690000000', fallback: 'https://op.test/contact', message: 'Bonjour Ana, au sujet {subject}.', subjects: { '/places/falls/': 'de « Falls »' }, subject_default: "d'une sortie" },
     bob: { number: '[WHATSAPP_BOB]', fallback: 'https://op.test/contact', message: 'x {subject}', subjects: {}, subject_default: 'y' },
   },
-  lead: { magnets: ['top5'], sources: ['listing'], consent_versions: ['v1'] },
+  lead: { magnets: ['top5'], sources: ['listing'], consent_versions: ['v1'], phone_consent_versions: ['p1'] },
 };
 const rows: { sql: string; values: unknown[] }[] = [];
 let stored: Record<string, unknown> | null = null;
@@ -56,8 +56,12 @@ expect('lead: step 1 stored', r.status === 200 && j.ok && !!j.id && !!j.token, J
 const ins = rows.find((x) => x.sql.startsWith('INSERT INTO leads'))!;
 expect('lead: e-mail lowercased, only utm_* kept, consent and version stored', ins.values.includes('ana@test.fr') && ins.values.includes('{"utm_source":"fb"}') && ins.values.includes('v1'), JSON.stringify(ins.values));
 r = await call(handleLead, 'https://s.test/api/lead', {}, post({ id: j.id, token: j.token, phone: '+590 690 00 00 00' }));
-expect('lead: step 2 adds the phone', r.status === 200);
-r = await call(handleLead, 'https://s.test/api/lead', {}, post({ id: j.id, token: j.token, phone: '0690000000' }));
+expect('lead: step 2 refused without the phone consent text', r.status === 400);
+const phoneStep = { id: j.id, token: j.token, phone: '+590 690 00 00 00', phone_consent_text: 'En ajoutant…', phone_consent_text_version: 'p1' };
+r = await call(handleLead, 'https://s.test/api/lead', {}, post(phoneStep));
+const upd = rows.find((x) => x.sql.startsWith('UPDATE leads'));
+expect('lead: step 2 adds the phone and its consent', r.status === 200 && !!upd && upd.values.includes('p1') && upd.values.includes('En ajoutant…'));
+r = await call(handleLead, 'https://s.test/api/lead', {}, post(phoneStep));
 expect('lead: the phone token works once', r.status === 404);
 for (const [name, body] of [['no consent', { ...lead, consent: false }], ['bad e-mail', { ...lead, email: 'x' }], ['other site', { ...lead, site: 'x' }], ['unknown consent version', { ...lead, consent_text_version: 'v0' }], ['not JSON', 'hello']] as const) {
   r = await call(handleLead, 'https://s.test/api/lead', {}, post(body));

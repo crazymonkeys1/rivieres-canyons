@@ -35,6 +35,25 @@ Layer (which projects a rule applies to):
 
 ## Changes
 
+### 2026-10-08 · Phase 7: deployment to Cloudflare Pages
+- **Layer:** Core (headers, workflow pattern) · Site (project settings)
+- **Change:**
+  - GitHub workflow **Deploy** (`.github/workflows/deploy.yml`), because GitHub reaches Cloudflare and this workspace cannot. It runs on every push, by hand ("deploy", or "publish-content" to pull Airtable first), from an Airtable automation (`repository_dispatch: airtable-publish`), and every night at 03:17 Guadeloupe (deploys only when Airtable changed).
+  - `scripts/cloudflare.ts prepare` creates what is missing (Pages project, D1 database whose id it saves in `wrangler.toml`), applies the migrations, sets the server secrets from GitHub secrets, and gives the build the site's address. `deploy` uploads `dist/` (pages and functions), then tests the live site (8 checks: pages, 404, robots, sitemap, both redirects, noindex on `.pages.dev`). Every step is explained in the run's summary.
+  - Without the Cloudflare keys, the workflow says so and stays green (the checks still run).
+  - `public/_headers`: `.pages.dev` addresses are `noindex` (only the real domain is indexed); security headers; built files cached for a year.
+  - `docs/DEPLOY.md`: Jordan's click-by-click setup (Cloudflare token, Turnstile, Web Analytics, Airtable automation).
+- **Why:** phase 7 of the build plan (CLAUDE.md §13).
+- **How to apply elsewhere:** copy the workflow and `scripts/cloudflare.ts`; change `PROJECT` / `DATABASE` names.
+- **Status:** Rivières & Canyons ⏳ (waiting for the Cloudflare keys) · Mangrove ⏳ · Template ✅
+
+### 2026-10-08 · Phone consent sentence in the lead form
+- **Layer:** Core (LeadCapture, edge) · Site (wording)
+- **Change:** step 2 shows its own consent sentence under the phone field (`text-caption`, inverse secondary colour, privacy link), linked to the « Ajouter » button (`aria-describedby`). The text and its version are stored with the number (`phone_consent_text`, `phone_consent_text_version`, migration `0002`); the server refuses a phone without them.
+- **Why:** the e-mail consent did not cover WhatsApp contact (Jordan, 2026-10-08).
+- **How to apply elsewhere:** pass `phone.consentText` / `phone.consentVersion` to LeadCapture.
+- **Status:** Rivières & Canyons ✅ · Mangrove ⏳ · Template ✅
+
 ### 2026-10-08 · Phase 6: conversion (/go/ redirects, lead form, analytics)
 - **Layer:** Core (edge functions, LeadCapture, PageShell) · Site (targets, wording)
 - **Change:**

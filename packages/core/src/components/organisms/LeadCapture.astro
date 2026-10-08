@@ -2,7 +2,8 @@
 // L5 LeadCapture: the lead magnet form on a dark panel, in three steps (CLAUDE.md §9).
 //   1. E-mail + explicit consent (never pre-checked, link to the privacy page). The button stays disabled until the
 //      e-mail is valid and consent is given. Posts JSON to the lead endpoint in the fixed lead format.
-//   2. Optional phone number ("Ajouter"), or "Non merci".
+//   2. Optional phone number ("Ajouter"), or "Non merci". Its own consent sentence (stored with the number) sits under the
+//      field, with the privacy link: adding the number is the explicit act of consent.
 //   3. Confirmation (role="status").
 // Bot check: Cloudflare Turnstile, loaded only when the visitor starts using the form, and only when a site key is given.
 import Checkbox from '../atoms/Checkbox.astro';
@@ -10,7 +11,7 @@ interface Props {
   id: string; eyebrow: string; title: string; text: string; action: string;
   emailLabel: string; emailPlaceholder: string; submitLabel: string; sendingLabel: string;
   consentText: string; consentVersion: string; privacy: { label: string; href: string };
-  phone: { text: string; placeholder: string; submit: string; skip: string };
+  phone: { text: string; placeholder: string; submit: string; skip: string; consentText: string; consentVersion: string };
   doneText: string; errorText: string; turnstileSiteKey?: string;
   hidden: { site: string; source: string; magnet: string; page: string };
 }
@@ -38,8 +39,11 @@ const { id, eyebrow, title, text, action, emailLabel, emailPlaceholder, submitLa
     <label for={`${id}-phone`} class="text-body lead-capture__text">{phone.text}</label>
     <div class="lead-capture__row">
       <input class="lead-capture__field text-body" id={`${id}-phone`} name="phone" type="tel" inputmode="tel" autocomplete="tel" enterkeyhint="send" placeholder={phone.placeholder} required />
-      <button class="lead-capture__submit text-body is-strong" type="submit" data-label={phone.submit} data-sending={sendingLabel}>{phone.submit}</button>
+      <button class="lead-capture__submit text-body is-strong" type="submit" data-label={phone.submit} data-sending={sendingLabel} aria-describedby={`${id}-phone-consent`}>{phone.submit}</button>
     </div>
+    <p class="text-caption lead-capture__consent" id={`${id}-phone-consent`}>{phone.consentText} <a href={privacy.href} class="lead-capture__privacy">{privacy.label}</a></p>
+    <input type="hidden" name="phone_consent_text" value={phone.consentText} />
+    <input type="hidden" name="phone_consent_text_version" value={phone.consentVersion} />
     <button class="lead-capture__skip text-caption" type="button" data-lead-skip>{phone.skip}</button>
   </form>
 
@@ -117,7 +121,8 @@ const { id, eyebrow, title, text, action, emailLabel, emailPlaceholder, submitLa
       const phone = step2.querySelector<HTMLInputElement>('input')!.value.trim();
       if (!phone || !lead) return finish();
       error.textContent = ''; busy(phoneButton, true);
-      try { await post({ id: lead.id, token: lead.token, phone }); finish(); } catch { fail(); busy(phoneButton, false); }
+      const f2 = new FormData(step2);
+      try { await post({ id: lead.id, token: lead.token, phone, phone_consent_text: f2.get('phone_consent_text'), phone_consent_text_version: f2.get('phone_consent_text_version') }); finish(); } catch { fail(); busy(phoneButton, false); }
     });
     step2.querySelector('[data-lead-skip]')!.addEventListener('click', finish);
   }
@@ -139,6 +144,7 @@ const { id, eyebrow, title, text, action, emailLabel, emailPlaceholder, submitLa
   .lead-capture__skip { justify-self: start; min-block-size: var(--tap-size-min); padding: 0; border: 0; background: none; color: var(--color-text-inverse-secondary); text-decoration: underline; cursor: pointer; }
   .lead-capture__skip:focus-visible, .lead-capture__submit:focus-visible, .lead-capture__privacy:focus-visible { outline-color: var(--color-focus-ring-inverse); }
   .lead-capture__privacy { color: var(--color-text-inverse); text-decoration: underline; }
+  .lead-capture__consent { max-inline-size: var(--container-narrow); color: var(--color-text-inverse-secondary); }
   .lead-capture__done { margin-block-start: var(--space-2); color: var(--color-text-inverse); }
   .lead-capture__error { color: var(--color-text-inverse); }
   .lead-capture__error:empty, .lead-capture__check:empty { display: none; }
