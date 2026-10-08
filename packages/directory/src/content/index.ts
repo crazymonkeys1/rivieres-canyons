@@ -23,6 +23,8 @@ export const listingShape = z.object({
   name: z.string().min(1),
   type: z.string(),
   alt_names: z.array(z.string()),
+  /** The name after the preposition meaning "to", for headings like "Comment aller au Canyon doré" (FR: au / à la / à l' / aux). Empty = neutral headings. */
+  name_with_preposition: z.string().nullable(),
   // Publication gates: status = shown or not; confidence = how verified (site levels); completeness = indexed or not (computed).
   // `rejected` keeps research memory in the same table (decision D4): never shown, reason in status_note.
   status: z.enum(LISTING_STATUSES),

@@ -236,6 +236,18 @@ ${errors.length ? `\n## Problems\n${errors.map((e) => `- ${e}`).join('\n')}\n` :
     if (process.env.GITHUB_STEP_SUMMARY) appendFileSync(process.env.GITHUB_STEP_SUMMARY, text);
     process.exit(errors.length ? 1 : 0);
   }
+  if (cmd === 'columns') {
+    // Non-destructive: adds the columns the code declares but the base lacks, then records their IDs. No row is touched.
+    const map = JSON.parse(readFileSync(mapFile, 'utf8')) as BaseMap;
+    const { added, problems } = await addMissingFields(TABLES, map.base_id, token);
+    const linked = await linkBase(TABLES, map.base_id, token);
+    writeFileSync(mapFile, JSON.stringify(linked.map, null, 2) + '\n');
+    const all = [...problems, ...linked.problems];
+    const text = `# Airtable: new columns\n\nBase \`${map.base_id}\`: ${added.length ? `added ${added.join(', ')}` : 'no column was missing'}. No row was changed.\n${all.map((e) => `\n- ${e}`).join('')}\n`;
+    console.log(text);
+    if (process.env.GITHUB_STEP_SUMMARY) appendFileSync(process.env.GITHUB_STEP_SUMMARY, text);
+    process.exit(all.length ? 1 : 0);
+  }
   if (cmd === 'link') {
     if (!baseId) throw new Error('AIRTABLE_BASE_ID is missing');
     const { map, problems } = await linkBase(TABLES, baseId, token);

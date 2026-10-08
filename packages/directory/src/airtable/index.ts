@@ -89,6 +89,7 @@ export function listingFields(s: ListingSettings): Field[] {
     f('En savoir plus — titre', 'singleLineText', 'more_title', { group: 'Contenu' }),
     f('En savoir plus — texte', 'multilineText', 'more_text', { group: 'Contenu' }),
     fLines('Autres noms', 'alt_names', { group: 'Contenu' }),
+    f('Nom avec préposition', 'singleLineText', 'name_with_preposition', { group: 'Contenu', help: "Le nom précédé de « au », « à la », « à l' » ou « aux », pour les titres « Comment aller … » (ex. : au Canyon doré, à la Cascade aux Écrevisses, aux Chutes du Carbet). Vide = titre neutre." }),
     fLabelled('Bon à savoir', 'key_facts', {}, { group: 'Contenu' }),
     {
       ...fLink('Conseil — guide', 'tip.guide_id', n.guide, { single: true, group: 'Contenu' }),

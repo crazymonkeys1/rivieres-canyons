@@ -44,7 +44,7 @@ import {
 import { keyFacts, placeFact, offerFact, factValue, minutes, gearIcon, keyFactIcon, risk, date } from '../../content/format';
 import { PLACE_FACTS, OFFER_FACTS } from '../../content/site.config';
 import { pageMeta } from '../../content/pages';
-import { placeFaq } from '../../content/place';
+import { placeFaq, nameHeading } from '../../content/place';
 import { teamCompanies } from '../../content/team';
 import type { Destination } from '../../content/schema';
 
@@ -163,13 +163,13 @@ const companies = teamCompanies(url.place(p.id));
     )}
 
     <section id="acces" aria-labelledby="acces-title">
-      {policy === 'public' && <SectionHeader id="acces-title" title={p.headings.access ?? t('place.access_title_public', { name })} />}
+      {policy === 'public' && <SectionHeader id="acces-title" title={p.headings.access ?? nameHeading('place.access_title_public', p)} />}
       {policy === 'commune_only' && <SectionHeader id="acces-title" title={t('place.access_title_commune', { name })} />}
-      {policy === 'guide_only' && <SectionHeader id="acces-title" title={t('place.access_title_guide', { name })} />}
+      {policy === 'guide_only' && <SectionHeader id="acces-title" title={nameHeading('place.access_title_guide', p)} />}
       {policy === 'closed' && <SectionHeader id="acces-title" title={t('place.access_title_closed')} />}
 
       {policy === 'public' && p.access_tiles.length > 0 && (
-        <FactList label={t('place.access_title_public', { name })} columns={3}>
+        <FactList label={nameHeading('place.access_title_public', p)} columns={3}>
           {p.access_tiles.map((a, i) => (
             <FactCell label={a.label} value={a.value} emoji={a.icon}>
               {a.tip && <Tooltip slot="note" id={`access-tip-${i}`} label={a.label} text={a.tip} />}
@@ -202,7 +202,7 @@ const companies = teamCompanies(url.place(p.id));
 
     {offer && operator && guide && (
       <section id="sortie" aria-labelledby="sortie-title">
-        <SectionHeader id="sortie-title" eyebrow={`${t('place.offer_kind')} · ${operator.name}`} title={p.headings.offer ?? t('place.offer_title', { name })} />
+        <SectionHeader id="sortie-title" eyebrow={`${t('place.offer_kind')} · ${operator.name}`} title={p.headings.offer ?? nameHeading('place.offer_title', p)} />
         <p class="text-title">{offer.name}</p>
         <p class="text-body">{offer.subtitle}</p>
         {offer.guide_tip && <Quote size="pull" attribution={`${guide.first_name}, ${operator.name}`}>{offer.guide_tip}</Quote>}

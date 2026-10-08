@@ -10,6 +10,7 @@ on:
         type: choice
         options:
           - verify-base
+          - add-new-columns
           - build-new-base
           - reset-and-refill-base
           - pull-content
@@ -62,6 +63,10 @@ jobs:
       - name: Check the base against the repository (read-only)
         if: inputs.job == 'verify-base'
         run: pnpm --filter rivieres-canyons exec tsx scripts/airtable.ts verify
+
+      - name: Add the columns the code declares but the base lacks (no row is changed)
+        if: inputs.job == 'add-new-columns'
+        run: pnpm --filter rivieres-canyons exec tsx scripts/airtable.ts columns
 
       - name: Pull the content from Airtable and check it
         if: inputs.job == 'pull-content'

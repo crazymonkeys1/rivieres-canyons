@@ -35,6 +35,13 @@ Layer (which projects a rule applies to):
 
 ## Changes
 
+### 2026-10-08 · Name with its preposition (decision V13-A)
+- **Layer:** Directory (field) · Site (headings)
+- **Change:** listings get `name_with_preposition` (Airtable « Nom avec préposition », e.g. « au Canyon doré », « aux Chutes du Carbet »). Headings built on a name use it (« Comment aller au Canyon doré », « Accéder au Canyon Ferry avec un guide », « Aller au Canyon doré avec un guide », the access FAQ question); when empty, they fall back to a wording that is correct with any name (« Canyon doré : comment y aller »). New GitHub job `add-new-columns`: adds the columns the code declares but the base lacks, without touching any row.
+- **Why:** « Comment aller à Canyon doré » is wrong French; the article depends on the name, so it is content, not code.
+- **How to apply elsewhere:** any French directory fills the field; other languages can use it for their own contracted forms.
+- **Status:** Rivières & Canyons ⏳ (column to add and fill) · Mangrove ⏳ · Template ✅
+
 ### 2026-10-08 · Phase 5: search engines and AI assistants
 - **Layer:** Core · Directory · Places · Site
 - **Change:**

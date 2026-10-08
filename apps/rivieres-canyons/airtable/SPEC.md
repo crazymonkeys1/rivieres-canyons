@@ -124,6 +124,7 @@ Une fiche du répertoire. Nouvelle fiche : nom, type, commune, statut « Brouill
 | En savoir plus — titre | Single line text |  |  |
 | En savoir plus — texte | Long text |  |  |
 | Autres noms | Long text |  | Un élément par ligne. |
+| Nom avec préposition | Single line text |  | Le nom précédé de « au », « à la », « à l' » ou « aux », pour les titres « Comment aller … » (ex. : au Canyon doré, à la Cascade aux Écrevisses, aux Chutes du Carbet). Vide = titre neutre. |
 | Bon à savoir | Long text |  | Une ligne par élément, au format « Libellé : valeur ». |
 | Conseil — guide | Link to another record → **Guides** (one record) |  |  |
 | Conseil — texte | Long text |  | Le conseil du guide, à la première personne. |
