@@ -66,6 +66,8 @@ export const url = {
   contact: () => '/contact/',
   /** Every outbound booking goes through /go/ (CLAUDE.md §9; the redirect itself comes in phase 6). */
   book: (offerId: string) => `/go/book/${offerId}/`,
+  /** A company's booking page, when no single outing is meant (guide page). Same /go/book/ route; ids never collide with offers. */
+  bookOperator: (operatorId: string) => `/go/book/${operatorId}/`,
   whatsapp: (guideId: string, ref: string) => `/go/whatsapp/${guideId}/?ref=${encodeURIComponent(ref)}`,
   maps: (lat: number, lng: number) => `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`,
 };

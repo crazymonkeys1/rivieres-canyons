@@ -1,20 +1,23 @@
 ---
-// L4 Byline: who wrote or vouches for a page (stacked avatars + names) and when. One line that wraps.
+// L4 Byline: who wrote or vouches for a page (stacked avatars + names) and when. The text wraps beside the avatars;
+// extra meta ("· 4 min de lecture") goes in the default slot.
 import Avatar from '../atoms/Avatar.astro';
 interface Props { people: { name: string; photo?: string; href?: string }[]; lead?: string; date?: string; dateLabel?: string; locale?: string; onPhoto?: boolean }
 const { people, lead, date, dateLabel, locale = 'fr-FR', onPhoto } = Astro.props;
 ---
 <p class:list={['byline', 'text-caption', { 'byline--on-photo': onPhoto }]}>
   <span class="byline__avatars">{people.map((p) => <Avatar src={p.photo} alt={p.name} size={32} ring />)}</span>
-  <span>
+  <span class="byline__text">
     {lead && <span>{lead} </span>}
     {people.map((p, i) => (<>{i > 0 && (i === people.length - 1 ? ' & ' : ', ')}{p.href ? <a href={p.href} class="is-strong byline__name">{p.name}</a> : <span class="is-strong byline__name">{p.name}</span>}</>))}
     {date && <span> · {dateLabel && `${dateLabel} `}<time datetime={date}>{new Date(date).toLocaleDateString(locale, { day: 'numeric', month: 'long', year: 'numeric' })}</time></span>}
+    {Astro.slots.has('default') && <span> <slot /></span>}
   </span>
 </p>
 <style>
-  .byline { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); margin: 0; color: var(--color-text-muted); }
-  .byline__avatars { display: inline-flex; }
+  .byline { display: flex; align-items: center; gap: var(--space-2); margin: 0; color: var(--color-text-muted); }
+  .byline__avatars { display: inline-flex; flex: none; }
+  .byline__text { min-inline-size: 0; }
   .byline__avatars > :global(* + *) { margin-inline-start: calc(var(--space-2h) * -1); }
   .byline__name { color: var(--color-text-strong); }
   .byline--on-photo { color: var(--color-text-inverse-secondary); }

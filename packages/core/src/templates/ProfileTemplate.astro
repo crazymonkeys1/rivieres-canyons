@@ -1,0 +1,19 @@
+---
+// L6 ProfileTemplate: the order and layout of a person's page, no content: the header, then sections (each a <section>,
+// separated by a rule) in one column. Slots, in order: header · default (the sections) · after
+---
+<div class="profile-template">
+  <div class="profile-template__header"><slot name="header" /></div>
+  <div class="profile-template__body"><slot /></div>
+  <slot name="after" />
+</div>
+<style>
+  .profile-template__header, .profile-template__body { inline-size: 100%; max-inline-size: var(--container-page); margin-inline: auto; padding-inline: var(--page-gutter); }
+  .profile-template__header { padding-block: var(--space-6) var(--section-y); }
+  .profile-template__body { display: grid; grid-template-columns: minmax(0, 1fr); padding-block-end: var(--space-10); }
+  .profile-template__body > :global(section) { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-4); padding-block: var(--section-y); border-block-start: 1px solid var(--color-border-default); scroll-margin-top: var(--space-6); }
+  .profile-template__body > :global(section) > :global(:where(p, h2, h3, ul, ol, dl, figure, div)) { margin: 0; }
+  .profile-template__body > :global(section) > :global(:not(.is-wide)) { max-inline-size: var(--container-text); }
+  /* Layout helper for a list of cards. */
+  .profile-template :global(.profile-template__cards) { --cards-min: 280px; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--cards-min)), 1fr)); gap: var(--space-3); margin: 0; padding: 0; list-style: none; }
+</style>

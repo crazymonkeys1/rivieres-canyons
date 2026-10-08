@@ -1,0 +1,30 @@
+---
+// L5 ProfileHeader: the opening of a person's page: back link, 72px portrait (ring in the company colour), overline,
+// H1, one meta line, and the actions (Buttons) in the default slot.
+import type { ImageMetadata } from 'astro';
+import Avatar from '../atoms/Avatar.astro';
+interface Props { title: string; eyebrow: string; portrait?: ImageMetadata | null; color?: string; back?: { label: string; href: string } }
+const { title, eyebrow, portrait, color, back } = Astro.props;
+---
+<header class="profile-header" style={color ? `--profile-color: ${color}` : undefined}>
+  {back && <a class="profile-header__back text-body is-strong" href={back.href}>{back.label}</a>}
+  <div class="profile-header__id">
+    <Avatar src={portrait?.src} alt="" size={72} ringColor="var(--profile-color)" />
+    <div class="profile-header__text">
+      <p class="text-label is-upper is-strong profile-header__eyebrow">{eyebrow}</p>
+      <h1 class="text-display profile-header__title">{title}</h1>
+      {Astro.slots.has('meta') && <p class="text-body profile-header__meta"><slot name="meta" /></p>}
+    </div>
+  </div>
+  {Astro.slots.has('default') && <div class="profile-header__actions"><slot /></div>}
+</header>
+<style>
+  .profile-header { --profile-color: var(--color-brand); display: grid; gap: var(--space-5); justify-items: start; }
+  .profile-header__back { display: inline-flex; align-items: center; min-block-size: var(--tap-size-min); color: var(--color-text-strong); }
+  .profile-header__id { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-4); }
+  .profile-header__text { display: grid; gap: var(--space-1); min-inline-size: 0; }
+  .profile-header__eyebrow { margin: 0; color: var(--color-brand); }   /* the company colour stays decoration (portrait ring) */
+  .profile-header__title { margin: 0; color: var(--color-text-strong); }
+  .profile-header__meta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-1) var(--space-2); margin: 0; color: var(--color-text-muted); }
+  .profile-header__actions { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+</style>

@@ -1,0 +1,80 @@
+---
+// L7 Guide page: ProfileTemplate filled from a guide, their company, outings, places and real reviews.
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import ProfileTemplate from '@orbit/core/templates/ProfileTemplate.astro';
+import ProfileHeader from '@orbit/core/components/organisms/ProfileHeader.astro';
+import KeyFacts from '@orbit/core/components/organisms/KeyFacts.astro';
+import KeyFact from '@orbit/core/components/molecules/KeyFact.astro';
+import SectionHeader from '@orbit/core/components/molecules/SectionHeader.astro';
+import Button from '@orbit/core/components/atoms/Button.astro';
+import Rating from '@orbit/core/components/atoms/Rating.astro';
+import DestinationCard from '@orbit/directory/components/DestinationCard.astro';
+import ReviewCard from '@orbit/directory/components/ReviewCard.astro';
+import { content, t, url, operators, places, types, imagesOf, photoFile, portraitOf, localityNames, reviewsOf } from '../../content/site';
+import { listingItems } from '../../content/listing';
+import type { Content } from '../../content/schema';
+
+export function getStaticPaths() {
+  return content.guides.map((guide) => ({ params: { slug: guide.id }, props: { guide } }));
+}
+const { guide: g } = Astro.props as { guide: Content['guides'][number] };
+const op = operators.get(g.operator_id)!;
+const ref = url.guide(g.id);
+const offerIds = new Set(content.offers.filter((o) => o.status === 'published' && o.operator_id === op.id).map((o) => o.id));
+const offerCards = listingItems.filter((i) => i.kind === 'offer' && offerIds.has(i.id));
+const placeIds = [...new Set(content.offers.filter((o) => offerIds.has(o.id)).map((o) => o.listing_id))];
+const placeList = placeIds.map((id) => places.get(id)!).filter((p) => p.status === 'published');
+const reviews = reviewsOf(op.id);
+const name = g.full_name ?? g.first_name;
+---
+<SiteLayout title={`${name} · ${op.name} · ${t('site.name')}`} description={t('guide.description', { name, role: g.role, company: op.name })} path={ref}>
+  <ProfileTemplate>
+    <ProfileHeader slot="header" title={name} eyebrow={t('guide.eyebrow', { company: op.name })} portrait={portraitOf(g.photo)} color={op.brand_color} back={{ label: t('nav.back_to_results'), href: url.home() }}>
+      <Fragment slot="meta">
+        <span>{g.role}</span>
+        {op.rating && op.rating_source && <span>· <Rating value={op.rating} label={t('guide.rating', { value: op.rating })} countText={op.rating_count ? t('guide.rating_count', { n: op.rating_count }) : undefined} /> ({op.rating_source})</span>}
+      </Fragment>
+      <Button href={url.bookOperator(op.id)} external>{t('guide.book', { company: op.name })} →</Button>
+      <Button variant="secondary" href={url.whatsapp(g.id, ref)} external>{t('guide.write', { guide: g.first_name })}</Button>
+    </ProfileHeader>
+
+    <section id="a-propos" aria-labelledby="a-propos-title">
+      <SectionHeader id="a-propos-title" title={t('place.offer_about', { guide: g.first_name })} />
+      <p class="text-read">{g.bio}</p>
+      {g.facts.length > 0 && <KeyFacts label={t('place.offer_about', { guide: g.first_name })}>{g.facts.map((f) => <KeyFact label={f.label} value={f.value} emoji={f.icon} />)}</KeyFacts>}
+    </section>
+
+    {offerCards.length > 0 && (
+      <section id="sorties" aria-labelledby="sorties-title">
+        <SectionHeader id="sorties-title" title={t('guide.offers', { guide: g.first_name })} />
+        <ul class="profile-template__cards is-wide">
+          {offerCards.map((item) => (
+            <li><DestinationCard href={item.href} name={item.name} image={item.image} imageAlt="" placeholderLabel={t('place.photo_missing')}
+              typeLabel={item.typeLabel} typeEmoji={item.typeEmoji} meta={item.meta} subtitle={item.subtitle} alert={item.alert}
+              tags={item.tags} facts={item.facts} guided={item.guided} cta={item.cta} factsLabel={t('place.facts_label')} /></li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    {placeList.length > 0 && (
+      <section id="lieux" aria-labelledby="lieux-title">
+        <SectionHeader id="lieux-title" title={t('guide.places', { guide: g.first_name })} />
+        <ul class="profile-template__cards is-wide">
+          {placeList.map((p) => {
+            const ty = types.get(p.type);
+            const hero = imagesOf('listing', p.id, 'hero')[0];
+            return <li><DestinationCard layout="row" href={url.place(p.id)} name={p.name} image={hero ? photoFile(hero.id) : null} imageAlt="" placeholderLabel={t('place.photo_missing')} typeLabel={ty?.label ?? p.type} meta={[ty?.label, localityNames(p.location.localities).join(' / ')].filter(Boolean).join(' · ')} cta={t('place.view')} /></li>;
+          })}
+        </ul>
+      </section>
+    )}
+
+    {reviews.length > 0 && (
+      <section id="avis" aria-labelledby="avis-title">
+        <SectionHeader id="avis-title" title={t('guide.reviews', { company: op.name })} />
+        {reviews.map((r) => <ReviewCard quote={r.quote} author={r.author} source={r.source} rating={r.rating} />)}
+      </section>
+    )}
+  </ProfileTemplate>
+</SiteLayout>

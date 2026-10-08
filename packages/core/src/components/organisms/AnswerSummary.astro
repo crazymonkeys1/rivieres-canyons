@@ -1,0 +1,14 @@
+---
+// L5 AnswerSummary: the short direct answer at the top of an article or a filter page (40–60 words), for readers and AI answers.
+interface Props { label: string; text: string }
+const { label, text } = Astro.props;
+---
+<aside class="answer-summary" aria-label={label}>
+  <p class="text-label is-upper answer-summary__label">{label}</p>
+  <p class="text-read answer-summary__text">{text}</p>
+</aside>
+<style>
+  .answer-summary { display: grid; gap: var(--space-1h); padding: var(--space-4) var(--space-5); background: var(--color-surface-info); border-radius: var(--radius-container); }
+  .answer-summary__label { margin: 0; color: var(--color-brand); }
+  .answer-summary__text { margin: 0; color: var(--color-text-body); }
+</style>

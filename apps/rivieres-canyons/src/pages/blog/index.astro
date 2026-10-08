@@ -1,0 +1,39 @@
+---
+// L7 Blog index: every published intent article as a RelatedCard with its intro (CollectionTemplate).
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import CollectionTemplate from '@orbit/core/templates/CollectionTemplate.astro';
+import Hero from '@orbit/core/components/organisms/Hero.astro';
+import RelatedCard from '@orbit/core/components/organisms/RelatedCard.astro';
+import Photo from '@orbit/core/components/atoms/Photo.astro';
+import Badge from '@orbit/core/components/atoms/Badge.astro';
+import Breadcrumb from '@orbit/core/components/molecules/Breadcrumb.astro';
+import Byline from '@orbit/core/components/molecules/Byline.astro';
+import { t, url, imagesOf, photoFile, guides, portraitOf } from '../../content/site';
+import { publishedArticles } from '../../content/article';
+
+const hero = publishedArticles.map((a) => imagesOf('article', a.id, 'hero')[0]).find(Boolean) ?? null;
+const authors = [...new Set(publishedArticles.flatMap((a) => a.author_ids))].map((id) => guides.get(id)).filter((g): g is NonNullable<typeof g> => !!g)
+  .map((g) => ({ name: g.first_name, photo: portraitOf(g.photo)?.src, href: url.guide(g.id) }));
+---
+<SiteLayout title={`${t('blog.title')} · ${t('site.name')}`} description={t('blog.description')} path={url.blog()}>
+  <CollectionTemplate>
+    <Hero slot="hero" variant="article" title={t('blog.title')} credit={hero?.credit}>
+      <Photo slot="media" image={hero ? photoFile(hero.id) : null} alt="" ratio="16:9" eager widths={[640, 1024, 1600]} sizes="100vw" />
+      <Breadcrumb slot="breadcrumb" onPhoto label={t('nav.breadcrumb')} items={[{ label: t('nav.home'), href: url.home() }, { label: t('blog.crumb') }]} />
+      <Badge slot="badges" onPhoto>{t('blog.crumb')}</Badge>
+      <Byline slot="meta" onPhoto people={authors} lead={t('article.by')}>· {t('blog.count', { n: publishedArticles.length })}</Byline>
+    </Hero>
+
+    <p class="text-read">{t('blog.intro')}</p>
+
+    <section aria-labelledby="articles" class="is-wide">
+      <h2 id="articles" class="visually-hidden">{t('blog.title')}</h2>
+      <ul class="collection-template__cards">
+        {publishedArticles.map((a) => {
+          const img = imagesOf('article', a.id, 'hero')[0];
+          return <li><RelatedCard href={url.article(a.id)} title={a.label} text={a.intro} image={img ? photoFile(img.id) : null} placeholderLabel={t('place.photo_missing')} /></li>;
+        })}
+      </ul>
+    </section>
+  </CollectionTemplate>
+</SiteLayout>

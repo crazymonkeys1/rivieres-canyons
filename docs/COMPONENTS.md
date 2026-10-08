@@ -13,6 +13,12 @@ Status: ✅ in the reference · 🆕 needed by the system but only implied in th
 - **Tooltip** is the only atom/molecule with a script (tap to open, Escape and outside tap to close); everything else is HTML + CSS.
 - **Icon** emoji size is the one typography exception, marked `design-check-allow` in the file.
 
+**Built (phase 4, 2026-10-08):** every L5 organism and L6 template below, in `packages/{core,directory,places}/src/{components,templates}/` (layer by the "would it make sense for cars?" test, `ARCHITECTURE.md` §2), used by the site's pages: place page, listing, intent article, filter landing pages, guide pages, blog index, about, contact, legal notice, privacy. Every page passes `pnpm design:check`, has no sideways scroll at 360 · 480 · 1024 px and no axe violation. Implementation notes:
+- **Templates own layout only** (column widths, gaps, the section rhythm, card grids via a `{template}__cards` helper class). Pages only choose components and pass data.
+- **Operator colours are decoration only** (portrait rings, a card's top rule): text that names an operator uses `--color-brand` or `--color-text-strong`, because some brand colours fail contrast as text.
+- **No hotlinked photo:** `Photo` shows a neutral placeholder ("Photo à venir") until the file is downloaded by the `fetch-photos` job.
+- Added in phase 4 (not in the reference list): **Photo** (L3), **GuideSection**, **GuidePitch**, **ProfileHeader** (L5). Rows below.
+
 ---
 
 ## L3 Atoms
@@ -32,6 +38,7 @@ Status: ✅ in the reference · 🆕 needed by the system but only implied in th
 | **Checkbox** ✅ | (inline) | input + label | `checked` | label `text-caption` | 24px box inside a 44px row. | Consent checkbox is never pre-checked. |
 | **Toggle** ✅ | (inline) | switch + label + hint | `on` | `text-body` + `is-strong`, hint `text-caption` | 44px row; knob `--elevation-thumb`. | Used in FiltersSheet. |
 | **Select** ✅ | (inline) | native select | | `text-caption` | Desktop inline filters only. | |
+| **Photo** 🆕 | (background images) | Astro `<Image>` or placeholder | `ratio: 4:3 \| 3:2 \| 16:9 \| 1:1 \| 21:9` · `widths` · `sizes` · `eager` | placeholder `text-label` | Fixed ratio, `object-fit: cover`, `--color-surface-sunken` while missing. Served from the site, resized at build. | Credit is shown by the parent. Phase 4. |
 
 ## L4 Molecules
 
@@ -66,11 +73,11 @@ Status: ✅ in the reference · 🆕 needed by the system but only implied in th
 | **BenefitList** ✅ | ValueTiles | Icon + title + text | | `auto-fit minmax(min(100%, 220px), 1fr)`. | "Pourquoi y aller avec…". |
 | **SafetyAlert** ✅ | SafetyAlert | Badge (danger) + title + text (+ items) | `variant: default \| compact \| site-closed` | `--color-surface-danger` / `--color-border-danger`. Max one danger surface per viewport. | Listing banner (compact, collapsible), destination, access, article. |
 | **AccessNotice** ✅ | AccessNotice | Icon + title + text (+ TextLink) | `policy: commune_only \| guide_only \| closed` | `--color-surface-info`. Merges the guide CTA for guide_only and closed. | Accès section. |
-| **AnswerSummary** ✅ | AnswerBox | overline + text | | `--color-surface-info`, `text-read`. 40–60 words. | Article, filter page. |
+| **AnswerSummary** ✅ | AnswerBox | overline + text | `label` · `text` | `--color-surface-info`, `text-read`. 40–60 words. | Article, filter page. |
 | **TableOfContents** ✅ | TOC | overline + ordered links | | 2px left rule; 44px rows. | Article. |
 | **TakeawayList** ✅ | TakeawayList | list with lead-ins | | `text-read`, 600 lead-in. | "L'essentiel". |
 | **ArticleSection** ✅ | EditorialSection | SectionHeader + h3 + prose | | `text-read` column 680px. | |
-| **ArticleEntry** ✅ | ArticleEntry | title + meta + image + FactList + prose + KeyFacts + Quote + TextLink | | Facts attached under the photo. | Blog selection. |
+| **ArticleEntry** ✅ | ArticleEntry | title + meta + image + FactList + prose + KeyFacts + Quote + TextLink | prose in the default slot · `color` (ring only) | Facts attached under the photo. | Blog selection. |
 | **GearList** ✅ | GearList | Icon + label rows | `tone: provided \| bring` | `auto-fill minmax(140px)`. | |
 | **RiskList** ✅ | RiskTags | Tags with risk emoji | | | |
 | **FaqList** ✅ | Accordion / FAQ | Disclosures | | Native `<details>`; FAQPage JSON-LD. | |
@@ -80,13 +87,16 @@ Status: ✅ in the reference · 🆕 needed by the system but only implied in th
 | **Lightbox** ✅ | Lightbox | image/video + controls | | `--z-lightbox`, swipe, Esc, source link. | |
 | **SocialPosts** ✅ | SocialStrip | thumbnails + titles | | Scroll-snap row (62% cards) <1024; 4-column grid ≥1024. | |
 | **PressMentions** ✅ | PressList | link rows | | 44px rows. | |
-| **RelatedCard** ✅ | RelatedCard | image (3:2) + `text-title` name | | `auto-fill minmax(min(100%, 240px), 1fr)`. | Article and filter-page "À lire aussi". |
+| **RelatedCard** ✅ | RelatedCard | image (3:2) + `text-title` name (+ `text-body` summary) | `text?` | `auto-fill minmax(min(100%, 240px), 1fr)`. | Article and filter-page "À lire aussi". |
 | **ReviewCard** ✅ | ReviewCard | Rating + Quote + attribution | | Real, sourced reviews only. | |
 | **GuideOfferCard** ✅ | GuideOfferCard | operator Avatar + name + Price + Button + TextLink + alt switch | | Inline on mobile. ≥1024: sticky 340px column. | `Guide Offer Card.dc.html` |
 | **StickyBooking** ✅ | MobileStickyCTA | Avatar + summary + Button | | Mobile only, hides on scroll-down, `--z-cta`, `--elevation-bar`. | |
 | **LeadCapture** ✅ | LeadMagnetBand | overline + title + body + TextInput + Button + Checkbox | `step: main \| secondary \| done` | Stacks (52px field, 52px button) on phones, one row from ~480px without a media query. Consent never pre-checked; button disabled until valid. | Listing feed. |
 | **GuideContactLink** ✅ | WhatsAppLink | Button/TextLink → `wa.me` | | Pre-filled message (see DESIGN_SYSTEM). | |
 | **BookingLink** ✅ | BookingLink | Button → `operator.bookUrl` | | New tab; goes through `/go/book/*`. | |
+| **GuideSection** 🆕 | (#guides "Qui sommes-nous") | Avatars + SectionHeader + prose + one block per company (Avatar, name, credential, text, TextLinks) | | Dark band, white panel; company blocks `auto-fit minmax(240px)`. | Place pages, about page. Phase 4. |
+| **GuidePitch** 🆕 | (BenefitList card "Pourquoi partir avec un guide ?") | SectionHeader + prose + BenefitList + TextLinks | | Card `--color-surface-card`, `--radius-container`; tiles on `--color-surface-inset`. | Article end. Phase 4. |
+| **ProfileHeader** 🆕 | (guide page header) | back link + Avatar 72 (ring in the company colour) + overline + H1 `text-display` + meta + Buttons (slot) | | Wraps; Buttons wrap under the name. | Guide pages. Phase 4. |
 | **Hero** 🆕 | (hero blocks) | photo + scrim + Breadcrumb + H1 + meta/Byline | `variant: destination \| article \| listing` | Photo with `--gradient-hero-scrim`; H1 `text-display` white + `.on-photo`. Destination: Badges + commune line. | Three heroes in the reference share this. |
 | **SiteFooter** ✅ | Footer | link groups + LegalNotice | | Groups `auto-fit minmax(150px)`. | |
 | **EmptyState** ✅ | (isEmpty block) | title + text + Buttons | | | Listing with no results. |
@@ -100,7 +110,9 @@ Status: ✅ in the reference · 🆕 needed by the system but only implied in th
 | **ArticleTemplate** | SiteHeader · Hero · AnswerSummary · TableOfContents · TakeawayList · ArticleSections · ArticleEntries · KeyFacts · SafetyAlert · FaqList · BenefitList · Byline · SourceList · Related · SiteFooter | blog article |
 | **CollectionTemplate** | SiteHeader · Hero · intro · AnswerSummary · DestinationCard grid · FaqList · Related · SiteFooter | filter page, blog index |
 | **ProfileTemplate** | SiteHeader · header (Avatar, H1, Buttons) · About · Offers · Places · Reviews · SiteFooter | guide page |
-| **DocumentTemplate** | SiteHeader · H1 · prose · SiteFooter | privacy, legal |
+| **DocumentTemplate** | SiteHeader · H1 · prose · SiteFooter | privacy, legal, about, contact |
+
+Files: `packages/core/src/templates/{PageShell,ArticleTemplate,CollectionTemplate,ProfileTemplate,DocumentTemplate}.astro`, `packages/directory/src/templates/ListingTemplate.astro`, `packages/places/src/templates/PlaceTemplate.astro`. SiteHeader and SiteFooter come from the site layout, not the templates.
 
 ## Gaps closed by this registry (items present in the reference but missing from the previous system)
 Breadcrumb, Hero (shared), Rating, TextInput / Checkbox / Toggle / Select, Disclosure (generic), SearchField, FilterOptionGroup, EmptyState, Callout, FactCell/KeyFact as separate molecules, MenuSheet and FilterToolbar (added 2026-10-06).

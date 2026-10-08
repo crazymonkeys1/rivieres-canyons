@@ -1,0 +1,22 @@
+---
+// L5 ArticleSection: an editorial section of an article: SectionHeader, then sub-headings (H3) with their prose.
+import SectionHeader from '../molecules/SectionHeader.astro';
+interface Props { id: string; title: string; eyebrow?: string; parts: { title: string; text: string }[] }
+const { id, title, eyebrow, parts } = Astro.props;
+---
+<div class="article-section">
+  <SectionHeader id={id} title={title} eyebrow={eyebrow} />
+  {parts.map((p) => (
+    <div class="article-section__part">
+      <h3 class="text-subheading article-section__title">{p.title}</h3>
+      <p class="text-read article-section__text">{p.text}</p>
+    </div>
+  ))}
+  <slot />
+</div>
+<style>
+  .article-section { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-6); }
+  .article-section__part { display: grid; gap: var(--space-2); }
+  .article-section__title { margin: 0; color: var(--color-text-strong); }
+  .article-section__text { margin: 0; color: var(--color-text-body); max-inline-size: var(--container-read); }
+</style>

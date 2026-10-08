@@ -1,0 +1,14 @@
+---
+// L7 Contact page: one WhatsApp button per guide (through /go/whatsapp/, CLAUDE.md §9), in DocumentTemplate.
+import SiteLayout from '../layouts/SiteLayout.astro';
+import DocumentTemplate from '@orbit/core/templates/DocumentTemplate.astro';
+import Button from '@orbit/core/components/atoms/Button.astro';
+import { content, t, url } from '../content/site';
+---
+<SiteLayout title={`${t('contact.title')} · ${t('site.name')}`} description={t('contact.description')} path={url.contact()}>
+  <DocumentTemplate>
+    <h1 slot="header" class="text-display">{t('contact.title')}</h1>
+    <p class="text-read">{t('contact.intro')}</p>
+    <p class="document-template__actions">{content.guides.map((g, i) => <Button variant={i === 0 ? 'primary' : 'secondary'} href={url.whatsapp(g.id, url.contact())} external>{t('place.offer_write', { guide: g.first_name })}</Button>)}</p>
+  </DocumentTemplate>
+</SiteLayout>

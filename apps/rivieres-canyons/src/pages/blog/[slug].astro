@@ -1,0 +1,127 @@
+---
+// L7 Intent article: ArticleTemplate filled from the article and its computed selection. No styling here.
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import ArticleTemplate from '@orbit/core/templates/ArticleTemplate.astro';
+import Hero from '@orbit/core/components/organisms/Hero.astro';
+import AnswerSummary from '@orbit/core/components/organisms/AnswerSummary.astro';
+import TableOfContents from '@orbit/core/components/organisms/TableOfContents.astro';
+import TakeawayList from '@orbit/core/components/organisms/TakeawayList.astro';
+import ArticleSection from '@orbit/core/components/organisms/ArticleSection.astro';
+import KeyFacts from '@orbit/core/components/organisms/KeyFacts.astro';
+import FaqList from '@orbit/core/components/organisms/FaqList.astro';
+import RelatedCard from '@orbit/core/components/organisms/RelatedCard.astro';
+import Photo from '@orbit/core/components/atoms/Photo.astro';
+import Badge from '@orbit/core/components/atoms/Badge.astro';
+import Divider from '@orbit/core/components/atoms/Divider.astro';
+import Breadcrumb from '@orbit/core/components/molecules/Breadcrumb.astro';
+import Byline from '@orbit/core/components/molecules/Byline.astro';
+import Quote from '@orbit/core/components/molecules/Quote.astro';
+import KeyFact from '@orbit/core/components/molecules/KeyFact.astro';
+import SectionHeader from '@orbit/core/components/molecules/SectionHeader.astro';
+import SafetyAlert from '@orbit/places/components/SafetyAlert.astro';
+import ArticleEntry from '@orbit/directory/components/ArticleEntry.astro';
+import GuidePitch from '@orbit/directory/components/GuidePitch.astro';
+import { t, tList, url, imagesOf, photoFile, sourcesOf } from '../../content/site';
+import { articleView, publishedArticles } from '../../content/article';
+import { keyFactIcon } from '../../content/format';
+import type { Content } from '../../content/schema';
+
+export function getStaticPaths() {
+  return publishedArticles.map((article) => ({ params: { slug: article.id }, props: { article } }));
+}
+const { article: a } = Astro.props as { article: Content['articles'][number] };
+const v = articleView(a);
+const ed = a.editorial;
+const related = publishedArticles.filter((x) => x.id !== a.id).map((x) => {
+  const img = imagesOf('article', x.id, 'hero')[0];
+  return { href: url.article(x.id), title: x.label, image: img ? photoFile(img.id) : null };
+});
+const siteSources = sourcesOf('site', 'site');
+const description = (a.seo.description ?? a.answer).slice(0, 155);
+---
+<SiteLayout title={a.seo.title ?? `${a.h1} · ${t('site.name')}`} description={description} path={url.article(a.id)}>
+  <ArticleTemplate>
+    <Hero slot="hero" variant="article" title={a.h1} credit={v.hero?.credit}>
+      <Photo slot="media" image={v.hero ? photoFile(v.hero.id) : null} alt="" ratio="16:9" eager widths={[640, 1024, 1600]} sizes="100vw" />
+      <Breadcrumb slot="breadcrumb" onPhoto label={t('nav.breadcrumb')} items={[{ label: t('nav.home'), href: url.home() }, { label: t('blog.crumb'), href: url.blog() }, { label: a.label }]} />
+      <Badge slot="badges" onPhoto>{a.eyebrow}</Badge>
+      <Byline slot="meta" onPhoto people={v.authors} lead={t('article.by')} date={a.updated_on} dateLabel={t('article.updated')}>· {t('article.read_time', { n: v.readTime })}</Byline>
+    </Hero>
+
+    <p class="text-read">{a.intro}</p>
+    <AnswerSummary label={t('article.answer')} text={a.answer} />
+    <TableOfContents label={t('article.toc')} items={v.toc} />
+
+    {a.takeaways.length > 0 && (
+      <section aria-labelledby="essentiel">
+        <SectionHeader id="essentiel" title={t('article.takeaways')} />
+        <TakeawayList items={a.takeaways} />
+      </section>
+    )}
+
+    {ed && (
+      <section aria-labelledby="guide">
+        <ArticleSection id="guide" title={ed.h2} parts={ed.sections} />
+        {v.pull && <Quote size="pull" attribution={v.pull.attribution}>{v.pull.text}</Quote>}
+      </section>
+    )}
+
+    {v.entries.length > 0 && <Divider variant="ornament" />}
+    {v.entries.length > 0 && (
+      <section aria-labelledby="selection" class="is-entries">
+        <SectionHeader id="selection" title={v.selectionTitle} />
+        {v.entries.map((e) => (
+          <ArticleEntry id={e.id} number={e.number} title={e.title} href={e.href} linkLabel={e.linkLabel} kind={e.kind} place={e.place} by={e.by} color={e.color}
+            image={e.image} imageAlt={e.imageAlt} placeholderLabel={t('place.photo_missing')} credit={e.credit} facts={e.facts} factsLabel={t('place.facts_label')}>
+            {e.lead && <p class="text-read">{e.lead}</p>}
+            {e.paragraphs.map((p) => <p class="text-read">{p}</p>)}
+            {e.list.length > 0 && <h4 class="text-subheading">{e.listTitle}</h4>}
+            {e.list.length > 0 && <ul class="text-read">{e.list.map((l) => <li>{l.label && <strong>{l.label} : </strong>}{l.text}</li>)}</ul>}
+            {e.story && <Quote attribution={e.story.attribution} rule>{e.story.text}</Quote>}
+            {e.angle && a.angle_label && <p class="text-read"><strong>{a.angle_label} :</strong> {e.angle}</p>}
+            {e.season && <p class="text-read"><strong>{t('article.season')} :</strong> {e.season}</p>}
+          </ArticleEntry>
+        ))}
+      </section>
+    )}
+
+    {ed && ed.tips.length > 0 && <Divider variant="ornament" />}
+    {ed && ed.tips.length > 0 && (
+      <section aria-labelledby="bon-a-savoir">
+        <SectionHeader id="bon-a-savoir" title={t('article.tips')} />
+        <KeyFacts label={t('article.tips')}>{ed.tips.map((k) => <KeyFact label={k.label} value={k.value} emoji={keyFactIcon(k.label)} />)}</KeyFacts>
+      </section>
+    )}
+
+    <section aria-labelledby="avant-de-partir">
+      <SectionHeader id="avant-de-partir" title={t('article.before')} />
+      <SafetyAlert title={t('listing.alert_title')} text={a.safety_note} badgeLabel={t('article.before_badge')} />
+    </section>
+
+    {v.faq.length > 0 && (
+      <section aria-labelledby="faq-theme">
+        <SectionHeader id="faq-theme" title={t('article.faq_title', { label: a.label })} />
+        <FaqList items={v.faq} />
+      </section>
+    )}
+
+    <section aria-labelledby="avec-un-guide">
+      <GuidePitch id="avec-un-guide" title={t('article.why_title')} text={a.why_intro}
+        points={tList('why_guide_points').map((b) => ({ emoji: b.icon, title: b.label, text: b.value }))}
+        links={[{ label: t('article.why_offers'), href: `${url.home()}#resultats` }, { label: t('article.why_about'), href: url.about() }]} />
+    </section>
+
+    <footer class="text-caption">
+      <Byline people={v.authors} lead={t('article.written_by')} />
+      <p>{t('article.authors_bio')}</p>
+      {siteSources.length > 0 && <p>{t('article.sources')} {siteSources.map((s, i) => <>{i > 0 && ' · '}<a class="link" href={s.url} target="_blank" rel="noopener">{s.label}</a></>)}</p>}
+    </footer>
+
+    {related.length > 0 && (
+      <section slot="after" aria-labelledby="autres-idees">
+        <SectionHeader id="autres-idees" title={t('article.related')} />
+        <ul class="article-template__cards">{related.map((r) => <li><RelatedCard href={r.href} title={r.title} image={r.image} placeholderLabel={t('place.photo_missing')} /></li>)}</ul>
+      </section>
+    )}
+  </ArticleTemplate>
+</SiteLayout>

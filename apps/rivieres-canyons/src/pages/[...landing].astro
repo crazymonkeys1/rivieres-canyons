@@ -1,0 +1,58 @@
+---
+// L7 Filter landing page (/cascades/, /communes/petit-bourg/): CollectionTemplate filled from a computed collection.
+import SiteLayout from '../layouts/SiteLayout.astro';
+import CollectionTemplate from '@orbit/core/templates/CollectionTemplate.astro';
+import Hero from '@orbit/core/components/organisms/Hero.astro';
+import AnswerSummary from '@orbit/core/components/organisms/AnswerSummary.astro';
+import FaqList from '@orbit/core/components/organisms/FaqList.astro';
+import RelatedCard from '@orbit/core/components/organisms/RelatedCard.astro';
+import Photo from '@orbit/core/components/atoms/Photo.astro';
+import Badge from '@orbit/core/components/atoms/Badge.astro';
+import Breadcrumb from '@orbit/core/components/molecules/Breadcrumb.astro';
+import SectionHeader from '@orbit/core/components/molecules/SectionHeader.astro';
+import DestinationCard from '@orbit/directory/components/DestinationCard.astro';
+import { t, url, photoFile } from '../content/site';
+import { collections, type Collection } from '../content/collection';
+
+export function getStaticPaths() {
+  return collections.map((c) => ({ params: { landing: c.path.replace(/^\/|\/$/g, '') }, props: { c } }));
+}
+const { c } = Astro.props as { c: Collection };
+---
+<SiteLayout title={c.seo.title ?? `${c.h1} · ${t('site.name')}`} description={(c.seo.description ?? c.answer).slice(0, 155)} path={c.path}>
+  <CollectionTemplate>
+    <Hero slot="hero" variant="article" title={c.h1} credit={c.hero?.credit}>
+      <Photo slot="media" image={c.hero ? photoFile(c.hero.id) : null} alt="" ratio="16:9" eager widths={[640, 1024, 1600]} sizes="100vw" />
+      <Breadcrumb slot="breadcrumb" onPhoto label={t('nav.breadcrumb')} items={[{ label: t('nav.home'), href: url.home() }, { label: c.crumbParent }, { label: c.h1 }]} />
+      <Badge slot="badges" onPhoto>{c.crumbParent}</Badge>
+    </Hero>
+
+    <div>
+      <p class="text-read">{c.intro}</p>
+      <AnswerSummary label={t('article.answer')} text={c.answer} />
+    </div>
+
+    <section aria-labelledby="lieux" class="is-wide">
+      <SectionHeader id="lieux" eyebrow={t('collection.list_eyebrow')} title={c.listTitle} />
+      <ul class="collection-template__cards">
+        {c.cards.map((item) => (
+          <li><DestinationCard href={item.href} name={item.name} image={item.image} imageAlt="" placeholderLabel={t('place.photo_missing')}
+            typeLabel={item.typeLabel} typeEmoji={item.typeEmoji} meta={item.meta} subtitle={item.subtitle} alert={item.alert}
+            tags={item.tags} facts={item.facts} guided={item.guided} cta={item.cta} factsLabel={t('place.facts_label')} /></li>
+        ))}
+      </ul>
+    </section>
+
+    <section aria-labelledby="faq-filtre">
+      <SectionHeader id="faq-filtre" title={t('collection.faq_title', { h1: c.h1 })} />
+      <FaqList items={c.faq} />
+    </section>
+
+    {c.related.length > 0 && (
+      <section aria-labelledby="a-lire" class="is-wide">
+        <SectionHeader id="a-lire" title={t('collection.related')} />
+        <ul class="collection-template__cards is-compact">{c.related.map((r) => <li><RelatedCard href={r.href} title={r.title} image={r.image ? photoFile(r.image.id) : null} placeholderLabel={t('place.photo_missing')} /></li>)}</ul>
+      </section>
+    )}
+  </CollectionTemplate>
+</SiteLayout>

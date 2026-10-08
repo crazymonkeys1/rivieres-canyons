@@ -33,8 +33,9 @@ const { variant = 'destination', title, credit, back } = Astro.props;
   .hero__badges { display: flex; flex-wrap: wrap; gap: var(--space-1h); align-items: center; }
   .hero__badges:empty { display: none; }
   .hero__title { margin: 0; color: var(--color-text-inverse); }
-  .hero__meta { display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-2); color: var(--color-text-inverse-secondary); }
+  .hero__meta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-1) var(--space-2); color: var(--color-text-inverse-secondary); }
   .hero__meta:empty { display: none; }
+  .hero--article .hero__content { max-inline-size: var(--container-article); padding-inline: var(--page-gutter-read); }   /* text lines up with the reading column */
   .hero--listing .hero__content { justify-items: center; text-align: center; max-inline-size: var(--container-article); }
   .hero--listing .hero__badges, .hero--listing .hero__meta { justify-content: center; }
   .hero__badges > :global(*) { max-inline-size: 100%; white-space: normal; }   /* a long label wraps instead of widening the page */

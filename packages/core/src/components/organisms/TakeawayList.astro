@@ -1,0 +1,12 @@
+---
+// L5 TakeawayList: the key points of a page, each with a strong lead-in ("L'essentiel").
+interface Props { items: { title: string; text: string }[] }
+const { items } = Astro.props;
+---
+<ul class="takeaway-list text-read">
+  {items.map((i) => <li><span class="is-strong takeaway-list__title">{i.title}.</span> {i.text}</li>)}
+</ul>
+<style>
+  .takeaway-list { display: grid; gap: var(--space-2); margin: 0; padding-inline-start: var(--space-5); color: var(--color-text-body); }
+  .takeaway-list__title { color: var(--color-text-strong); }
+</style>

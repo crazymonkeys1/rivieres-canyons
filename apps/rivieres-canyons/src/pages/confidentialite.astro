@@ -1,0 +1,23 @@
+---
+// L7 Privacy page (docs/PRIVACY_CONTEXT.md §4): the text comes from the `privacy_policy` site text once it is final.
+// Until then the page shows the single token [PRIVACY_POLICY_TEXT], is noindex, and a production build fails on it.
+// The final text may use "## " lines for section headings; everything else is a paragraph.
+import SiteLayout from '../layouts/SiteLayout.astro';
+import DocumentTemplate from '@orbit/core/templates/DocumentTemplate.astro';
+import { content, t, url } from '../content/site';
+import { date } from '../content/format';
+const row = content.copy.find((c) => c.key === 'privacy_policy');
+const final = row?.status === 'final' && row.text ? row.text : null;
+const blocks = (final ?? '[PRIVACY_POLICY_TEXT]').split(/\n\s*\n/).map((b) => b.trim()).filter(Boolean)
+  .map((b) => (b.startsWith('## ') ? { h2: b.slice(3), id: b.slice(3).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') } : { p: b }));
+const updated = (row as any)?.updated_on as string | undefined;
+---
+<SiteLayout title={`${t('privacy.title')} · ${t('site.name')}`} description={t('privacy.description')} path={url.privacy()} noindex={!final}>
+  <DocumentTemplate>
+    <Fragment slot="header">
+      <h1 class="text-display">{t('privacy.title')}</h1>
+      {final && updated && <p class="text-caption">{t('privacy.updated', { date: date(updated) })}</p>}
+    </Fragment>
+    {blocks.map((b) => ('h2' in b ? <h2 id={b.id} class="text-heading">{b.h2}</h2> : <p class="text-read">{b.p}</p>))}
+  </DocumentTemplate>
+</SiteLayout>

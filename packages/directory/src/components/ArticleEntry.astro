@@ -1,0 +1,55 @@
+---
+// L5 ArticleEntry: one item of an article's selection (a guided outing or a place): number and name, a meta line
+// (kind, place, guide), the photo with its facts attached underneath and its credit, then the prose in the default slot,
+// and the link to the full page. `color` (the operator's colour) is decoration only: the ring of the guide's portrait.
+import type { ImageMetadata } from 'astro';
+import Photo from '@orbit/core/components/atoms/Photo.astro';
+import Avatar from '@orbit/core/components/atoms/Avatar.astro';
+import Icon from '@orbit/core/components/atoms/Icon.astro';
+import TextLink from '@orbit/core/components/atoms/TextLink.astro';
+import FactList from '@orbit/core/components/organisms/FactList.astro';
+import FactCell from '@orbit/core/components/molecules/FactCell.astro';
+interface Props {
+  id: string; number: string; title: string; href: string; linkLabel: string;
+  kind: string; place?: string; by?: { label: string; portrait?: ImageMetadata | null; name: string } | null; color?: string;
+  image: ImageMetadata | null; imageAlt: string; placeholderLabel?: string; credit?: string | null;
+  facts?: { label: string; value: string; emoji?: string }[]; factsLabel?: string;
+}
+const { id, number, title, href, linkLabel, kind, place, by, color, image, imageAlt, placeholderLabel, credit, facts = [], factsLabel } = Astro.props;
+---
+<article class="article-entry" style={color ? `--entry-color: ${color}` : undefined} aria-labelledby={id}>
+  <header class="article-entry__header">
+    <h3 id={id} class="text-title article-entry__title"><span class="article-entry__number">{number}.</span> {title}</h3>
+    <p class="text-caption article-entry__meta">
+      <span class="text-label is-upper is-strong article-entry__kind">{kind}</span>
+      {place && <span><Icon emoji="📍" size={15} /> {place}</span>}
+      {by && <span class="is-strong article-entry__by"><Avatar src={by.portrait?.src} alt="" size={18} ringColor="var(--entry-color)" /> {by.label}</span>}
+    </p>
+  </header>
+  <figure class="article-entry__figure">
+    <div class="article-entry__media">
+      <Photo image={image} alt={imageAlt} ratio="16:9" widths={[360, 720, 1080]} sizes="(min-width: 1024px) 680px, 100vw" placeholderLabel={placeholderLabel} />
+      {facts.length > 0 && <FactList label={factsLabel} columns={4} attached>{facts.map((f) => <FactCell label={f.label} value={f.value} emoji={f.emoji} />)}</FactList>}
+    </div>
+    {credit && <figcaption class="text-label article-entry__credit">{credit}</figcaption>}
+  </figure>
+  <div class="article-entry__body"><slot /></div>
+  <p class="article-entry__link"><TextLink href={href} arrow>{linkLabel}</TextLink></p>
+</article>
+<style>
+  .article-entry { --entry-color: var(--color-brand); display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-4); }
+  .article-entry__header { display: grid; gap: var(--space-1); }
+  .article-entry__title { margin: 0; color: var(--color-text-strong); }
+  .article-entry__number { color: var(--color-text-muted); }
+  .article-entry__meta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-1) var(--space-3); margin: 0; color: var(--color-text-muted); }
+  .article-entry__kind { color: var(--color-brand); }
+  .article-entry__by { color: var(--color-text-strong); }
+  .article-entry__by { display: inline-flex; align-items: center; gap: var(--space-1h); }
+  .article-entry__figure { display: grid; gap: var(--space-2); margin: 0; }
+  .article-entry__media { display: grid; grid-template-columns: minmax(0, 1fr); border-radius: var(--radius-container); overflow: hidden; }
+  .article-entry__media :global(.fact-cell) { background: var(--color-surface-card); }
+  .article-entry__credit { margin: 0; text-align: center; color: var(--color-text-muted); }
+  .article-entry__body { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-4); }
+  .article-entry__body > :global(*) { margin: 0; }
+  .article-entry__link { margin: 0; }
+</style>

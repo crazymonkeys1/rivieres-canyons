@@ -1,0 +1,18 @@
+---
+// L5 RelatedCard: a link to another page, as a photo (3:2), its name and an optional one-line summary. Laid out in a grid by the template.
+import type { ImageMetadata } from 'astro';
+import Photo from '../atoms/Photo.astro';
+interface Props { href: string; title: string; image: ImageMetadata | null; placeholderLabel?: string; text?: string | null }
+const { href, title, image, placeholderLabel, text } = Astro.props;
+---
+<a class="related-card" href={href}>
+  <Photo image={image} alt="" ratio="3:2" widths={[320, 640]} sizes="(min-width: 1024px) 360px, 100vw" placeholderLabel={placeholderLabel} class="related-card__photo" />
+  <span class="text-title related-card__title">{title}</span>
+  {text && <span class="text-body related-card__text">{text}</span>}
+</a>
+<style>
+  .related-card { display: grid; gap: var(--space-2); color: var(--color-text-strong); text-decoration: none; }
+  .related-card :global(.related-card__photo) { border-radius: var(--radius-container); }
+  .related-card__text { color: var(--color-text-body); }
+  .related-card:hover .related-card__title { color: var(--color-brand-hover); text-decoration: underline; }
+</style>

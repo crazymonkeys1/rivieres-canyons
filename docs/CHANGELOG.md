@@ -35,6 +35,20 @@ Layer (which projects a rule applies to):
 
 ## Changes
 
+### 2026-10-08 · Phase 4: organisms, templates and every page
+- **Layer:** Core · Directory · Places · Site
+- **Change:**
+  - Pages: place (`/destinations/{slug}/`), listing with filters (`/`), intent articles (`/blog/{slug}/`), blog index, filter landing pages (`/cascades/`, `/canyons/`, `/rivieres/`, `/communes/{commune}/`: types and communes with 3+ published places), guide pages (`/guides/{slug}/`), about, contact, legal notice, privacy. 45 pages in all.
+  - Templates: ArticleTemplate, CollectionTemplate, ProfileTemplate, DocumentTemplate (Core); ListingTemplate (Directory); PlaceTemplate (Places).
+  - New components: Photo (atom), GuideSection, GuidePitch, ProfileHeader; the article organisms AnswerSummary, TableOfContents, TakeawayList, ArticleSection, ArticleEntry, RelatedCard.
+  - Computed text, never hand-written facts: an article's selection (its saved filters and named rule), entry facts, FAQ and reading time; a filter page's intro, short answer and FAQ (counts, guided places, access). Wording is in the site texts (`copy.ts`, overridable in Airtable).
+  - Articles never list a closed place (`location_policy: closed` or access status closed): no directions to a closed site.
+  - Operator colours are decoration only (rings, rules), never text: some brand colours fail contrast as text.
+  - Pages still to write go in as placeholders: privacy text `[PRIVACY_POLICY_TEXT]` and legal notice `[LEGAL_NOTICE_TEXT]`; both pages are `noindex` meanwhile and a production build fails on them.
+- **Why:** phase 4 of the build plan (CLAUDE.md §13).
+- **How to apply elsewhere:** a new directory reuses the templates and organisms as they are; it writes its own `site.config.ts`, site texts and the small content helpers (`article.ts`, `collection.ts`) for its own facts.
+- **Status:** Rivières & Canyons ✅ · Mangrove ⏳ · Template ✅
+
 ### 2026-10-07 · Phase 3: design system in code (atoms, molecules, style guide, checks)
 - **Layer:** Core
 - **Change:**

@@ -1,0 +1,20 @@
+---
+// L5 GuidePitch: the closing "why go with a guide" card of an article: heading, short text, the reasons, and links.
+import SectionHeader from '@orbit/core/components/molecules/SectionHeader.astro';
+import BenefitList from '@orbit/core/components/organisms/BenefitList.astro';
+import TextLink from '@orbit/core/components/atoms/TextLink.astro';
+interface Props { id: string; title: string; text?: string | null; points: { emoji?: string; title: string; text: string }[]; links: { label: string; href: string }[] }
+const { id, title, text, points, links } = Astro.props;
+---
+<div class="guide-pitch">
+  <SectionHeader id={id} title={title} />
+  {text && <p class="text-read guide-pitch__text">{text}</p>}
+  {points.length > 0 && <BenefitList items={points} />}
+  {links.length > 0 && <p class="guide-pitch__links">{links.map((l, i) => <TextLink href={l.href} emphasis={i === 0 ? 'action' : 'quiet'}>{l.label}</TextLink>)}</p>}
+</div>
+<style>
+  .guide-pitch { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-4); padding: var(--space-5); background: var(--color-surface-card); border: 1px solid var(--color-border-default); border-radius: var(--radius-container); }
+  .guide-pitch__text { margin: 0; color: var(--color-text-body); }
+  .guide-pitch__links { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-5); margin: 0; }
+  .guide-pitch :global(.benefit-list__item) { background: var(--color-surface-inset); }
+</style>

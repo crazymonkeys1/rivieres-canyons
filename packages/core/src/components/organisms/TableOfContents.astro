@@ -1,0 +1,18 @@
+---
+// L5 TableOfContents: the numbered list of a long page's sections, each a 44px link to the section's H2.
+interface Props { label: string; items: { href: string; label: string }[] }
+const { label, items } = Astro.props;
+---
+<nav class="table-of-contents" aria-labelledby="toc-label">
+  <p id="toc-label" class="text-label is-upper table-of-contents__label">{label}</p>
+  <ol class="table-of-contents__list text-body">
+    {items.map((i) => <li><a class="table-of-contents__link" href={i.href}>{i.label}</a></li>)}
+  </ol>
+</nav>
+<style>
+  .table-of-contents { display: grid; gap: var(--space-1); padding-inline-start: var(--space-4); border-inline-start: 2px solid var(--color-border-default); }
+  .table-of-contents__label { margin: 0; color: var(--color-text-muted); }
+  .table-of-contents__list { margin: 0; padding-inline-start: var(--space-5); color: var(--color-text-muted); }
+  .table-of-contents__link { display: inline-flex; align-items: center; min-block-size: var(--tap-size-min); color: var(--color-text-strong); text-decoration: none; }
+  .table-of-contents__link:hover { color: var(--color-brand-hover); text-decoration: underline; }
+</style>

@@ -1,0 +1,23 @@
+---
+// L6 ArticleTemplate: the order and layout of a long-form article, no content. Hero across the page, then one reading
+// column (--container-article) of sections spaced by --article-gap, then a full-width "after" area (related pages).
+// Slots, in order: hero · default (the parts, each a <section>) · after
+---
+<div class="article-template">
+  <slot name="hero" />
+  <div class="article-template__body"><slot /></div>
+  {Astro.slots.has('after') && <div class="article-template__after"><slot name="after" /></div>}
+</div>
+<style>
+  .article-template__body { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--article-gap); inline-size: 100%; max-inline-size: var(--container-article); margin-inline: auto; padding: var(--article-gap) var(--page-gutter-read); }
+  .article-template__body > :global(*) { margin: 0; }
+  .article-template__body > :global(:is(section, footer)) { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-4); scroll-margin-top: var(--space-6); }
+  .article-template__body > :global(:is(section, footer)) > :global(:where(p, h2, h3, ul, ol, dl, figure, hr, div)) { margin: 0; }   /* the gap is the only vertical rhythm */
+  .article-template__body > :global(section.is-entries) > :global(article + article) { margin-block-start: calc(var(--entry-gap) - var(--space-4)); }   /* selection entries breathe more */
+  .article-template__body :global(h2) { scroll-margin-top: var(--space-6); }
+  .article-template__after { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-4); inline-size: 100%; max-inline-size: var(--container-page); margin-inline: auto; padding: 0 var(--page-gutter) var(--section-y); }
+  .article-template__after > :global(*) { margin: 0; }
+  .article-template__after > :global(section) { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-4); }
+  /* Layout helper for a grid of cards (RelatedCard, DestinationCard). */
+  .article-template :global(.article-template__cards) { --cards-min: 240px; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--cards-min)), 1fr)); gap: var(--space-4); margin: 0; padding: 0; list-style: none; }
+</style>

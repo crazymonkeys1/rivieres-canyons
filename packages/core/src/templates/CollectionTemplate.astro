@@ -1,0 +1,22 @@
+---
+// L6 CollectionTemplate: the order and layout of a collection page (filter landing page, blog index), no content.
+// Hero across the page, then sections: text sections stay in the reading column, `.is-wide` sections (card grids)
+// use the page width. Slots, in order: hero · default (the sections) · after
+---
+<div class="collection-template">
+  <slot name="hero" />
+  <div class="collection-template__body"><slot /></div>
+  {Astro.slots.has('after') && <div class="collection-template__body"><slot name="after" /></div>}
+</div>
+<style>
+  .collection-template__body { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--article-gap); inline-size: 100%; max-inline-size: var(--container-page); margin-inline: auto; padding: var(--article-gap) var(--page-gutter); }
+  .collection-template__body + .collection-template__body { padding-block-start: 0; }
+  .collection-template__body > :global(*) { margin: 0; }
+  .collection-template__body > :global(:is(section, div, p)) { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-4); inline-size: 100%; max-inline-size: var(--container-read); margin-inline: auto; scroll-margin-top: var(--space-6); }
+  .collection-template__body > :global(.is-wide) { max-inline-size: none; }
+  .collection-template__body > :global(section) > :global(:where(p, h2, h3, ul, ol, dl, div)) { margin: 0; }
+  .collection-template__body > :global(section) > :global(header) { max-inline-size: var(--container-read); }
+  /* Layout helper for a grid of cards (DestinationCard, RelatedCard). */
+  .collection-template :global(.collection-template__cards) { --cards-min: 290px; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--cards-min)), 1fr)); gap: var(--space-4); margin: 0; padding: 0; list-style: none; }
+  .collection-template :global(.collection-template__cards.is-compact) { --cards-min: 240px; }
+</style>

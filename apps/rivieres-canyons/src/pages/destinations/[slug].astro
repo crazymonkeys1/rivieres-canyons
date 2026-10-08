@@ -44,6 +44,7 @@ import {
 import { keyFacts, placeFact, offerFact, factValue, minutes, gearIcon, keyFactIcon, risk, date } from '../../content/format';
 import { PLACE_FACTS, OFFER_FACTS } from '../../content/site.config';
 import { landings } from '../../content/nav';
+import { teamCompanies } from '../../content/team';
 import type { Destination } from '../../content/schema';
 
 export function getStaticPaths() {
@@ -106,16 +107,7 @@ const typeLanding = landings.find((l) => l.dimension === 'type' && l.value === p
 const breadcrumb = [{ label: t('nav.home'), href: url.home() }, ...(typeLanding && type ? [{ label: type.plural, href: url.type(p.type) }] : []), { label: name }];
 const sources = sourcesOf('listing', p.id).filter((s) => !s.featured);
 const description = (p.signature ?? p.summary ?? '').slice(0, 155);
-const companies = content.operators.map((o) => {
-  const g = guideOf(o.id);
-  return {
-    name: o.name, color: o.brand_color, guideName: g?.first_name ?? o.name, portrait: g ? portraitOf(g.photo) : null,
-    withLine: t('team.with', { guide: g?.first_name ?? '' }), credential: t(`team.credential.${o.id}` as any), text: t(`team.operator.${o.id}` as any),
-    write: { label: t('place.offer_write', { guide: g?.first_name ?? '' }), href: g ? url.whatsapp(g.id, url.place(p.id)) : o.contact_url ?? o.website_url },
-    profile: { label: t('team.profile'), href: g ? url.guide(g.id) : url.about() },
-    website: { label: new URL(o.website_url).hostname.replace(/^www\./, ''), href: o.website_url },
-  };
-});
+const companies = teamCompanies(url.place(p.id));
 ---
 <SiteLayout title={`${name} · ${t('site.name')}`} description={description} path={url.place(p.id)}>
   <PlaceTemplate>

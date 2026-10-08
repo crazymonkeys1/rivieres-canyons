@@ -18,6 +18,7 @@ The detailed, always-current list of data gaps is generated in `docs/CONTENT_REP
 | L7 | Account names for 2 social posts on Cascade aux Écrevisses | Jordan → Airtable | 2026-10-07 | open |
 | L8 | Privacy policy text (generated later from `docs/PRIVACY_CONTEXT.md`; open items in its §3) | Jordan | 2026-10-07 | open |
 | L9 | 7 guide stories ("Pourquoi je vous emmène ici") drafted from the guides' tips: each guide approves or rewrites, then sets "Histoire — statut" to Validée | Guides | 2026-10-07 | open |
+| L10 | Legal notice ("Mentions légales"): publisher, director of publication, host. The page exists with the token `[LEGAL_NOTICE_TEXT]` above the safety disclaimer | Jordan | 2026-10-08 | open |
 
 ## To validate (not blocking)
 
@@ -30,6 +31,10 @@ The detailed, always-current list of data gaps is generated in `docs/CONTENT_REP
 | V5 | Yalodé logo | Jordan → Airtable | 2026-10-07 | open |
 | V7 | Near-duplicate outing tags, kept as written: "Famille" / "Formule Family"; "Journée" / "Journée complète" / "Journée entière"; "Rappel encadré" / "Rappels enchaînés" / "Rappels hauts". Merge? | Guides | 2026-10-07 | open |
 | V8 | Yalodé brand colour: old base `#14342A`, v12 design `#0A8577` (kept) | Jordan | 2026-10-07 | open |
+| V9 | Site texts pending your OK (wording in `copy.ts`): C1 neutral first sentence of the disclaimer; C2 footer "Site indépendant…" instead of "Prototype"; C3 listing subtitle without "en toute sécurité"; the listing card button "Y aller en sécurité" is kept (it describes a guided outing) | Jordan | 2026-10-08 | open |
+| V10 | Site texts written in phase 4 for the new pages: blog intro, author line "Guides diplômés d'État en canyoning, en Basse-Terre depuis plus de 8 ans" (from the v12 design), contact intro, menu label "Les lieux" (instead of "Sites en accès libre") | Jordan | 2026-10-08 | open |
+| V11 | "Baignade en rivière" lists every place whose swimming is filled in, so Saut de la Lézarde appears without a note (its access is "à vérifier"). Add an angle note or exclude it in the article's selection | Jordan | 2026-10-08 | open |
+| V12 | Footer link colour: the muted grey on the cream footer was too light, so footer titles use body text. Darken `--palette-ink-500` for every muted text, or keep as is | Jordan | 2026-10-08 | open |
 
 ## Next actions (phase 2)
 
@@ -41,6 +46,17 @@ The detailed, always-current list of data gaps is generated in `docs/CONTENT_REP
 | N3 | ~~Allow `api.airtable.com` in the cloud environment~~: the settings screen fails ("Couldn't update environment"); replaced by the GitHub job, which reaches Airtable | — | 2026-10-07 | replaced |
 | N4 | Interfaces (`docs/AIRTABLE_INTERFACES.md`): **deferred** (Jordan, 2026-10-07: only Orbit edits for now, in the base directly). "Mon espace" for the guides when they start editing; "Orbit · Contenu" optional | Jordan | 2026-10-07 | deferred |
 | N6 | ~~`pull-content` test~~: done, content identical | — | 2026-10-07 | done |
+
+## Noted for later phases
+
+| # | What | Phase | Opened | Status |
+|---|---|---|---|---|
+| P1 | JSON-LD (TouristAttraction, Article, CollectionPage, Person…), sitemap, `robots.txt`, `llms.txt`, Markdown twins, completeness `noindex` | 5 | 2026-10-08 | open |
+| P2 | Computed FAQ "Comment aller à {lieu} ?" on public places | 5 | 2026-10-08 | open |
+| P3 | `/go/book/{offer or company}/` and `/go/whatsapp/{guide}/` redirects (the guide page's "Réserver sur {company}" uses the company id) | 6 | 2026-10-08 | open |
+| P4 | Lead form: steps 2 and 3 (phone, thank you), Turnstile, `/api/lead`, D1 | 6 | 2026-10-08 | open |
+| P5 | Social posts show no thumbnail (we never hotlink); download them with the photos if wanted | later | 2026-10-08 | open |
+| P6 | Small UI choices kept from the build: the listing safety banner is not collapsible; 2 quick filters inline on desktop (the rest in "Filtres"); default sort: guided outings first, then by name | review | 2026-10-08 | open |
 
 ## Worth adding (improves SEO, not blocking)
 

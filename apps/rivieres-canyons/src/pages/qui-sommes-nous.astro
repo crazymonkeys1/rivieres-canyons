@@ -1,0 +1,19 @@
+---
+// L7 About page: the team text and the companies (GuideSection), in DocumentTemplate.
+import SiteLayout from '../layouts/SiteLayout.astro';
+import DocumentTemplate from '@orbit/core/templates/DocumentTemplate.astro';
+import GuideSection from '@orbit/directory/components/GuideSection.astro';
+import { t, url } from '../content/site';
+import { teamCompanies } from '../content/team';
+---
+<SiteLayout title={`${t('footer.about')} · ${t('site.name')}`} description={t('about.description')} path={url.about()}>
+  <DocumentTemplate>
+    <Fragment slot="header">
+      <p class="text-label is-upper">{t('team.eyebrow')}</p>
+      <h1 class="text-display">{t('team.title')}</h1>
+    </Fragment>
+    <p class="text-read">{t('team.text_1')}</p>
+    <p class="text-read">{t('team.text_2')}</p>
+    <GuideSection slot="after" id="les-guides" eyebrow={t('site.name')} title={t('nav.guides')} paragraphs={[]} companies={teamCompanies(url.about())} />
+  </DocumentTemplate>
+</SiteLayout>
