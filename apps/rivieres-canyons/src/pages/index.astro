@@ -8,6 +8,7 @@ import FiltersSheet from '@orbit/directory/components/FiltersSheet.astro';
 import DestinationCard from '@orbit/directory/components/DestinationCard.astro';
 import SafetyAlert from '@orbit/places/components/SafetyAlert.astro';
 import LeadCapture from '@orbit/core/components/organisms/LeadCapture.astro';
+import { LEAD, consentVersion } from '../content/conversion';
 import EmptyState from '@orbit/core/components/organisms/EmptyState.astro';
 import Photo from '@orbit/core/components/atoms/Photo.astro';
 import Badge from '@orbit/core/components/atoms/Badge.astro';
@@ -68,9 +69,11 @@ const sortOptions = [{ value: 'default', label: t('listing.sort_default'), selec
         {index === LEAD_AFTER - 1 && (
           <li class="is-full" data-feed-slot={LEAD_AFTER}>
             <LeadCapture id="top5" eyebrow={t('lead.eyebrow')} title={t('lead.title')} text={t('lead.text')} action="/api/lead"
-              emailLabel={t('lead.email')} emailPlaceholder={t('lead.email_placeholder')} submitLabel={t('lead.submit')}
-              consentText={t('lead.consent')} privacy={{ label: t('lead.privacy'), href: url.privacy() }}
-              hidden={{ site: 'rivieres-canyons', source: 'listing', magnet: 'top5', page: url.home() }} />
+              emailLabel={t('lead.email')} emailPlaceholder={t('lead.email_placeholder')} submitLabel={t('lead.submit')} sendingLabel={t('lead.sending')}
+              consentText={LEAD.consentText()} consentVersion={consentVersion(LEAD.consentText())} privacy={{ label: t('lead.privacy'), href: url.privacy() }}
+              phone={{ text: t('lead.phone_text'), placeholder: t('lead.phone_placeholder'), submit: t('lead.phone_submit'), skip: t('lead.phone_skip') }}
+              doneText={t('lead.done')} errorText={t('lead.error')} turnstileSiteKey={import.meta.env.PUBLIC_TURNSTILE_SITE_KEY}
+              hidden={{ site: LEAD.site, source: 'listing', magnet: LEAD.magnet, page: url.home() }} />
           </li>
         )}
       </>

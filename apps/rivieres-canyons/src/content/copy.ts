@@ -77,6 +77,13 @@ export const COPY_DEFAULTS = {
   'lead.submit': 'Recevoir',
   'lead.consent': "J'accepte de recevoir le top 5 et les conseils de sortie de Pascal et Quentin par e-mail. Désinscription en un clic.",
   'lead.privacy': 'Politique de confidentialité',
+  'lead.phone_text': 'Ajoutez votre numéro pour recevoir la surprise sur WhatsApp (facultatif)',
+  'lead.phone_placeholder': 'votre numéro',
+  'lead.phone_submit': 'Ajouter',
+  'lead.phone_skip': 'Non merci',
+  'lead.done': 'Le top 5 (et sa petite surprise) arrive vite.',
+  'lead.error': "L'envoi n'a pas abouti. Vérifiez votre e-mail et réessayez dans un instant.",
+  'lead.sending': 'Envoi…',
 
   // Place page
   'place.overview_eyebrow': 'Aperçu',
@@ -348,8 +355,16 @@ export const COPY_DEFAULTS = {
   'llms.guides': 'Les guides',
   'llms.about': 'À propos',
 
+  // Page not found
+  'notfound.title': 'Page introuvable',
+  'notfound.text': "Cette page n'existe pas ou a changé d'adresse.",
+  'notfound.home': 'Voir tous les lieux',
+  'notfound.blog': 'Idées de sorties',
+
   // Contact (WhatsApp message, CLAUDE.md §9)
-  'contact.whatsapp_message': 'Bonjour {guide}, je vous écris depuis {site} au sujet de {subject}.',
+  'contact.whatsapp_message': 'Bonjour {guide}, je vous écris depuis {site} au sujet {subject}.',
+  'contact.subject_named': 'de « {name} »',
+  'contact.subject_default': "d'une sortie",
 } as const;
 
 export type CopyKey = keyof typeof COPY_DEFAULTS;

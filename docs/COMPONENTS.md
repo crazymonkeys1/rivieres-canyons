@@ -91,7 +91,7 @@ Status: ✅ in the reference · 🆕 needed by the system but only implied in th
 | **ReviewCard** ✅ | ReviewCard | Rating + Quote + attribution | | Real, sourced reviews only. | |
 | **GuideOfferCard** ✅ | GuideOfferCard | operator Avatar + name + Price + Button + TextLink + alt switch | | Inline on mobile. ≥1024: sticky 340px column. | `Guide Offer Card.dc.html` |
 | **StickyBooking** ✅ | MobileStickyCTA | Avatar + summary + Button | | Mobile only, hides on scroll-down, `--z-cta`, `--elevation-bar`. | |
-| **LeadCapture** ✅ | LeadMagnetBand | overline + title + body + TextInput + Button + Checkbox | `step: main \| secondary \| done` | Stacks (52px field, 52px button) on phones, one row from ~480px without a media query. Consent never pre-checked; button disabled until valid. | Listing feed. |
+| **LeadCapture** ✅ | LeadMagnetBand | overline + title + body + TextInput + Button + Checkbox | `step: main \| secondary \| done` | Stacks (52px field, 52px button) on phones, one row from ~480px without a media query. Consent never pre-checked; button disabled until valid. Steps 2 (phone, « Non merci ») and 3 (`role="status"`) built in phase 6; posts JSON to `/api/lead`; Turnstile loaded on first use. | Listing feed. |
 | **GuideContactLink** ✅ | WhatsAppLink | Button/TextLink → `wa.me` | | Pre-filled message (see DESIGN_SYSTEM). | |
 | **BookingLink** ✅ | BookingLink | Button → `operator.bookUrl` | | New tab; goes through `/go/book/*`. | |
 | **GuideSection** 🆕 | (#guides "Qui sommes-nous") | Avatars + SectionHeader + prose + one block per company (Avatar, name, credential, text, TextLinks) | | Dark band, white panel; company blocks `auto-fit minmax(240px)`. | Place pages, about page. Phase 4. |

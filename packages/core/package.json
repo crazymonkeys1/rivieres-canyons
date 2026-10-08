@@ -9,7 +9,8 @@
     "./styles/*": "./src/styles/*",
     "./components/*": "./src/components/*",
     "./templates/*": "./src/templates/*",
-    "./seo": "./src/seo/index.ts"
+    "./seo": "./src/seo/index.ts",
+    "./edge": "./src/edge/index.ts"
   },
   "dependencies": {
     "zod": "^3.25.0",

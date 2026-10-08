@@ -3,3 +3,6 @@ dist/
 .astro/
 .env
 .env.*
+
+# Cloudflare local state (wrangler pages dev, local D1)
+.wrangler/

@@ -1,0 +1,14 @@
+---
+// L7 Page not found (dist/404.html): Cloudflare serves it with a 404 status for every unknown address.
+import SiteLayout from '../layouts/SiteLayout.astro';
+import DocumentTemplate from '@orbit/core/templates/DocumentTemplate.astro';
+import Button from '@orbit/core/components/atoms/Button.astro';
+import { t, url } from '../content/site';
+---
+<SiteLayout path={url.notFound()}>
+  <DocumentTemplate>
+    <h1 slot="header" class="text-display">{t('notfound.title')}</h1>
+    <p class="text-read">{t('notfound.text')}</p>
+    <p class="document-template__actions"><Button href={url.home()}>{t('notfound.home')}</Button><Button variant="secondary" href={url.blog()}>{t('notfound.blog')}</Button></p>
+  </DocumentTemplate>
+</SiteLayout>

@@ -1,37 +1,125 @@
 ---
-// L5 LeadCapture: the lead magnet form on a dark panel. E-mail first; explicit consent, never pre-checked, with a link to
-// the privacy page; the button stays disabled until the e-mail is valid and consent is given.
-// Posts to the lead endpoint in the fixed lead format (the endpoint and the later steps come in phase 6).
+// L5 LeadCapture: the lead magnet form on a dark panel, in three steps (CLAUDE.md §9).
+//   1. E-mail + explicit consent (never pre-checked, link to the privacy page). The button stays disabled until the
+//      e-mail is valid and consent is given. Posts JSON to the lead endpoint in the fixed lead format.
+//   2. Optional phone number ("Ajouter"), or "Non merci".
+//   3. Confirmation (role="status").
+// Bot check: Cloudflare Turnstile, loaded only when the visitor starts using the form, and only when a site key is given.
 import Checkbox from '../atoms/Checkbox.astro';
 interface Props {
   id: string; eyebrow: string; title: string; text: string; action: string;
-  emailLabel: string; emailPlaceholder: string; submitLabel: string;
-  consentText: string; privacy: { label: string; href: string };
+  emailLabel: string; emailPlaceholder: string; submitLabel: string; sendingLabel: string;
+  consentText: string; consentVersion: string; privacy: { label: string; href: string };
+  phone: { text: string; placeholder: string; submit: string; skip: string };
+  doneText: string; errorText: string; turnstileSiteKey?: string;
   hidden: { site: string; source: string; magnet: string; page: string };
 }
-const { id, eyebrow, title, text, action, emailLabel, emailPlaceholder, submitLabel, consentText, privacy, hidden } = Astro.props;
+const { id, eyebrow, title, text, action, emailLabel, emailPlaceholder, submitLabel, sendingLabel, consentText, consentVersion, privacy, phone, doneText, errorText, turnstileSiteKey, hidden } = Astro.props;
 ---
-<section class="lead-capture" aria-labelledby={`${id}-title`}>
+<section class="lead-capture" id={id} aria-labelledby={`${id}-title`} data-lead data-action={action} data-sitekey={turnstileSiteKey}>
   <p class="text-label is-upper lead-capture__eyebrow">{eyebrow}</p>
   <h2 class="text-title lead-capture__title" id={`${id}-title`}>{title}</h2>
   <p class="text-body lead-capture__text">{text}</p>
-  <form class="lead-capture__form" method="post" action={action} data-lead-form novalidate>
+
+  <form class="lead-capture__form" method="post" action={action} data-lead-step="1" novalidate>
     {Object.entries(hidden).map(([k, v]) => <input type="hidden" name={k} value={v} />)}
     <input type="hidden" name="consent_text" value={consentText} />
+    <input type="hidden" name="consent_text_version" value={consentVersion} />
     <div class="lead-capture__row">
       <label for={`${id}-email`} class="visually-hidden">{emailLabel}</label>
-      <input class="lead-capture__email text-body" id={`${id}-email`} name="email" type="email" inputmode="email" autocomplete="email" enterkeyhint="send" placeholder={emailPlaceholder} required />
-      <button class="lead-capture__submit text-body is-strong" type="submit" disabled aria-disabled="true" data-lead-submit>{submitLabel}</button>
+      <input class="lead-capture__field text-body" id={`${id}-email`} name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" enterkeyhint="send" placeholder={emailPlaceholder} required />
+      <button class="lead-capture__submit text-body is-strong" type="submit" disabled aria-disabled="true" data-label={submitLabel} data-sending={sendingLabel}>{submitLabel}</button>
     </div>
     <Checkbox id={`${id}-consent`} name="consent" required onDark>{consentText} <a href={privacy.href} class="lead-capture__privacy">{privacy.label}</a></Checkbox>
+    <div class="lead-capture__check" data-lead-turnstile></div>
   </form>
+
+  <form class="lead-capture__form" data-lead-step="2" hidden novalidate>
+    <label for={`${id}-phone`} class="text-body lead-capture__text">{phone.text}</label>
+    <div class="lead-capture__row">
+      <input class="lead-capture__field text-body" id={`${id}-phone`} name="phone" type="tel" inputmode="tel" autocomplete="tel" enterkeyhint="send" placeholder={phone.placeholder} required />
+      <button class="lead-capture__submit text-body is-strong" type="submit" data-label={phone.submit} data-sending={sendingLabel}>{phone.submit}</button>
+    </div>
+    <button class="lead-capture__skip text-caption" type="button" data-lead-skip>{phone.skip}</button>
+  </form>
+
+  <p class="text-body is-strong lead-capture__done" role="status" tabindex="-1" data-lead-done hidden>✓ {doneText}</p>
+  <p class="text-caption lead-capture__error" role="alert" data-lead-error data-text={errorText}></p>
 </section>
 <script>
-  for (const form of document.querySelectorAll<HTMLFormElement>('[data-lead-form]')) {
-    const email = form.querySelector<HTMLInputElement>('input[type=email]')!, consent = form.querySelector<HTMLInputElement>('input[name=consent]')!;
-    const submit = form.querySelector<HTMLButtonElement>('[data-lead-submit]')!;
-    const update = () => { const ok = email.validity.valid && email.value.trim() !== '' && consent.checked; submit.disabled = !ok; submit.setAttribute('aria-disabled', String(!ok)); };
-    form.addEventListener('input', update); form.addEventListener('change', update); update();
+  type Lead = { id: string; token: string };
+  const utm = () => {
+    // UTM parameters of the visit (kept for the session so a later page still knows the campaign).
+    const fromUrl = Object.fromEntries([...new URLSearchParams(location.search)].filter(([k]) => k.startsWith('utm_')));
+    try {
+      if (Object.keys(fromUrl).length) sessionStorage.setItem('utm', JSON.stringify(fromUrl));
+      return Object.keys(fromUrl).length ? fromUrl : JSON.parse(sessionStorage.getItem('utm') ?? '{}');
+    } catch { return fromUrl; }
+  };
+  let turnstileLoading: Promise<void> | null = null;
+  const loadTurnstile = () => turnstileLoading ??= new Promise<void>((resolve, reject) => {
+    const s = document.createElement('script');
+    s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+    s.async = true; s.onload = () => resolve(); s.onerror = () => reject(new Error('turnstile'));
+    document.head.append(s);
+  });
+
+  for (const box of document.querySelectorAll<HTMLElement>('[data-lead]')) {
+    const step1 = box.querySelector<HTMLFormElement>('[data-lead-step="1"]')!, step2 = box.querySelector<HTMLFormElement>('[data-lead-step="2"]')!;
+    const email = step1.querySelector<HTMLInputElement>('input[type=email]')!, consent = step1.querySelector<HTMLInputElement>('input[name=consent]')!;
+    const submit = step1.querySelector<HTMLButtonElement>('button[type=submit]')!;
+    const done = box.querySelector<HTMLElement>('[data-lead-done]')!, error = box.querySelector<HTMLElement>('[data-lead-error]')!;
+    const siteKey = box.dataset.sitekey, action = box.dataset.action!;
+    let turnstileToken = '', lead: Lead | null = null, widget = false;
+
+    const valid = () => email.validity.valid && email.value.trim() !== '' && consent.checked;
+    const update = () => { const ok = valid(); submit.disabled = !ok; submit.setAttribute('aria-disabled', String(!ok)); };
+    const busy = (b: HTMLButtonElement, on: boolean) => { b.disabled = on; b.textContent = on ? b.dataset.sending! : b.dataset.label!; };
+    const fail = () => { error.textContent = error.dataset.text!; };
+    const finish = () => { step1.hidden = true; step2.hidden = true; done.hidden = false; done.focus(); };
+    const startCheck = async () => {
+      if (!siteKey || widget) return;
+      widget = true;
+      try {
+        await loadTurnstile();
+        (window as any).turnstile.render(box.querySelector('[data-lead-turnstile]'), {
+          sitekey: siteKey, appearance: 'interaction-only', language: document.documentElement.lang || 'auto',
+          callback: (t: string) => { turnstileToken = t; }, 'expired-callback': () => { turnstileToken = ''; },
+        });
+      } catch { widget = false; }
+    };
+    const post = async (body: object) => {
+      const r = await fetch(action, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+      const j = await r.json().catch(() => ({ ok: false }));
+      if (!r.ok || !j.ok) throw new Error(j.error ?? 'lead');
+      return j;
+    };
+
+    step1.addEventListener('input', update); step1.addEventListener('change', update); update();
+    step1.addEventListener('focusin', startCheck, { once: true });
+    step1.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!valid()) return;
+      error.textContent = ''; busy(submit, true);
+      const f = new FormData(step1);
+      try {
+        const j = await post({
+          site: f.get('site'), source: f.get('source'), magnet: f.get('magnet'), page: f.get('page'), email: email.value.trim(),
+          consent: true, consent_text: f.get('consent_text'), consent_text_version: f.get('consent_text_version'), utm: utm(), turnstile: turnstileToken,
+        });
+        lead = { id: j.id, token: j.token };
+        step1.hidden = true; step2.hidden = false; step2.querySelector<HTMLInputElement>('input')!.focus();
+      } catch { fail(); busy(submit, false); update(); (window as any).turnstile?.reset?.(); }
+    });
+    const phoneButton = step2.querySelector<HTMLButtonElement>('button[type=submit]')!;
+    step2.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const phone = step2.querySelector<HTMLInputElement>('input')!.value.trim();
+      if (!phone || !lead) return finish();
+      error.textContent = ''; busy(phoneButton, true);
+      try { await post({ id: lead.id, token: lead.token, phone }); finish(); } catch { fail(); busy(phoneButton, false); }
+    });
+    step2.querySelector('[data-lead-skip]')!.addEventListener('click', finish);
   }
 </script>
 <style>
@@ -41,11 +129,17 @@ const { id, eyebrow, title, text, action, emailLabel, emailPlaceholder, submitLa
   .lead-capture__title { color: var(--color-text-inverse); }
   .lead-capture__text { max-inline-size: var(--container-narrow); color: var(--color-text-inverse-secondary); }
   .lead-capture__form { display: grid; gap: var(--space-2); margin-block-start: var(--space-2); }
+  .lead-capture__form[hidden] { display: none; }
   .lead-capture__row { --lead-field: 52px; --lead-email-basis: 240px; --lead-button-basis: 160px; display: flex; flex-wrap: wrap; gap: var(--space-2); }
-  .lead-capture__email { flex: 1 1 var(--lead-email-basis); min-block-size: var(--lead-field); padding-inline: var(--space-4); border: 0; border-radius: var(--radius-control); background: var(--color-surface-card); color: var(--color-text-strong); box-shadow: var(--elevation-input); }
-  .lead-capture__email:focus-visible { outline-color: var(--color-focus-ring-inverse); }
+  .lead-capture__field { flex: 1 1 var(--lead-email-basis); min-block-size: var(--lead-field); padding-inline: var(--space-4); border: 0; border-radius: var(--radius-control); background: var(--color-surface-card); color: var(--color-text-strong); box-shadow: var(--elevation-input); }
+  .lead-capture__field:focus-visible { outline-color: var(--color-focus-ring-inverse); }
   .lead-capture__submit { flex: 1 1 var(--lead-button-basis); min-block-size: var(--lead-field); border: 0; border-radius: var(--radius-control); background: var(--color-action-primary); color: var(--color-text-inverse); cursor: pointer; }
   .lead-capture__submit:hover:not(:disabled) { background: var(--color-action-primary-hover); }
   .lead-capture__submit:disabled { opacity: 0.5; cursor: not-allowed; }
+  .lead-capture__skip { justify-self: start; min-block-size: var(--tap-size-min); padding: 0; border: 0; background: none; color: var(--color-text-inverse-secondary); text-decoration: underline; cursor: pointer; }
+  .lead-capture__skip:focus-visible, .lead-capture__submit:focus-visible, .lead-capture__privacy:focus-visible { outline-color: var(--color-focus-ring-inverse); }
   .lead-capture__privacy { color: var(--color-text-inverse); text-decoration: underline; }
+  .lead-capture__done { margin-block-start: var(--space-2); color: var(--color-text-inverse); }
+  .lead-capture__error { color: var(--color-text-inverse); }
+  .lead-capture__error:empty, .lead-capture__check:empty { display: none; }
 </style>

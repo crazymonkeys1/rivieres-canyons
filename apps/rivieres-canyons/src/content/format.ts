@@ -45,5 +45,3 @@ export const risk = (key: string) => ({ label: (RISKS as any)[key]?.label ?? key
 /** "2026-10-02" → "2 octobre 2026". */
 export const date = (iso: string) => new Date(iso).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
 
-/** The WhatsApp message (CLAUDE.md §9). */
-export const whatsappMessage = (guide: string, subject: string) => t('contact.whatsapp_message', { guide, site: t('site.name'), subject });

@@ -253,6 +253,7 @@ function staticPages(): PageEntry[] {
     documentPage(url.legal(), t('legal.title'), t('legal.description'), isPlaceholder(t('legal.publisher')) ? null
       : new Md().h1(t('legal.title')).p(t('legal.publisher')).h2(t('legal.full_summary')).p(t('legal.full_1')).p(t('legal.full_2')).p(t('legal.full_3')).p(t('legal.full_4'))),
     documentPage(url.privacy(), t('privacy.title'), t('privacy.description'), isPlaceholder(privacyText) ? null : new Md().h1(t('privacy.title')).add(privacyText!)),
+    documentPage(url.notFound(), t('notfound.title'), t('notfound.text'), null),
   ];
 }
 

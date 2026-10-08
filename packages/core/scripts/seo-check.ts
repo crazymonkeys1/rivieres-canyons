@@ -10,7 +10,7 @@ const walk = (dir: string): string[] => readdirSync(dir).flatMap((f) => statSync
 if (!existsSync(dist)) { console.error(`seo:check · ${dist} is missing: build first`); process.exit(1); }
 const files = walk(dist);
 const read = (f: string) => readFileSync(f, 'utf8');
-const pages = files.filter((f) => f.endsWith('.html') && !relative(dist, f).startsWith('style-guide'));
+const pages = files.filter((f) => f.endsWith('.html') && !relative(dist, f).startsWith('style-guide') && relative(dist, f) !== '404.html');
 const pathOf = (f: string) => '/' + relative(dist, f).replace(/index\.html$/, '');
 
 const sitemapFile = join(dist, 'sitemap.xml');
@@ -49,7 +49,7 @@ for (const f of ['llms.txt', 'llms-full.txt']) if (!existsSync(join(dist, f))) p
 
 if (production) {
   if (/example\.org/.test(site)) problems.push('the site domain is not set: build with SITE_URL=https://… (canonical URLs, sitemap, llms.txt)');
-  for (const f of files.filter((x) => /\.(md|txt|xml)$/.test(x))) for (const m of read(f).matchAll(/\[[A-Z][A-Z0-9_]*\]/g)) problems.push(`${relative(dist, f)}: placeholder ${m[0]}`);
+  for (const f of files.filter((x) => /\.(md|txt|xml|json)$/.test(x))) for (const m of read(f).matchAll(/\[[A-Z][A-Z0-9_]*\]/g)) problems.push(`${relative(dist, f)}: placeholder ${m[0]}`);
 }
 
 console.log(`seo:check · ${pages.length} pages · ${sitemap.length} in sitemap · ${problems.length ? `${problems.length} problem(s)` : 'pass'}`);

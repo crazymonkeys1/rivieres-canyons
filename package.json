@@ -3,7 +3,7 @@
   "private": true,
   "packageManager": "pnpm@10.28.0",
   "scripts": {
-    "check": "pnpm design:check && pnpm --filter rivieres-canyons content:check && pnpm --filter rivieres-canyons airtable:export",
+    "check": "pnpm design:check && pnpm --filter rivieres-canyons content:check && pnpm --filter rivieres-canyons airtable:export && pnpm edge:test",
     "content:check": "pnpm --filter rivieres-canyons content:check",
     "content:check:prod": "pnpm --filter rivieres-canyons content:check:prod",
     "airtable:export": "pnpm --filter rivieres-canyons airtable:export",
@@ -12,7 +12,8 @@
     "design:check": "tsx packages/core/scripts/design-check.ts",
     "build": "pnpm --filter rivieres-canyons build",
     "seo:check": "tsx packages/core/scripts/seo-check.ts apps/rivieres-canyons/dist",
-    "seo:check:prod": "tsx packages/core/scripts/seo-check.ts apps/rivieres-canyons/dist --production"
+    "seo:check:prod": "tsx packages/core/scripts/seo-check.ts apps/rivieres-canyons/dist --production",
+    "edge:test": "tsx packages/core/scripts/edge-test.ts"
   },
   "devDependencies": {
     "tsx": "^4.23.15"

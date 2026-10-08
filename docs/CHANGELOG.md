@@ -35,6 +35,25 @@ Layer (which projects a rule applies to):
 
 ## Changes
 
+### 2026-10-08 · Phase 6: conversion (/go/ redirects, lead form, analytics)
+- **Layer:** Core (edge functions, LeadCapture, PageShell) · Site (targets, wording)
+- **Change:**
+  - **`@orbit/core/edge`**, the only server code, run as Cloudflare Pages Functions (`apps/rivieres-canyons/functions/`):
+    - `/go/book/{outing or company}/`: logs the click, then redirects to the company's booking page with `utm_source`, `utm_medium=referral`, `utm_campaign` (the outing) and `utm_content` (the page the click came from). Placeholder booking URL → the company's website.
+    - `/go/whatsapp/{guide}/?ref=…`: logs the click, then opens `wa.me` with « Bonjour {guide}, je vous écris depuis {site} au sujet de « {sortie ou lieu} ». » (the guide's outing on that place when there is one, else the place, else « d'une sortie »). Placeholder number → the company's contact page.
+    - `/api/lead`: step 1 stores the lead in the fixed format (`site, source, magnet, page, email, consent, consent_text, consent_text_version, utm, created_at`) after the Turnstile check; step 2 adds the optional phone with a one-time token. Forwards to `LEAD_ENDPOINT` when it is set (the Orbit CRM later: a setting, no code).
+    - Click logs keep kind, id, source page, UTM and time: no IP, no browser details (PRIVACY_CONTEXT §2).
+  - The functions hold no site data: the site publishes `/go/targets.json` (where each id leads, message wording, accepted lead values), built from the content.
+  - `consent_text_version` is a short fingerprint of the consent wording, so it changes exactly when the wording changes; the server refuses an unknown version.
+  - **LeadCapture** steps 2 (optional phone, « Ajouter » / « Non merci ») and 3 (confirmation, `role="status"`), wording from the v12 design. Turnstile is loaded only when the visitor starts using the form.
+  - Cloudflare Web Analytics beacon in PageShell, only when `PUBLIC_CF_BEACON_TOKEN` is set.
+  - D1 schema in `migrations/0001_leads_and_clicks.sql`; `wrangler.toml` for the Pages project.
+  - 404 page (`dist/404.html`): unknown addresses now answer « 404 », not the home page with « 200 ».
+  - `pnpm edge:test` (21 tests, in GitHub "Checks") with a fake site and database; `seo:check:prod` also fails on placeholders in `go/targets.json`.
+- **Why:** phase 6 of the build plan (CLAUDE.md §9, §13).
+- **How to apply elsewhere:** a new site copies the two function files and builds its own `/go/targets.json` from its content; everything else is in `@orbit/core`.
+- **Status:** Rivières & Canyons ✅ (live once phase 7 sets the database and keys) · Mangrove ⏳ · Template ✅
+
 ### 2026-10-08 · Name with its preposition (decision V13-A)
 - **Layer:** Directory (field) · Site (headings)
 - **Change:** listings get `name_with_preposition` (Airtable « Nom avec préposition », e.g. « au Canyon doré », « aux Chutes du Carbet »). Headings built on a name use it (« Comment aller au Canyon doré », « Accéder au Canyon Ferry avec un guide », « Aller au Canyon doré avec un guide », the access FAQ question); when empty, they fall back to a wording that is correct with any name (« Canyon doré : comment y aller »). New GitHub job `add-new-columns`: adds the columns the code declares but the base lacks, without touching any row.

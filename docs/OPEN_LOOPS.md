@@ -20,6 +20,7 @@ The detailed, always-current list of data gaps is generated in `docs/CONTENT_REP
 | L9 | 7 guide stories ("Pourquoi je vous emmène ici") drafted from the guides' tips: each guide approves or rewrites, then sets "Histoire — statut" to Validée | Guides | 2026-10-07 | open |
 | L10 | Legal notice ("Mentions légales"): publisher, director of publication, host. The page exists with the token `[LEGAL_NOTICE_TEXT]` above the safety disclaimer | Jordan | 2026-10-08 | open |
 | L11 | The site's domain (`SITE_URL`): canonical URLs, sitemap and llms.txt use it. Until then `example.org` stands in and `pnpm seo:check:prod` fails | Jordan | 2026-10-08 | open |
+| L12 | **Who sends the top 5?** Leads are now stored (Cloudflare D1), but nothing e-mails the top 5 yet, while the form says « arrive vite ». Choose how it is sent (e-mail tool, or by hand at first) and write the top 5 itself; the tool also goes in the privacy text (PRIVACY_CONTEXT §3) | Jordan | 2026-10-08 | open |
 
 ## To validate (not blocking)
 
@@ -36,6 +37,7 @@ The detailed, always-current list of data gaps is generated in `docs/CONTENT_REP
 | V10 | Site texts written in phase 4 for the new pages: blog intro, author line "Guides diplômés d'État en canyoning, en Basse-Terre depuis plus de 8 ans" (from the v12 design), contact intro, menu label "Les lieux" (instead of "Sites en accès libre") | Jordan | 2026-10-08 | open |
 | V11 | "Baignade en rivière" lists every place whose swimming is filled in, so Saut de la Lézarde appears without a note (its access is "à vérifier"). Add an angle note or exclude it in the article's selection | Jordan | 2026-10-08 | open |
 | V13 | **Decided A (2026-10-08):** new column « Nom avec préposition » on Lieux (e.g. « au Canyon doré »). Run the GitHub job `add-new-columns`, fill the column (suggestions in the phase 5 report), then `pull-content`. Empty = neutral heading (« Canyon doré : comment y aller ») | Jordan → Airtable | 2026-10-08 | open |
+| V14 | Lead form steps 2 and 3 use the v12 design's wording (« Ajoutez votre numéro pour recevoir la surprise sur WhatsApp (facultatif) », « Le top 5 (et sa petite surprise) arrive vite. »). Check it with the privacy text: the phone step has no separate consent sentence | Jordan | 2026-10-08 | open |
 | V12 | Footer link colour: the muted grey on the cream footer was too light, so footer titles use body text. Darken `--palette-ink-500` for every muted text, or keep as is | Jordan | 2026-10-08 | open |
 
 ## Next actions (phase 2)
@@ -57,8 +59,9 @@ The detailed, always-current list of data gaps is generated in `docs/CONTENT_REP
 | P2 | ~~Computed FAQ "{lieu} : comment y aller ?"~~ (every place, answered by its location policy) | 5 | 2026-10-08 | done |
 | P7 | Cloudflare: turn off "Block AI bots" for the domain (CLAUDE.md §10) | 7 | 2026-10-08 | open |
 | P8 | Google Rich Results test and Search Console on the real domain (not reachable from here) | 8 | 2026-10-08 | open |
-| P3 | `/go/book/{offer or company}/` and `/go/whatsapp/{guide}/` redirects (the guide page's "Réserver sur {company}" uses the company id) | 6 | 2026-10-08 | open |
-| P4 | Lead form: steps 2 and 3 (phone, thank you), Turnstile, `/api/lead`, D1 | 6 | 2026-10-08 | open |
+| P3 | ~~`/go/book/` and `/go/whatsapp/` redirects with click log~~ | 6 | 2026-10-08 | done |
+| P4 | ~~Lead form steps 2 and 3, Turnstile, `/api/lead`, D1~~ | 6 | 2026-10-08 | done |
+| P9 | Cloudflare setup: Pages project from GitHub (root `apps/rivieres-canyons`, build `pnpm build`, output `dist`); D1 database `rivieres-canyons` + migration; Turnstile widget (site key → `PUBLIC_TURNSTILE_SITE_KEY`, secret → `TURNSTILE_SECRET`: **without the secret the bot check is skipped**); Web Analytics token → `PUBLIC_CF_BEACON_TOKEN`; `SITE_URL`; deploy hook for Airtable | 7 | 2026-10-08 | open |
 | P5 | Social posts show no thumbnail (we never hotlink); download them with the photos if wanted | later | 2026-10-08 | open |
 | P6 | Small UI choices kept from the build: the listing safety banner is not collapsible; 2 quick filters inline on desktop (the rest in "Filtres"); default sort: guided outings first, then by name | review | 2026-10-08 | open |
 

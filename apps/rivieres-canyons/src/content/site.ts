@@ -64,6 +64,8 @@ export const url = {
   legal: () => '/mentions-legales/',
   about: () => '/qui-sommes-nous/',
   contact: () => '/contact/',
+  /** The error page Cloudflare serves for unknown addresses (dist/404.html), always noindex. */
+  notFound: () => '/404/',
   /** Every outbound booking goes through /go/ (CLAUDE.md §9; the redirect itself comes in phase 6). */
   book: (offerId: string) => `/go/book/${offerId}/`,
   /** A company's booking page, when no single outing is meant (guide page). Same /go/book/ route; ids never collide with offers. */
