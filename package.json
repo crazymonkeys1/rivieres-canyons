@@ -10,7 +10,9 @@
     "airtable:link": "pnpm --filter rivieres-canyons airtable:link",
     "content:pull": "pnpm --filter rivieres-canyons content:pull",
     "design:check": "tsx packages/core/scripts/design-check.ts",
-    "build": "pnpm --filter rivieres-canyons build"
+    "build": "pnpm --filter rivieres-canyons build",
+    "seo:check": "tsx packages/core/scripts/seo-check.ts apps/rivieres-canyons/dist",
+    "seo:check:prod": "tsx packages/core/scripts/seo-check.ts apps/rivieres-canyons/dist --production"
   },
   "devDependencies": {
     "tsx": "^4.23.15"

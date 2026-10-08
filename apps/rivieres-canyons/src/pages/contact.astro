@@ -5,7 +5,7 @@ import DocumentTemplate from '@orbit/core/templates/DocumentTemplate.astro';
 import Button from '@orbit/core/components/atoms/Button.astro';
 import { content, t, url } from '../content/site';
 ---
-<SiteLayout title={`${t('contact.title')} · ${t('site.name')}`} description={t('contact.description')} path={url.contact()}>
+<SiteLayout path={url.contact()}>
   <DocumentTemplate>
     <h1 slot="header" class="text-display">{t('contact.title')}</h1>
     <p class="text-read">{t('contact.intro')}</p>

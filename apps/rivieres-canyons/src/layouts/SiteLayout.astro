@@ -1,6 +1,7 @@
 ---
 // The frame of every public page: foundation CSS + theme, document head, header and menu, footer with the full
-// safety disclaimer. Pages put their template in the default slot.
+// safety disclaimer. Pages give their path only: title, description, indexing, image and JSON-LD come from the page
+// registry (src/content/pages.ts), the same source as the sitemap, llms.txt and the Markdown twins.
 import '@orbit/core/styles/index.css';
 import '../styles/theme.css';
 import PageShell from '@orbit/core/templates/PageShell.astro';
@@ -10,11 +11,14 @@ import SiteFooter from '@orbit/core/components/organisms/SiteFooter.astro';
 import LegalNotice from '@orbit/core/components/organisms/LegalNotice.astro';
 import { t, url } from '../content/site';
 import { primaryLinks, menuGroups, footerGroups } from '../content/nav';
-interface Props { title: string; description: string; path: string; noindex?: boolean; jsonLd?: object[]; image?: string }
-const { title, description, path, noindex, jsonLd, image } = Astro.props;
+import { pageMeta, twinPath } from '../content/pages';
+interface Props { path: string }
+const { path } = Astro.props;
+const { title, description, noindex, jsonLd, image, markdown } = await pageMeta(path);
 const canonical = new URL(path, Astro.site).href;
 ---
 <PageShell title={title} description={description} canonical={canonical} noindex={noindex} jsonLd={jsonLd} image={image} siteName={t('site.name')}>
+  {markdown && <link slot="head" rel="alternate" type="text/markdown" href={twinPath(path)} />}
   <SiteHeader homeHref={url.home()} name={t('site.name')} mark={t('site.mark')} links={primaryLinks} menuLabel={t('nav.menu_open')} menuId="site-menu">
     <MenuSheet slot="menu" id="site-menu" label={t('nav.menu_open')} closeLabel={t('nav.menu_close')} primary={primaryLinks} groups={menuGroups} />
   </SiteHeader>

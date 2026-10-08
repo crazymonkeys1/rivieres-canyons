@@ -43,7 +43,8 @@ import {
 } from '../../content/site';
 import { keyFacts, placeFact, offerFact, factValue, minutes, gearIcon, keyFactIcon, risk, date } from '../../content/format';
 import { PLACE_FACTS, OFFER_FACTS } from '../../content/site.config';
-import { landings } from '../../content/nav';
+import { pageMeta } from '../../content/pages';
+import { placeFaq } from '../../content/place';
 import { teamCompanies } from '../../content/team';
 import type { Destination } from '../../content/schema';
 
@@ -103,17 +104,16 @@ const nearby = publishedPlaces
   .filter((x) => x.id !== p.id)
   .map((x) => ({ x, score: (x.location.localities.some((l) => p.location.localities.includes(l)) ? 2 : 0) + (x.location.area === p.location.area ? 1 : 0) + (offersOf(x.id).length ? 0.5 : 0) }))
   .filter((n) => n.score >= 1).sort((a, b) => b.score - a.score).slice(0, 3).map((n) => n.x);
-const typeLanding = landings.find((l) => l.dimension === 'type' && l.value === p.type);
-const breadcrumb = [{ label: t('nav.home'), href: url.home() }, ...(typeLanding && type ? [{ label: type.plural, href: url.type(p.type) }] : []), { label: name }];
+const crumbs = (await pageMeta(url.place(p.id))).breadcrumb.map((c) => ({ label: c.name, href: c.url }));
 const sources = sourcesOf('listing', p.id).filter((s) => !s.featured);
-const description = (p.signature ?? p.summary ?? '').slice(0, 155);
+const faq = placeFaq(p);
 const companies = teamCompanies(url.place(p.id));
 ---
-<SiteLayout title={`${name} · ${t('site.name')}`} description={description} path={url.place(p.id)}>
+<SiteLayout path={url.place(p.id)}>
   <PlaceTemplate>
     <Hero slot="hero" title={name} credit={hero?.credit} back={{ label: t('nav.back_to_results'), href: url.home() }}>
       <Photo slot="media" image={hero ? photoFile(hero.id) : null} alt="" ratio="16:9" eager widths={[640, 1024, 1600]} sizes="100vw" />
-      <Breadcrumb slot="breadcrumb" onPhoto label={t('nav.breadcrumb')} items={breadcrumb} />
+      <Breadcrumb slot="breadcrumb" onPhoto label={t('nav.breadcrumb')} items={crumbs} />
       <Fragment slot="badges">
         <Badge onPhoto>{type?.icon && <Icon emoji={type.icon} size={15} />}{type?.label ?? p.type}</Badge>
         {p.safety_alert && <a href="#alerte-site"><Badge tone="danger" label={`${t('place.danger_badge')} : ${p.safety_alert.short_label}`} /></a>}
@@ -239,10 +239,10 @@ const companies = teamCompanies(url.place(p.id));
       </section>
     )}
 
-    {p.faq.length > 0 && (
+    {faq.length > 0 && (
       <section id="faq" aria-labelledby="faq-title">
         <SectionHeader id="faq-title" title={p.headings.faq ?? t('place.faq_title', { name })} />
-        <FaqList items={p.faq} />
+        <FaqList items={faq} />
       </section>
     )}
 

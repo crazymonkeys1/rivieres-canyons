@@ -6,7 +6,7 @@ import GuideSection from '@orbit/directory/components/GuideSection.astro';
 import { t, url } from '../content/site';
 import { teamCompanies } from '../content/team';
 ---
-<SiteLayout title={`${t('footer.about')} · ${t('site.name')}`} description={t('about.description')} path={url.about()}>
+<SiteLayout path={url.about()}>
   <DocumentTemplate>
     <Fragment slot="header">
       <p class="text-label is-upper">{t('team.eyebrow')}</p>

@@ -35,6 +35,21 @@ Layer (which projects a rule applies to):
 
 ## Changes
 
+### 2026-10-08 · Phase 5: search engines and AI assistants
+- **Layer:** Core · Directory · Places · Site
+- **Change:**
+  - **One page registry** (`src/content/pages.ts`): every public page has one entry with its title, description, canonical path, indexing, social image, JSON-LD, breadcrumb and Markdown twin. The site layout takes only the page's path and reads the rest from there; the sitemap, `robots.txt`, `llms.txt`, `llms-full.txt` and the `.md` twins are built from the same list. A page without an entry fails the build.
+  - JSON-LD builders: `@orbit/core/seo` (BreadcrumbList, FAQPage, ItemList, Organization, WebSite, Person, Article, CollectionPage, Blog; robots, sitemap, llms.txt writers; a small Markdown writer), `@orbit/places/seo` (TouristAttraction: `publicAccess` true for public, false for closed, omitted otherwise; coordinates only for public places), `@orbit/directory/seo` (Product + Offer, no rating without a source and a count).
+  - Completeness gate: a place below 60 % is `noindex`, out of the sitemap, `llms.txt` and the twins (11 of 22 today). One shared function for the build and `content:check`.
+  - Every place gets the question "{lieu} : comment y aller ?", answered from its location policy (itinerary only for public places), on the page and in its FAQPage.
+  - `robots.txt` allows everyone and names GPTBot, ClaudeBot, PerplexityBot and Google-Extended; `/go/`, `/api/` and the style guide are not crawled.
+  - The domain comes from `SITE_URL`; until it is set, `pnpm seo:check:prod` fails.
+  - `pnpm seo:check` (in GitHub "Checks"): one H1, title, description and canonical per page; every H2 has an id; JSON-LD parses; indexable pages are in the sitemap and have a twin, noindex pages have neither; robots names the AI crawlers.
+  - Fix: the image library Sharp was missing; the build would have failed as soon as photos were downloaded.
+- **Why:** phase 5 of the build plan (CLAUDE.md §10, §13).
+- **How to apply elsewhere:** a new site writes its own `pages.ts` entries from its content; builders, endpoints and the check are reused as they are.
+- **Status:** Rivières & Canyons ✅ · Mangrove ⏳ · Template ✅
+
 ### 2026-10-08 · Phase 4: organisms, templates and every page
 - **Layer:** Core · Directory · Places · Site
 - **Change:**

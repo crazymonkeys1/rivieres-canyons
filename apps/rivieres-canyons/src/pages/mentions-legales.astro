@@ -1,13 +1,12 @@
 ---
-// L7 Legal notice: the publisher and host block is not written yet (placeholder, noindex, production build fails on it);
+// L7 Legal notice: the publisher and host block is not written yet (placeholder; the page registry keeps it noindex and a production build fails on it);
 // the safety disclaimer below it is the site's existing text.
 import SiteLayout from '../layouts/SiteLayout.astro';
 import DocumentTemplate from '@orbit/core/templates/DocumentTemplate.astro';
 import SectionHeader from '@orbit/core/components/molecules/SectionHeader.astro';
 import { t, url } from '../content/site';
-const pending = /^\[[A-Z_]+\]$/.test(t('legal.publisher'));
 ---
-<SiteLayout title={`${t('legal.title')} · ${t('site.name')}`} description={t('legal.description')} path={url.legal()} noindex={pending}>
+<SiteLayout path={url.legal()}>
   <DocumentTemplate>
     <h1 slot="header" class="text-display">{t('legal.title')}</h1>
     <p class="text-read">{t('legal.publisher')}</p>

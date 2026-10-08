@@ -1,4 +1,4 @@
-# Runs on every push: design rules, content checks, Airtable round trip, and the site build.
+# Runs on every push: design rules, content checks, Airtable round trip, the site build and the SEO checks.
 name: Checks
 
 on:
@@ -26,3 +26,5 @@ jobs:
         run: pnpm --filter rivieres-canyons airtable:export
       - name: Build the site
         run: pnpm build
+      - name: SEO and AI access (CLAUDE.md §10)
+        run: pnpm seo:check

@@ -28,7 +28,7 @@ const attrs = (i: (typeof listingItems)[number]) => ({
 });
 const sortOptions = [{ value: 'default', label: t('listing.sort_default'), selected: true }, { value: 'name', label: t('listing.sort_name') }, { value: 'price', label: t('listing.sort_price') }];
 ---
-<SiteLayout title={`${t('site.name')} · ${t('site.tagline')}`} description={t('listing.description')} path={url.home()}>
+<SiteLayout path={url.home()}>
   <ListingTemplate>
     <Hero slot="hero" variant="listing" title={t('listing.title')} credit={heroImage?.credit}>
       <Photo slot="media" image={heroImage ? photoFile(heroImage.id) : null} alt="" ratio="16:9" eager widths={[640, 1024, 1600]} sizes="100vw" />

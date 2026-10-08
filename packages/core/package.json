@@ -8,7 +8,8 @@
     "./airtable": "./src/airtable/index.ts",
     "./styles/*": "./src/styles/*",
     "./components/*": "./src/components/*",
-    "./templates/*": "./src/templates/*"
+    "./templates/*": "./src/templates/*",
+    "./seo": "./src/seo/index.ts"
   },
   "dependencies": {
     "zod": "^3.25.0",

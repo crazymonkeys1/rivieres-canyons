@@ -27,7 +27,7 @@ const placeList = placeIds.map((id) => places.get(id)!).filter((p) => p.status =
 const reviews = reviewsOf(op.id);
 const name = g.full_name ?? g.first_name;
 ---
-<SiteLayout title={`${name} · ${op.name} · ${t('site.name')}`} description={t('guide.description', { name, role: g.role, company: op.name })} path={ref}>
+<SiteLayout path={ref}>
   <ProfileTemplate>
     <ProfileHeader slot="header" title={name} eyebrow={t('guide.eyebrow', { company: op.name })} portrait={portraitOf(g.photo)} color={op.brand_color} back={{ label: t('nav.back_to_results'), href: url.home() }}>
       <Fragment slot="meta">

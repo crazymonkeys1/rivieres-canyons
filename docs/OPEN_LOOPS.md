@@ -19,6 +19,7 @@ The detailed, always-current list of data gaps is generated in `docs/CONTENT_REP
 | L8 | Privacy policy text (generated later from `docs/PRIVACY_CONTEXT.md`; open items in its §3) | Jordan | 2026-10-07 | open |
 | L9 | 7 guide stories ("Pourquoi je vous emmène ici") drafted from the guides' tips: each guide approves or rewrites, then sets "Histoire — statut" to Validée | Guides | 2026-10-07 | open |
 | L10 | Legal notice ("Mentions légales"): publisher, director of publication, host. The page exists with the token `[LEGAL_NOTICE_TEXT]` above the safety disclaimer | Jordan | 2026-10-08 | open |
+| L11 | The site's domain (`SITE_URL`): canonical URLs, sitemap and llms.txt use it. Until then `example.org` stands in and `pnpm seo:check:prod` fails | Jordan | 2026-10-08 | open |
 
 ## To validate (not blocking)
 
@@ -34,6 +35,7 @@ The detailed, always-current list of data gaps is generated in `docs/CONTENT_REP
 | V9 | Site texts pending your OK (wording in `copy.ts`): C1 neutral first sentence of the disclaimer; C2 footer "Site indépendant…" instead of "Prototype"; C3 listing subtitle without "en toute sécurité"; the listing card button "Y aller en sécurité" is kept (it describes a guided outing) | Jordan | 2026-10-08 | open |
 | V10 | Site texts written in phase 4 for the new pages: blog intro, author line "Guides diplômés d'État en canyoning, en Basse-Terre depuis plus de 8 ans" (from the v12 design), contact intro, menu label "Les lieux" (instead of "Sites en accès libre") | Jordan | 2026-10-08 | open |
 | V11 | "Baignade en rivière" lists every place whose swimming is filled in, so Saut de la Lézarde appears without a note (its access is "à vérifier"). Add an angle note or exclude it in the article's selection | Jordan | 2026-10-08 | open |
+| V13 | Headings built from a place's name read badly when the name needs an article: "Comment aller à Canyon doré", "Accéder à Canyon Ferry avec un guide". Options: add a field "Nom avec préposition" ("au Canyon doré"), or rephrase these headings ("Canyon doré : accès") | Jordan | 2026-10-08 | open |
 | V12 | Footer link colour: the muted grey on the cream footer was too light, so footer titles use body text. Darken `--palette-ink-500` for every muted text, or keep as is | Jordan | 2026-10-08 | open |
 
 ## Next actions (phase 2)
@@ -51,8 +53,10 @@ The detailed, always-current list of data gaps is generated in `docs/CONTENT_REP
 
 | # | What | Phase | Opened | Status |
 |---|---|---|---|---|
-| P1 | JSON-LD (TouristAttraction, Article, CollectionPage, Person…), sitemap, `robots.txt`, `llms.txt`, Markdown twins, completeness `noindex` | 5 | 2026-10-08 | open |
-| P2 | Computed FAQ "Comment aller à {lieu} ?" on public places | 5 | 2026-10-08 | open |
+| P1 | ~~JSON-LD, sitemap, `robots.txt`, `llms.txt`, Markdown twins, completeness `noindex`~~ | 5 | 2026-10-08 | done |
+| P2 | ~~Computed FAQ "{lieu} : comment y aller ?"~~ (every place, answered by its location policy) | 5 | 2026-10-08 | done |
+| P7 | Cloudflare: turn off "Block AI bots" for the domain (CLAUDE.md §10) | 7 | 2026-10-08 | open |
+| P8 | Google Rich Results test and Search Console on the real domain (not reachable from here) | 8 | 2026-10-08 | open |
 | P3 | `/go/book/{offer or company}/` and `/go/whatsapp/{guide}/` redirects (the guide page's "Réserver sur {company}" uses the company id) | 6 | 2026-10-08 | open |
 | P4 | Lead form: steps 2 and 3 (phone, thank you), Turnstile, `/api/lead`, D1 | 6 | 2026-10-08 | open |
 | P5 | Social posts show no thumbnail (we never hotlink); download them with the photos if wanted | later | 2026-10-08 | open |

@@ -10,16 +10,18 @@ import Breadcrumb from '@orbit/core/components/molecules/Breadcrumb.astro';
 import Byline from '@orbit/core/components/molecules/Byline.astro';
 import { t, url, imagesOf, photoFile, guides, portraitOf } from '../../content/site';
 import { publishedArticles } from '../../content/article';
+import { pageMeta } from '../../content/pages';
 
+const crumbs = (await pageMeta(url.blog())).breadcrumb.map((c) => ({ label: c.name, href: c.url }));
 const hero = publishedArticles.map((a) => imagesOf('article', a.id, 'hero')[0]).find(Boolean) ?? null;
 const authors = [...new Set(publishedArticles.flatMap((a) => a.author_ids))].map((id) => guides.get(id)).filter((g): g is NonNullable<typeof g> => !!g)
   .map((g) => ({ name: g.first_name, photo: portraitOf(g.photo)?.src, href: url.guide(g.id) }));
 ---
-<SiteLayout title={`${t('blog.title')} · ${t('site.name')}`} description={t('blog.description')} path={url.blog()}>
+<SiteLayout path={url.blog()}>
   <CollectionTemplate>
     <Hero slot="hero" variant="article" title={t('blog.title')} credit={hero?.credit}>
       <Photo slot="media" image={hero ? photoFile(hero.id) : null} alt="" ratio="16:9" eager widths={[640, 1024, 1600]} sizes="100vw" />
-      <Breadcrumb slot="breadcrumb" onPhoto label={t('nav.breadcrumb')} items={[{ label: t('nav.home'), href: url.home() }, { label: t('blog.crumb') }]} />
+      <Breadcrumb slot="breadcrumb" onPhoto label={t('nav.breadcrumb')} items={crumbs} />
       <Badge slot="badges" onPhoto>{t('blog.crumb')}</Badge>
       <Byline slot="meta" onPhoto people={authors} lead={t('article.by')}>· {t('blog.count', { n: publishedArticles.length })}</Byline>
     </Hero>

@@ -12,7 +12,7 @@ const blocks = (final ?? '[PRIVACY_POLICY_TEXT]').split(/\n\s*\n/).map((b) => b.
   .map((b) => (b.startsWith('## ') ? { h2: b.slice(3), id: b.slice(3).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') } : { p: b }));
 const updated = (row as any)?.updated_on as string | undefined;
 ---
-<SiteLayout title={`${t('privacy.title')} · ${t('site.name')}`} description={t('privacy.description')} path={url.privacy()} noindex={!final}>
+<SiteLayout path={url.privacy()}>
   <DocumentTemplate>
     <Fragment slot="header">
       <h1 class="text-display">{t('privacy.title')}</h1>

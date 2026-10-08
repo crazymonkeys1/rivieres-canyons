@@ -1,6 +1,7 @@
 // Checks run on the content, whatever its source (design migration today, Airtable tomorrow):
 // schema, references, copy rules, production readiness, completeness and landing pages.
-import { findPlaceholders, completeness } from '@orbit/core/content';
+import { findPlaceholders } from '@orbit/core/content';
+import { placeScore } from './completeness';
 import { landingPages, criteriaDimension } from '@orbit/directory/content';
 import { contentSchema, type Content } from './schema';
 import { COMPLETENESS, LANDING, SAFETY_CLAIMS, ARTICLE_RULES, ALLOWED_MEETING_MENTIONS } from './site.config';
@@ -113,11 +114,7 @@ export function checkContent(c: Content) {
       .map((t) => `\`${d.id}\`: "${short(t, 160)}"`));
 
   // Completeness and landing pages
-  const heroOf = (id: string) => c.images.find((i) => i.owner_id === id && i.role === 'hero') ?? null;
-  const scores = c.destinations.map((d) => {
-    const s = completeness({ ...d, hero: heroOf(d.id) }, COMPLETENESS.keys);
-    return { d, ...s, indexable: d.status === 'published' && s.score >= COMPLETENESS.threshold };
-  });
+  const scores = c.destinations.map((d) => ({ d, ...placeScore(d, c.images) }));
   const dimensions = [...LANDING.dimensions, criteriaDimension(c.criteria)];
   const landings = landingPages(c.destinations, dimensions, LANDING.min).map((l) => ({
     ...l, dimension_label: dimensions.find((d) => d.key === l.dimension)!.label,

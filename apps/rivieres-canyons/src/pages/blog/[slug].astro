@@ -24,6 +24,7 @@ import GuidePitch from '@orbit/directory/components/GuidePitch.astro';
 import { t, tList, url, imagesOf, photoFile, sourcesOf } from '../../content/site';
 import { articleView, publishedArticles } from '../../content/article';
 import { keyFactIcon } from '../../content/format';
+import { pageMeta } from '../../content/pages';
 import type { Content } from '../../content/schema';
 
 export function getStaticPaths() {
@@ -37,13 +38,13 @@ const related = publishedArticles.filter((x) => x.id !== a.id).map((x) => {
   return { href: url.article(x.id), title: x.label, image: img ? photoFile(img.id) : null };
 });
 const siteSources = sourcesOf('site', 'site');
-const description = (a.seo.description ?? a.answer).slice(0, 155);
+const crumbs = (await pageMeta(url.article(a.id))).breadcrumb.map((c) => ({ label: c.name, href: c.url }));
 ---
-<SiteLayout title={a.seo.title ?? `${a.h1} · ${t('site.name')}`} description={description} path={url.article(a.id)}>
+<SiteLayout path={url.article(a.id)}>
   <ArticleTemplate>
     <Hero slot="hero" variant="article" title={a.h1} credit={v.hero?.credit}>
       <Photo slot="media" image={v.hero ? photoFile(v.hero.id) : null} alt="" ratio="16:9" eager widths={[640, 1024, 1600]} sizes="100vw" />
-      <Breadcrumb slot="breadcrumb" onPhoto label={t('nav.breadcrumb')} items={[{ label: t('nav.home'), href: url.home() }, { label: t('blog.crumb'), href: url.blog() }, { label: a.label }]} />
+      <Breadcrumb slot="breadcrumb" onPhoto label={t('nav.breadcrumb')} items={crumbs} />
       <Badge slot="badges" onPhoto>{a.eyebrow}</Badge>
       <Byline slot="meta" onPhoto people={v.authors} lead={t('article.by')} date={a.updated_on} dateLabel={t('article.updated')}>· {t('article.read_time', { n: v.readTime })}</Byline>
     </Hero>

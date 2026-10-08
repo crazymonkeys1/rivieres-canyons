@@ -13,17 +13,19 @@ import SectionHeader from '@orbit/core/components/molecules/SectionHeader.astro'
 import DestinationCard from '@orbit/directory/components/DestinationCard.astro';
 import { t, url, photoFile } from '../content/site';
 import { collections, type Collection } from '../content/collection';
+import { pageMeta } from '../content/pages';
 
 export function getStaticPaths() {
   return collections.map((c) => ({ params: { landing: c.path.replace(/^\/|\/$/g, '') }, props: { c } }));
 }
 const { c } = Astro.props as { c: Collection };
+const crumbs = (await pageMeta(c.path)).breadcrumb.map((c) => ({ label: c.name, href: c.url }));
 ---
-<SiteLayout title={c.seo.title ?? `${c.h1} · ${t('site.name')}`} description={(c.seo.description ?? c.answer).slice(0, 155)} path={c.path}>
+<SiteLayout path={c.path}>
   <CollectionTemplate>
     <Hero slot="hero" variant="article" title={c.h1} credit={c.hero?.credit}>
       <Photo slot="media" image={c.hero ? photoFile(c.hero.id) : null} alt="" ratio="16:9" eager widths={[640, 1024, 1600]} sizes="100vw" />
-      <Breadcrumb slot="breadcrumb" onPhoto label={t('nav.breadcrumb')} items={[{ label: t('nav.home'), href: url.home() }, { label: c.crumbParent }, { label: c.h1 }]} />
+      <Breadcrumb slot="breadcrumb" onPhoto label={t('nav.breadcrumb')} items={crumbs} />
       <Badge slot="badges" onPhoto>{c.crumbParent}</Badge>
     </Hero>
 
