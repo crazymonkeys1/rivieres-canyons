@@ -44,12 +44,12 @@ The detailed, always-current list of data gaps is generated in `docs/CONTENT_REP
 
 | # | Action | Who | Opened | Status |
 |---|---|---|---|---|
-| D0 | Delete the « Worker » app created with Cloudflare's dashboard (its deploy fails: wrong product). Decided 2026-10-09: GitHub route, Pages as planned (step 0) | Jordan | 2026-10-09 | open |
-| D1 | Cloudflare API token + account ID as GitHub secrets (step 1) | Jordan | 2026-10-08 | open |
-| D2 | First deployment: Actions → Deploy → Run workflow (step 2) | Jordan | 2026-10-08 | open |
+| D0 | ~~Delete the dashboard « Worker » app~~ | Jordan | 2026-10-09 | done |
+| D1 | ~~Cloudflare API token + account ID as GitHub secrets~~ | Jordan | 2026-10-08 | done |
+| D2 | ~~First deployment~~: https://rivieres-canyons.pages.dev (8/8 live checks, 2026-10-09) | Jordan | 2026-10-08 | done |
 | D3 | Turnstile widget: site key (variable) + secret key (secret) (step 3). Without it the form has no bot check | Jordan | 2026-10-08 | open |
 | D4 | Web Analytics token (step 4; can wait for the domain) | Jordan | 2026-10-08 | open |
-| D5 | Airtable automation « Publier » with a GitHub token (step 5) | Jordan | 2026-10-08 | open |
+| D5 | ~~Airtable automation « Publier »~~ (worked on 2026-10-09: pulled the content and the photos) | Jordan | 2026-10-08 | done |
 
 ## Next actions (phase 2)
 

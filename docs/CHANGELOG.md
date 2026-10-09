@@ -35,6 +35,13 @@ Layer (which projects a rule applies to):
 
 ## Changes
 
+### 2026-10-09 · Phase 7 live
+- **Layer:** Site
+- **Change:** first deployment, https://rivieres-canyons.pages.dev (8/8 live checks). The workflow now retries Cloudflare's « unknown error », names the missing secret, saves safely when two runs overlap, and reports the address as a run notice. The Airtable automation and the photo download work.
+- **Why:** first real run surfaced these gaps (keys not found, a transient 8000000 error, two runs pulling at once).
+- **How to apply elsewhere:** nothing to do: it is in the shared workflow and script.
+- **Status:** Rivières & Canyons ✅ · Mangrove ⏳ · Template ✅
+
 ### 2026-10-08 · Phase 7: deployment to Cloudflare Pages
 - **Layer:** Core (headers, workflow pattern) · Site (project settings)
 - **Change:**

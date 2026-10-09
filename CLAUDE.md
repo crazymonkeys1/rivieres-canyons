@@ -138,7 +138,7 @@ Log every reusable decision in `docs/CHANGELOG.md`: date, layer (Core / Director
 4. **Organisms and templates, in order:** Done 2026-10-08: 45 pages, see `docs/CHANGELOG.md`. Destination page (fixtures: Saut d'Acomat, Cascade aux Écrevisses, Canyon doré) → listing + filters → intent article → filter landing page → guide page → blog index → static pages (about, legal notice, privacy, contact).
 5. **SEO/LLM layer** and the completeness `noindex` rule. Done 2026-10-08: page registry `src/content/pages.ts`, JSON-LD, sitemap, robots.txt, llms.txt, Markdown twins, `pnpm seo:check`.
 6. **Conversion:** `/go/` redirects, WhatsApp links, lead form + D1 + Turnstile, analytics. Done 2026-10-08: `@orbit/core/edge`, `functions/`, `/go/targets.json`, `migrations/`, `pnpm edge:test`; live once phase 7 creates the database and keys.
-7. **Deploy:** Cloudflare Pages preview URL. An Airtable automation calls the deploy hook on publish. Built 2026-10-08 (waiting for Jordan's keys, `docs/DEPLOY.md`): GitHub workflow « Deploy » + `scripts/cloudflare.ts`, `public/_headers`.
+7. **Deploy:** Cloudflare Pages preview URL. An Airtable automation calls the deploy hook on publish. Done 2026-10-09: https://rivieres-canyons.pages.dev (noindex until the domain), `docs/DEPLOY.md`, GitHub workflow « Deploy » + `scripts/cloudflare.ts`, `public/_headers`.
 8. **QA before going public:** Lighthouse mobile, Rich Results test, link check, a11y check, placeholder check, AI-bot access check, a read-through on a real phone. Then connect the domain.
 
 ## 14. Session start checklist
