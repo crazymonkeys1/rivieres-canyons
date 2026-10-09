@@ -37,10 +37,29 @@ if (cmd === 'prepare') {
   }
   try {
     // 1. Pages project (its address is <subdomain>.pages.dev; Cloudflare adds a suffix when the name is taken).
+    const errText = (e: unknown) => { const x = e as { stderr?: string; stdout?: string; message: string }; return `${x.stderr ?? ''}${x.stdout ?? ''}` || x.message; };
+    /** Cloudflare sometimes answers "unknown error" once: try again before giving up. */
+    const retry = async <T>(what: string, f: () => T): Promise<T> => {
+      for (let i = 1; ; i++) {
+        try { return f(); } catch (e) {
+          if (i >= 3) throw Object.assign(new Error(`${what}: ${errText(e).slice(0, 1200)}`), { step: what });
+          await new Promise((r) => setTimeout(r, 8000 * i));
+        }
+      }
+    };
     const list = () => JSON.parse(wrangler(['pages', 'project', 'list', '--json'])) as Record<string, string>[];
-    let project = list().find((p) => (p['Project Name'] ?? p.name) === PROJECT);
+    let project = (await retry('read the list of Pages projects', list)).find((p) => (p['Project Name'] ?? p.name) === PROJECT);
     if (!project) {
-      wrangler(['pages', 'project', 'create', PROJECT, '--production-branch', 'main']);
+      try {
+        await retry('create the Pages project', () => wrangler(['pages', 'project', 'create', PROJECT, '--production-branch', 'main']));
+      } catch (e) {
+        fail(title, `Cloudflare refused to create the Pages project « ${PROJECT} ». Its answer:\n\n\`\`\`\n${(e as Error).message}\n\`\`\`\n`
+          + 'Reading the list of projects worked, so the key is right. Usual causes, in this order:\n'
+          + `1. A Worker named « ${PROJECT} » still exists (the app created on 2026-10-09 with the dashboard): Workers & Pages → it → Settings → Delete.\n`
+          + '2. The Cloudflare account e-mail is not verified: look for the yellow banner in the dashboard, or My Profile → e-mail.\n'
+          + '3. Pages has never been opened on this account: Workers & Pages → Create → Pages tab, just look, no need to create anything.\n'
+          + 'Then run Deploy again.');
+      }
       project = list().find((p) => (p['Project Name'] ?? p.name) === PROJECT);
       say(`Pages project « ${PROJECT} » created.`);
     } else say(`Pages project « ${PROJECT} » found.`);
@@ -80,7 +99,7 @@ if (cmd === 'prepare') {
     summary(title);
   } catch (e) {
     const err = e as { stderr?: string; message: string };
-    fail(title, `Cloudflare refused a step. Its answer:\n\n\`\`\`\n${(err.stderr || err.message).slice(0, 1500)}\n\`\`\`\nMost often: the API token lacks a permission (docs/DEPLOY.md, step 1).`);
+    fail(title, `Cloudflare refused a step. Its answer:\n\n\`\`\`\n${(err.stderr || err.message).slice(0, 1500)}\n\`\`\`\nIf the failed step is « read the list of Pages projects »: the key or the account ID is wrong, or the token lacks the permission « Cloudflare Pages · Edit » (docs/DEPLOY.md, step 1).`);
   }
 }
 
