@@ -8,7 +8,7 @@ compatibility_date = "2026-09-01"
 [[d1_databases]]
 binding = "DB"
 database_name = "rivieres-canyons"
-database_id = "00000000-0000-0000-0000-000000000000"
+database_id = "8fcd2571-6f89-4ba3-a4f5-8e77ec9d2b56"
 migrations_dir = "migrations"
 
 # Secrets (set in the Cloudflare dashboard, never in this file): TURNSTILE_SECRET, LEAD_ENDPOINT (later), LEAD_ENDPOINT_TOKEN (later).
