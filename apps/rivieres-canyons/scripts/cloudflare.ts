@@ -138,5 +138,6 @@ if (cmd === 'deploy') {
     say(`${pass ? '✅' : '❌'} ${label} (${path} → ${status})`);
   }
   summary(title);
+  console.log(`::notice title=Site online::https://${host} (${expectations.length - bad}/${expectations.length} live checks passed)`);
   process.exit(bad ? 1 : 0);
 }
