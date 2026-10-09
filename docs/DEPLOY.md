@@ -4,6 +4,12 @@ The GitHub workflow **Deploy** builds the site and puts it on Cloudflare. It cre
 
 Until step 1 is done, every push still runs the checks, and the workflow says "Cloudflare is not connected yet". It doesn't fail.
 
+## Step 0 · Don't create the app in the Cloudflare dashboard
+
+The site is not created with Cloudflare's **Create application** button (it makes a "Worker" that builds from the top of the repository; its deploy step `npx wrangler deploy` fails here). GitHub creates the right project, a "Pages" project, by itself in step 2.
+
+If you already created one: Cloudflare → **Workers & Pages** → click that app → **Settings** → at the bottom **Delete** → confirm. Otherwise it keeps building on every push and failing.
+
 ## Step 1 · Connect Cloudflare to GitHub (5 min, once)
 
 1. Log in to **dash.cloudflare.com** (create a free account if needed).
