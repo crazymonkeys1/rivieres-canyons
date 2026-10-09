@@ -25,9 +25,15 @@ const fail = (title: string, why: string): never => { say(`**Stopped:** ${why}`)
 
 if (cmd === 'prepare') {
   const title = 'Cloudflare: preparation';
-  if (!process.env.CLOUDFLARE_API_TOKEN || !process.env.CLOUDFLARE_ACCOUNT_ID) {
-    say('Cloudflare is not connected yet: add the GitHub secrets `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` (docs/DEPLOY.md, step 1). Nothing was deployed; the checks still ran.');
-    output('ready', 'false'); summary(title); process.exit(0);
+  const missing = ['CLOUDFLARE_API_TOKEN', 'CLOUDFLARE_ACCOUNT_ID'].filter((k) => !process.env[k]?.trim());
+  if (missing.length) {
+    for (const k of ['CLOUDFLARE_API_TOKEN', 'CLOUDFLARE_ACCOUNT_ID']) say(`GitHub secret \`${k}\`: ${missing.includes(k) ? '**not found**' : 'found'}.`);
+    say('Add the missing one under GitHub → Settings → Secrets and variables → **Actions** → tab **Secrets** → **New repository secret**, with exactly this name (docs/DEPLOY.md, step 1). '
+      + 'Not under "Environments", "Codespaces" or "Dependabot", and not in the **Variables** tab: the workflow cannot read those.');
+    // On a push the checks still matter, so the run stays green with a warning; asked by hand, by Airtable or at night it must fail visibly.
+    const asked = process.env.GITHUB_EVENT_NAME && process.env.GITHUB_EVENT_NAME !== 'push';
+    console.log(`::${asked ? 'error' : 'warning'} title=Cloudflare not connected::Missing GitHub secret(s): ${missing.join(', ')}. Nothing was deployed.`);
+    output('ready', 'false'); summary(title); process.exit(asked ? 1 : 0);
   }
   try {
     // 1. Pages project (its address is <subdomain>.pages.dev; Cloudflare adds a suffix when the name is taken).

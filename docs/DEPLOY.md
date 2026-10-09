@@ -21,9 +21,11 @@ If you already created one: Cloudflare → **Workers & Pages** → click that ap
      - `Account` · `D1` · `Edit`
    - **Account Resources:** `Include` · your account.
    - **Continue to summary** → **Create Token**. Copy the token: it is shown only once.
-4. On **github.com/crazymonkeys1/rivieres-canyons** → **Settings** → **Secrets and variables** → **Actions** → tab **Secrets** → **New repository secret**. Create two secrets:
+4. On **github.com/crazymonkeys1/rivieres-canyons** → **Settings** → in the left menu **Secrets and variables** → **Actions** (not "Codespaces" or "Dependabot") → tab **Secrets** → green button **New repository secret** (not "Manage environment secrets"). Create two secrets, with exactly these names:
    - `CLOUDFLARE_API_TOKEN` = the token
    - `CLOUDFLARE_ACCOUNT_ID` = the account ID
+
+   To check: the page then lists both names under **Repository secrets**. If a run says "Cloudflare not connected", its summary says which name it did not find.
 
 ## Step 2 · First deployment (3 min)
 

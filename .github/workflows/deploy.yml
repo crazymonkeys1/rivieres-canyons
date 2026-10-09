@@ -35,7 +35,7 @@ jobs:
     timeout-minutes: 25
     env:
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID || vars.CLOUDFLARE_ACCOUNT_ID }}   # not secret: a variable works too
       PULL: ${{ github.event_name == 'repository_dispatch' || github.event_name == 'schedule' || inputs.job == 'publish-content' }}
     steps:
       - uses: actions/checkout@v5
@@ -96,10 +96,11 @@ jobs:
         run: pnpm --filter rivieres-canyons exec tsx scripts/cloudflare.ts deploy
 
       - name: Save content, photos and the database id to the repository
-        if: always() && (env.PULL == 'true' || steps.prepare.outputs.ready == 'true')
+        if: always() && (env.PULL == 'true' || steps.prepare.outputs.ready == 'true') && steps.changes.outputs.deploy != 'false'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
           git add apps/rivieres-canyons/wrangler.toml apps/rivieres-canyons/content/fixtures apps/rivieres-canyons/src/assets/photos apps/rivieres-canyons/src/assets/logos docs/CONTENT_REPORT.md
           git diff --cached --quiet || git commit -m "Deploy: ${{ github.event_name }} (run ${{ github.run_number }})"
-          git push
+          # Another run may have saved in the meantime: put this one on top, then save.
+          for i in 1 2 3; do git pull --rebase -X theirs origin main && git push && break; sleep 5; done
